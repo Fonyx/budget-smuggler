@@ -1,4 +1,4 @@
-const clog = require('../helpers/colorLogger');
+const clog = require('../utils/colorLogging');
 
 /**
  * Custom middleware that logs out the type and path of each request to the server as well as an emoji

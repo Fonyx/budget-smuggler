@@ -4,6 +4,7 @@ const routes = require('./controllers');
 
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const colorLog = require('./middleware/colorRequests');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -19,7 +20,7 @@ const sess = {
 };
 
 app.use(session(sess));
-
+app.use(colorLog);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
