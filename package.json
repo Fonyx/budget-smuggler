@@ -22,6 +22,7 @@
     "jest": "^27.1.0",
     "mysql2": "^2.2.5",
     "nodemon": "^2.0.12",
+    "normalize.css": "^8.0.1",
     "sequelize": "^6.3.5"
   },
   "devDependencies": {
