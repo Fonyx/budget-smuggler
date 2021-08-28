@@ -63,6 +63,7 @@ function stringCharsOnly(userText){
         let badFormat = /[`!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?~]/;
         if(badFormat.test(currentChar)){
             clog(`Found a special character: ${currentChar} in input: ${userText}`, 'red');
+            return false
         }
     }
     // if nothing else threw a failure error, then return true as string must only contain alpha/space chars
