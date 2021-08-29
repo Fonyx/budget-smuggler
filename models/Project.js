@@ -14,6 +14,7 @@ const sequelize = require('../config/connection');
 //     name: {
 //       type: DataTypes.STRING,
 //       allowNull: false,
+//       validate:
 //     },
 //     description: {
 //       type: DataTypes.STRING,

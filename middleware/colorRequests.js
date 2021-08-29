@@ -6,7 +6,7 @@ const clog = require('../utils/colorLogging');
  * @param {*} res 
  * @param {*} next 
  */
-const colorLog = (req, res, next) => {   
+const cRequests = (req, res, next) => {   
     const openHands = String.fromCodePoint(0x1F932);
     const handWriting = String.fromCodePoint(0x270D);
     const pointing = String.fromCodePoint(0x1F446);
@@ -39,5 +39,5 @@ const colorLog = (req, res, next) => {
     next();
   };
   
-module.exports= colorLog;
+module.exports= cRequests;
   
