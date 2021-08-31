@@ -34,5 +34,6 @@
     "semi": ["error", "always"],
     "radix": "off"
   },
-  "extends": ["prettier"]
+  "extends": ["prettier"],
+  "parser": "@babel/eslint-parser"
 }
