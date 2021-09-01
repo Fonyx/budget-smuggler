@@ -23,17 +23,29 @@ function __getColorCode(colorChoice){
  * @param {str} text 
  * @param {str} colorPref-optional defaults to black 
  */
-function clog(text, colorPref){
+ function clog(text, colorPref) {
     let colorCode = __getColorCode('black');
     // handle optional parse
-    if(colorPref){
+    if (colorPref) {
+      try{
         colorCode = __getColorCode(colorPref);
+        console.log(`${colorCode}`);
+        console.log(text);
+        
+      }catch(err){
+        if(err.message === 'Color not available'){
+          // if the user requests an invalid color, log that using red
+          colorCode = __getColorCode('red');
+          console.log(`${colorCode}`);
+          console.log(text, `Color '${colorPref}' unavailable, choose from ${colorNames}`);
+        }
+      }
+      // reset the console color to black
+      let blackCode = __getColorCode('black');
+        console.log(`${blackCode}`);
     }
-    console.log(`${colorCode}`);
-    console.log(text);
-    let blackCode = __getColorCode('black');
-    console.log(`${blackCode}`);
-}
+    
+  }
 
 
 module.exports = clog;
