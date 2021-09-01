@@ -1,7 +1,7 @@
 {
   "name": "crowd-funding",
   "version": "1.0.0",
-  "description": "",
+  "description": "A skeleton for project two, using express, sequelize, handlebars, nodeJs",
   "main": "server.js",
   "scripts": {
     "test": "jest --coverage",
@@ -29,5 +29,13 @@
     "eslint": "^7.12.1",
     "eslint-config-prettier": "^6.15.0",
     "prettier": "^2.1.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fonyx/budget-smuggler.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Fonyx/budget-smuggler/issues"
+  },
+  "homepage": "https://github.com/Fonyx/budget-smuggler#readme"
 }

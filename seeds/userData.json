@@ -1,0 +1,20 @@
+[
+  {
+    "username": "LouisJones",
+    "password": "loujo123",
+    "email": "louisjones32@gmail.com",
+    "currency": "AU"
+  },
+  {
+    "username": "LisaStewart",
+    "password": "listew123",
+    "email": "lisastewart59@gmail.com",
+    "currency": "YEN"
+  },
+  {
+    "username": "DanaGarcia",
+    "password": "dangar123",
+    "email": "danagarcia89@gmail.com",
+    "currency": "USD"
+  }
+]
