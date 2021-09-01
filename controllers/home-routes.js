@@ -49,14 +49,16 @@ router.get('/profile', onlyIfLoggedIn, async (req, res) => {
       include: ['category'],
     });
 
-    const transactions = transactionData.get({ plain: true });
+    const transactions = transactionData.map((transObj) => {
+      return transObj.get({ plain: true });
+    });
 
     res.render('profile', {
       ...transactions,
       logged_in: true
     });
   } catch (err) {
-    res.status(500).json(err);
+    resstatus(500).json(err);
   }
 });
 

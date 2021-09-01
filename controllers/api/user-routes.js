@@ -43,11 +43,9 @@ try {
   }
 
   req.session.save(() => {
-  req.session.loggedIn = true;
-
-  res
-      .status(200)
-      .json({ user: dbUserData, message: 'You are now logged in!' });
+    req.session.loggedIn = true;
+    req.session.user_id = dbUserData.id;
+    res.status(200).json({ user: dbUserData, message: 'You are now logged in!' });
   });
 } catch (err) {
   console.log(err);
