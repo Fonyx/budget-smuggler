@@ -1,0 +1,7 @@
+<h1> Profile </h1>
+User log in is: {{logged_in}}
+<h2> User Transactions</h2>
+{{#each transactions as |transaction|}}
+    <h2>{{transaction.date}}</h2>
+    <h3>{{transaction.frequency}}</h3>
+{{/each}}

@@ -33,9 +33,9 @@ User.init(
         },
         currency: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
             validate: {
-                len: [1],
+                len: [5],
             },
         },
     },

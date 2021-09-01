@@ -1,14 +1,41 @@
 [
   {
-    "name": "Louis Jones",
-    "colour": "Navy Blue"
+    "name":"ebay sale",
+    "amount":112.54,
+    "due_date": "11/8/2021",
+    "frequency": "fortnightly",
+    "type":"credit",
+    "end_recurrence":"1/12/2021",
+    "category_id":1,
+    "user_id": 1
   },
   {
-    "name": "Lisa Stewart",
-    "colour": "Crimson"
+    "name":"rent",
+    "amount":800,
+    "due_date": "10/8/2021",
+    "frequency": "monthly",
+    "type":"debit",
+    "end_recurrence":"1/1/2022",
+    "category_id":1,
+    "user_id": 1
   },
   {
-    "name": "Dana Garcia",
-    "colour": "Turquoise"
+    "name":"camera",
+    "amount":112.54,
+    "due_date": "4/8/2021",
+    "frequency": "fortnightly",
+    "type":"credit",
+    "end_recurrence":"1/12/2021",
+    "category_id":2,
+    "user_id": 1
+  },
+  {
+    "name":"flights",
+    "amount":1143.27,
+    "due_date": "3/8/2021",
+    "frequency": "once",
+    "type":"credit",
+    "category_id":3,
+    "user_id": 2
   }
 ]

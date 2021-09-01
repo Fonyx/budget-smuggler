@@ -19,6 +19,11 @@ Category.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        emoji: {
+            // maybe use a hook to determine the emoji char
+            type: DataTypes.STRING,
+            allowNull: true,
+        }
     },
     {
         sequelize,

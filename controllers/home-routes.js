@@ -7,15 +7,18 @@ router.get('/', async (req, res) => {
   try {
     // Get all posts, sorted by title
     const userData = await User.findAll({
-      include: ['owner', 'comments'],
-      order: [['title', 'ASC']],
+      include: ['transactions'],
+      order: [['email', 'ASC']],
     });
 
     // Serialize user data so templates can read it
-    const users = userData.map((post) => post.get({ plain: true }));
+    const users = userData.map((userObj) => userObj.get({ plain: true }));
 
     // Pass serialized data into Handlebars.js template
-    res.render('homepage', { users });
+    res.render('homepage', { 
+      ...users,
+      logged_in: req.session.logged_in 
+    });
   } catch (err) {
     res.status(500).json(err.message);
   }
@@ -39,15 +42,19 @@ router.get('/login', (req, res) => {
 router.get('/profile', onlyIfLoggedIn, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] },
-      include: ['posts'],
+    const transactionData = await Transaction.findAll({
+      where: {user_id: req.session.user_id}
+    },
+    {
+      include: ['category'],
     });
 
-    const user = userData.get({ plain: true });
+    const transactions = transactionData.map((transObj) => {
+      return transObj.get({ plain: true });
+    });
 
     res.render('profile', {
-      ...user,
+      ...transactions,
       logged_in: true
     });
   } catch (err) {
