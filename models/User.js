@@ -30,12 +30,12 @@ User.init(
             validate: {
                 len: [8],
             },
-            currency: {
-                type: DataTypes.STRING,
-                allowNull: false,
-                validate: {
-                    len: [1],
-                },
+        },
+        currency: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [1],
             },
         },
     },
