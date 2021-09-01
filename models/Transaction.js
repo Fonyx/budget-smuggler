@@ -11,24 +11,32 @@ Transaction.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        date: {
-            type: DataTypes.DATEONLY,
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },  
+        amount: {
+            type: DataTypes.FLOAT,
+            allowNull: false,
+            validate: {
+                isFloat: true,
+            }
+        },  
+        due_date: {
+            type: DataTypes.DATE,
             allowNull: false,
         },
         frequency: {
             type: DataTypes.STRING,
             allowNull: false,
+            default: "once",
         },
         type: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        recurring: {
-            type: DataTypes.STRING,
-            defaultValue: "once",
-        },
-        end_date: {
-            type: DataTypes.DATEONLY,
+        end_recurrence: {
+            type: DataTypes.DATE,
             allowNull: true,
         },
         category_id: {
