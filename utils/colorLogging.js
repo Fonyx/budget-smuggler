@@ -41,8 +41,8 @@ function __getColorCode(colorChoice){
         }
       }
       // reset the console color to black
-      let blackCode = __getColorCode('black');
-        console.log(`${blackCode}`);
+      let defaultCode = __getColorCode('blue');
+        console.log(`${defaultCode}`);
     }
     
   }
