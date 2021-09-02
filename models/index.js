@@ -15,11 +15,13 @@ Transaction.belongsTo(User, {
 Transaction.belongsTo(Category, {
     foreignKey: 'category_id',
     as: "category",
+    onDelete: 'CASCADE',
 });
 
 Category.hasMany(Transaction, {
     foreignKey: 'category_id',
-    as:"transactions"
+    as:"transactions",
+    onDelete: 'CASCADE',
 });
 
 module.exports = { User, Category, Transaction };
