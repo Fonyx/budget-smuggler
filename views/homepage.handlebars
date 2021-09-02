@@ -1,9 +1,0 @@
-<h1> Homepage </h1>
-
-{{#each users as |user|}}
-    <h2>{{user.email}}</h2>
-    <h3>{{user.currency}}</h3>
-    {{#each user.transactions as |transaction|}}
-        <p>{{transaction.type}}</p>
-    {{/each}}
-{{/each}}
