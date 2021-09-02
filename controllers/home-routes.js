@@ -36,26 +36,27 @@ router.get('/login', (req, res) => {
   } catch(err){
     res.status(500).json(err);
   }
-})
+});
 
 // Use withAuth middleware to prevent access to route
 router.get('/profile', onlyIfLoggedIn, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
-    const transactionData = await Transaction.findAll({
+    const rawTransactions = await Transaction.findAll({
+      include: {nested: true, all: true},
       where: {user_id: req.session.user_id}
     },
     {
       include: ['category'],
     });
 
-    const transactions = transactionData.map((transObj) => {
+    const transactions = rawTransactions.map((transObj) => {
       return transObj.get({ plain: true });
     });
 
     res.render('profile', {
-      ...transactions,
-      logged_in: true
+      transactions,
+      logged_in: req.session.logged_in
     });
   } catch (err) {
     res.status(500).json(err);

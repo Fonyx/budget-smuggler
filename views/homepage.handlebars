@@ -1,0 +1,9 @@
+<h1> Homepage </h1>
+
+{{#each transactions as |transaction|}}
+    <h2>{{email}}</h2>
+    <h3>{{currency}}</h3>
+    {{#each user.transactions as |transaction|}}
+        <p>{{transaction.type}}</p>
+    {{/each}}
+{{/each}}
