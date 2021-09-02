@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User, Category, Transaction } = require('../../models');
+const {onlyIfLoggedIn} = require('../../middleware/auth');
 
 // Get all transactions for a user
 router.get('/user/:id', async (req, res) => {

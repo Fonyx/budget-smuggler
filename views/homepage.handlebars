@@ -1,9 +1,12 @@
 <h1> Homepage </h1>
 
-{{#each transactions as |transaction|}}
-    <h2>{{email}}</h2>
-    <h3>{{currency}}</h3>
-    {{#each user.transactions as |transaction|}}
-        <p>{{transaction.type}}</p>
-    {{/each}}
-{{/each}}
+{{#if logged_in}}
+    <nav>
+        <button class="btn" id="logout">logout</button>
+    </nav>
+{{else}}
+    <nav>
+    <a class="btn" href="/login" id="login">login</a>
+    <a class="btn" href="/signup" id="signup">signup</a>
+    </nav>
+{{/if}}

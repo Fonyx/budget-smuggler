@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Category } = require('../../models');
-
+const {onlyIfLoggedIn} = require('../../middleware/auth');
 
 // Get all categories
 router.get('/', async (req, res) => {

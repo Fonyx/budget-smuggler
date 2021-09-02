@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { User } = require('../../models');
-
+const {onlyIfLoggedIn} = require('../../middleware/auth');
+const clog = require('../../utils/colorLogging');
 
 // Get all users
 router.get('/', async (req, res) => {
@@ -32,12 +33,13 @@ router.post('/', async (req, res) => {
     });
 
     req.session.save(() => {
-      req.session.loggedIn = true;
-
+      req.session.logged_in = true;
+      req.session.user_id = dbUserData.id;
+      clog('Successfully signed up', 'green');
       res.status(200).json(dbUserData);
     });
   } catch (err) {
-    console.log(err);
+    clog(err.message, 'red');
     res.status(500).json(err);
   }
 });
@@ -64,8 +66,9 @@ try {
   }
 
   req.session.save(() => {
-    req.session.loggedIn = true;
+    req.session.logged_in = true;
     req.session.user_id = dbUserData.id;
+    clog('Successfully logged in', 'green');
     res.status(200).json({ user: dbUserData, message: 'You are now logged in!' });
   });
 } catch (err) {
@@ -76,9 +79,10 @@ try {
 
 // Logout
 router.post('/logout', (req, res) => {
-if (req.session.loggedIn) {
+if (req.session.logged_in) {
   req.session.destroy(() => {
-  res.status(204).end();
+    clog('Successfully logged out', 'green');
+    res.status(204).end();
   });
 } else {
   res.status(404).end();

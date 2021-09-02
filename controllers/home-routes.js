@@ -5,18 +5,8 @@ const {onlyIfLoggedIn} = require('../middleware/auth');
 // home route get request
 router.get('/', async (req, res) => {
   try {
-    // Get all posts, sorted by title
-    const userData = await User.findAll({
-      include: ['transactions'],
-      order: [['email', 'ASC']],
-    });
-
-    // Serialize user data so templates can read it
-    const users = userData.map((userObj) => userObj.get({ plain: true }));
-
     // Pass serialized data into Handlebars.js template
-    res.render('homepage', { 
-      ...users,
+    res.render('homepage', {
       logged_in: req.session.logged_in 
     });
   } catch (err) {
@@ -38,8 +28,22 @@ router.get('/login', (req, res) => {
   }
 });
 
+// get login empty page, renders login template
+router.get('/signup', (req, res) => {
+  try{
+    if (req.session.logged_in){
+      res.redirect('/profile');
+      return;
+    } else {
+      res.render('signup');
+    }
+  } catch(err){
+    res.status(500).json(err);
+  }
+});
+
 // Use withAuth middleware to prevent access to route
-router.get('/profile', onlyIfLoggedIn, async (req, res) => {
+router.get('/profile', async (req, res) => {
   try {
     // Find the logged in user based on the session ID
     const rawTransactions = await Transaction.findAll({
