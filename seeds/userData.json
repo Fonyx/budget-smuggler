@@ -16,5 +16,11 @@
     "password": "dangar123",
     "email": "danagarcia89@gmail.com",
     "currency": "USD"
+  },
+  {
+    "username": "nick",
+    "password": "bangbang",
+    "email": "nick@gmail.com",
+    "currency": "AUD"
   }
 ]

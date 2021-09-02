@@ -38,6 +38,13 @@ User.init(
                 len: [5],
             },
         },
+        balance:{
+            type: DataTypes.DECIMAL(2),
+            defaultValue: 0.00,
+            validate:{
+                isDecimal: true,
+            }
+        }
     },
     {
         hooks: {
