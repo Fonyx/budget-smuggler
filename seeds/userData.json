@@ -3,24 +3,28 @@
     "username": "LouisJones",
     "password": "loujo123",
     "email": "louisjones32@gmail.com",
-    "currency": "AU"
+    "currency": "AU",
+    "balance": 115.41
   },
   {
     "username": "LisaStewart",
     "password": "listew123",
     "email": "lisastewart59@gmail.com",
-    "currency": "YEN"
+    "currency": "YEN",
+    "balance": 1125.41
   },
   {
     "username": "DanaGarcia",
     "password": "dangar123",
     "email": "danagarcia89@gmail.com",
-    "currency": "USD"
+    "currency": "USD",
+    "balance": 15.41
   },
   {
     "username": "nick",
     "password": "bangbang",
     "email": "nick@gmail.com",
-    "currency": "AUD"
+    "currency": "AUD",
+    "balance": 3500.41
   }
 ]

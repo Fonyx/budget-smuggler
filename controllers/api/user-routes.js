@@ -1,6 +1,27 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 
+
+// Get all users
+router.get('/', async (req, res) => {
+  try{
+      const rawDbUsers = await User.findAll();
+
+      dbUsers = rawDbUsers.map((userObj) => {
+          return userObj.get({plain: true});
+      })
+      if(dbUsers){
+          res.status(200).json(dbUsers);
+      } else {
+          res.status(404).json({message: "no Users found"});
+      }
+  }
+  catch(err){
+      console.log(err);
+      res.status(500).json(err);
+  }
+});
+
 // CREATE new user
 router.post('/', async (req, res) => {
   try {

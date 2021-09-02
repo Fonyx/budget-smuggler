@@ -1,14 +1,11 @@
 const router = require('express').Router();
 const { Category } = require('../../models');
-const { findAll } = require('../../models/User');
 
 
 // Get all categories
 router.get('/', async (req, res) => {
     try{
-        const rawDbCategories = await Category.findAll({
-            include: {all:true, nested: true}
-        });
+        const rawDbCategories = await Category.findAll();
 
         dbCategories = rawDbCategories.map((categoryObj) => {
             return categoryObj.get({plain: true});

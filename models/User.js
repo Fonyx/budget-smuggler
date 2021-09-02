@@ -39,10 +39,10 @@ User.init(
             },
         },
         balance:{
-            type: DataTypes.DECIMAL(2),
+            type: DataTypes.FLOAT,
             defaultValue: 0.00,
             validate:{
-                isDecimal: true,
+                isFloat: true,
             }
         }
     },
