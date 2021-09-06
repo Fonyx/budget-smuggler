@@ -48,7 +48,7 @@ router.post('/login', async (req, res) => {
     console.log(err);
     res.status(500).json(err);
   }
-  });
+});
 
 // get login empty page, renders login template
 router.get('/signup', (req, res) => {
@@ -127,5 +127,28 @@ if (req.session.logged_in) {
   res.status(404).end();
 }
 });
+
+// request to update user balance as a put request
+router.put('/balance', onlyIfLoggedIn, (req, res) => {
+  try{
+    let user = await User.findByPk(req.session.user_id, {
+      all: true,
+      nested:true
+    })
+    if(user){
+      // this might not check well enough, use should use float for db structure but int should also work
+      if(typeof(req.body.balance) === 'number'){
+        user.balance = req.body.balance;
+        res.status(200).json({message:"Successfully "});
+      } else {
+        res.status(400).json({message:"User did not submit a number for balance"})
+      }
+    } else {
+      res.status(404).json({message:"Could not find logged in user object"})
+    }
+  }catch(err){
+    res.status(500).json({message:"Server failed to update user balance"});
+  }
+})
 
 module.exports = router;
