@@ -131,9 +131,9 @@ router.get('/logout', (req, res) => {
 //request for update form for user balance
 router.get('/balance', onlyIfLoggedIn, async (req, res) => {
   try{
-    let user = await User.findByPk(req.session.user_id);
-    let balance = user.balance;
-    res.render('update-balance', {balance});
+    let userObj = await User.findByPk(req.session.user_id);
+    user = userObj.get();
+    res.render('update-balance', {user});
   }catch(err){
     clog('Failed to return update-balance form', 'red');
     res.status(500).json({message:"Failed to serve update-balance form"});
