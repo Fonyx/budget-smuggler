@@ -1,31 +1,6 @@
 const router = require('express').Router();
-const { User, Category, Transaction } = require('../../models');
-const {onlyIfLoggedIn} = require('../../middleware/auth');
-
-// Get all transactions for a user
-router.get('/user/:id', async (req, res) => {
-  try{
-      const rawDbTransactions = await Transaction.findAll({
-          where: {
-            user_id: req.params.id
-          },
-          include: {all:true, nested: true}
-      });
-
-      dbTransactions = rawDbTransactions.map((transactionObj) => {
-          return transactionObj.get({plain: true});
-      })
-      if(dbTransactions){
-          res.status(200).json(dbTransactions);
-      } else {
-          res.status(404).json({message: "no Transactions found"});
-      }
-  }
-  catch(err){
-      console.log(err);
-      res.status(500).json(err);
-  }
-});
+const { User, Category, Transaction } = require('../models');
+const {onlyIfLoggedIn} = require('../middleware/auth');
 
 // Get one transaction
 router.get('/:id', async (req, res) => {
@@ -45,8 +20,25 @@ router.get('/:id', async (req, res) => {
   }
 })
 
+// Update a transaction
+router.put('/:id', async (req, res) => {
+    try {
+        const dbTransactionData = await Transaction.findByPk(req.params.id);
+        if(dbTransactionData){
+            dbTransactionData.update(req.body);
+            res.status(200).json(dbTransactionData);
+        } else {
+            res.status(404).json({message: `No transaction with id: ${req.params.id}`});
+        }
+    
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+});
+
 // CREATE new transaction
-router.post('/', async (req, res) => {
+router.post('/create', async (req, res) => {
     let userObj = await User.findByPk(req.body.user_id);
     let categoryObj = await Category.findByPk(req.body.category_id);
     if(userObj && categoryObj){
@@ -63,21 +55,29 @@ router.post('/', async (req, res) => {
     }
 });
 
-// Update a transaction
-router.put('/:id', async (req, res) => {
-  try {
-      const dbTransactionData = await Transaction.findByPk(req.params.id);
-      if(dbTransactionData){
-          dbTransactionData.update(req.body);
-          res.status(200).json(dbTransactionData);
-      } else {
-          res.status(404).json({message: `No transaction with id: ${req.params.id}`});
-      }
+// Get all transactions for a user
+router.get('/user/:id', async (req, res) => {
+    try{
+        const rawDbTransactions = await Transaction.findAll({
+            where: {
+              user_id: req.params.id
+            },
+            include: {all:true, nested: true}
+        });
   
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
+        dbTransactions = rawDbTransactions.map((transactionObj) => {
+            return transactionObj.get({plain: true});
+        })
+        if(dbTransactions){
+            res.status(200).json(dbTransactions);
+        } else {
+            res.status(404).json({message: "no Transactions found"});
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json(err);
+    }
 });
 
 // Delete a transaction

@@ -1,6 +1,7 @@
 const router = require('express').Router();
-const { Category } = require('../../models');
-const {onlyIfLoggedIn} = require('../../middleware/auth');
+const { Category } = require('../models');
+const {onlyIfLoggedIn} = require('../middleware/auth');
+const clog = require('../utils/colorLogging');
 
 // Get all categories
 router.get('/', async (req, res) => {
@@ -38,7 +39,7 @@ router.get('/:id', async (req, res) => {
         console.log(err);
         res.status(500).json(err);
     }
-})
+});
 
 // CREATE new category
 router.post('/', async (req, res) => {

@@ -8,7 +8,7 @@ const loginFormHandler = async (event) => {
     if(email && password){
 
         // consume the login endpoint with a post request
-        const response = await fetch('/api/user/login', {
+        const response = await fetch('/user/login', {
             method: 'POST',
             body: JSON.stringify({email, password}),
             headers: {'Content-Type':'application/json'}
@@ -16,7 +16,7 @@ const loginFormHandler = async (event) => {
 
         if(response.ok){
             console.log('User successfully logged in');
-            document.location.replace('/profile');
+            document.location.replace('/user/profile');
         } else {
             console.log('User failed to login with known credentials');
             alert(response.statusText);
