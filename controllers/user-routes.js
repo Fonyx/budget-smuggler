@@ -129,7 +129,7 @@ router.get('/logout', (req, res) => {
 });
 
 //request for update form for user balance
-router.get('/balance', onlyIfLoggedIn, (req, res) => {
+router.get('/balance', onlyIfLoggedIn, async (req, res) => {
   try{
     let user = await User.findByPk(req.session.user_id);
     res.render('update-balance', {user});
@@ -140,7 +140,7 @@ router.get('/balance', onlyIfLoggedIn, (req, res) => {
 });
 
 // request to update user balance as a put request
-router.put('/balance', onlyIfLoggedIn, (req, res) => {
+router.put('/balance', onlyIfLoggedIn, async (req, res) => {
   try{
     let userObj = await User.findByPk(req.session.user_id, {
       all: true,
