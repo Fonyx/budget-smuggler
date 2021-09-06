@@ -56,11 +56,11 @@ router.post('/create', async (req, res) => {
 });
 
 // Get all transactions for a user
-router.get('/user/:id', async (req, res) => {
+router.get('/user/:user_id', async (req, res) => {
     try{
         const rawDbTransactions = await Transaction.findAll({
             where: {
-              user_id: req.params.id
+              user_id: req.params.user_id
             },
             include: {all:true, nested: true}
         });
