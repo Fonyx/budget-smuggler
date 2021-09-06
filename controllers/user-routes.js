@@ -128,4 +128,41 @@ router.get('/logout', (req, res) => {
   }
 });
 
+//request for update form for user balance
+router.get('/balance', onlyIfLoggedIn, (req, res) => {
+  try{
+    let user = await User.findByPk(req.session.user_id);
+    res.render('update-balance', {user});
+  }catch(err){
+    clog('Failed to return update-balance form', 'red');
+    res.status(500).json({message:"Failed to serve update-balance form"});
+  }
+});
+
+// request to update user balance as a put request
+router.put('/balance', onlyIfLoggedIn, (req, res) => {
+  try{
+    let userObj = await User.findByPk(req.session.user_id, {
+      all: true,
+      nested:true
+    })
+    clog(`Updating user balance from, ${userObj.balance} to ${req.body.balance}`, 'blue')
+    if(userObj){
+      // this might not check well enough, use should use float for db structure but int should also work
+      if(typeof(req.body.balance) === 'number'){
+        userObj.update({
+          balance:req.body.balance
+        });
+        res.status(200).json({message:"Successfully "});
+      } else {
+        res.status(400).json({message:"User did not submit a number for balance"})
+      }
+    } else {
+      res.status(404).json({message:"Could not find logged in user object"})
+    }
+  }catch(err){
+    res.status(500).json({message:"Server failed to update user balance"});
+  }
+});
+
 module.exports = router;
