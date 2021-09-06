@@ -1,9 +1,7 @@
-const signupFormHandler = async (event) => {
+const updateBalanceFormHandler = async (event) => {
     event.preventDefault();
     // collect values from the login form
-    const username = document.querySelector('#name-signup').value.trim();
-    const email = document.querySelector('#email-signup').value.trim();
-    const password = document.querySelector('#password-signup').value.trim();
+    const username = document.querySelector('#current-balance').value.trim();
 
     if(username && email && password){
 
@@ -15,20 +13,20 @@ const signupFormHandler = async (event) => {
         });
 
         if(response.ok){
-            console.log('User successfully logged in');
+            console.log('User balance successfully retrieved');
             document.location.replace('/profile');
         } else {
-            console.log('User failed to signup');
+            console.log('User current balance not retrieved');
             alert(response.statusText);
         }
 
     } else {
-        console.log('User did not submit values for username, email and password during login');
+        console.log('User did not submit values for current balance');
     }
 }
 
 
 // attach the submit handler to the signup button
 document
-.querySelector('.signup-form')
-.addEventListener('submit', signupFormHandler);
+.querySelector('.update-balance-form')
+.addEventListener('submit', updateBalanceFormHandler);
