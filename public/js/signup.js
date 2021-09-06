@@ -5,18 +5,18 @@ const signupFormHandler = async (event) => {
     const email = document.querySelector('#email-signup').value.trim();
     const password = document.querySelector('#password-signup').value.trim();
 
-    if(username && email && password){
+    if (username && email && password) {
 
         // consume the login endpoint with a post request
-        const response = await fetch('/api/user/', {
+        const response = await fetch('/user/signup', {
             method: 'POST',
-            body: JSON.stringify({username, email, password}),
-            headers: {'Content-Type':'application/json'}
+            body: JSON.stringify({ username, email, password }),
+            headers: { 'Content-Type': 'application/json' }
         });
 
-        if(response.ok){
+        if (response.ok) {
             console.log('User successfully logged in');
-            document.location.replace('/profile');
+            document.location.replace('/user/profile');
         } else {
             console.log('User failed to signup');
             alert(response.statusText);
@@ -30,5 +30,5 @@ const signupFormHandler = async (event) => {
 
 // attach the submit handler to the signup button
 document
-.querySelector('.signup-form')
-.addEventListener('submit', signupFormHandler);
+    .querySelector('.signup-form')
+    .addEventListener('submit', signupFormHandler);
