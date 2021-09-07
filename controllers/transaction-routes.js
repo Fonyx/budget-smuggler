@@ -23,7 +23,7 @@ router.get('/:transaction_id', onlyIfLoggedIn, async (req, res) => {
 // Get the delete transaction confirmation form with the transaction details being returned
 router.get('/delete/:transaction_id', onlyIfLoggedIn, async (req, res) => {
     try{
-        let transactionObj = Transaction.findByPk(req.params.transaction_id);
+        let transactionObj = await Transaction.findByPk(req.params.transaction_id);
         if(transactionObj){
             let transaction = transactionObj.get({plain: true})
             res.render('confirm-transaction-delete', {transaction});
@@ -40,9 +40,10 @@ router.get('/delete/:transaction_id', onlyIfLoggedIn, async (req, res) => {
 router.delete('/:transaction_id', onlyIfLoggedIn, async (req, res) => {
     try{
         let target = await Transaction.findByPk(req.params.transaction_id);
+        let targetName = target.name;
         if(target){
             target.destroy();
-            res.status(200).json({message:"Deleted transaction"});
+            res.status(200).json({message:`Deleted transaction ${targetName}`});
         } else{
             res.status(404).json({message: `Could not find transaction with id: ${req.params.transaction_id} to delete`});
         }
@@ -53,9 +54,15 @@ router.delete('/:transaction_id', onlyIfLoggedIn, async (req, res) => {
 });
 
 // Get new transaction form
-router.get('/create', onlyIfLoggedIn, async (req, res) => {
+router.get('/', onlyIfLoggedIn, async (req, res) => {
     try {
-        res.render('create-transaction');
+        let userObj = await User.findByPk(req.session.user_id);
+        if(userObj){
+            let user = userObj.get();
+            res.render('create-transaction', {user});
+        } else {
+            res.status(400).json({message:"Session user object didn't return an obj, likely user is signed out"});
+        }
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -63,7 +70,7 @@ router.get('/create', onlyIfLoggedIn, async (req, res) => {
 });
 
 // CREATE new transaction using form contents
-router.post('/create', onlyIfLoggedIn, async (req, res) => {
+router.post('/', onlyIfLoggedIn, async (req, res) => {
     let userObj = await User.findByPk(req.session.user_id);
     let categoryObj = await Category.findByPk(req.body.category_id);
     if(userObj && categoryObj){
@@ -80,82 +87,6 @@ router.post('/create', onlyIfLoggedIn, async (req, res) => {
     }
 });
 
-// Get all transactions for a user
-router.get('/user', onlyIfLoggedIn, async (req, res) => {
-    try{
-        const rawDbTransactions = await Transaction.findAll({
-            where: {
-              user_id: req.session.user_id
-            },
-            include: {all:true, nested: true}
-        });
-  
-        dbTransactions = rawDbTransactions.map((transactionObj) => {
-            return transactionObj.get({plain: true});
-        })
-        if(dbTransactions){
-            res.status(200).json(dbTransactions);
-        } else {
-            res.status(404).json({message: "no Transactions found"});
-        }
-    }
-    catch(err){
-        console.log(err);
-        res.status(500).json(err);
-    }
-});
-
-// Get all transactions for a user for a category
-router.get('/user', onlyIfLoggedIn, async (req, res) => {
-    try{
-        const rawDbTransactions = await Transaction.findAll({
-            where: {
-              user_id: req.session.user_id
-            },
-            include: {all:true, nested: true}
-        });
-  
-        dbTransactions = rawDbTransactions.map((transactionObj) => {
-            return transactionObj.get({plain: true});
-        })
-        if(dbTransactions){
-            res.status(200).json(dbTransactions);
-        } else {
-            res.status(404).json({message: "no Transactions found"});
-        }
-    }
-    catch(err){
-        console.log(err);
-        res.status(500).json(err);
-    }
-});
-
-// Get all transactions for a user for a category
-router.get('/user/:category_id', onlyIfLoggedIn, async (req, res) => {
-    try{
-        const rawDbTransactions = await Transaction.findAll({
-            where: {
-              user_id: req.session.user_id,
-              category_id: req.params.category_id
-            },
-            include: {all:true, nested: true}
-        });
-  
-        dbTransactions = rawDbTransactions.map((transactionObj) => {
-            return transactionObj.get({plain: true});
-        })
-        if(dbTransactions){
-            res.status(200).json(dbTransactions);
-        } else {
-            res.status(404).json({message: "no Transactions found"});
-        }
-    }
-    catch(err){
-        console.log(err);
-        res.status(500).json(err);
-    }
-});
-
 // get the update transaction form
 router.get('/update/:transaction_id', onlyIfLoggedIn, async (req, res) => {
     try{
@@ -166,7 +97,7 @@ router.get('/update/:transaction_id', onlyIfLoggedIn, async (req, res) => {
         let dbTransaction = rawTransaction.get({plain: true});
 
         if(dbTransaction){
-            res.status(200).json(dbTransaction);
+            res.render('update-transaction', {dbTransaction})
         } else {
             res.status(404).json({message: "no transaction found"});
         }
@@ -177,9 +108,8 @@ router.get('/update/:transaction_id', onlyIfLoggedIn, async (req, res) => {
     }
 });
 
-
-// post the update transaction form details
-router.post('/update/:transaction_id', onlyIfLoggedIn, async (req, res) => {
+// put the update transaction form details
+router.put('/update/:transaction_id', onlyIfLoggedIn, async (req, res) => {
     try{
         const rawTransaction = await Transaction.findByPk(req.params.transaction_id, {
             include: {all:true, nested: true}
@@ -188,7 +118,7 @@ router.post('/update/:transaction_id', onlyIfLoggedIn, async (req, res) => {
         let dbTransaction = await rawTransaction.update(req.body);
 
         if(dbTransaction){
-            res.status(200).json(dbTransaction);
+            res.status(200).json({message:"Successfully updated transaction"});
         } else {
             res.status(404).json({message: "no transaction found for update"});
         }
