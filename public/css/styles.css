@@ -1,0 +1,106 @@
+/* ---------- MAIN HANDLEBARS STYLES ---------- */
+:root {
+    --darkgrey: #3E4251;
+    --mediumgreen: #6C9D9A;
+    --lightgreen: #BEE3DB;
+    --white: #FAF9F9; 
+    --apricot: #FFD6BA;
+}
+
+main {
+    background: #FAF9F9 url('../images/background-image-2.png') no-repeat center center;
+    background-size: cover;
+    width: fit-content;
+    height: 500px;
+    position: relative;
+}
+
+.page-title {
+    color: black;
+    font-family: john-doe, sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 4em;
+    padding-top: 20px;
+    text-shadow: 2px 2px 8px goldenrod;
+}
+
+.headline {
+    color: black;
+    background-color: white;
+    font-family: hero-new-hairline,sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 5em;
+}
+
+/* ---------- HOMEPAGE HANDLEBARS STYLES ---------- */
+.login-signup-nav {
+    position: relative;
+}
+
+.login-signup {
+    position: absolute;
+    top: -100px;
+    right: 0px;
+}
+
+.login-signup > a.btn {
+    background-color: var(--dark-grey);
+    box-shadow: 2px 2px 8px goldenrod;
+}
+
+.login-signup > a.btn:hover {
+    color: white;
+    background-color: var(--mediumgreen);
+    box-shadow: 2px 2px 8px goldenrod;
+}
+
+/* ---------- LOGIN HANDLEBARS STYLES ---------- */
+.login-buttons .btn {
+    background-color: var(--dark-grey);
+    box-shadow: 2px 2px 8px goldenrod;   
+}
+
+.login-buttons .btn:hover {
+    color: white;
+    background-color: var(--mediumgreen);
+    box-shadow: 2px 2px 8px goldenrod;
+}
+
+.card-title {
+    font-family: hero-new-hairline,sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 3em;
+}
+
+.login-card {
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    max-width:700px;
+    height: 100%;
+}
+
+/* ---------- SIGNUP HANDLEBARS ---------- */
+.signup-buttons .btn {
+    background-color: var(--dark-grey);
+    box-shadow: 2px 2px 8px goldenrod;   
+}
+
+.signup-buttons .btn:hover {
+    color: white;
+    background-color: var(--mediumgreen);
+    box-shadow: 2px 2px 8px goldenrod;
+}
+
+.signup-card {
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    max-width:700px;
+    height: 100%;
+}
+
+
