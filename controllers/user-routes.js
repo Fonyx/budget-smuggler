@@ -150,7 +150,7 @@ router.put('/profile/balance', onlyIfLoggedIn, async (req, res) => {
         userObj.update({
           balance:req.body.balance
         });
-        res.status(200).json({message:"Successfully "});
+        res.status(200).json({message:`Successfully updated user balance to ${req.body.balance}`});
       } else {
         res.status(400).json({message:"User did not submit a number for balance"})
       }
