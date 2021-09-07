@@ -34,21 +34,25 @@ router.post('/', onlyIfLoggedIn, async (req, res) => {
         res.status(200).json(dbCategoryData);
     
     } catch (err) {
-      console.log(err);
-      res.status(500).json(err);
+        if(err.name ==="SequelizeUniqueConstraintError"){
+            clog(`Category ${req.body.name} already exists`, 'magenta');
+            res.status(400).json({message:`Category ${req.body.name} already exists`})
+        } else {
+            res.status(500).json(err);
+        }
     }
 });
 
-// Get one categories
-router.get('/:category_id',onlyIfLoggedIn,  async (req, res) => {
+// Get one category
+router.get('/:category_name',onlyIfLoggedIn,  async (req, res) => {
     try{
-        const dbCategory = await Category.findByPk(req.params.category_id, {
+        const dbCategory = await Category.findByPk(req.params.category_name, {
             include: {all:true, nested: true}
         });
         if(dbCategory){
             res.status(200).json(dbCategory);
         } else {
-            res.status(404).json({message: `no Category with id: ${req.params.category_id} found`});
+            res.status(404).json({message: `no Category with id: ${req.params.category_name} found`});
         }
     }
     catch(err){
@@ -58,9 +62,9 @@ router.get('/:category_id',onlyIfLoggedIn,  async (req, res) => {
 });
 
 // Update a category
-router.put('/:category_id', onlyIfLoggedIn, async (req, res) => {
+router.put('/:category_name', onlyIfLoggedIn, async (req, res) => {
     try {
-        const dbCategoryData = await Category.findByPk(req.params.category_id);
+        const dbCategoryData = await Category.findByPk(req.params.category_name);
         if(dbCategoryData){
             dbCategoryData.update({
                 name: req.body.name,
@@ -69,7 +73,7 @@ router.put('/:category_id', onlyIfLoggedIn, async (req, res) => {
             });
             res.status(200).json(dbCategoryData);
         } else {
-            res.status(404).json({message: `No category with id: ${req.params.category_id}`});
+            res.status(404).json({message: `No category ${req.params.category_name} exists`});
         }
     
     } catch (err) {
@@ -79,15 +83,15 @@ router.put('/:category_id', onlyIfLoggedIn, async (req, res) => {
 });
 
 // Delete a category
-router.delete('/:category_id', onlyIfLoggedIn, async (req, res) => {
+router.delete('/:category_name', onlyIfLoggedIn, async (req, res) => {
     try{
-        let target = await Category.findByPk(req.params.category_id);
+        let target = await Category.findByPk(req.params.category_name);
         let targetName = target.name;
         if(target){
             target.destroy();
             res.status(200).json({message:`Deleted category ${targetName}`});
         } else{
-            res.status(404).json({message: `Could not find category with id: ${req.params.category_id} to delete`});
+            res.status(404).json({message: `Could not find category with id: ${req.params.category_name} to delete`});
         }
     }catch(err){
         console.log(err);
