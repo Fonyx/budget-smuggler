@@ -82,9 +82,10 @@ router.put('/:category_id', onlyIfLoggedIn, async (req, res) => {
 router.delete('/:category_id', onlyIfLoggedIn, async (req, res) => {
     try{
         let target = await Category.findByPk(req.params.category_id);
+        let targetName = target.name;
         if(target){
             target.destroy();
-            res.status(200).json({message:"Deleted category"});
+            res.status(200).json({message:`Deleted category ${targetName}`});
         } else{
             res.status(404).json({message: `Could not find category with id: ${req.params.category_id} to delete`});
         }
