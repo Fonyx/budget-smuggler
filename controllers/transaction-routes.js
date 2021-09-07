@@ -3,32 +3,32 @@ const { User, Category, Transaction } = require('../models');
 const {onlyIfLoggedIn} = require('../middleware/auth');
 
 // Get one transaction
-router.get('/:id', async (req, res) => {
+router.get('/:transaction_id', onlyIfLoggedIn, async (req, res) => {
   try{
-      const dbTransaction = await Transaction.findByPk(req.params.id, {
+      const dbTransaction = await Transaction.findByPk(req.params.transaction_id, {
           include: {all:true, nested: true}
       });
       if(dbTransaction){
           res.status(200).json(dbTransaction);
       } else {
-          res.status(404).json({message: `no Transaction with id: ${req.params.id} found`});
+          res.status(404).json({message: `no Transaction with id: ${req.params.transaction_id} found`});
       }
   }
   catch(err){
       console.log(err);
       res.status(500).json(err);
   }
-})
+});
 
 // Update a transaction
-router.put('/:id', async (req, res) => {
+router.put('/:transaction_id', onlyIfLoggedIn, async (req, res) => {
     try {
-        const dbTransactionData = await Transaction.findByPk(req.params.id);
+        const dbTransactionData = await Transaction.findByPk(req.params.transaction_id);
         if(dbTransactionData){
             dbTransactionData.update(req.body);
             res.status(200).json(dbTransactionData);
         } else {
-            res.status(404).json({message: `No transaction with id: ${req.params.id}`});
+            res.status(404).json({message: `No transaction with id: ${req.params.transaction_id}`});
         }
     
     } catch (err) {
@@ -38,7 +38,7 @@ router.put('/:id', async (req, res) => {
 });
 
 // CREATE new transaction
-router.post('/create', async (req, res) => {
+router.post('/create', onlyIfLoggedIn, async (req, res) => {
     let userObj = await User.findByPk(req.body.user_id);
     let categoryObj = await Category.findByPk(req.body.category_id);
     if(userObj && categoryObj){
@@ -56,7 +56,7 @@ router.post('/create', async (req, res) => {
 });
 
 // Get all transactions for a user
-router.get('/user/:user_id', async (req, res) => {
+router.get('/user/:user_id', onlyIfLoggedIn, async (req, res) => {
     try{
         const rawDbTransactions = await Transaction.findAll({
             where: {
@@ -81,20 +81,20 @@ router.get('/user/:user_id', async (req, res) => {
 });
 
 // Delete a transaction
-router.delete('/:id', async (req, res) => {
+router.delete('/:transaction_id', onlyIfLoggedIn, async (req, res) => {
   try{
-      let target = await Transaction.findByPk(req.params.id);
+      let target = await Transaction.findByPk(req.params.transaction_id);
       if(target){
           target.destroy();
           res.status(200).json({message:"Deleted transaction"});
       } else{
-          res.status(404).json({message: `Could not find transaction with id: ${req.params.id} to delete`});
+          res.status(404).json({message: `Could not find transaction with id: ${req.params.transaction_id} to delete`});
       }
   }catch(err){
       console.log(err);
       res.status(500).json(err);
   }
-})
+});
 
 
 module.exports = router;

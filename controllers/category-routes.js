@@ -24,15 +24,15 @@ router.get('/', async (req, res) => {
 });
 
 // Get one categories
-router.get('/:id', async (req, res) => {
+router.get('/:category_id', async (req, res) => {
     try{
-        const dbCategory = await Category.findByPk(req.params.id, {
+        const dbCategory = await Category.findByPk(req.params.category_id, {
             include: {all:true, nested: true}
         });
         if(dbCategory){
             res.status(200).json(dbCategory);
         } else {
-            res.status(404).json({message: `no Category with id: ${req.params.id} found`});
+            res.status(404).json({message: `no Category with id: ${req.params.category_id} found`});
         }
     }
     catch(err){
@@ -58,9 +58,9 @@ router.post('/', async (req, res) => {
 });
 
 // Update a category
-router.put('/:id', async (req, res) => {
+router.put('/:category_id', async (req, res) => {
     try {
-        const dbCategoryData = await Category.findByPk(req.params.id);
+        const dbCategoryData = await Category.findByPk(req.params.category_id);
         if(dbCategoryData){
             dbCategoryData.update({
                 name: req.body.name,
@@ -69,7 +69,7 @@ router.put('/:id', async (req, res) => {
             });
             res.status(200).json(dbCategoryData);
         } else {
-            res.status(404).json({message: `No category with id: ${req.params.id}`});
+            res.status(404).json({message: `No category with id: ${req.params.category_id}`});
         }
     
     } catch (err) {
@@ -79,14 +79,14 @@ router.put('/:id', async (req, res) => {
 });
 
 // Delete a category
-router.delete('/:id', async (req, res) => {
+router.delete('/:category_id', async (req, res) => {
     try{
-        let target = await Category.findByPk(req.params.id);
+        let target = await Category.findByPk(req.params.category_id);
         if(target){
             target.destroy();
             res.status(200).json({message:"Deleted category"});
         } else{
-            res.status(404).json({message: `Could not find category with id: ${req.params.id} to delete`});
+            res.status(404).json({message: `Could not find category with id: ${req.params.category_id} to delete`});
         }
     }catch(err){
         console.log(err);
