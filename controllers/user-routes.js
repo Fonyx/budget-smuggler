@@ -54,7 +54,7 @@ router.post('/login', async (req, res) => {
 router.get('/signup', (req, res) => {
   try {
     if (req.session.logged_in) {
-      res.redirect('/profile');
+      res.redirect('/user/profile');
       return;
     } else {
       res.render('signup');
@@ -67,11 +67,7 @@ router.get('/signup', (req, res) => {
 // CREATE new user
 router.post('/signup', async (req, res) => {
   try {
-    const dbUserData = await User.create({
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
-    });
+    const dbUserData = await User.create(req.body);
 
     req.session.save(() => {
       req.session.logged_in = true;
@@ -90,7 +86,7 @@ router.get('/logout', (req, res) => {
   if (req.session.logged_in) {
     res.render('logout-confirm');
   } else {
-    res.status(404).end();
+    res.status(400).json({message:"User not logged in"});
   }
 });
 
@@ -102,12 +98,12 @@ router.post('/logout', (req, res) => {
       res.status(204).end();
     });
   } else {
-    res.status(404).end();
+    res.status(404).json({message:"Failed to sign out since user object could not be found"});
   }
 });
 
 // Use withAuth middleware to prevent access to route
-router.get('/profile', async (req, res) => {
+router.get('/profile',onlyIfLoggedIn, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
     const rawTransactions = await Transaction.findAll({

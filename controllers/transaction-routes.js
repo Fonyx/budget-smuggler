@@ -20,20 +20,19 @@ router.get('/:transaction_id', onlyIfLoggedIn, async (req, res) => {
   }
 });
 
-// Update a transaction
-router.put('/:transaction_id', onlyIfLoggedIn, async (req, res) => {
-    try {
-        const dbTransactionData = await Transaction.findByPk(req.params.transaction_id);
-        if(dbTransactionData){
-            dbTransactionData.update(req.body);
-            res.status(200).json(dbTransactionData);
+// Get the delete transaction confirmation form with the transaction details being returned
+router.get('/delete/:transaction_id', onlyIfLoggedIn, async (req, res) => {
+    try{
+        let transactionObj = Transaction.findByPk(req.params.transaction_id);
+        if(transactionObj){
+            let transaction = transactionObj.get({plain: true})
+            res.render('confirm-transaction-delete', {transaction});
         } else {
-            res.status(404).json({message: `No transaction with id: ${req.params.transaction_id}`});
+            res.status(404).json({message:"Could not find transaction to delete"})
         }
-    
-    } catch (err) {
-      console.log(err);
-      res.status(500).json(err);
+    }catch(err){
+        console.log(err);
+        res.status(500).json(err);
     }
 });
 
@@ -51,7 +50,7 @@ router.delete('/:transaction_id', onlyIfLoggedIn, async (req, res) => {
         console.log(err);
         res.status(500).json(err);
     }
-  });
+});
 
 // Get new transaction form
 router.get('/create', onlyIfLoggedIn, async (req, res) => {
@@ -63,7 +62,7 @@ router.get('/create', onlyIfLoggedIn, async (req, res) => {
     }
 });
 
-// CREATE new transaction
+// CREATE new transaction using form contents
 router.post('/create', onlyIfLoggedIn, async (req, res) => {
     let userObj = await User.findByPk(req.session.user_id);
     let categoryObj = await Category.findByPk(req.body.category_id);
@@ -107,12 +106,37 @@ router.get('/user', onlyIfLoggedIn, async (req, res) => {
 });
 
 // Get all transactions for a user for a category
-router.get('/user/:category', onlyIfLoggedIn, async (req, res) => {
+router.get('/user', onlyIfLoggedIn, async (req, res) => {
+    try{
+        const rawDbTransactions = await Transaction.findAll({
+            where: {
+              user_id: req.session.user_id
+            },
+            include: {all:true, nested: true}
+        });
+  
+        dbTransactions = rawDbTransactions.map((transactionObj) => {
+            return transactionObj.get({plain: true});
+        })
+        if(dbTransactions){
+            res.status(200).json(dbTransactions);
+        } else {
+            res.status(404).json({message: "no Transactions found"});
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
+// Get all transactions for a user for a category
+router.get('/user/:category_id', onlyIfLoggedIn, async (req, res) => {
     try{
         const rawDbTransactions = await Transaction.findAll({
             where: {
               user_id: req.session.user_id,
-              category_id = req.params.category_id
+              category_id: req.params.category_id
             },
             include: {all:true, nested: true}
         });
@@ -154,7 +178,7 @@ router.get('/update/:transaction_id', onlyIfLoggedIn, async (req, res) => {
 });
 
 
-// get the update transaction form
+// post the update transaction form details
 router.post('/update/:transaction_id', onlyIfLoggedIn, async (req, res) => {
     try{
         const rawTransaction = await Transaction.findByPk(req.params.transaction_id, {

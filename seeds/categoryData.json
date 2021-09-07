@@ -1,14 +1,17 @@
 [
   {
     "name": "Daily Cashflow",
-    "colour": "Navy Blue"
+    "colour": "Navy Blue",
+    "emoji_string":"0x270D"
   },
   {
     "name": "Business",
-    "colour": "Crimson"
+    "colour": "Crimson",
+    "emoji_string":"0x1F485"
   },
   {
     "name": "Holiday",
-    "colour": "Turquoise"
+    "colour": "Turquoise",
+    "emoji_string":"0x1F441"
   }
 ]
