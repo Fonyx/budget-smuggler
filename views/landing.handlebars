@@ -1,14 +1,15 @@
-{{!-- This template simply renders the buttons to logout if the user is logged in, otherwise it shows buttons that link to login and signup --}}
+<div>
 
-<h1> Homepage </h1>
-
-{{#if logged_in}}
+    {{#if logged_in}}
     <nav>
         <a href="/user/logout" id="logout">LOGOUT</a>
     </nav>
-{{else}}
-    <nav>
-    <a class="btn" href="/user/login" id="login">LOGIN</a>
-    <a class="btn" href="/user/signup" id="signup">SIGNUP</a>
+    {{else}}
+    <nav class="login-signup-nav">
+        <div class="login-signup">
+            <a class="btn btn btn-light m-3" href="/user/login" id="login">LOGIN</a>
+            <a class="btn btn-light m-3" href="/user/signup" id="signup">SIGNUP</a>
+        </div>
     </nav>
-{{/if}}
+    {{/if}}
+</div>
