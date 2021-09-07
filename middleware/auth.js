@@ -6,7 +6,7 @@
  */
 const onlyIfLoggedIn = (req, res, next) => {
     // if user isn't logged in, redirect to /login route
-    if(!req.session.loggedIn){
+    if(!req.session.logged_in){
         res.redirect('/login');
     // otherwise call next to move through other middleware functions
     } else {

@@ -1,9 +1,9 @@
 const updateBalanceFormHandler = async (event) => {
     event.preventDefault();
     // collect values from the login form
-    const username = document.querySelector('#current-balance').value.trim();
+    const balance = document.querySelector('#current-balance').value.trim();
 
-    if(username && email && password){
+    if(balance){
 
         // consume the login endpoint with a post request
         const response = await fetch('user/profile/balance', {
