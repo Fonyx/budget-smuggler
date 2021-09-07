@@ -1,7 +1,16 @@
+{{!-- This template will render all transactions for a logged in user. Data available is {{userTransactions}} and {{userObj}} for dressing the dynamic fields. There will be buttons that redirect to many other routes, in no particular order they are:
+    - create transaction : /transaction/create
+    - update transaction : /transaction/update/:transaction_id 
+    - delete transaction : /transaction/delete/:transaction_id
+    - update balance : /profile/balance
+    - graph view : /graphs
+they should be <a href="/transaction/create"></a> tags as they are redirects which automatically use get requests --}}
+
 <h1> Profile </h1>
 User log in is: {{logged_in}}
 <h2> User Transactions</h2>
 {{#each transactions as |transaction|}}
+    <h1>{{transaction.name}}</h1>
     <h2>{{transaction.date}}</h2>
-    <h3>{{transaction.frequency}}</h3>
+    <h3>{{transaction.amount}}</h3>
 {{/each}}

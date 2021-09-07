@@ -13,13 +13,10 @@ Transaction.belongsTo(User, {
 });
 
 Transaction.belongsTo(Category, {
-    foreignKey: 'category_id',
-    as: "category",
     onDelete: 'CASCADE',
 });
 
 Category.hasMany(Transaction, {
-    foreignKey: 'category_id',
     as:"transactions",
     onDelete: 'CASCADE',
 });
