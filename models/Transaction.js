@@ -39,11 +39,11 @@ Transaction.init(
             type: DataTypes.DATE,
             allowNull: true,
         },
-        category_id: {
-            type: DataTypes.INTEGER,
+        category_name: {
+            type: DataTypes.STRING,
             references: {
                 model: 'category',
-                key: 'id',
+                key: 'name',
             },
         },
         user_id: {

@@ -35,7 +35,7 @@ User.init(
             type: DataTypes.STRING,
             allowNull: true,
             validate: {
-                len: [5],
+                len: [2,5],
             },
         },
         balance:{

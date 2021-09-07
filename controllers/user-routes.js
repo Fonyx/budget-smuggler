@@ -54,7 +54,7 @@ router.post('/login', async (req, res) => {
 router.get('/signup', (req, res) => {
   try {
     if (req.session.logged_in) {
-      res.redirect('/profile');
+      res.redirect('/user/profile');
       return;
     } else {
       res.render('signup');
@@ -67,11 +67,7 @@ router.get('/signup', (req, res) => {
 // CREATE new user
 router.post('/signup', async (req, res) => {
   try {
-    const dbUserData = await User.create({
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
-    });
+    const dbUserData = await User.create(req.body);
 
     req.session.save(() => {
       req.session.logged_in = true;
@@ -85,8 +81,29 @@ router.post('/signup', async (req, res) => {
   }
 });
 
+// request for logout form to be rendered
+router.get('/logout', (req, res) => {
+  if (req.session.logged_in) {
+    res.render('logout-confirm');
+  } else {
+    res.status(400).json({message:"User not logged in"});
+  }
+});
+
+// Logout post request - does the actual logging out
+router.post('/logout', (req, res) => {
+  if (req.session.logged_in) {
+    req.session.destroy(() => {
+      clog('Successfully logged out', 'green');
+      res.status(204).end();
+    });
+  } else {
+    res.status(404).json({message:"Failed to sign out since user object could not be found"});
+  }
+});
+
 // Use withAuth middleware to prevent access to route
-router.get('/profile', async (req, res) => {
+router.get('/profile',onlyIfLoggedIn, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
     const rawTransactions = await Transaction.findAll({
@@ -107,32 +124,11 @@ router.get('/profile', async (req, res) => {
   }
 });
 
-// Logout post request - does the actual logging out
-router.post('/logout', (req, res) => {
-  if (req.session.logged_in) {
-    req.session.destroy(() => {
-      clog('Successfully logged out', 'green');
-      res.status(204).end();
-    });
-  } else {
-    res.status(404).end();
-  }
-});
-
-// request for logout form to be rendered
-router.get('/logout', (req, res) => {
-  if (req.session.logged_in) {
-    res.render('logout-confirm');
-  } else {
-    res.status(404).end();
-  }
-});
-
 //request for update form for user balance
-router.get('/balance', onlyIfLoggedIn, async (req, res) => {
+router.get('/profile/balance', onlyIfLoggedIn, async (req, res) => {
   try{
     let userObj = await User.findByPk(req.session.user_id);
-    user = userObj.get();
+    let user = userObj.get();
     res.render('update-balance', {user});
   }catch(err){
     clog('Failed to return update-balance form', 'red');
@@ -141,7 +137,7 @@ router.get('/balance', onlyIfLoggedIn, async (req, res) => {
 });
 
 // request to update user balance as a put request
-router.put('/balance', onlyIfLoggedIn, async (req, res) => {
+router.put('/profile/balance', onlyIfLoggedIn, async (req, res) => {
   try{
     let userObj = await User.findByPk(req.session.user_id, {
       all: true,
@@ -154,7 +150,7 @@ router.put('/balance', onlyIfLoggedIn, async (req, res) => {
         userObj.update({
           balance:req.body.balance
         });
-        res.status(200).json({message:"Successfully "});
+        res.status(200).json({message:`Successfully updated user balance to ${req.body.balance}`});
       } else {
         res.status(400).json({message:"User did not submit a number for balance"})
       }
