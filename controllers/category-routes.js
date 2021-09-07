@@ -4,7 +4,7 @@ const {onlyIfLoggedIn} = require('../middleware/auth');
 const clog = require('../utils/colorLogging');
 
 // Get all categories
-router.get('/', async (req, res) => {
+router.get('/', onlyIfLoggedIn, async (req, res) => {
     try{
         const rawDbCategories = await Category.findAll();
 
@@ -23,8 +23,24 @@ router.get('/', async (req, res) => {
     }
 });
 
+// CREATE new category
+router.post('/', onlyIfLoggedIn, async (req, res) => {
+    try {
+        const dbCategoryData = await Category.create({
+            name: req.body.name,
+            colour: req.body.colour,
+            emoji: req.body.emoji
+        });
+        res.status(200).json(dbCategoryData);
+    
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+});
+
 // Get one categories
-router.get('/:category_id', async (req, res) => {
+router.get('/:category_id',onlyIfLoggedIn,  async (req, res) => {
     try{
         const dbCategory = await Category.findByPk(req.params.category_id, {
             include: {all:true, nested: true}
@@ -41,24 +57,8 @@ router.get('/:category_id', async (req, res) => {
     }
 });
 
-// CREATE new category
-router.post('/', async (req, res) => {
-    try {
-        const dbCategoryData = await Category.create({
-            name: req.body.name,
-            colour: req.body.colour,
-            emoji: req.body.emoji
-        });
-        res.status(200).json(dbCategoryData);
-    
-    } catch (err) {
-      console.log(err);
-      res.status(500).json(err);
-    }
-});
-
 // Update a category
-router.put('/:category_id', async (req, res) => {
+router.put('/:category_id', onlyIfLoggedIn, async (req, res) => {
     try {
         const dbCategoryData = await Category.findByPk(req.params.category_id);
         if(dbCategoryData){
@@ -79,7 +79,7 @@ router.put('/:category_id', async (req, res) => {
 });
 
 // Delete a category
-router.delete('/:category_id', async (req, res) => {
+router.delete('/:category_id', onlyIfLoggedIn, async (req, res) => {
     try{
         let target = await Category.findByPk(req.params.category_id);
         if(target){

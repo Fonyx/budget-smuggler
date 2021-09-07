@@ -37,9 +37,35 @@ router.put('/:transaction_id', onlyIfLoggedIn, async (req, res) => {
     }
 });
 
+// Delete a transaction
+router.delete('/:transaction_id', onlyIfLoggedIn, async (req, res) => {
+    try{
+        let target = await Transaction.findByPk(req.params.transaction_id);
+        if(target){
+            target.destroy();
+            res.status(200).json({message:"Deleted transaction"});
+        } else{
+            res.status(404).json({message: `Could not find transaction with id: ${req.params.transaction_id} to delete`});
+        }
+    }catch(err){
+        console.log(err);
+        res.status(500).json(err);
+    }
+  });
+
+// Get new transaction form
+router.get('/create', onlyIfLoggedIn, async (req, res) => {
+    try {
+        res.render('create-transaction');
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
 // CREATE new transaction
 router.post('/create', onlyIfLoggedIn, async (req, res) => {
-    let userObj = await User.findByPk(req.body.user_id);
+    let userObj = await User.findByPk(req.session.user_id);
     let categoryObj = await Category.findByPk(req.body.category_id);
     if(userObj && categoryObj){
         try {
@@ -56,11 +82,11 @@ router.post('/create', onlyIfLoggedIn, async (req, res) => {
 });
 
 // Get all transactions for a user
-router.get('/user/:user_id', onlyIfLoggedIn, async (req, res) => {
+router.get('/user', onlyIfLoggedIn, async (req, res) => {
     try{
         const rawDbTransactions = await Transaction.findAll({
             where: {
-              user_id: req.params.user_id
+              user_id: req.session.user_id
             },
             include: {all:true, nested: true}
         });
@@ -80,21 +106,74 @@ router.get('/user/:user_id', onlyIfLoggedIn, async (req, res) => {
     }
 });
 
-// Delete a transaction
-router.delete('/:transaction_id', onlyIfLoggedIn, async (req, res) => {
-  try{
-      let target = await Transaction.findByPk(req.params.transaction_id);
-      if(target){
-          target.destroy();
-          res.status(200).json({message:"Deleted transaction"});
-      } else{
-          res.status(404).json({message: `Could not find transaction with id: ${req.params.transaction_id} to delete`});
-      }
-  }catch(err){
-      console.log(err);
-      res.status(500).json(err);
-  }
+// Get all transactions for a user for a category
+router.get('/user/:category', onlyIfLoggedIn, async (req, res) => {
+    try{
+        const rawDbTransactions = await Transaction.findAll({
+            where: {
+              user_id: req.session.user_id,
+              category_id = req.params.category_id
+            },
+            include: {all:true, nested: true}
+        });
+  
+        dbTransactions = rawDbTransactions.map((transactionObj) => {
+            return transactionObj.get({plain: true});
+        })
+        if(dbTransactions){
+            res.status(200).json(dbTransactions);
+        } else {
+            res.status(404).json({message: "no Transactions found"});
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json(err);
+    }
 });
+
+// get the update transaction form
+router.get('/update/:transaction_id', onlyIfLoggedIn, async (req, res) => {
+    try{
+        const rawTransaction = await Transaction.findByPk(req.params.transaction_id, {
+            include: {all:true, nested: true}
+        });
+  
+        let dbTransaction = rawTransaction.get({plain: true});
+
+        if(dbTransaction){
+            res.status(200).json(dbTransaction);
+        } else {
+            res.status(404).json({message: "no transaction found"});
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
+
+// get the update transaction form
+router.post('/update/:transaction_id', onlyIfLoggedIn, async (req, res) => {
+    try{
+        const rawTransaction = await Transaction.findByPk(req.params.transaction_id, {
+            include: {all:true, nested: true}
+        });
+  
+        let dbTransaction = await rawTransaction.update(req.body);
+
+        if(dbTransaction){
+            res.status(200).json(dbTransaction);
+        } else {
+            res.status(404).json({message: "no transaction found for update"});
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json(err);
+    }
+})
 
 
 module.exports = router;

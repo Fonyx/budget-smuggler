@@ -85,6 +85,27 @@ router.post('/signup', async (req, res) => {
   }
 });
 
+// request for logout form to be rendered
+router.get('/logout', (req, res) => {
+  if (req.session.logged_in) {
+    res.render('logout-confirm');
+  } else {
+    res.status(404).end();
+  }
+});
+
+// Logout post request - does the actual logging out
+router.post('/logout', (req, res) => {
+  if (req.session.logged_in) {
+    req.session.destroy(() => {
+      clog('Successfully logged out', 'green');
+      res.status(204).end();
+    });
+  } else {
+    res.status(404).end();
+  }
+});
+
 // Use withAuth middleware to prevent access to route
 router.get('/profile', async (req, res) => {
   try {
@@ -107,32 +128,11 @@ router.get('/profile', async (req, res) => {
   }
 });
 
-// Logout post request - does the actual logging out
-router.post('/logout', (req, res) => {
-  if (req.session.logged_in) {
-    req.session.destroy(() => {
-      clog('Successfully logged out', 'green');
-      res.status(204).end();
-    });
-  } else {
-    res.status(404).end();
-  }
-});
-
-// request for logout form to be rendered
-router.get('/logout', (req, res) => {
-  if (req.session.logged_in) {
-    res.render('logout-confirm');
-  } else {
-    res.status(404).end();
-  }
-});
-
 //request for update form for user balance
-router.get('/balance', onlyIfLoggedIn, async (req, res) => {
+router.get('/profile/balance', onlyIfLoggedIn, async (req, res) => {
   try{
     let userObj = await User.findByPk(req.session.user_id);
-    user = userObj.get();
+    let user = userObj.get();
     res.render('update-balance', {user});
   }catch(err){
     clog('Failed to return update-balance form', 'red');
@@ -141,7 +141,7 @@ router.get('/balance', onlyIfLoggedIn, async (req, res) => {
 });
 
 // request to update user balance as a put request
-router.put('/balance', onlyIfLoggedIn, async (req, res) => {
+router.put('/profile/balance', onlyIfLoggedIn, async (req, res) => {
   try{
     let userObj = await User.findByPk(req.session.user_id, {
       all: true,
