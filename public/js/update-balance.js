@@ -6,15 +6,15 @@ const updateBalanceFormHandler = async (event) => {
     if(username && email && password){
 
         // consume the login endpoint with a post request
-        const response = await fetch('/api/user/', {
-            method: 'POST',
-            body: JSON.stringify({username, email, password}),
+        const response = await fetch('user/profile/balance', {
+            method: 'PUT',
+            body: JSON.stringify({balance}),
             headers: {'Content-Type':'application/json'}
         });
 
         if(response.ok){
             console.log('User balance successfully retrieved');
-            document.location.replace('/profile');
+            //document.location.replace('/profile');
         } else {
             console.log('User current balance not retrieved');
             alert(response.statusText);
