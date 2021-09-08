@@ -162,12 +162,50 @@ img.landing-logo {
     background-color: var(--mediumgreen);
 }
 
+.current-balance-title {
+    font-family: monotype-modern-display,sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
 .update-link {
+    font-family: hero-new-hairline,sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 3em;
+    text-decoration: none;
     color: black;
+    font-weight: bold;
+    font-size: 1.2em;
 }
 
 .update-link:hover {
-    color: var(--lightgreen);
+    text-decoration: none;
+    color: orange;
+}
+
+.new-transaction-link {
+    font-family: hero-new-hairline,sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 3em;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.new-transaction-link:hover {
+    text-decoration: none;
+    color: orange;
+}
+
+.no-transactions {
+    padding: 20px;
+    font-weight: normal;
+    font-style: italic;
+    font-size: 1.1em;
+    color: lightslategray;
 }
 
 /* partials - transaction-card */
