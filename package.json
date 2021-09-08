@@ -7,6 +7,7 @@
     "test": "jest --coverage",
     "start": "node server.js",
     "seed": "node seeds/seed.js",
+    "seedHeroku": "node seeds/seedHeroku.js",
     "watch": "nodemon server.js"
   },
   "keywords": [],
@@ -37,5 +38,8 @@
   "bugs": {
     "url": "https://github.com/Fonyx/budget-smuggler/issues"
   },
-  "homepage": "https://github.com/Fonyx/budget-smuggler#readme"
+  "homepage": "https://github.com/Fonyx/budget-smuggler#readme",
+  "engines": {
+    "node": "12.14.1"
+  }
 }

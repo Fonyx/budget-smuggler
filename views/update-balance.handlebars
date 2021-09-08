@@ -11,15 +11,15 @@ all good, 400 user did something bad, 500 server broke --}}
 <p>User's balance: {{user.balance}}</p>
 
 
-<form>
-    <div class="form update-balance-form">
+<form class="update-balance-form form">
+    <div class="form-group">
         <label for="current-balance">Current Balance</label>
-        <input type="text" class="form-control" id="current-balance" aria-describedby="currentBalance"
-            placeholder="{{user.balance}}">
+        <input type="text" class="form-control" id="current-balance" data-id="{{user.id}}"
+            aria-describedby="currentBalance" placeholder="{{user.balance}}">
     </div>
     <div>
         <button id="update-btn" type="submit" class="btn btn-primary">Update</button>
-        <button id="cancel-btn" type="submit" class="btn-primary">Cancel</button>
+        <button id="cancel-btn" type="cancel" class="btn-primary">Cancel</button>
     </div>
 </form>
 
