@@ -1,16 +1,45 @@
-{{!-- This template will render all transactions for a logged in user. Data available is {{userTransactions}} and {{userObj}} for dressing the dynamic fields. There will be buttons that redirect to many other routes, in no particular order they are:
-    - create transaction : /transaction/create
-    - update transaction : /transaction/update/:transaction_id 
-    - delete transaction : /transaction/delete/:transaction_id
-    - update balance : /profile/balance
-    - graph view : /graphs
+{{!-- This template will render all transactions for a logged in user. Data available is {{userTransactions}} and
+{{userObj}} for dressing the dynamic fields. There will be buttons that redirect to many other routes, in no particular
+order they are:
+- create transaction : /transaction/create - link to new page
+- update transaction : /transaction/update/:transaction_id link to new page
+- delete transaction : /transaction/delete/:transaction_id not sure
+- update balance : /profile/balance link to new page
+- graph view : /graphs link to new page
 they should be <a href="/transaction/create"></a> tags as they are redirects which automatically use get requests --}}
+<main class="container">
+    <section class="card profile-card row g-3 align-items-center justify-content-center m-4">
+        <div class="card-body d-flex flex-column p-2 w-75">
 
-<h1> Profile </h1>
-User log in is: {{logged_in}}
-<h2> User Transactions</h2>
-{{#each transactions as |transaction|}}
-    <h1>{{transaction.name}}</h1>
-    <h2>{{transaction.date}}</h2>
-    <h3>{{transaction.amount}}</h3>
-{{/each}}
+            <div>
+                <h1 class="card-title text-center"><span>Current Balance: {{transactions.balance}}</span><span><svg
+                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-plus-lg" viewBox="0 0 16 16">
+                            <path
+                                d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z" />
+                        </svg></span></h1>
+            </div>
+
+            <section class="card container p-2 m-2">
+                <h3 class="card-header row text-center">
+                    <span class="col-md">Name</span>
+                    <span class="col-md">Frequency</span>
+                    <span class="col-md">Amount</span>
+                    <span class="col-md">Days Left</span>
+                    <span class="col-md">
+                        <!-- Placeholder for icons-->
+                    </span>
+                </h3>
+                {{#if transactions}}
+                {{#each transactions as |transaction|}}
+                {{>transaction-card}}
+                {{/each}}
+                {{else}}
+                <h2> You have no transactions yet.</h2>
+                {{/if}}
+            </section>
+        </div>
+    </section>
+</main>
+
+<script src="/js/logout.js"></script>
