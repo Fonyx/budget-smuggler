@@ -162,6 +162,14 @@ img.landing-logo {
     background-color: var(--mediumgreen);
 }
 
+.update-link {
+    color: black;
+}
+
+.update-link:hover {
+    color: var(--lightgreen);
+}
+
 /* partials - transaction-card */
 .profile-buttons a {
     color: black;

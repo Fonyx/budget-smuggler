@@ -12,12 +12,14 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
         <div class="card-body d-flex flex-column p-2 w-75">
 
             <div>
-                <h1 class="card-title text-center"><span>Current Balance: {{transactions.balance}}</span><span><svg
-                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-plus-lg" viewBox="0 0 16 16">
-                            <path
-                                d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z" />
-                        </svg></span></h1>
+                <h1 class="card-title text-center"><span>Current Balance: {{user.balance}}</span><span><button
+                            class="btn updateBalanceBtn" type="button" id="updateBalanceBtn"><a class="update-link"
+                                href="/user/profile/balance{{transaction.id}}"><svg xmlns="http://www.w3.org/2000/svg"
+                                    width="16" height="16" fill="currentColor" class="bi bi-plus-lg"
+                                    viewBox="0 0 16 16">
+                                    <path
+                                        d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z" />
+                                </svg> Update Balance</a></span></h1>
             </div>
 
             <section class="card container p-2 m-2">
