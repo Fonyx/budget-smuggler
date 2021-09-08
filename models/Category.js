@@ -1,47 +1,41 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
+//https://getbootstrap.com/docs/5.0/utilities/background/
 const colors = [
-    'red', 
-    'pink', 
-    'purple', 
-    'deep-purple', 
-    'indigo',
-    'blue',
-    'light-blue',
-    'cyan',
-    'teal',
-    'green',
-    'light-green',
-    'lime',
-    'yellow',
-    'amber',
-    'orange',
-    'deep-orange',
-    'brown',
-    'grey',
-]
-const modifiers = [
-    'lighten-5', 
-    'lighten-4', 
-    'lighten-3', 
-    'lighten-2', 
-    'lighten-1',
-    '',
-    'darken-1',
-    'darken-2',
-    'darken-3',
-    'darken-4',
-    'accent-1',
-    'accent-2',
-    'accent-3',
-    'accent-4',
+    'bg-primary', 
+    'bg-secondary', 
+    'bg-success', 
+    'bg-danger', 
+    'bg-warning', 
+    'bg-info', 
+    'bg-light',
+    'bg-dark',
+];
+
+const color_codes = [
+    '#0d6efd','#6c757d', '#198754','#dc3545','#ffc107','#0dcaf0', '#f8f9fa','#212529'
 ]
 
-// a function that returns a random int inclusively between min and max
-function generateRandomIntFromRange(min, max){
-    return Math.floor(Math.random()*(max-min+1)+min);
+const color_map = {
+    bg_primary: '#0d6efd',
+    bg_secondary: '#6c757d',
+    bg_success: '#198754',
+    bg_danger: '#dc3545',
+    bg_warning: '#ffc107',
+    bg_info: '#0dcaf0',
+    bg_light: '#f8f9fa',
+    bg_dark: '#212529'
 }
+
+const text_colors = ['text-white', 'text-black'];
+
+const colorsForWhiteText = [
+    'bg-primary', 
+    'bg-secondary', 
+    'bg-success', 
+    'bg-danger', 
+];
 
 class Category extends Model {}
 
@@ -53,54 +47,28 @@ Category.init(
             primaryKey: true,
             unique: true
         },
-        colour: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
         emoji: {
             // maybe use a hook to determine the emoji char
             type: DataTypes.STRING,
             allowNull: true,
+        },
+        color :{
+            type: DataTypes.ENUM,
+            values: color_codes,
+            allowNull: false,
         },
         bootstrap_color:{
             type: DataTypes.ENUM,
             values: colors,
             allowNull: false,
         },
-        bootstrap_modifier:{
-            type: DataTypes.ENUM,
-            values: modifiers,
-            allowNull: false,
-        },
         bootstrap_text_color:{
             type: DataTypes.ENUM,
-            values: ['white', 'black'],
+            values: text_colors,
             allowNull: false,
         }
     },
     {
-        hooks:{
-            beforeCreate: (tag) => {
-                let randomColorIndex = generateRandomIntFromRange(0, colors.length-1);
-                let randomModifierIndex = generateRandomIntFromRange(0, modifiers.length-1);
-                let bootstrapText = 'black'
-    
-                let randomColor = colors[randomColorIndex];
-                let randomModifier = modifiers[randomModifierIndex];
-    
-                tag.bootstrap_color = randomColor;
-                tag.bootstrap_modifier = randomModifier;
-    
-                // if the modifier is darken, set the text to white, otherwise leave it black for lighten and accent
-                if(randomModifier[0] === 'd'){
-                    bootstrapText = 'white';
-                }
-                tag.bootstrap_text_color = bootstrapText;
-
-                // store the tag name as a hyphenated slug to avoid spaces in urls
-                tag.name = tag.name.replace(' ', '-');
-            }
-        },
         sequelize,
         timestamps: false,
         freezeTableName: true,

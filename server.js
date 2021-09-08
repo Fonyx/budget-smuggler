@@ -8,6 +8,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const cRequests = require('./middleware/colorRequests');
 const helpers = require('./utils/hjsHelpers');
 
+
 const hbs = exphbs.create({ helpers });
 
 const app = express();
