@@ -5,14 +5,24 @@
     --lightgreen: #BEE3DB;
     --white: #FAF9F9; 
     --apricot: #FFD6BA;
+    --deletered: #c60000;
 }
 
-main {
-    background: #FAF9F9 url('../images/background-image-2.png') no-repeat center center;
+img.logo {
+    width: 160px;
+    height: 100px;
+}
+
+body {
+    background: #FAF9F9 url('../images/background.jpeg') no-repeat center;
     background-size: cover;
-    width: fit-content;
-    height: 500px;
+    width: 100%;
+    height: 900px;
     position: relative;
+}
+
+nav {
+    margin: 0px;
 }
 
 .page-title {
@@ -20,28 +30,71 @@ main {
     font-family: john-doe, sans-serif;
     font-weight: 700;
     font-style: normal;
-    font-size: 4em;
-    padding-top: 20px;
+    font-size: 2.6em;
+    padding: 15px 30px;
     text-shadow: 2px 2px 8px goldenrod;
+}
+
+.logout-nav {
+    position: relative;
+}
+
+.logout-nav .btn {
+    position: relative;
+    top: -100px;
+    background-color: var(--dark-grey);
+    box-shadow: 2px 2px 8px goldenrod;
+}
+
+.logout-nav .btn:hover {
+    color: white;
+    background-color: var(--mediumgreen);
+    box-shadow: 2px 2px 8px goldenrod;
+}
+
+.login-signup-nav {
+    position: relative;
+}
+
+.login-signup-nav .btn {
+    position: relative;
+    top: -100px;
+    background-color: var(--dark-grey);
+    box-shadow: 2px 2px 8px goldenrod;
+}
+
+.login-signup-nav .btn:hover {
+    color: white;
+    background-color: var(--mediumgreen);
+    box-shadow: 2px 2px 8px goldenrod;
+}
+
+
+
+/* ---------- LANDING PAGE HANDLEBARS STYLES ---------- */
+.landing-logo-headline {
+    max-width: 1400px;
 }
 
 .headline {
     color: black;
-    background-color: white;
     font-family: hero-new-hairline,sans-serif;
-    font-weight: 600;
+    font-weight: 300;
     font-style: normal;
-    font-size: 5em;
+    font-size: 4em;
 }
 
-/* ---------- HOMEPAGE HANDLEBARS STYLES ---------- */
+img.landing-logo {
+    width: 570px;
+    height: 450px;
+}
+
 .login-signup-nav {
     position: relative;
 }
 
 .login-signup {
     position: absolute;
-    top: -100px;
     right: 0px;
 }
 
@@ -76,11 +129,8 @@ main {
 }
 
 .login-card {
-    position: absolute;
-    top: 0px;
-    left: 50%;
-    max-width:700px;
-    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 /* ---------- SIGNUP HANDLEBARS ---------- */
@@ -96,11 +146,32 @@ main {
 }
 
 .signup-card {
-    position: absolute;
-    top: 0px;
-    left: 50%;
-    max-width:700px;
-    height: 100%;
+    max-width: 90%;
+    max-height: 100%;
 }
 
+
+/* ---------- PROFILE HANDLEBARS ---------- */
+.profile-card {
+    max-width: 90%;
+    max-height: 100%;
+}
+
+.profile-card .card-header {
+    color: var(--white);
+    background-color: var(--mediumgreen);
+}
+
+/* partials - transaction-card */
+.profile-buttons a {
+    color: black;
+}
+
+.add-link:hover {
+    color: var(--mediumgreen);
+}
+
+.delete-link:hover {
+    color: #c60000;
+}
 

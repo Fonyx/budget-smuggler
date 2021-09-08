@@ -20,26 +20,40 @@
 </head>
 
 <body>
-  <div class="container">
-    <header class="p-4">
+  <header class="p-4">
+    <div class="d-flex flex-row">
+      <img src="/images/logo-image.jpeg" alt="Gold background textured image" class="logo">
       <h1 class="page-title">Budget Smuggler</h1>
-      {{#if logged_in}}
-      <nav>
-        <button class="btn btn-dark" id="logout">logout</button>
+    </div>
+    {{#if logged_in}}
+    <div class="container">
+      <nav class="logout-nav d-flex flex-row mb-3 justify-content-end">
+        <a class="btn btn-light p-2 m-2" href="/user/profile">Profile</a>
+        <a class="btn btn-light p-2 m-2" href="/graphs">Graphs</a>
+        <a class="btn btn-light p-2 m-2" href="">Nav item 3</a>
+        <a class="btn btn-light p-2 m-2" href="/user/logout" id="logout">LOGOUT</a>
       </nav>
-      {{/if}}
-    </header>
-    <main class="container position-relative">
-      <p class="headline position-absolute top-0 start-50">Your favorite budgeting app</p>
-      {{{ body }}}
-    </main>
+    </div>
+    {{else}}
+    <div>
+      <nav class="login-signup-nav">
+        <div class="login-signup">
+          <a class="btn btn btn-light m-3" href="/user/login" id="login">LOGIN</a>
+          <a class="btn btn-light m-3" href="/user/signup" id="signup">SIGNUP</a>
+        </div>
+      </nav>
+    </div>
+    {{/if}}
+  </header>
 
-      
-    <footer>
-    </footer>
-  </div>
+  {{{ body }}}
+
+  <footer>
+
+  </footer>
+
   {{#if logged_in}}
-    <script src="/js/logout.js"></script>
+  <script src="/js/logout.js"></script>
   {{/if}}
 </body>
 
