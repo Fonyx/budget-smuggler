@@ -32,7 +32,8 @@ Transaction.init(
             default: "once",
         },
         type: {
-            type: DataTypes.STRING,
+            type: DataTypes.ENUM,
+            values: ['income', 'expense'],
             allowNull: false,
         },
         end_recurrence: {
