@@ -1,3 +1,29 @@
 {{!-- This template is a form for updating all the fields in a transaction, it has access to {{transactionObj}} and {{userObj}} for dressing the form. Client side js will need to handle event listening for submit, form field validation, and then sending a PUT request to "/transaction/update/{{transactionObj.id}}". It will handle the usual responses, code 200 - all good, 400 user did something bad, 500 server broke --}}
 
 UPDATE TRANSACTION FORM + A TRANSACTION OBJECT
+
+<h1>Update Transaction</h1>
+
+<form class="update-transaction-form form">
+    <div class="form-group">
+        <label for="">NAME</label>
+        <input type="text" class="form-control" id="update-transaction-name" data-id="{{user.id}}" aria-describedby="updateTransactionName" placeholder="{{user.name}}">
+        <label for="">AMMOUNT</label>
+        <input type="text" class="form-control" id="update-transaction-ammount" data-id="{{user.id}}" aria-describedby="updateTransactionAmmount" placeholder="{{user.amount}}">
+        <label for="">DUE DATE</label>
+        <input type="text" class="form-control" id="update-transaction-due-date" data-id="{{user.id}}" aria-describedby="updateTransactionDueDate" placeholder="{{user.due_date}}">
+        <label for="">FREQUENCY</label>
+        <input type="text" class="form-control" id="update-transaction-frequency" data-id="{{user.id}}" aria-describedby="updateTransactionFrequency" placeholder="{{user.frequency}}">
+        <label for="">TYPE</label>
+        <input type="text" class="form-control" id="update-transaction-type" data-id="{{user.id}}" aria-describedby="updateTransactionType" placeholder="{{user.type}}">
+        <label for="">END RECURRENCE</label>
+        <input type="text" class="form-control" id="update-transaction-end-recurrence" data-id="{{user.id}}" aria-describedby="updateTransactionEndRecurrence" placeholder="{{user.end_recurrence}}">
+        <label for="">CATEGORY NAME</label>
+        <input type="text" class="form-control" id="update-transaction-category-name" data-id="{{user.id}}" aria-describedby="updateTransactionCategoryName" placeholder="{{user.category_name}}">
+    </div>
+    <div>
+        <button id="back-btn" type="submit" class="btn btn-primary">Back</button>
+    </div>
+</form>
+
+<script src="/js/update-transaction.js"></script>
