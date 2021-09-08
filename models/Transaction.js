@@ -1,7 +1,14 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Transaction extends Model { }
+class Transaction extends Model { 
+
+    getDueDateAsDateString(){
+        return this.getDataValue('due_date').toString();
+        // return moment(this.getDataValue('due_date')).format('DD/MM/YYYY');
+        // return moment(this.getDataValue('createdAt')).format('DD/MM/YYYY h:mm:ss');
+    }
+}
 
 Transaction.init(
     {
