@@ -4,7 +4,7 @@
     "amount":112.54,
     "due_date": "11/8/2021",
     "frequency": "fortnightly",
-    "type":"credit",
+    "type":"income",
     "end_recurrence":"1/12/2021",
     "category_name":"Business",
     "user_id": 5
@@ -14,7 +14,7 @@
     "amount":800,
     "due_date": "10/8/2021",
     "frequency": "monthly",
-    "type":"debit",
+    "type":"expense",
     "end_recurrence":"1/1/2022",
     "category_name":"Cashflow",
     "user_id": 5
@@ -24,7 +24,7 @@
     "amount":112.54,
     "due_date": "4/8/2021",
     "frequency": "fortnightly",
-    "type":"credit",
+    "type":"income",
     "end_recurrence":"1/12/2021",
     "category_name":"Cashflow",
     "user_id": 5
@@ -34,7 +34,7 @@
     "amount":1143.27,
     "due_date": "3/8/2021",
     "frequency": "once",
-    "type":"credit",
+    "type":"income",
     "category_name":"Holiday",
     "user_id": 15
   },
@@ -43,7 +43,7 @@
     "amount":234.54,
     "due_date": "11/8/2021",
     "frequency": "fortnightly",
-    "type":"credit",
+    "type":"income",
     "end_recurrence":"1/12/2021",
     "category_name":"Holiday",
     "user_id": 35
@@ -53,7 +53,7 @@
     "amount":800,
     "due_date": "10/8/2021",
     "frequency": "monthly",
-    "type":"debit",
+    "type":"expense",
     "end_recurrence":"1/1/2022",
     "category_name":"Cashflow",
     "user_id": 25
@@ -63,7 +63,7 @@
     "amount":112.54,
     "due_date": "4/8/2021",
     "frequency": "once",
-    "type":"credit",
+    "type":"income",
     "end_recurrence":"1/12/2021",
     "category_name":"Business",
     "user_id": 35
@@ -73,7 +73,7 @@
     "amount":1290.27,
     "due_date": "3/8/2021",
     "frequency": "once",
-    "type":"credit",
+    "type":"income",
     "category_name":"Business",
     "user_id": 35
   }
