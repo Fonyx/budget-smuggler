@@ -41,6 +41,7 @@ Transaction.init(
         },
         category_name: {
             type: DataTypes.STRING,
+            allowNull: false,
             references: {
                 model: 'category',
                 key: 'name',

@@ -7,7 +7,7 @@
     "type":"credit",
     "end_recurrence":"1/12/2021",
     "category_name":"Business",
-    "user_id": 1
+    "user_id": 5
   },
   {
     "name":"rent",
@@ -17,7 +17,7 @@
     "type":"debit",
     "end_recurrence":"1/1/2022",
     "category_name":"Daily Cashflow",
-    "user_id": 1
+    "user_id": 5
   },
   {
     "name":"camera",
@@ -27,7 +27,7 @@
     "type":"credit",
     "end_recurrence":"1/12/2021",
     "category_name":"Daily Cashflow",
-    "user_id": 1
+    "user_id": 5
   },
   {
     "name":"flights",
@@ -36,7 +36,7 @@
     "frequency": "once",
     "type":"credit",
     "category_name":"Holiday",
-    "user_id": 2
+    "user_id": 15
   },
   {
     "name":"ebay sale",
@@ -46,7 +46,7 @@
     "type":"credit",
     "end_recurrence":"1/12/2021",
     "category_name":"Holiday",
-    "user_id": 4
+    "user_id": 35
   },
   {
     "name":"rent",
@@ -56,7 +56,7 @@
     "type":"debit",
     "end_recurrence":"1/1/2022",
     "category_name":"Daily Cashflow",
-    "user_id": 3
+    "user_id": 25
   },
   {
     "name":"lenses",
@@ -66,7 +66,7 @@
     "type":"credit",
     "end_recurrence":"1/12/2021",
     "category_name":"Business",
-    "user_id": 4
+    "user_id": 35
   },
   {
     "name":"accommodation",
@@ -75,6 +75,6 @@
     "frequency": "once",
     "type":"credit",
     "category_name":"Business",
-    "user_id": 4
+    "user_id": 35
   }
 ]
