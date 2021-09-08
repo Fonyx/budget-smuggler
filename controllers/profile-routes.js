@@ -18,8 +18,10 @@ router.get('/', onlyIfLoggedIn, async (req, res) => {
         transactions = rawDbTransactions.map((transactionObj) => {
             return transactionObj.get({plain: true});
         })
+        // since this is an onlyLoggedIn route, this is always true
+        var logged_in = true;
         if(transactions){
-            res.render('profile', {transactions, user});
+            res.render('profile', {transactions, user, logged_in});
         } else {
             res.status(404).json({message: "no Transactions found"});
         }
