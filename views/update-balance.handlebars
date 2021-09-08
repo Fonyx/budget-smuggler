@@ -1,6 +1,11 @@
-{{!-- this template will render a form with fields for a transaction, it will dress the form with data from the {{user}} that is available. It will need client side javascript to event handle the form submit by taking the form field data, validating it, then sending it in a PUT request to "/profile/balance". It will handle the usual responses, code 200 - all good, 400 user did something bad, 500 server broke --}}
+{{!-- this template will render a form with fields for a transaction, it will dress the form with data from the {{user}}
+that is available. It will need client side javascript to event handle the form submit by taking the form field data,
+validating it, then sending it in a PUT request to "/profile/balance". It will handle the usual responses, code 200 -
+all good, 400 user did something bad, 500 server broke --}}
 
+<main>
 
+</main>
 <h1>Update Balance</h1>
 
 <p>User's balance: {{user.balance}}</p>
@@ -9,7 +14,8 @@
 <form class="update-balance-form form">
     <div class="form-group">
         <label for="current-balance">Current Balance</label>
-        <input type="text" class="form-control" id="current-balance" data-id="{{user.id}}" aria-describedby="currentBalance" placeholder="{{user.balance}}">
+        <input type="text" class="form-control" id="current-balance" data-id="{{user.id}}"
+            aria-describedby="currentBalance" placeholder="{{user.balance}}">
     </div>
     <div>
         <button id="update-btn" type="submit" class="btn btn-primary">Update</button>
