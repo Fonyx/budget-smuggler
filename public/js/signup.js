@@ -16,7 +16,7 @@ const signupFormHandler = async (event) => {
 
         if (response.ok) {
             console.log('User successfully logged in');
-            document.location.replace('/user/profile');
+            document.location.replace('/profile');
         } else {
             console.log('User failed to signup');
             alert(response.statusText);
