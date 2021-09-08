@@ -57,19 +57,21 @@ var ctx = timelineEl.getContext('2d');
 
 // Chart.defaults.font.family = 'Lato';
 // Chart.defaults.font.size = 18;
-var dates = ['18/5/1991', '20/5/1991', '21/5/1991', '22/5/1991','24/5/1991']
+var dates = ['18/5/1991', '21/5/1991', '28/5/1991', '1/6/1991','5/6/1991']
 var amounts = [200, 250, 270, -10, 500];
 var colours = ['green', 'green', 'green', 'red', 'green']
 
 dateObjs = dates.map((date, index) => {
   let currentAmount = amounts[index];
   let dataElement = {
+    //   {due_date: '18/5/1991', amount: 200},
     due_date: date,
     amount: currentAmount}
   return dataElement
 });
 
 console.log(dateObjs);
+
 let timelineChart = new Chart(ctx, {
   type:'line',
   data:{
@@ -78,10 +80,10 @@ let timelineChart = new Chart(ctx, {
       label: 'All Accounts',
       data: dateObjs,
       backgroundColor:colours,
-      borderWidth: 1,
-      borderColor: '#777',
-      hoverBorderWidth: 3,
-      hoverBorderColor:'#000'
+      // borderWidth: 1,
+      // borderColor: '#ffffff',
+      // hoverBorderWidth: 3,
+      // hoverBorderColor:'#ffffff'
     }],
   },
   options:{
@@ -91,7 +93,7 @@ let timelineChart = new Chart(ctx, {
       fontSize: 25
     },
     legend:{
-      display: true,
+      display: false,
       position: 'right',
       labels:{
         fontColor: 'black'
@@ -109,7 +111,8 @@ let timelineChart = new Chart(ctx, {
       tooltip: {
         enabled: false
       }
-    },
+    }
+    ,
     parsing: {
       xAxisKey: 'due_date',
       yAxisKey: 'amount'

@@ -12,12 +12,12 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"
     async="false"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   {{!--
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3"></script>
   <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@0.1.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@0.1.1"></script> --}}
 </head>
 
 <body>
@@ -26,6 +26,7 @@
       <img src="/images/logo-image.jpeg" alt="Gold background textured image" class="logo">
       <h1 class="page-title">Budget Smuggler</h1>
     </div>
+    User logged in is: {{logged_in}}
     {{#if logged_in}}
     <div class="container">
       <nav class="logout-nav d-flex flex-row mb-3 justify-content-end">
