@@ -16,7 +16,7 @@
     "frequency": "monthly",
     "type":"debit",
     "end_recurrence":"1/1/2022",
-    "category_name":"Daily Cashflow",
+    "category_name":"Cashflow",
     "user_id": 1
   },
   {
@@ -26,7 +26,7 @@
     "frequency": "fortnightly",
     "type":"credit",
     "end_recurrence":"1/12/2021",
-    "category_name":"Daily Cashflow",
+    "category_name":"Cashflow",
     "user_id": 1
   },
   {
@@ -55,7 +55,7 @@
     "frequency": "monthly",
     "type":"debit",
     "end_recurrence":"1/1/2022",
-    "category_name":"Daily Cashflow",
+    "category_name":"Cashflow",
     "user_id": 3
   },
   {

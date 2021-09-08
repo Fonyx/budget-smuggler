@@ -6,7 +6,7 @@ const clog = require('../utils/colorLogging');
 // get the test route for the timeline graph
 router.get('/timeline', async(req, res) => {
     try{
-        let transactionObjs = Transaction.findAll({
+        let transactionObjs = await Transaction.findAll({
             nested: true,
             all: true
         })
@@ -17,6 +17,6 @@ router.get('/timeline', async(req, res) => {
     }catch(err){
         res.status(500).json({message:"Failed to return timeline"});
     }
-})
+});
 
 module.exports = router;

@@ -31,7 +31,7 @@ router.get('/', onlyIfLoggedIn, async (req, res) => {
 });
 
 // Get all transactions for a user for a category
-router.get('/:category_id', onlyIfLoggedIn, async (req, res) => {
+router.get('/:category_name', onlyIfLoggedIn, async (req, res) => {
     try{
         let userObj = await User.findByPk(req.session.user_id);
         let user = userObj.get();
@@ -39,7 +39,7 @@ router.get('/:category_id', onlyIfLoggedIn, async (req, res) => {
         const rawDbTransactions = await Transaction.findAll({
             where: {
               user_id: user.id,
-              category_id: req.params.category_id
+              category_name: req.params.category_name
             },
             include: {all:true, nested: true}
         });
