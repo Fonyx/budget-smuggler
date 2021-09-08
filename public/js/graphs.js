@@ -5,135 +5,114 @@
 
 
 // https://www.chartjs.org/docs/latest/developers/updates.html
-function addData(chart, label, data) {
-    chart.data.labels.push(label);
-    chart.data.datasets.forEach((dataset) => {
-        dataset.data.push(data);
-    });
-    chart.update();
-}
-function removeData(chart) {
-    chart.data.labels.pop();
-    chart.data.datasets.forEach((dataset) => {
-        dataset.data.pop();
-    });
-    chart.update();
-}
+// function addData(chart, label, data) {
+//     chart.data.labels.push(label);
+//     chart.data.datasets.forEach((dataset) => {
+//         dataset.data.push(data);
+//     });
+//     chart.update();
+// }
+// function removeData(chart) {
+//     chart.data.labels.pop();
+//     chart.data.datasets.forEach((dataset) => {
+//         dataset.data.pop();
+//     });
+//     chart.update();
+// }
 
 //https://www.chartjs.org/docs/latest/developers/updates.html 
-function updateConfigAsNewObject(chart) {
-    chart.options = {
-        responsive: true,
-        plugins: {
-            title: {
-                display: true,
-                text: 'Chart.js'
-            }
-        },
-        scales: {
-            x: {
-                display: true
-            },
-            y: {
-                display: true
-            }
-        }
-    };
-    chart.update();
-}
-
+// function updateConfigAsNewObject(chart) {
+//     chart.options = {
+//         responsive: true,
+//         plugins: {
+//             title: {
+//                 display: true,
+//                 text: 'Chart.js'
+//             }
+//         },
+//         scales: {
+//             x: {
+//                 display: true
+//             },
+//             y: {
+//                 display: true
+//             }
+//         }
+//     };
+//     chart.update();
+// }
 
 https://www.chartjs.org/docs/latest/samples/advanced/linear-gradient.html
-let width, height, gradient;
-function getGradient(ctx, chartArea) {
-  const chartWidth = chartArea.right - chartArea.left;
-  const chartHeight = chartArea.bottom - chartArea.top;
-  if (gradient === null || width !== chartWidth || height !== chartHeight) {
-    // Create the gradient because this is either the first render
-    // or the size of the chart has changed
-    width = chartWidth;
-    height = chartHeight;
-    gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
-    gradient.addColorStop(0, Utils.CHART_COLORS.blue);
-    gradient.addColorStop(0.5, Utils.CHART_COLORS.yellow);
-    gradient.addColorStop(1, Utils.CHART_COLORS.red);
-  }
 
-  return gradient;
-};
+/*  
+Data needed
+labels: list of dates
+data: transactionList
+colors: listOfColors to show green for positive and red for negative on the plot
+category: For displaying the colour of the category
+*/
 
-const config = {
-    type: 'line',
-    data: data,
-    options: {
-      responsive: true,
-      plugins: {
-        legend: {
-          position: 'top',
-        },
+var timelineEl = document.getElementById('chartTimeline');
+var ctx = timelineEl.getContext('2d');
+
+// Chart.defaults.font.family = 'Lato';
+// Chart.defaults.font.size = 18;
+var dates = ['18/5/1991', '20/5/1991', '21/5/1991', '22/5/1991','24/5/1991']
+var amounts = [200, 250, 270, -10, 500];
+var colours = ['green', 'green', 'green', 'red', 'green']
+
+dateObjs = dates.map((date, index) => {
+  let currentAmount = amounts[index];
+  let dataElement = {
+    due_date: date,
+    amount: currentAmount}
+  return dataElement
+});
+
+console.log(dateObjs);
+let timelineChart = new Chart(ctx, {
+  type:'line',
+  data:{
+    labels: dates,
+    datasets:[{
+      label: 'All Accounts',
+      data: dateObjs,
+      backgroundColor:colours,
+      borderWidth: 1,
+      borderColor: '#777',
+      hoverBorderWidth: 3,
+      hoverBorderColor:'#000'
+    }],
+  },
+  options:{
+    title:{
+      display: true,
+      text: 'All Accounts',
+      fontSize: 25
+    },
+    legend:{
+      display: true,
+      position: 'right',
+      labels:{
+        fontColor: 'black'
       }
     },
-};
-
-const DATA_COUNT = 7;
-const NUMBER_CFG = {count: DATA_COUNT, min: -100, max: 100};
-const labels = Utils.months({count: 7});
-
-const data = {
-  labels: labels,
-  datasets: [
-    {
-      label: 'Dataset 1',
-      data: Utils.numbers(NUMBER_CFG),
-      borderColor: function(context) {
-        const chart = context.chart;
-        const {ctx, chartArea} = chart;
-
-        if (!chartArea) {
-          // This case happens on initial chart load
-          return null;
-        }
-        return getGradient(ctx, chartArea);
-      },
-    },
-  ]
-};
-
-const actions = [
-    {
-      name: 'Randomize',
-      handler(chart) {
-        chart.data.datasets.forEach(dataset => {
-          dataset.data = Utils.numbers({count: chart.data.labels.length, min: -100, max: 100});
-        });
-        chart.update();
+    layout: {
+      padding: {
+        left: 50,
+        right: 50,
+        bottom: 0,
+        top: 0
       }
     },
-    {
-      name: 'Add Data',
-      handler(chart) {
-        const data = chart.data;
-        if (data.datasets.length > 0) {
-          data.labels = Utils.months({count: data.labels.length + 1});
-  
-          for (var index = 0; index < data.datasets.length; ++index) {
-            data.datasets[index].data.push(Utils.rand(-100, 100));
-          }
-  
-          chart.update();
-        }
+    plugins:{
+      tooltip: {
+        enabled: false
       }
     },
-    {
-      name: 'Remove Data',
-      handler(chart) {
-        chart.data.labels.splice(-1, 1); // remove the label first
-  
-        chart.data.datasets.forEach(dataset => {
-          dataset.data.pop();
-        });
-  
-        chart.update();
-      }
+    parsing: {
+      xAxisKey: 'due_date',
+      yAxisKey: 'amount'
     }
-];
+  }
+});

@@ -1,17 +1,23 @@
 [
   {
-    "name": "Daily Cashflow",
-    "colour": "Navy Blue",
+    "name": "Cashflow",
+    "color":"#FFC107",
+    "bootstrap_color": "bg-warning",
+    "bootstrap_text_color": "text-black",
     "emoji_string":"0x270D"
   },
   {
     "name": "Business",
-    "colour": "Crimson",
+    "color":"#198754",
+    "bootstrap_color": "bg-success",
+    "bootstrap_text_color": "text-white",
     "emoji_string":"0x1F485"
   },
   {
     "name": "Holiday",
-    "colour": "Turquoise",
+    "color":"#0D6EFD",
+    "bootstrap_color": "bg-primary",
+    "bootstrap_text_color": "text-white",
     "emoji_string":"0x1F441"
   }
 ]
