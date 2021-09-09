@@ -1,6 +1,10 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 const dayjs = require('dayjs');
+// https://day.js.org/docs/en/display/format
+var weekOfYear = require('dayjs/plugin/weekOfYear')
+dayjs.extend(weekOfYear);
+
 
 // function that returns the day of year number for a date object, defaults to today
 function getAnnualDayNumber(date){
@@ -16,9 +20,14 @@ function getAnnualDayNumber(date){
     let dayNumber = parseInt(dateObj.format('d'), 10);
     // get the week number of the date
     let weekNumber = dateObj.week();
+    // get the year number of the date
+    let yearNumber = dateObj.format('YYYY');
+
+    // calculate number of days in years already completed (yearNumber - 1)
+    let days = (yearNumber - 1) * 365
 
     // calculate number of days in weeks already completed (weeks -1)
-    let days = (weekNumber-1) * 7
+    days += (weekNumber-1) * 7
 
     // add the number of days in current week
     days += dayNumber

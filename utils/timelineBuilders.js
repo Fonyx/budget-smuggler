@@ -1,7 +1,6 @@
 const dayjs = require('dayjs');
-var weekOfYear = require('dayjs/plugin/weekOfYear')
-dayjs.extend(weekOfYear);
 const {Dict} = require('../utils/classes');
+const clog = require('../utils/colorLogging');
 
 /**
  * Function that creates a balance timeline for a given set of transactions, category filtering is done a level above in the route that calls this
@@ -46,6 +45,7 @@ function createDailyTransactionTotalList(transactions){
     for(transaction of transactions){
         // get the relative day number of each transaction and store with amount (+- according to transaction type)
         let amount = transaction.getAmount();
+        let name = transaction.getName();
         // get the number of days in the future from today
         let relativeDate = transaction.getDayNumberFromTodayForDate();
         let due_date = transaction.getDateString();
@@ -56,6 +56,7 @@ function createDailyTransactionTotalList(transactions){
             dayTransactions.upsert(due_date, amount);
         } else {
             // date has already passed
+            clog(`Transaction ${name} already past: ${due_date}`,'blue')
         }
     }
     dayTransactions.reduceValuesLists();
