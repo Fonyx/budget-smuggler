@@ -1,8 +1,70 @@
-This template is for showing the user an empty form that will build a new transaction, the user object is not available
+{{!-- This template is for showing the user an empty form that will build a new transaction, the user object is not
+available
 as we
 don't need to display any user data for this form. This template will need to import a script that gathers the form
 fields and then
 submits them in a request to "/transaction/create" as a POST request.
 
 
-CREATE A TRANSACTION FORM - USER OBJ AVAILABLE {{user.email}} {{user.balance}}
+CREATE A TRANSACTION FORM - USER OBJ AVAILABLE {{user.email}} {{user.balance}} --}}
+
+<main class="container">
+    <section class="card transaction-card row g-3 align-items-center m-4">
+        <div class="card-body d-flex flex-column p-4 w-75">
+            <form class="form transaction-form">
+                <div>
+                    <h2 class="card-title text-center">Add new transaction</h2>
+                </div>
+                <div class="form-group p-4">
+                    <label for="transaction-name" class="col-form-label">Name</label>
+                    <input class="form-input form-control" type="text" id="transaction-name">
+                </div>
+
+                <div class="form-group p-4">
+                    <label for="transaction-amount" class="col-form-label">Amount</label>
+                    <input class="form-input form-control" type="text" id="transaction-amount">
+                </div>
+
+                <div>
+                    <p>Type</p>
+                    <select class="transaction-type custom-select custom-select-sm">
+                        <option value="once" selected>Expense</option>
+                        <option value="weekly">Income</option>
+                    </select>
+                </div>
+
+                <div class="form-group p-4">
+                    <label for="transaction-category" class="col-form-label">Category</label>
+                    <input class="form-input form-control" type="text" id="transaction-category">
+                </div>
+
+                <div class="form-group p-4">
+                    <label for="transaction-duedate" class="col-form-label">Due Date</label>
+                    <input class="form-input form-control" type="date" id="transaction-duedate">
+                </div>
+
+                <div>
+                    <p>How often?</p>
+                    <select class="transaction-frequency custom-select custom-select-sm">
+                        <option value="once" selected>Once</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="fortnightly">Fortnightly</option>
+                        <option value="monthly">Monthly</option>
+                    </select>
+                </div>
+
+                <div class="form-group p-4">
+                    <label for="transaction-enddate" class="col-form-label">End Date</label>
+                    <input class="form-input form-control" type="date" id="transaction-enddate">
+                </div>
+
+                <div class="transaction-buttons form-group p-4 m-4 d-flex justify-content-evenly">
+                    <button class="btn btn-light mx-3 w-50" type="submit">Create</button>
+                    <a class="btn btn-light mx-3 w-50" type="cancel" href="/profile">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+
+<script src="/js/createtransaction.js"></script>
