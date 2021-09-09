@@ -121,6 +121,35 @@ const clog = require('../utils/colorLogging');
             this.set(currentKey, reducedValues)
         }
     }
+    /**
+     * Function that adds all values previously seen, for example
+     * {
+     *      keys: [1, 2, 3],
+     *      values: [[6], [6], [6]]
+     * }
+     * ->
+     * {
+     *      keys: [1, 2, 3],
+     *      values: [[6], [12], [18]]
+     * }
+     * 
+     */
+    accumulate(){
+        let accumulatedValue = 0;
+
+        for(let i = 0; i < this.keys.length; i++){
+            let currentKey = this.keys[i];
+            let currentValue = this.values[i][0];
+
+            // dodge 0 index
+            if(i > 0){
+                accumulatedValue += currentValue
+            } else {
+                accumulatedValue = currentValue 
+            }
+            this.set(currentKey, accumulatedValue);
+        }
+    }
 }
 
 module.exports ={

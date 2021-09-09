@@ -4,51 +4,41 @@ dayjs.extend(weekOfYear);
 const {Dict} = require('../utils/classes');
 
 /**
- * Function that creates a balance timeline for a given set of transactions and filters for category for the next year.
+ * Function that creates a balance timeline for a given set of transactions, category filtering is done a level above in the route that calls this
  * @param {int} starting_balance the users opening balance
  * @param {[Objs]} transactions chronologically ordered list of Sequelize objects (note, not serialized in order to use instance methods)
- * @param {str} category str for category filter or 'all'
  * @returns {[{date: amount},]} 
  */
-async function createBalanceTimeline(starting_balance, transactions, category){
-    // Entire function revolves around day numbers from today forward 365 days
+async function createBalanceTimeline(starting_balance, transactions){
+    
+    // calculate day0 balance and assign
+    var dateAmounts = [];
+    // push the day 0 value
+    dateAmounts.push(
+        {0: starting_balance}
+    )
 
-    const allowedCategories = ['all', 'business', 'cashflow', 'savings'];
+    var dayTransactionTotals = createDailyTransactionTotalList(transactions);
 
-    // check the category is valid
-    if(allowedCategories.includes(category)){
+    dayTransactionTotals.print();
 
-        // calculate day0 balance and assign
-        var dateAmounts = [];
-        // push the day 0 value
-        dateAmounts.push(
-            {0: starting_balance}
-        )
-        var dayBalances = createDayTransactionList(transactions)
+    // reduce the transaction totals to an accumulated balance
+    dayTransactionTotals.accumulate();
 
-        // build new array of length 365 with total balance on each day
-
-    } else {
-        throw new Error(`Timeline builder received invalid category ${category}, must be in ${allowedCategories}`);
-    }
+    dayTransactionTotals.print();
 
 }
 
 /**
- * Function that builds an array of date:transaction based on a list of transactions, this list is not unique as there may be multiple transactions on a day
- * returns a list of date:transaction 
-* [day_1: [
-*      200, -150, 500
-*       ],
-* day_2:[
-*      100, -240, 200
-*       ],
- * day_3 :[
- *      
- *      ]
- * ...]
+ * Function that builds an array of 'date:total_for_daily_transactions' based on a list of transactions
+ * returns a dictionary with a list for values
+ [
+    day_1: [200],
+    day_2:[100],
+    day_3 :[-300]
+  ]
  */
-function createDayTransactionList(transactions){
+function createDailyTransactionTotalList(transactions){
 
     var dayTransactions = new Dict();
 
@@ -69,7 +59,6 @@ function createDayTransactionList(transactions){
         }
     }
     dayTransactions.reduceValuesLists();
-    dayTransactions.print();
 
     return dayTransactions
 
