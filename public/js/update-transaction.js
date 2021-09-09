@@ -8,7 +8,7 @@ const updateTransactionFormHandler = async (event) => {
     const dueDate = document.querySelector('#update-transaction-due-date').value.trim();
     const frequency = document.querySelector('#update-transaction-frequency').value.trim();
     const type = document.querySelector('#update-transaction-type').value.trim();
-    const category_name = document.querySelector('#update-transaction-category-id').value.trim();    
+    const category_name = document.querySelector('#update-transaction-category-name').value.trim();    
     //Unsure about line 15. 
     const transactionObj = document.querySelector('#update-transaction-form').dataset.id;
 

@@ -6,18 +6,18 @@ UPDATE TRANSACTION FORM + A TRANSACTION OBJECT
 
 <form id="update-transaction-form" class="form">
     <div class="form-group">
-        <label for="">NAME</label>
-        <input type="text" class="form-control" id="update-transaction-name" data-id="{{user.id}}" aria-describedby="updateTransactionName" placeholder="{{user.name}}">
-        <label for="">AMMOUNT</label>
-        <input type="text" class="form-control" id="update-transaction-ammount" data-id="{{user.id}}" aria-describedby="updateTransactionAmmount" placeholder="{{user.amount}}">
-        <label for="">DUE DATE</label>
-        <input type="text" class="form-control" id="update-transaction-due-date" data-id="{{user.id}}" aria-describedby="updateTransactionDueDate" placeholder="{{user.due_date}}">
-        <label for="">FREQUENCY</label>
-        <input type="text" class="form-control" id="update-transaction-frequency" data-id="{{user.id}}" aria-describedby="updateTransactionFrequency" placeholder="{{user.frequency}}">
-        <label for="">TYPE</label>
-        <input type="text" class="form-control" id="update-transaction-type" data-id="{{user.id}}" aria-describedby="updateTransactionType" placeholder="{{user.type}}">
-        <label for="">CATEGORY ID</label>
-        <input type="text" class="form-control" id="update-transaction-category-id" data-id="{{user.id}}" aria-describedby="updateTransactionCategoryId" placeholder="{{user.category_id}}">
+        <label for="update-transaction-name">NAME</label>
+        <input type="text" class="form-control" value="{{transaction.name}}" id="update-transaction-name" data-id="{{user.id}}" aria-describedby="updateTransactionName" placeholder="{{user.name}}">
+        <label for="update-transaction-ammount">AMMOUNT</label>
+        <input type="text" class="form-control" value="{{transaction.ammount}}" id="update-transaction-ammount" data-id="{{user.id}}" aria-describedby="updateTransactionAmmount" placeholder="{{user.amount}}">
+        <label for="update-transaction-due-date">DUE DATE</label>
+        <input type="text" class="form-control" value="{{transaction.due_date}}" id="update-transaction-due-date" data-id="{{user.id}}" aria-describedby="updateTransactionDueDate" placeholder="{{user.due_date}}">
+        <label for="update-transaction-frequency">FREQUENCY</label>
+        <input type="text" class="form-control" value="{{transaction.frequency}}" id="update-transaction-frequency" data-id="{{user.id}}" aria-describedby="updateTransactionFrequency" placeholder="{{user.frequency}}">
+        <label for="update-transaction-type">TYPE</label>
+        <input type="text" class="form-control" value="{{transaction.type}}"id="update-transaction-type" data-id="{{user.id}}" aria-describedby="updateTransactionType" placeholder="{{user.type}}">
+        <label for="update-transaction-category-name">CATEGORY NAME</label>
+        <input type="text" class="form-control" id="update-transaction-category-name" data-id="{{user.id}}" aria-describedby="updateTransactionCategoryName" placeholder="{{user.category_name}}">
     </div>
     <div>
         <button id="submit-btn" type="submit" class="btn btn-primary">Submit</button>
