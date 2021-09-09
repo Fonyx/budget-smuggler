@@ -2,7 +2,7 @@ console.log("infile")
 const updateBalanceFormHandler = async (event) => {
     console.log("infunction")
     event.preventDefault();
-    // collect values from the login form
+    // collect values from the update-balance form
     const balance = document.querySelector('#current-balance').value.trim();
     
     const userid = document.querySelector('#current-balance').dataset.id;
