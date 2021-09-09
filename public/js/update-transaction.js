@@ -8,18 +8,16 @@ const updateTransactionFormHandler = async (event) => {
     const dueDate = document.querySelector('#update-transaction-due-date').value.trim();
     const frequency = document.querySelector('#update-transaction-frequency').value.trim();
     const type = document.querySelector('#update-transaction-type').value.trim();
-    const category_id = document.querySelector('#update-transaction-category-id').value.trim();
-    const user_id = document.querySelector('#update-transaction-user_id').value.trim();
-    
+    const category_name = document.querySelector('#update-transaction-category-id').value.trim();    
     //Unsure about line 15. 
     const transactionObj = document.querySelector('#update-transaction-form').dataset.id;
 
-    if(name & ammount & dueDate & frequency & type & category_id & user_id){
+    if(name & ammount & dueDate & frequency & type & category_name){
         try{
             // consume the login endpoint with a post request
             const response = await fetch(`/transaction/update/${transactionObj.id}`, {
                 method: 'PUT',
-                body: JSON.stringify({name, ammount, dueDate, frequency, type, endRecurrence, category_id, user_id}),
+                body: JSON.stringify({name, ammount, dueDate, frequency, type, endRecurrence, category_name}),
                 headers: {'Content-Type':'application/json'}
             });
             if(response.ok){
