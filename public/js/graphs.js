@@ -2,7 +2,7 @@
 var timelineEl = document.getElementById('chartTimeline');
 var ctx = timelineEl.getContext('2d');
 
-var gradient = ctx.createLinearGradient(0,20, 0,500);
+var gradient = ctx.createLinearGradient(0,20, 0,250);
 
 // Add three color stops
 gradient.addColorStop(1, 'red');
@@ -26,10 +26,9 @@ async function graphTimeline() {
     let timelineChart = new Chart(ctx, {
       type:'line',
       data:{
-        labels: timelineData.labels,
         datasets:[{
           label: 'All Accounts',
-          data: timelineData.data,
+          data: timelineData.timeline,
           backgroundColor:gradient,
           parsing: {
             xAxisKey: 'date',
@@ -60,7 +59,20 @@ async function graphTimeline() {
         },
         plugins:{
           tooltip: {
-            enabled: false
+            enabled: true
+          }
+        },
+        animations: {
+          y: {
+            easing: 'easeInOutElastic',
+            from: (ctx) => {
+              if (ctx.type === 'data') {
+                if (ctx.mode === 'default' && !ctx.dropped) {
+                  ctx.dropped = true;
+                  return 0;
+                }
+              }
+            }
           }
         }
       }

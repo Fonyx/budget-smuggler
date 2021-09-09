@@ -36,26 +36,27 @@ router.get('/data/timeline', onlyIfLoggedIn, async(req, res)=> {
 
         let userObj = await User.findByPk(req.session.user_id);
         let user = userObj.get({plain: true});
-        let transactions = transactionObjs.map((transactionObj) => {
-            return transactionObj.get({plain: true});
-        });
+
+        // let transactions = transactionObjs.map((transactionObj) => {
+        //     return transactionObj.get({plain: true});
+        // });
 
         var timeline = await createBalanceTimeline(user.balance, transactionObjs, 'all');
 
-        // transactionObjs.forEach((transactionObj) => {
-        //     if(transactionObj.getDataValue('type') === 'expense'){
-        //         colours.push('#ee110a');
-        //     } else {
-        //         colours.push('#0aee0a');
-        //     }
-        //     labels.push(transactionObj.getDateString());
-        //     data.push(
-        //         {   
-        //             date: transactionObj.getDateString(),
-        //             amount: transactionObj.getAmount()
-        //         }
-        //     )
-        // });
+        transactionObjs.forEach((transactionObj) => {
+            if(transactionObj.getDataValue('type') === 'expense'){
+                colours.push('#ee110a');
+            } else {
+                colours.push('#0aee0a');
+            }
+            labels.push(transactionObj.getDateString());
+            data.push(
+                {   
+                    date: transactionObj.getDateString(),
+                    amount: transactionObj.getAmount()
+                }
+            )
+        });
 
         const response = {
             status: 'success',

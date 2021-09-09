@@ -3,7 +3,7 @@ const clog = require('../utils/colorLogging');
  * A dictionary object that acts like a python dictionary, with teh asterix that the value is a list
  * has getter, setter and print methods
  */
- class Dict{
+ class dict{
     /**
      * 
      * @param {list} keys list of strings
@@ -28,15 +28,15 @@ const clog = require('../utils/colorLogging');
     }
     // exports the contents of the dictionary to a list of objects with lists
     // i.e [{key: [value]}, {key: [value]}, {key: [value]}]
-    // export(){
-    //     let package = [];
-    //     for(let i = 0; i < this.keys.length; i++){
-    //         let curr_key = this.keys[i];
-    //         let curr_val = this.get(curr_key);
-    //         package.push({curr_key, curr_val});
-    //     }
-    //     return package;
-    // }
+    export(){
+        let data = []
+        for(let i = 0; i < this.keys.length; i++){
+            let curr_key = this.keys[i];
+            let curr_val = Math.round(this.get(curr_key)[0]);
+            data.push({date: curr_key, amount: curr_val});
+        }
+        return data;
+    }
 
     length(){
         return this.keys.length;
@@ -166,5 +166,5 @@ const clog = require('../utils/colorLogging');
 }
 
 module.exports ={
-    Dict,
+    dict,
 }

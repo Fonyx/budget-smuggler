@@ -1,5 +1,5 @@
 const dayjs = require('dayjs');
-const {Dict} = require('../utils/classes');
+const {dict} = require('../utils/classes');
 const clog = require('../utils/colorLogging');
 
 /**
@@ -24,9 +24,9 @@ async function createBalanceTimeline(starting_balance, transactions){
     dayTransactionTotals.accumulate();
 
     // export the timeline to a simple object for the graph
-    // data = dayTransactionTotals.export();
+    data = dayTransactionTotals.export();
 
-    return dayTransactionTotals;
+    return data;
 
 }
 
@@ -41,7 +41,7 @@ async function createBalanceTimeline(starting_balance, transactions){
  */
 function createDailyTransactionTotalList(transactions){
 
-    var dayTransactions = new Dict();
+    var dayTransactions = new dict();
 
     // create array of income/expenses
     for(transaction of transactions){
