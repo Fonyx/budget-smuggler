@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { User, Transaction } = require('../models');
 const {onlyIfLoggedIn} = require('../middleware/auth');
 const clog = require('../utils/colorLogging');
+const {createBalanceTimeline} = require('../utils/timelineBuilders');
 
 // get the test route for the timeline graph
 router.get('/timeline', async(req, res) => {
@@ -32,15 +33,20 @@ router.get('/data/timeline', onlyIfLoggedIn, async(req, res)=> {
             nested: true,
             all: true
         });
-        // let transactions = transactionObjs.map((transactionObj) => {
-        //     return transactionObj.get({plain: true});
-        // });
+
+        let userObj = await User.findByPk(req.session.user_id);
+        let user = userObj.get({plain: true});
+        let transactions = transactionObjs.map((transactionObj) => {
+            return transactionObj.get({plain: true});
+        });
+
+        var timeline = await createBalanceTimeline(user.balance, transactionObjs, 'all');
 
         transactionObjs.forEach((transactionObj) => {
             if(transactionObj.getDataValue('type') === 'expense'){
-                colours.push('red');
+                colours.push('#ee110a');
             } else {
-                colours.push('green');
+                colours.push('#0aee0a');
             }
             labels.push(transactionObj.getDateString());
             data.push(
@@ -51,13 +57,11 @@ router.get('/data/timeline', onlyIfLoggedIn, async(req, res)=> {
             )
         });
 
-        let dataPacket = {
-            data, colours, labels
-        }
-
         const response = {
             status: 'success',
-            body: dataPacket,
+            body: {
+                data, colours, labels
+            },
           };
 
         res.json(response);
@@ -65,5 +69,25 @@ router.get('/data/timeline', onlyIfLoggedIn, async(req, res)=> {
         clog(err, 'red');
         res.status(500).send('Error with server trying to built timeline package')
     }
-})
+});
+
+/**
+ * get the data packet for the timeline route filtering by category
+ * list of {date: balance} objects
+ * list of colors for each date, green if positive, red if negative
+ */
+router.get('/data/timeline/:category_name', onlyIfLoggedIn, async(req, res)=> {
+    try{
+        let colours = [];
+        let data = [];
+        let labels = [];
+        
+
+        res.json(response);
+    }catch(err){
+        clog(err, 'red');
+        res.status(500).send('Error with server trying to build timeline package by category')
+    }
+});
+
 module.exports = router;
