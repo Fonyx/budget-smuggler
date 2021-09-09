@@ -149,6 +149,8 @@ const clog = require('../utils/colorLogging');
             }
             this.set(currentKey, accumulatedValue);
         }
+
+        this.print();
     }
 }
 

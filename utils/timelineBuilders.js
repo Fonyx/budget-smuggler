@@ -19,12 +19,10 @@ async function createBalanceTimeline(starting_balance, transactions){
 
     var dayTransactionTotals = createDailyTransactionTotalList(transactions);
 
-    dayTransactionTotals.print();
-
     // reduce the transaction totals to an accumulated balance
     dayTransactionTotals.accumulate();
 
-    dayTransactionTotals.print();
+    return dayTransactionTotals;
 
 }
 
