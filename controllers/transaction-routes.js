@@ -5,11 +5,11 @@ const {onlyIfLoggedIn} = require('../middleware/auth');
 // Get one transaction
 router.get('/:transaction_id', onlyIfLoggedIn, async (req, res) => {
   try{
-      const dbTransaction = await Transaction.findByPk(req.params.transaction_id, {
+      const transaction = await Transaction.findByPk(req.params.transaction_id, {
           include: {all:true, nested: true}
       });
-      if(dbTransaction){
-          res.status(200).json(dbTransaction);
+      if(transaction){
+          res.status(200).json(transaction);
       } else {
           res.status(404).json({message: `no Transaction with id: ${req.params.transaction_id} found`});
       }
@@ -72,7 +72,7 @@ router.get('/', onlyIfLoggedIn, async (req, res) => {
 // CREATE new transaction using form contents
 router.post('/', onlyIfLoggedIn, async (req, res) => {
     let userObj = await User.findByPk(req.session.user_id);
-    let categoryObj = await Category.findByPk(req.body.category_id);
+    let categoryObj = await Category.findByPk(req.body.category_name);
     if(userObj && categoryObj){
         try {
             const dbTransactionData = await Transaction.create(req.body);
@@ -94,10 +94,10 @@ router.get('/update/:transaction_id', onlyIfLoggedIn, async (req, res) => {
             include: {all:true, nested: true}
         });
   
-        let dbTransaction = rawTransaction.get({plain: true});
+        let transaction = rawTransaction.get({plain: true});
 
-        if(dbTransaction){
-            res.render('update-transaction', {dbTransaction})
+        if(transaction){
+            res.render('update-transaction', {transaction})
         } else {
             res.status(404).json({message: "no transaction found"});
         }
@@ -115,9 +115,9 @@ router.put('/update/:transaction_id', onlyIfLoggedIn, async (req, res) => {
             include: {all:true, nested: true}
         });
   
-        let dbTransaction = await rawTransaction.update(req.body);
+        let transaction = await rawTransaction.update(req.body);
 
-        if(dbTransaction){
+        if(transaction){
             res.status(200).json({message:"Successfully updated transaction"});
         } else {
             res.status(404).json({message: "no transaction found for update"});
