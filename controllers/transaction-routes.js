@@ -72,7 +72,7 @@ router.get('/', onlyIfLoggedIn, async (req, res) => {
 // CREATE new transaction using form contents
 router.post('/', onlyIfLoggedIn, async (req, res) => {
     let userObj = await User.findByPk(req.session.user_id);
-    let categoryObj = await Category.findByPk(req.body.category_id);
+    let categoryObj = await Category.findByPk(req.body.category_name);
     if(userObj && categoryObj){
         try {
             const dbTransactionData = await Transaction.create(req.body);

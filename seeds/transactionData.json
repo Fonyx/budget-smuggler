@@ -2,17 +2,17 @@
   {
     "name":"ebay sale",
     "amount":112.54,
-    "due_date": "11/8/2021",
+    "due_date": "11/8/2022",
     "frequency": "fortnightly",
     "type":"income",
-    "end_recurrence":"1/12/2021",
+    "end_recurrence":"1/12/2022",
     "category_name":"Business",
     "user_id": 1
   },
   {
     "name":"rent",
     "amount":800,
-    "due_date": "10/8/2021",
+    "due_date": "10/8/2022",
     "frequency": "monthly",
     "type":"expense",
     "end_recurrence":"1/1/2022",
@@ -22,59 +22,77 @@
   {
     "name":"camera",
     "amount":112.54,
-    "due_date": "4/8/2021",
+    "due_date": "4/8/2022",
     "frequency": "fortnightly",
     "type":"income",
-    "end_recurrence":"1/12/2021",
+    "end_recurrence":"1/12/2022",
     "category_name":"Cashflow",
     "user_id": 1
   },
   {
     "name":"flights",
     "amount":1143.27,
-    "due_date": "3/8/2021",
+    "due_date": "3/8/2022",
     "frequency": "once",
     "type":"income",
     "category_name":"Holiday",
-    "user_id": 2
+    "user_id": 1
   },
   {
     "name":"ebay sale",
     "amount":234.54,
-    "due_date": "11/8/2021",
+    "due_date": "11/8/2022",
     "frequency": "fortnightly",
     "type":"income",
-    "end_recurrence":"1/12/2021",
+    "end_recurrence":"1/12/2022",
     "category_name":"Holiday",
-    "user_id": 4
+    "user_id": 1
   },
   {
     "name":"rent",
     "amount":800,
-    "due_date": "10/8/2021",
+    "due_date": "10/8/2022",
     "frequency": "monthly",
     "type":"expense",
     "end_recurrence":"1/1/2022",
     "category_name":"Cashflow",
-    "user_id": 3
+    "user_id": 1
   },
   {
     "name":"lenses",
     "amount":112.54,
-    "due_date": "4/8/2021",
+    "due_date": "4/8/2022",
     "frequency": "once",
     "type":"income",
-    "end_recurrence":"1/12/2021",
+    "end_recurrence":"1/12/2022",
     "category_name":"Business",
-    "user_id": 4
+    "user_id": 1
   },
   {
     "name":"accommodation",
     "amount":1290.27,
-    "due_date": "3/8/2021",
+    "due_date": "3/8/2022",
     "frequency": "once",
     "type":"income",
     "category_name":"Business",
-    "user_id": 4
+    "user_id": 1
+  },
+  {
+    "name":"accomodation double",
+    "amount":1190.27,
+    "due_date": "3/8/2022",
+    "frequency": "fortnightly",
+    "type":"income",
+    "category_name":"Business",
+    "user_id": 1
+  },
+  {
+    "name":"accommodation triple",
+    "amount":1990.27,
+    "due_date": "3/8/2022",
+    "frequency": "once",
+    "type":"income",
+    "category_name":"Business",
+    "user_id": 1
   }
 ]
