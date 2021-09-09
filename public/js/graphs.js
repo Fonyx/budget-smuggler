@@ -52,8 +52,6 @@ colors: listOfColors to show green for positive and red for negative on the plot
 category: For displaying the colour of the category
 */
 
-var timelineEl = document.getElementById('chartTimeline');
-var ctx = timelineEl.getContext('2d');
 
 // Chart.defaults.font.family = 'Lato';
 // Chart.defaults.font.size = 18;
@@ -64,35 +62,36 @@ var ctx = timelineEl.getContext('2d');
 // dateObjs = dates.map((date, index) => {
   //   let currentAmount = amounts[index];
   //   let dataElement = {
-  //     //   {due_date: '18/5/1991', amount: 200},
-  //     due_date: date,
-  //     amount: currentAmount}
-  //   return dataElement
-  // });
-  // console.log(dateObjs);
+    //     //   {due_date: '18/5/1991', amount: 200},
+    //     due_date: date,
+    //     amount: currentAmount}
+    //   return dataElement
+    // });
+    // console.log(dateObjs);
+  var timelineEl = document.getElementById('chartTimeline');
+  var ctx = timelineEl.getContext('2d');
 
   async function graphTimeline() {
     let timelineData = await fetch('/graph/data/timeline', {
       method: 'GET',
       headers: { 'Content-Type': 'application/json'}
     })
-    .then(resp => resp)
+    .then(async (response) =>{
+      let data = await response.json();
+      return data.body;
+    })
     .catch((err) => console.log(err));
     
+    console.log(timelineData);
     if(timelineData){
-      console.log(timelineData);
       let timelineChart = new Chart(ctx, {
         type:'line',
         data:{
-          labels: dates,
+          labels: timelineData.labels,
           datasets:[{
             label: 'All Accounts',
-            data: dateObjs,
-            backgroundColor:colours,
-            // borderWidth: 1,
-            // borderColor: '#ffffff',
-            // hoverBorderWidth: 3,
-            // hoverBorderColor:'#ffffff'
+            data: timelineData.data,
+            backgroundColor:timelineData.colors,
           }],
         },
         options:{
@@ -123,7 +122,7 @@ var ctx = timelineEl.getContext('2d');
           }
           ,
           parsing: {
-            xAxisKey: 'due_date',
+            xAxisKey: 'date',
             yAxisKey: 'amount'
           }
         }

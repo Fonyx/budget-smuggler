@@ -1,13 +1,18 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
+const dayjs = require('dayjs');
 
-class Transaction extends Model { 
+class Transaction extends Model {
 
-    getDueDateAsDateString(){
-        return this.getDataValue('due_date').toString();
-        // return moment(this.getDataValue('due_date')).format('DD/MM/YYYY');
-        // return moment(this.getDataValue('createdAt')).format('DD/MM/YYYY h:mm:ss');
+    getDateString(){
+        let dayObj = dayjs(this.getDataValue('due_date'));
+        let dayText = dayObj.format('DD/MM/YYYY');
+        return dayText
     }
+    getAmount(){
+        return this.getDataValue('amount');
+    }
+
 }
 
 Transaction.init(
