@@ -12,7 +12,7 @@ const updateTransactionFormHandler = async (event) => {
     const user_id = document.querySelector('#update-transaction-user_id').value.trim();
     
     //Unsure about line 15. 
-    const transactionObj = document.querySelector('#update-transaction-name').dataset.id;
+    const transactionObj = document.querySelector('#update-transaction-form').dataset.id;
 
     if(name & ammount & dueDate & frequency & type & category_id & user_id){
         try{
@@ -43,5 +43,5 @@ const updateTransactionFormHandler = async (event) => {
 
 // attach the submit handler to the signup button
 document
-.querySelector('.update-transaction-form')
+.querySelector('#update-transaction-form')
 .addEventListener('submit-btn', updateTransactionFormHandler);
