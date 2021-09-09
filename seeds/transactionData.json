@@ -36,7 +36,7 @@
     "frequency": "once",
     "type":"income",
     "category_name":"Holiday",
-    "user_id": 2
+    "user_id": 1
   },
   {
     "name":"ebay sale",
@@ -46,7 +46,7 @@
     "type":"income",
     "end_recurrence":"1/12/2021",
     "category_name":"Holiday",
-    "user_id": 4
+    "user_id": 1
   },
   {
     "name":"rent",
@@ -56,7 +56,7 @@
     "type":"expense",
     "end_recurrence":"1/1/2022",
     "category_name":"Cashflow",
-    "user_id": 3
+    "user_id": 1
   },
   {
     "name":"lenses",
@@ -66,7 +66,7 @@
     "type":"income",
     "end_recurrence":"1/12/2021",
     "category_name":"Business",
-    "user_id": 4
+    "user_id": 1
   },
   {
     "name":"accommodation",
@@ -75,6 +75,24 @@
     "frequency": "once",
     "type":"income",
     "category_name":"Business",
-    "user_id": 4
+    "user_id": 1
+  },
+  {
+    "name":"accomodation double",
+    "amount":1190.27,
+    "due_date": "3/8/2021",
+    "frequency": "fortnightly",
+    "type":"income",
+    "category_name":"Business",
+    "user_id": 1
+  },
+  {
+    "name":"accommodation triple",
+    "amount":1990.27,
+    "due_date": "3/8/2021",
+    "frequency": "once",
+    "type":"income",
+    "category_name":"Business",
+    "user_id": 1
   }
 ]
