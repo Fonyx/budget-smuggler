@@ -22,16 +22,24 @@ CREATE A TRANSACTION FORM - USER OBJ AVAILABLE {{user.email}} {{user.balance}} -
 
                 <div class="form-group p-4">
                     <label for="transaction-amount" class="col-form-label">Amount</label>
-                    <input class="form-input form-control" type="text" id="transaction-amount">
+                    <input class="form-input form-control" type="number" id="transaction-amount">
                 </div>
 
-                <div>
-                    <p>Type</p>
-                    <select class="transaction-type custom-select custom-select-sm">
-                        <option value="once" selected>Expense</option>
-                        <option value="weekly">Income</option>
-                    </select>
+                <div class="form-check">
+                    <p>Type:</p>
+                    <input class="form-check-input" type="radio" value="income" name="transaction-type" id="income"
+                        checked>
+                    <label class="form-check-label" for="income">
+                        Income
+                    </label>
                 </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="expense" name="transaction-type" id="expense">
+                    <label class="form-check-label" for="expense">
+                        Expense
+                    </label>
+                </div>
+
 
                 <div class="form-group p-4">
                     <label for="transaction-category" class="col-form-label">Category</label>
@@ -43,14 +51,36 @@ CREATE A TRANSACTION FORM - USER OBJ AVAILABLE {{user.email}} {{user.balance}} -
                     <input class="form-input form-control" type="date" id="transaction-duedate">
                 </div>
 
-                <div>
+                <div class="form-check">
                     <p>How often?</p>
-                    <select class="transaction-frequency custom-select custom-select-sm">
-                        <option value="once" selected>Once</option>
-                        <option value="weekly">Weekly</option>
-                        <option value="fortnightly">Fortnightly</option>
-                        <option value="monthly">Monthly</option>
-                    </select>
+                    <input class="form-check-input" type="radio" value="once" name="transaction-frequency" id="once"
+                        checked>
+                    <label class="form-check-label" for="once">
+                        Once
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="weekly" name="transaction-frequency"
+                        id="weekly">
+                    <label class="form-check-label" for="weekly">
+                        Weekly
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="fortnightly" name="transaction-frequency"
+                        id="fortnightly">
+                    <label class="form-check-label" for="fortnightly">
+                        Fortnightly
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="monthly" name="transaction-frequency"
+                        id="monthly">
+                    <label class="form-check-label" for="monthly">
+                        Monthly
+                    </label>
                 </div>
 
                 <div class="form-group p-4">
