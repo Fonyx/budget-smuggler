@@ -92,11 +92,15 @@ category: For displaying the colour of the category
             label: 'All Accounts',
             data: timelineData.data,
             backgroundColor:timelineData.colors,
+            parsing: {
+              xAxisKey: 'date',
+              yAxisKey: 'amount'
+            }
           }],
         },
         options:{
           title:{
-            display: true,
+            display: false,
             text: 'All Accounts',
             fontSize: 25
           },
@@ -119,11 +123,6 @@ category: For displaying the colour of the category
             tooltip: {
               enabled: false
             }
-          }
-          ,
-          parsing: {
-            xAxisKey: 'date',
-            yAxisKey: 'amount'
           }
         }
       });
