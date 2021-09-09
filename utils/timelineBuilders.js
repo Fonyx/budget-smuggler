@@ -12,6 +12,7 @@ async function createBalanceTimeline(starting_balance, transactions){
     
     // calculate day0 balance and assign
     var dateAmounts = [];
+    let data = [];
     // push the day 0 value
     dateAmounts.push(
         {0: starting_balance}
@@ -21,6 +22,9 @@ async function createBalanceTimeline(starting_balance, transactions){
 
     // reduce the transaction totals to an accumulated balance
     dayTransactionTotals.accumulate();
+
+    // export the timeline to a simple object for the graph
+    // data = dayTransactionTotals.export();
 
     return dayTransactionTotals;
 

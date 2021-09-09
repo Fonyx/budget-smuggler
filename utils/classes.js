@@ -26,6 +26,17 @@ const clog = require('../utils/colorLogging');
             clog(`${curr_key}: ${curr_val}`, 'magenta');
         }
     }
+    // exports the contents of the dictionary to a list of objects with lists
+    // i.e [{key: [value]}, {key: [value]}, {key: [value]}]
+    // export(){
+    //     let package = [];
+    //     for(let i = 0; i < this.keys.length; i++){
+    //         let curr_key = this.keys[i];
+    //         let curr_val = this.get(curr_key);
+    //         package.push({curr_key, curr_val});
+    //     }
+    //     return package;
+    // }
 
     length(){
         return this.keys.length;
