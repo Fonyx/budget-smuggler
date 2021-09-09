@@ -57,65 +57,84 @@ var ctx = timelineEl.getContext('2d');
 
 // Chart.defaults.font.family = 'Lato';
 // Chart.defaults.font.size = 18;
-var dates = ['18/5/1991', '21/5/1991', '28/5/1991', '1/6/1991','5/6/1991']
-var amounts = [200, 250, 270, -10, 500];
-var colours = ['green', 'green', 'green', 'red', 'green']
+// var dates = ['18/5/1991', '21/5/1991', '28/5/1991', '1/6/1991','5/6/1991']
+// var amounts = [200, 250, 270, -10, 500];
+// var colours = ['green', 'green', 'green', 'red', 'green']
 
-dateObjs = dates.map((date, index) => {
-  let currentAmount = amounts[index];
-  let dataElement = {
-    //   {due_date: '18/5/1991', amount: 200},
-    due_date: date,
-    amount: currentAmount}
-  return dataElement
-});
+// dateObjs = dates.map((date, index) => {
+  //   let currentAmount = amounts[index];
+  //   let dataElement = {
+  //     //   {due_date: '18/5/1991', amount: 200},
+  //     due_date: date,
+  //     amount: currentAmount}
+  //   return dataElement
+  // });
+  // console.log(dateObjs);
 
-console.log(dateObjs);
-
-let timelineChart = new Chart(ctx, {
-  type:'line',
-  data:{
-    labels: dates,
-    datasets:[{
-      label: 'All Accounts',
-      data: dateObjs,
-      backgroundColor:colours,
-      // borderWidth: 1,
-      // borderColor: '#ffffff',
-      // hoverBorderWidth: 3,
-      // hoverBorderColor:'#ffffff'
-    }],
-  },
-  options:{
-    title:{
-      display: true,
-      text: 'All Accounts',
-      fontSize: 25
-    },
-    legend:{
-      display: false,
-      position: 'right',
-      labels:{
-        fontColor: 'black'
-      }
-    },
-    layout: {
-      padding: {
-        left: 50,
-        right: 50,
-        bottom: 0,
-        top: 0
-      }
-    },
-    plugins:{
-      tooltip: {
-        enabled: false
-      }
-    }
-    ,
-    parsing: {
-      xAxisKey: 'due_date',
-      yAxisKey: 'amount'
+  async function graphTimeline() {
+    let timelineData = await fetch('/graph/data/timeline', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json'}
+    })
+    .then(resp => resp)
+    .catch((err) => console.log(err));
+    
+    if(timelineData){
+      console.log(timelineData);
+      let timelineChart = new Chart(ctx, {
+        type:'line',
+        data:{
+          labels: dates,
+          datasets:[{
+            label: 'All Accounts',
+            data: dateObjs,
+            backgroundColor:colours,
+            // borderWidth: 1,
+            // borderColor: '#ffffff',
+            // hoverBorderWidth: 3,
+            // hoverBorderColor:'#ffffff'
+          }],
+        },
+        options:{
+          title:{
+            display: true,
+            text: 'All Accounts',
+            fontSize: 25
+          },
+          legend:{
+            display: false,
+            position: 'right',
+            labels:{
+              fontColor: 'black'
+            }
+          },
+          layout: {
+            padding: {
+              left: 50,
+              right: 50,
+              bottom: 0,
+              top: 0
+            }
+          },
+          plugins:{
+            tooltip: {
+              enabled: false
+            }
+          }
+          ,
+          parsing: {
+            xAxisKey: 'due_date',
+            yAxisKey: 'amount'
+          }
+        }
+      });
+    
+    }else{
+      console.log('Error getting timeline data');
     }
   }
-});
+
+  graphTimeline();
+
+
+
