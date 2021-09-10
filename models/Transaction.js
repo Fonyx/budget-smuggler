@@ -5,9 +5,48 @@ const dayjs = require('dayjs');
 var weekOfYear = require('dayjs/plugin/weekOfYear')
 dayjs.extend(weekOfYear);
 
+
+function getDayMonthMap(year){
+    // case for a leap year
+    if(year % 4 === 0){
+        const monthDays = {
+            'january':[1, 31],
+            'february':[32, 60],
+            'march':[61, 91],
+            'april':[92,121],
+            'may':[122, 152],
+            'june':[153, 182],
+            'july':[183, 213],
+            'august':[214, 244],
+            'september':[245, 274],
+            'october':[275, 305],
+            'november':[306, 335],
+            'december':[336, 366],
+        }
+    // case for non leap years
+    }else{
+        const monthDays = {
+            'january':[1, 31],
+            'february':[32, 59],
+            'march':[60, 90],
+            'april':[91, 120],
+            'may':[121, 151],
+            'june':[152, 181],
+            'july':[182, 212],
+            'august':[213, 243],
+            'september':[244, 273],
+            'october':[274, 304],
+            'november':[305, 334],
+            'december':[335, 365],
+        }
+    }
+}
+
+
+
 /**
  *  function that returns the day of year number for a date object from 0BC, defaults to today if no date parsed
- * @returns {int} a single integer from 0-largeNumber since lots of days since 0BC
+ * @returns {int} a single integer from 0-largeNumber since lots of days since 0BC, + 1 every 4 years for leap year
  * */
 function getDayNumberSince0BC(date){
     // if parsed a date, use that date
@@ -28,6 +67,9 @@ function getDayNumberSince0BC(date){
     // calculate number of days in years already completed (yearNumber - 1)
     let days = (yearNumber - 1) * 365
 
+    // add days for leap years, 1 day every 4 years, calculate x and round to floor
+    days += Math.floor((yearNumber - 1)/4);
+
     // calculate number of days in weeks already completed (weeks -1)
     days += (weekNumber-1) * 7
 
@@ -35,6 +77,57 @@ function getDayNumberSince0BC(date){
     days += dayNumber
 
     return days
+}
+
+/**
+     * Converts a day count from 0BC back to a dayjs date obj ie-1000000345 -> dayjs('13/23/2003')
+     * @param {int} relDateNum 
+     * @return {dayjs()} dayjs object instance
+     */
+ convertRelDateToDateString(relDateNum){
+     var result;
+    // get date elements back from relDateNum that is relative to 0BC
+    // days in a year
+    let daysInYear = 365
+    // get the number of years and floor the result to remove the days in the current year
+    let year = Math.floor(relDateNum/daysInYear)
+    // since we floored above result, determine how many days progressed in current year by finding remainder
+    let yearProgressInDays = relDateNum / (365*year);
+    // get month and remainder (day of month) and construct new dayjs object
+    let progress = convertYearProgressDaysIntoMonth(yearProgressInDays, year);
+
+    result = new dayjs(progress.day+'/'+progress.monthName+'/'+year);
+
+    return result; 
+}
+
+/**
+ * Converts a year progress day number into a month and a remainder
+ * @param {} yearProgressDay 
+ */
+convertYearProgressDaysIntoMonth(yearProgressDay, year){
+
+    var result; // {monthName:'', dayNum:int}
+
+    // get the mapping for the current year to turn day count into a monthName and remainder
+    let dayMap = getDayMonthMap(year);
+    /* 
+    {
+        january: [startInt, endInt],
+        ...
+    }
+    */
+
+    // determine which entry has the corresponding day number
+    for(let monthName, rangeList in dayMap){
+        // if the yearProgressDay is in the range for this month, save that month, and subtract the month start from the yearProgressDayNum
+        if(rangeList[0] <= yearProgressDay && rangeList[1] >= yearProgressDay){
+            result.monthName = monthName;
+            result.dayNum = yearProgressDay-rangeList[0];
+        }
+    }
+
+    return result;
 }
 
 class Transaction extends Model {
@@ -178,6 +271,8 @@ class Transaction extends Model {
         return recurrences;
     }
     getNonMonthlyRecurrenceDateObjs(){
+        let recurrenceDateNums = [];
+        let recurrenceDateObjs = [];
         // using relative date construction
 
         // map frequency to day number ie fortnight = 13/14, week = 6/7, annual = 364/365, should these be zero-indexed?
@@ -189,14 +284,28 @@ class Transaction extends Model {
         // get the ending date day relative to 0BC
         let relEndDayNum = this.getEndRecurrenceDateNum();
 
-        // based on transaction type, end_recurence relDateNum, and frequency as a day count
-        // build list of relDateNumbers for the transaction period until end_recurrence relDateNum 
+        // make array of relDateNums using the two ranges and the frequency, excluding start as start is already calculated higher and end is round
+        /* 
+        start: 1000345
+        frequency: 13 - fortnightly
+        end: 1000371
+        ->
+        [1000358, 1000371]
+        */
 
-        // get end_recurrence relDateNum
+        // skip start number as we don't want to add that to the list of recurrences, then increment by frequencyInDays
+        for(let i = relStartDayNum + 1; i<=relEndDayNum; i += frequencyInDays){
+            recurrenceDateNums.push(i)
+        }
 
+        // now we have a list of relative day numbers, and we need to convert them back to date strings
+        let recurrenceDateObjs = recurrenceDateNums.map((relDateNum) => return convertRelDateToDateString(relDateNum));
 
         //convert relDateNums back to dateObjs
+        return recurrenceDateObjs
     }
+
+    
 }   
 
 
