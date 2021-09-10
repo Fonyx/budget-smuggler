@@ -51,7 +51,7 @@ function createDailyTransactionTotalList(transactions){
         let name = transaction.getName();
         let recurrenceDateObjs = transaction.getAllRecurrenceDateObjs();
 
-        for(recurrenceDate of recurrenceDateObjs){
+        for(let recurrenceDate in recurrenceDateObjs){
             // past date filter - TEST THIS COMPARISON!!!!!!
             // https://day.js.org/docs/en/display/difference
             if(recurrenceDate.diff(todayObj) > 0){
