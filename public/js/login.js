@@ -19,6 +19,7 @@ const loginFormHandler = async (event) => {
             document.location.replace('/profile');
         } else {
             console.log('User failed to login with known credentials');
+            console.log(response);
             alert(response.statusText);
         }
 

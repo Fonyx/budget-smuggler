@@ -8,11 +8,11 @@ router.get('/login', (req, res) => {
   try {
     if (req.session.logged_in) {
       res.redirect('/profile');
-      return;
     } else {
       res.render('login');
     }
   } catch (err) {
+    clog(err, 'red');
     res.status(500).json(err);
   }
 });
