@@ -1,16 +1,15 @@
 const signupFormHandler = async (event) => {
     event.preventDefault();
     // collect values from the login form
-    const username = document.querySelector('#name-signup').value.trim();
     const email = document.querySelector('#email-signup').value.trim();
     const password = document.querySelector('#password-signup').value.trim();
 
-    if (username && email && password) {
+    if (email && password) {
 
         // consume the login endpoint with a post request
         const response = await fetch('/user/signup', {
             method: 'POST',
-            body: JSON.stringify({ username, email, password }),
+            body: JSON.stringify({ email, password }),
             headers: { 'Content-Type': 'application/json' }
         });
 
