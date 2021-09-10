@@ -1,34 +1,57 @@
-{{!-- This template is a form for updating all the fields in a transaction, it has access to {{transactionObj}} and {{userObj}} for dressing the form. Client side js will need to handle event listening for submit, form field validation, and then sending a PUT request to "/transaction/update/{{transactionObj.id}}". It will handle the usual responses, code 200 - all good, 400 user did something bad, 500 server broke --}}
+{{!-- This template is a form for updating all the fields in a transaction, it has access to {{transactionObj}} and
+{{userObj}} for dressing the form. Client side js will need to handle event listening for submit, form field validation,
+and then sending a PUT request to "/transaction/update/{{transactionObj.id}}". It will handle the usual responses, code
+200 - all good, 400 user did something bad, 500 server broke --}}
 
-UPDATE TRANSACTION FORM + A TRANSACTION OBJECT
+{{!-- UPDATE TRANSACTION FORM + A TRANSACTION OBJECT --}}
+<main class="container">
+    <section class="card transaction-card row g-3 align-items-center m-4">
+        <div class="card-body d-flex flex-column p-4 w-75">
+            <form id="update-transaction-form" class="form form transaction-form">
+                <div>
+                    <h1 class="card-title text-center">Update Transaction</h1>
+                </div>
 
-<h1>Update Transaction</h1>
-
-<form id="update-transaction-form" class="form">
-    <div class="form-group">
-        <label for="update-transaction-name">NAME</label>
-        <input type="text" class="form-control" value="{{transaction.name}}" id="update-transaction-name" data-id="{{transaction.id}}" placeholder="user name">
-
-        <label for="update-transaction-amount">AMOUNT</label>
-        <input type="text" class="form-control" value="{{transaction.amount}}" id="update-transaction-amount" placeholder="amount">
-
-        <label for="update-transaction-due-date">DUE DATE</label>
-        <input type="text" class="form-control" value="{{transaction.due_date}}" id="update-transaction-due-date" placeholder="due date">
-
-        <label for="update-transaction-frequency">FREQUENCY</label>
-        <input type="text" class="form-control" value="{{transaction.frequency}}" id="update-transaction-frequency" placeholder="frequency">
-
-        <label for="update-transaction-type">TYPE</label>
-        <input type="text" class="form-control" value="{{transaction.type}}"id="update-transaction-type" placeholder="type">
-        
-        <label for="update-transaction-category-name">CATEGORY NAME</label>
-        <input type="text" class="form-control" value="{{transaction.category_name}}"id="update-transaction-category-name" placeholder="category">
-    </div>
-    <br>
-    <div>
-        <button id="submit-btn" type="submit" class="btn btn-primary">Submit</button>
-        <button id="cancel-btn" type="cancel" onclick="window.history.back()" class="btn btn-secondary">Cancel</button>
-    </div>
-</form>
+                <div class="form-group p-3">
+                    <label for="update-transaction-name" class="col-form-label form-font">Name</label>
+                    <input type="text" class="form-control" value="{{transaction.name}}" id="update-transaction-name"
+                        data-id="{{transaction.id}}" placeholder="user name">
+                </div>
+                <div class="form-group p-3">
+                    <label for="update-transaction-amount" class="col-form-label form-font">Amount</label>
+                    <input type="text" class="form-control" value="{{transaction.amount}}"
+                        id="update-transaction-amount" placeholder="amount">
+                </div>
+                <div class="form-group p-3">
+                    <label for="update-transaction-due-date" class="col-form-label form-font">Due Date</label>
+                    <input type="text" class="form-control" value="{{transaction.due_date}}"
+                        id="update-transaction-due-date" placeholder="due date">
+                </div>
+                <div class="form-group p-3">
+                    <label for="update-transaction-frequency" class="col-form-label form-font">Frequency</label>
+                    <input type="text" class="form-control" value="{{transaction.frequency}}"
+                        id="update-transaction-frequency" placeholder="frequency">
+                </div>
+                <div class="form-group p-3">
+                    <label for="update-transaction-type" class="col-form-label form-font">Type</label>
+                    <input type="text" class="form-control" value="{{transaction.type}}" id="update-transaction-type"
+                        placeholder="type">
+                </div>
+                <div class="form-group p-3">
+                    <label for="update-transaction-category-name" class="col-form-label form-font">Category Name</label>
+                    <input type="text" class="form-control" value="{{transaction.category_name}}"
+                        id="update-transaction-category-name" placeholder="category">
+                </div>
+        </div>
+        <div class="transaction-buttons form-group p-4 m-4 d-flex justify-content-evenly">
+            <button id="submit-btn" type="submit"
+                class="btn btn-light mx-3 create-transaction-button w-25">Submit</button>
+            <button id="cancel-btn" type="cancel" onclick="window.history.back()"
+                class="btn btn-light mx-3 w-25">Cancel</button>
+        </div>
+        </form>
+        </div>
+    </section>
+</main>
 
 <script src="/js/update-transaction.js"></script>
