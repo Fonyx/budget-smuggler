@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { User, Category, Transaction } = require('../models');
 const {onlyIfLoggedIn} = require('../middleware/auth');
+const clog = require('../utils/colorLogging');
 
 // Get all transactions for a user
 router.get('/', onlyIfLoggedIn, async (req, res) => {
@@ -80,7 +81,7 @@ router.put('/balance', onlyIfLoggedIn, async (req, res) => {
       all: true,
       nested:true
     })
-    clog(`Updating user balance from, ${userObj.balance} to ${req.body.balance}`, 'blue')
+    clog(`Updating user balance from, ${userObj.balance} to ${req.body.balance}`, 'magenta')
     if(userObj){
       // this might not check well enough, use should use float for db structure but int should also work
       if(typeof(req.body.balance) === 'number'){
@@ -95,6 +96,7 @@ router.put('/balance', onlyIfLoggedIn, async (req, res) => {
       res.status(404).json({message:"Could not find logged in user object"})
     }
   }catch(err){
+    clog(err, 'red');
     res.status(500).json({message:"Server failed to update user balance"});
   }
 });
