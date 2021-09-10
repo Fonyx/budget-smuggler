@@ -19,7 +19,7 @@ const sess = {
     // only accepts requests to local server....what about external scripts?
     // sameSite: "strict",
     // 5 minute session timeout
-    expires: 1000 * 60 * 5
+    // expires: 1000 * 60 * 5
   },
   resave: false,
   saveUninitialized: true,

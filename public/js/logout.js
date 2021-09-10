@@ -1,5 +1,5 @@
 
-const logout = async (event) => {
+async function logout (event) {
     event.preventDefault();
     console.log('Trying to logout');
     const response = await fetch('/user/logout', {

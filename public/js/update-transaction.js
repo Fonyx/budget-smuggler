@@ -3,25 +3,34 @@ const updateTransactionFormHandler = async (event) => {
     console.log("infunction")
     event.preventDefault();
     // collect values from the update-transaction form
-    const name = document.querySelector('#update-transaction-name').value.trim();
-    const amount = document.querySelector('#update-transaction-amount').value.trim();
-    const dueDate = document.querySelector('#update-transaction-due-date').value.trim();
-    const frequency = document.querySelector('#update-transaction-frequency').value.trim();
-    const type = document.querySelector('#update-transaction-type').value.trim();
-    const category_name = document.querySelector('#update-transaction-category-name').value.trim();    
+    const nameValue = document.querySelector('#update-transaction-name').value.trim();
+    const amountValue = document.querySelector('#update-transaction-amount').value.trim();
+    const dueDateValue = document.querySelector('#update-transaction-due-date').value.trim();
+    const frequencyValue = document.querySelector('#update-transaction-frequency').value.trim();
+    const typeValue = document.querySelector('#update-transaction-type').value.trim();
+    const categoryNameValue = document.querySelector('#update-transaction-category-name').value.trim();    
 
-    const transactionObj = document.querySelector('#update-transaction-form').dataset.id;
+    const transaction_id = document.querySelector('#update-transaction-name').dataset.id;
 
-    if(name & amount & dueDate & frequency & type & category_name){
+    let data_packet = {
+        'name': nameValue,
+        'amount': amountValue,
+        'dueDate': dueDateValue,
+        'frequency': frequencyValue,
+        'type': typeValue,
+        'category': categoryNameValue,
+    }
+    
+    // if(name & amount & dueDate & frequency & type & category_name & transaction_id){
         try{
             // consume the login endpoint with a post request
-            const response = await fetch(`/transaction/update/${transactionObj.id}`, {
+            const response = await fetch(`/transaction/update/${transaction_id}`, {
                 method: 'PUT',
-                body: JSON.stringify({name, amount, dueDate, frequency, type, endRecurrence, category_name}),
+                body: JSON.stringify(data_packet),
                 headers: {'Content-Type':'application/json'}
             });
             if(response.ok){
-                console.log('User transaction successfully retrieved');
+                console.log('User transaction successfully updated');
                 //document.location.replace('/profile');
             } else if (response.statusCode === 400) {
                     alert('Client error');
@@ -34,12 +43,12 @@ const updateTransactionFormHandler = async (event) => {
         } catch(err){
             console.log(err)
         }
-    } else {
-        console.log('User did not submit values for current transaction');
-    }
+    // } else {
+    //     console.log('User did not submit values for current transaction');
+    // }
 }
 
 // attach the submit handler to the signup button
 document
 .querySelector('#update-transaction-form')
-.addEventListener('submit-btn', updateTransactionFormHandler);
+.addEventListener('submit', updateTransactionFormHandler);
