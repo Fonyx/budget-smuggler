@@ -42,7 +42,8 @@ class Category extends Model {}
 Category.init(
     {
         name: {
-            type: DataTypes.STRING,
+            type: DataTypes.ENUM,
+            values:['Cashflow', 'Business', 'Savings', 'Mortgage', 'Crypto'],
             allowNull: false,
             primaryKey: true,
             unique: true

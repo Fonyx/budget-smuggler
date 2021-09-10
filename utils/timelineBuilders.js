@@ -1,6 +1,7 @@
 const dayjs = require('dayjs');
 const {dict} = require('../utils/classes');
 const clog = require('../utils/colorLogging');
+const date_format = 'DD/MM/YYYY';
 
 /**
  * Function that creates a balance timeline for a given set of transactions, category filtering is done a level above in the route that calls this
@@ -42,24 +43,26 @@ async function createBalanceTimeline(starting_balance, transactions){
 function createDailyTransactionTotalList(transactions){
 
     var dayTransactions = new dict();
+    var todayObj = dayjs();
 
     // create array of income/expenses
     for(transaction of transactions){
         // get the relative day number of each transaction and store with amount (+- according to transaction type)
         let amount = transaction.getAmount();
         let name = transaction.getName();
-        // get the number of days in the future from today
-        let relativeDate = transaction.getDayNumberFromTodayForDate();
-        let due_date = transaction.getDateString();
-        // past date filter
-        if(relativeDate > 0){
-            // date is yet to come so we care about it
-            // we are going to implement a dictionary from python here
-            dayTransactions.upsert(due_date, amount);
-        } else {
-            // date has already passed
-            clog(`Transaction ${name} already past: ${due_date}`,'blue')
+        let recurrenceDateObjs = transaction.getAllRecurrenceDateObjs();
+
+        for(let recurrenceDate of recurrenceDateObjs){
+            if(recurrenceDate.diff(todayObj) > 0){
+                // date is yet to come so we care about it
+                // we are going to implement a dictionary from python here
+                dayTransactions.upsert(recurrenceDate.format(date_format), amount);
+            } else {
+                // date has already passed - log it for sanity but do nothing else
+                clog(`Transaction ${name} recurrence date: ${recurrenceDate.format(date_format)} has already passed`,'blue')
+            }
         }
+        clog(`Finished frequency analysis for: ${name}`, 'yellow');
     }
     dayTransactions.reduceValuesLists();
 
