@@ -34,8 +34,8 @@ a.nav-link {
     font-size: 25px;
 }
 
-nav a:hover {
-    text-shadow: 2px 2px var(--mediumgreen);
+a.nav-link:hover {
+    text-shadow: 2px 2px 8px var(var(--mediumgreen));
 }
 
 
