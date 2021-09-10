@@ -8,14 +8,19 @@ UPDATE TRANSACTION FORM + A TRANSACTION OBJECT
     <div class="form-group">
         <label for="update-transaction-name">NAME</label>
         <input type="text" class="form-control" value="{{transaction.name}}" id="update-transaction-name" data-id="{{transaction.id}}" placeholder="user name">
+
         <label for="update-transaction-amount">AMOUNT</label>
         <input type="text" class="form-control" value="{{transaction.amount}}" id="update-transaction-amount" placeholder="amount">
+
         <label for="update-transaction-due-date">DUE DATE</label>
         <input type="text" class="form-control" value="{{transaction.due_date}}" id="update-transaction-due-date" placeholder="due date">
+
         <label for="update-transaction-frequency">FREQUENCY</label>
         <input type="text" class="form-control" value="{{transaction.frequency}}" id="update-transaction-frequency" placeholder="frequency">
+
         <label for="update-transaction-type">TYPE</label>
         <input type="text" class="form-control" value="{{transaction.type}}"id="update-transaction-type" placeholder="type">
+        
         <label for="update-transaction-category-name">CATEGORY NAME</label>
         <input type="text" class="form-control" value="{{transaction.category_name}}"id="update-transaction-category-name" placeholder="category">
     </div>
