@@ -48,7 +48,7 @@ class Transaction extends Model {
     getDueDate(){
         return this.getDataValue('due_date');
     }
-    getDateString(){
+    getDueDateString(){
         let dayObj = dayjs(this.getDataValue('due_date'));
         let dayText = dayObj.format('DD/MM/YYYY');
         return dayText
@@ -65,6 +65,7 @@ class Transaction extends Model {
     getCategory(){
         return this.getDataValue('category_name');
     }
+
     /**
      * Function that determines the number of days from today until a date provided, negative means it has passed already
      */
@@ -74,6 +75,41 @@ class Transaction extends Model {
         let relativeDays = targetNumber - todayNumber;
         return relativeDays
     }
+
+    /**
+     * A function that returns all the recurrences (including initial due date) of this transaction as a list of dayjs objects
+     * @returns {[dayjs(),dayjs()]} returns list of string representations of dates
+     */
+    getAllRecurrenceDateObjs(){
+
+        // create list and add dueDateObj
+        var recurrenceDateObjs = [];
+
+        // if frequency === 'once'
+            // return list with just dueDateObj in it
+
+        // else if (frequency === 'monthly)
+            // monthly is an exception
+            // this.getMonthlyRecurrenceDateObjs();
+            
+        // else
+            // this.getNonMonthlyRecurrenceDateObjs();
+            // get end_recurrence reldateNum
+            // map frequency to day number ie fortnight = 13/14, week = 6/7, annual = 364/365, should these be zero-indexed?
+            // based on transaction type, end_recurence relDateNum, and frequency as a day count
+            // build list of relDateNumbers for the transaction period until end_recurrence relDateNum 
+            
+            return dateStrings
+        }
+    
+
+        getMonthlyRecurrenceDateObjs(){
+        // get end_recurrence reldateNum
+
+        getNonMonthlyRecurrenceDateObjs(){
+
+        }
+    }   
 
 }
 
@@ -101,9 +137,10 @@ Transaction.init(
             allowNull: false,
         },
         frequency: {
-            type: DataTypes.STRING,
+            type: DataTypes.ENUM,
+            values: ['once','weekly','fortnightly','monthly', 'annually'],
             allowNull: false,
-            default: "once",
+            default: 'once',
         },
         type: {
             type: DataTypes.ENUM,
@@ -115,7 +152,8 @@ Transaction.init(
             allowNull: true,
         },
         category_name: {
-            type: DataTypes.STRING,
+            type: DataTypes.ENUM,
+            values: ['Cashflow', 'Business', 'Savings', 'Mortgage', 'Crypto'],
             allowNull: false,
             references: {
                 model: 'category',
