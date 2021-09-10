@@ -15,12 +15,12 @@ CONFIRM DELETE OF TRANSACTION - TRANSACTION OBJ {{transaction.name}}
     <div class="col-md-6">
         <h2>Delete Transaction {{transaction.name}}</h2>
 
-        <a id="delete" class="btn btn-primary red" data-transaction_id="{{transaction.id}}">Delete</a>
+        <button id="delete" class="btn btn-primary red" data-transaction_id="{{transaction.id}}">Delete</button>
 
         <a href="#" onclick="window.history.back()" class="btn btn-primary">Back Away Slowly</a>
         {{!-- <a href="/comment/{{id}}" class="btn btn-primary">Back Away Slowly</a> --}}
     </div>
   </div>
 
-  <script src="/js/delete-comment.js"></script>
+  <script src="/js/delete-transaction.js"></script>
 </main>

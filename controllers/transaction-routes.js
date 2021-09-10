@@ -37,7 +37,7 @@ router.get('/delete/:transaction_id', onlyIfLoggedIn, async (req, res) => {
 });
 
 // Delete a transaction
-router.delete('/:transaction_id', onlyIfLoggedIn, async (req, res) => {
+router.delete('/delete/:transaction_id', onlyIfLoggedIn, async (req, res) => {
     try{
         let target = await Transaction.findByPk(req.params.transaction_id);
         let targetName = target.name;

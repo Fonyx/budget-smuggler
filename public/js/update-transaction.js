@@ -12,6 +12,13 @@ const updateTransactionFormHandler = async (event) => {
 
     const transaction_id = document.querySelector('#update-transaction-name').dataset.id;
 
+    try {
+        let _ = parseFloat(amountValue);
+    } catch (err) {
+        console.error(err);
+        return
+    }
+
     let data_packet = {
         'name': nameValue,
         'amount': amountValue,
