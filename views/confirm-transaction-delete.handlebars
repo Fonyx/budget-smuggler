@@ -1,26 +1,24 @@
-{{!-- This template is used to display a confirm delete form for a transaction. The data objects available are {{transaction}} and the {{user}} to stylize the template with dynamic data --}}
+{{!-- This template is used to display a confirm delete form for a transaction. The data objects available are
+{{transaction}} and the {{user}} to stylize the template with dynamic data --}}
 
+<main class="container">
+  <section class="card login-card row g-3 align-items-center m-4">
+    <div class="card-body d-flex flex-column p-4 w-75">
+      <div>
+        <h1 class="card-title text-center">Deleting {{transaction.name}}...</h1>
+      </div>
+      <div class="container center-align">
+        <div class="form-group p-4">
+          <h2 class="text-center">Are you sure?</h2>
+        </div>
+        <div class="login-buttons form-group p-4 m-4 d-flex justify-content-evenly">
+          <button id="delete" class="btn btn-light mx-3 w-50" data-transaction_id="{{transaction.id}}">Delete</button>
 
-CONFIRM DELETE OF TRANSACTION - TRANSACTION OBJ {{transaction.name}}
-
-<header>
-  <nav>
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo left">Are you Sure? This could be an important detail</a>
+          <a href="#" onclick="window.history.back()" class="btn btn-light mx-3 w-50">Back Away Slowly</a>
+          {{!-- <a href="/comment/{{id}}" class="btn btn-primary">Back Away Slowly</a> --}}
+        </div>
+      </div>
     </div>
-  </nav>
-</header>
-<main class="valign-wrapper">
-  <div class="container center-align">
-    <div class="col-md-6">
-        <h2>Delete Transaction {{transaction.name}}</h2>
-
-        <button id="delete" class="btn btn-primary red" data-transaction_id="{{transaction.id}}">Delete</button>
-
-        <a href="#" onclick="window.history.back()" class="btn btn-primary">Back Away Slowly</a>
-        {{!-- <a href="/comment/{{id}}" class="btn btn-primary">Back Away Slowly</a> --}}
-    </div>
-  </div>
-
-  <script src="/js/delete-transaction.js"></script>
+  </section>
 </main>
+<script src="/js/delete-transaction.js"></script>
