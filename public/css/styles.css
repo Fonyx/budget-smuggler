@@ -13,33 +13,41 @@ body {
     background-size: cover;
 }
 
-.page-title {
+a.page-title {
     color: black;
     font-family: john-doe, sans-serif;
-    font-weight: 700;
+    font-weight: 500;
     font-style: normal;
-    font-size: 80px;
+    font-size: 40px;
     padding: 15px 30px;
     text-shadow: 2px 2px 8px goldenrod;
 }
 
+a.page-title:hover {
+    color: black;
+    font-family: john-doe, sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 40px;
+    padding: 15px 30px;
+    text-shadow: 2px 2px 8px var(--mediumgreen);
+}
+
 /* ---------- NAVIGATION STYLES --------- */
-a.nav-link {
+a.nav-link.nav-item {
     color: black;
     text-decoration: none;
-    font-family: hero-new-hairline,sans-serif;
-    font-weight: 700;
+    font-family: condor, sans-serif;
+    font-weight: 500;
     font-style: normal;
     padding: 15px 30px;
     font-size: 25px;
+    text-shadow: 2px 2px 8px var(--apricot);
 }
 
-a.nav-link:hover {
-    text-shadow: 2px 2px 8px var(var(--mediumgreen));
+a.nav-link.nav-item:hover {
+    text-shadow: 2px 2px 24px var(--mediumgreen);
 }
-
-
-
 
 
 /* ---------- LANDING PAGE HANDLEBARS STYLES ---------- */
@@ -50,8 +58,6 @@ a.nav-link:hover {
     font-style: normal;
     font-size: 4em;
 }
-
-
 
 /* ---------- LOGIN HANDLEBARS STYLES ---------- */
 .login-buttons .btn {
@@ -110,6 +116,7 @@ a.nav-link:hover {
     font-family: monotype-modern-display,sans-serif;
     font-weight: 400;
     font-style: normal;
+    font-size: 4em;
 }
 
 .update-link {
@@ -152,13 +159,40 @@ a.nav-link:hover {
     color: lightslategray;
 }
 
+/* ---------- CREATE TRANASACTIONS HANDLEBARS ---------- */
+.form-font {
+    color: darkslategrey;
+    font-family: turnip, serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.current.balance.form-font {
+        color: darkslategrey;
+        font-family: turnip, serif;
+        font-weight: 600;
+        font-style: normal;
+}
+
+.transaction-buttons .btn {
+    background-color: var(--dark-grey);
+    box-shadow: 2px 2px 8px goldenrod;   
+}
+
+.transaction-buttons .btn:hover {
+    color: white;
+    background-color: var(--mediumgreen);
+    box-shadow: 2px 2px 8px goldenrod;
+}
+
+
 /* partials - transaction-card */
 .profile-buttons a {
     color: black;
 }
 
 .add-link:hover {
-    color: var(--mediumgreen);
+    color: orange;
 }
 
 .delete-link:hover {

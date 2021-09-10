@@ -16,98 +16,106 @@ CREATE A TRANSACTION FORM - USER OBJ AVAILABLE {{user.email}} {{user.balance}} -
                     <h2 class="card-title text-center">Add new transaction</h2>
                 </div>
                 <div class="form-group p-4">
-                    <label for="transaction-name" class="col-form-label">Name</label>
+                    <label for="transaction-name" class="col-form-label form-font">Name</label>
                     <input class="form-input form-control" type="text" id="transaction-name">
                 </div>
 
                 <div class="form-group p-4">
-                    <label for="transaction-amount" class="col-form-label">Amount</label>
-                    <input class="form-input form-control" type="number" id="transaction-amount">
+                    <label for="transaction-amount" class="col-form-label form-font">Amount</label>
+                    <input class="form-input form-control" type="text" id="transaction-amount">
                 </div>
 
-                <div class="form-check">
-                    <p>Type:</p>
-                    <input class="form-check-input" type="radio" value="income" name="transaction-type" id="income" checked="true">
-                    <label class="form-check-label" for="income">Income</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" value="expense" name="transaction-type" id="expense">
-                    <label class="form-check-label" for="expense">Expense</label>
-                </div>
-
-                <br>
-
-                <div class="form-check">
-                    <p>Category:</p>
-                    <input class="form-check-input" type="radio" value="Cashflow" name="transaction-category" id="cashflow" checked="true">
-                    <label class="form-check-label" for="cashflow">Cashflow</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" value="Business" name="transaction-category"
-                        id="business">
-                    <label class="form-check-label" for="business">Business</label>
+                <div class="container m-2">
+                    <p class="form-font">Type:</p>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" value="income" name="transaction-type" id="income"
+                            checked="true">
+                        <label class="form-check-label" for="income">Income</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" value="expense" name="transaction-type"
+                            id="expense">
+                        <label class="form-check-label" for="expense">Expense</label>
+                    </div>
                 </div>
 
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" value="Savings" name="transaction-category"
-                        id="savings">
-                    <label class="form-check-label" for="savings">Savings</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" value="Mortgage" name="transaction-category"
-                        id="mortgage">
-                    <label class="form-check-label" for="mortgage">Mortgage</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" value="Crypto" name="transaction-category"
-                        id="crypto">
-                    <label class="form-check-label" for="crypto">Crypto</label>
-                </div>
+                <div class="container m-2">
+                    <p class="form-font">Category:</p>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" value="Cashflow" name="transaction-category"
+                            id="cashflow" checked="true">
+                        <label class="form-check-label" for="cashflow">Cashflow</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" value="Business" name="transaction-category"
+                            id="business">
+                        <label class="form-check-label" for="business">Business</label>
+                    </div>
 
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" value="Savings" name="transaction-category"
+                            id="savings">
+                        <label class="form-check-label" for="savings">Savings</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" value="Mortgage" name="transaction-category"
+                            id="mortgage">
+                        <label class="form-check-label" for="mortgage">Mortgage</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" value="Crypto" name="transaction-category"
+                            id="crypto">
+                        <label class="form-check-label" for="crypto">Crypto</label>
+                    </div>
+                </div>
 
                 <div class="form-group p-4">
-                    <label for="transaction-duedate" class="col-form-label">Due Date</label>
+                    <label for="transaction-duedate" class="col-form-label form-font">Due Date</label>
                     <input class="form-input form-control" type="date" id="transaction-duedate">
                 </div>
 
-                <div class="form-check">
-                    <p>How often?</p>
-                    <input class="form-check-input" type="radio" value="once" name="transaction-frequency" id="once"
-                        checked="true">
-                    <label class="form-check-label" for="once">Once</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" value="weekly" name="transaction-frequency"
-                        id="weekly">
-                    <label class="form-check-label" for="weekly">Weekly</label>
-                </div>
+                <div class="container m-2">
+                    <p class="form-font">How often?</p>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" value="once" name="transaction-frequency" id="once"
+                            checked="true">
+                        <label class="form-check-label" for="once">Once</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" value="weekly" name="transaction-frequency"
+                            id="weekly">
+                        <label class="form-check-label" for="weekly">Weekly</label>
+                    </div>
 
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" value="fortnightly" name="transaction-frequency"
-                        id="fortnightly">
-                    <label class="form-check-label" for="fortnightly">Fortnightly</label>
-                </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" value="fortnightly" name="transaction-frequency"
+                            id="fortnightly">
+                        <label class="form-check-label" for="fortnightly">Fortnightly</label>
+                    </div>
 
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" value="monthly" name="transaction-frequency"
-                        id="monthly">
-                    <label class="form-check-label" for="monthly">Monthly</label>
-                </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" value="monthly" name="transaction-frequency"
+                            id="monthly">
+                        <label class="form-check-label" for="monthly">Monthly</label>
+                    </div>
 
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" value="annually" name="transaction-frequency"
-                        id="annually">
-                    <label class="form-check-label" for="annually">Annually</label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" value="annually" name="transaction-frequency"
+                            id="annually">
+                        <label class="form-check-label" for="annually">Annually</label>
+                    </div>
                 </div>
 
                 <div class="form-group p-4">
-                    <label for="transaction-enddate" class="col-form-label">End Date: Leave Blank if unknown</label>
+                    <label for="transaction-enddate" class="col-form-label form-font">End Date: Leave Blank if
+                        unknown</label>
                     <input class="form-input form-control" type="date" id="transaction-enddate">
                 </div>
 
                 <div class="transaction-buttons form-group p-4 m-4 d-flex justify-content-evenly">
-                    <button class="btn btn-light mx-3 w-50" type="submit">Create</button>
-                    <button class="btn btn-light mx-3 w-50" type="cancel" onclick="window.history.back()">Cancel</button>
+                    <button class="btn btn-light mx-3 w-50 create-transaction-button" type="submit">Create</button>
+                    <button class="btn btn-light mx-3 w-50" type="cancel"
+                        onclick="window.history.back()">Cancel</button>
                 </div>
             </form>
         </div>
