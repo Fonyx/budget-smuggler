@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { User, Category, Transaction } = require('../models');
 const {onlyIfLoggedIn} = require('../middleware/auth');
+const clog = require('../utils/colorLogging');
 
 // Get all transactions for a user
 router.get('/', onlyIfLoggedIn, async (req, res) => {
@@ -33,7 +34,7 @@ router.get('/', onlyIfLoggedIn, async (req, res) => {
 });
 
 // Get all transactions for a user for a category
-router.get('/:category_name', onlyIfLoggedIn, async (req, res) => {
+router.get('/category/:category_name', onlyIfLoggedIn, async (req, res) => {
     try{
         let userObj = await User.findByPk(req.session.user_id);
         let user = userObj.get();
@@ -62,7 +63,7 @@ router.get('/:category_name', onlyIfLoggedIn, async (req, res) => {
 });
 
 //request for update form for user balance
-router.get('/profile/balance', onlyIfLoggedIn, async (req, res) => {
+router.get('/balance', onlyIfLoggedIn, async (req, res) => {
     try{
       let userObj = await User.findByPk(req.session.user_id);
       let user = userObj.get();
@@ -74,27 +75,27 @@ router.get('/profile/balance', onlyIfLoggedIn, async (req, res) => {
 });
   
 // request to update user balance as a put request
-router.put('/profile/balance', onlyIfLoggedIn, async (req, res) => {
+router.put('/balance', onlyIfLoggedIn, async (req, res) => {
+  console.log('BAng');
   try{
     let userObj = await User.findByPk(req.session.user_id, {
       all: true,
       nested:true
-    })
-    clog(`Updating user balance from, ${userObj.balance} to ${req.body.balance}`, 'blue')
+    });
+
     if(userObj){
-      // this might not check well enough, use should use float for db structure but int should also work
-      if(typeof(req.body.balance) === 'number'){
-        userObj.update({
+        clog(`Updating user balance from, ${userObj.balance} to ${req.body.balance}`, 'magenta')
+        await userObj.update({
           balance:req.body.balance
         });
+        clog(`Successfully updated user balance to ${req.body.balance}`, 'blue');
         res.status(200).json({message:`Successfully updated user balance to ${req.body.balance}`});
       } else {
+        clog(`User submitted ${typeof(req.body.balance)} instead of number`, 'red');
         res.status(400).json({message:"User did not submit a number for balance"})
       }
-    } else {
-      res.status(404).json({message:"Could not find logged in user object"})
-    }
   }catch(err){
+    clog(err, 'red');
     res.status(500).json({message:"Server failed to update user balance"});
   }
 });

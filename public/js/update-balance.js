@@ -5,18 +5,17 @@ const updateBalanceFormHandler = async (event) => {
     // collect values from the update-balance form
     const balance = document.querySelector('#current-balance').value.trim();
     
-    const userid = document.querySelector('#current-balance').dataset.id;
     if(balance){
         try{
             // consume the login endpoint with a post request
-            const response = await fetch(`/transaction/update/${userid}`, {
+            const response = await fetch(`/profile/balance`, {
                 method: 'PUT',
                 body: JSON.stringify({balance}),
                 headers: {'Content-Type':'application/json'}
             });
             if(response.ok){
                 console.log('User balance successfully retrieved');
-                //document.location.replace('/profile');
+                document.location.replace('/profile');
             } else if (response.statusCode === 400) {
                     alert('Client error');
             } else if (response.statusCode === 500) {
