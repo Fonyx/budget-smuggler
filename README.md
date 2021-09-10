@@ -1,4 +1,4 @@
-# group-project-2
+# Budgie
 A skeleton for project two, using express, sequelize, handlebars, nodeJs
 
 # Dev Map

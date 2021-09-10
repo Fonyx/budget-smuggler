@@ -1,5 +1,5 @@
 {
-  "name": "crowd-funding",
+  "name": "budgie",
   "version": "1.0.0",
   "description": "A skeleton for project two, using express, sequelize, handlebars, nodeJs",
   "main": "server.js",
@@ -35,12 +35,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Fonyx/budget-smuggler.git"
+    "url": "git+https://github.com/Fonyx/budgie.git"
   },
   "bugs": {
-    "url": "https://github.com/Fonyx/budget-smuggler/issues"
+    "url": "https://github.com/Fonyx/budgie/issues"
   },
-  "homepage": "https://github.com/Fonyx/budget-smuggler#readme",
+  "homepage": "https://github.com/Fonyx/budgie#readme",
   "engines": {
     "node": "12.14.1"
   }
