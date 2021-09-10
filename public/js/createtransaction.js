@@ -1,27 +1,37 @@
 const createTransactionHandler = async (event) => {
     event.preventDefault();
-    const name = document.querySelector('#transaction-name').value.trim();
-    const amount = document.querySelector('#transaction-amount').value.trim();
-    const type = document.querySelector('input[name="transaction-type"]:checked').value;
-    const category = document.querySelector('#transaction-category').value.trim();
-    const dueDate = document.querySelector('#transaction-duedate').value.trim();
-    const frequency = document.querySelector('input[name="transaction-frequency"]:checked').value;
-    const endDate = document.querySelector('#transaction-enddate').value.trim();
-    const transaction_id = document.querySelector('#create-transaction-form').dataset.id;
+    const nameValue = document.querySelector('#transaction-name').value.trim();
+    const amountValue = document.querySelector('#transaction-amount').value.trim();
+    const typeValue = document.querySelector('input[name="transaction-type"]:checked').value;
+    const categoryValue = document.querySelector('input[name="transaction-category"]:checked').value;
+    const dueDateValue = document.querySelector('#transaction-duedate').value.trim();
+    const frequencyValue = document.querySelector('input[name="transaction-frequency"]:checked').value;
+    const endDateValue = document.querySelector('#transaction-enddate').value.trim();
 
-    if (name && amount && type && category && dueDate && frequency && endDate && transaction_id) {
-        const response = await fetch(`/transaction/create`, {
-            method: 'POST',
-            body: JSON.stringify({ name, amount, type, category, dueDate, frequency, endDate, transaction_id }),
-            headers: { 'Content-Type': 'application/json' }
-        });
+    let data_packet = {
+        'name': nameValue,
+        'amount': amountValue,
+        'due_date': new Date(dueDateValue),
+        'frequency': frequencyValue,
+        'type': typeValue,
+        'end_recurrence': new Date(endDateValue),
+        'category_name': categoryValue,
+    }
 
-        if (response.ok) {
-            document.location.replace('/profile');
-        } else {
-            alert('Failed to create transaction');
-        }
-    };
+    console.log(`Sending date to server: ${data_packet}`);
+
+    const response = await fetch(`/transaction`, {
+        method: 'POST',
+        body: JSON.stringify(data_packet),
+        headers: { 'Content-Type': 'application/json' }
+    });
+
+    if (response.ok) {
+        document.location.replace('/profile');
+    } else {
+        console.log(response);
+        alert('Failed to create transaction');
+    }
 
 }
 
