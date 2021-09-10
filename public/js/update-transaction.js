@@ -10,9 +10,17 @@ const updateTransactionFormHandler = async (event) => {
     const type = document.querySelector('#update-transaction-type').value.trim();
     const category_name = document.querySelector('#update-transaction-category-name').value.trim();    
 
-    const transactionObj = document.querySelector('#update-transaction-form').dataset.id;
+    const transaction_id = document.querySelector('#update-transaction-name').dataset.id;
 
-    if(name & amount & dueDate & frequency & type & category_name){
+    console.log(name)
+    console.log(amount)
+    console.log(dueDate)
+    console.log(frequency)
+    console.log(type)
+    console.log(category_name)
+    console.log(transaction_id)
+    
+    if(name & amount & dueDate & frequency & type & category_name & transaction_id){
         try{
             // consume the login endpoint with a post request
             const response = await fetch(`/transaction/update/${transactionObj.id}`, {
@@ -42,4 +50,4 @@ const updateTransactionFormHandler = async (event) => {
 // attach the submit handler to the signup button
 document
 .querySelector('#update-transaction-form')
-.addEventListener('submit-btn', updateTransactionFormHandler);
+.addEventListener('submit', updateTransactionFormHandler);
