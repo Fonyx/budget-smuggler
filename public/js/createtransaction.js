@@ -8,6 +8,20 @@ const createTransactionHandler = async (event) => {
     const frequencyValue = document.querySelector('input[name="transaction-frequency"]:checked').value;
     const endDateValue = document.querySelector('#transaction-enddate').value.trim();
 
+    // validating user input for amountValue
+    try {
+        let _ = parseFloat(amountValue);
+    } catch (err) {
+        console.error(err);
+        return
+    }
+
+    // validating that dueDate has been filled out
+    if(!dueDateValue){
+        console.error(err);
+        return
+    }
+
     let data_packet = {
         'name': nameValue,
         'amount': amountValue,

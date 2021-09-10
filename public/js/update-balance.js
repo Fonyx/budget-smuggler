@@ -4,6 +4,14 @@ const updateBalanceFormHandler = async (event) => {
     event.preventDefault();
     // collect values from the update-balance form
     const balance = document.querySelector('#current-balance').value.trim();
+
+    // validating user input for balance
+    try {
+        let _ = parseFloat(balance);
+    } catch (err) {
+        console.error(err);
+        return
+    }
     
     if(balance){
         try{

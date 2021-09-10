@@ -12,9 +12,16 @@ const updateTransactionFormHandler = async (event) => {
 
     const transaction_id = document.querySelector('#update-transaction-name').dataset.id;
 
+    // validating user input for amountValue
     try {
         let _ = parseFloat(amountValue);
     } catch (err) {
+        console.error(err);
+        return
+    }
+
+    // validating that dueDate has been filled out
+    if(!dueDateValue){
         console.error(err);
         return
     }
