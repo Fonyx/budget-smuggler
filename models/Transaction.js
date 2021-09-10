@@ -4,6 +4,7 @@ const dayjs = require('dayjs');
 // https://day.js.org/docs/en/display/format
 var weekOfYear = require('dayjs/plugin/weekOfYear')
 dayjs.extend(weekOfYear);
+const clog = require('../utils/colorLogging');
 
 
 function getDayMonthMap(year){
@@ -86,7 +87,7 @@ function getDayNumberSince0BC(date){
      * @param {int} relDateNum 
      * @return {dayjs()} dayjs object instance
      */
- function convertRelDateToDateString(relDateNum){
+ function convertRelDateToDateObj(relDateNum){
     var result;
     // get date elements back from relDateNum that is relative to 0BC
     // days in a year
@@ -94,7 +95,7 @@ function getDayNumberSince0BC(date){
     // get the number of years and floor the result to remove the days in the current year
     let year = Math.floor(relDateNum/daysInYear)
     // since we floored above result, determine how many days progressed in current year by finding remainder
-    let yearProgressInDays = relDateNum / (365*year);
+    let yearProgressInDays = relDateNum - (365*year);
     // get month and remainder (day of month) and construct new dayjs object
     let progress = convertYearProgressDaysIntoMonth(yearProgressInDays, year);
 
@@ -108,8 +109,12 @@ function getDayNumberSince0BC(date){
  * @param {} yearProgressDay 
  */
 function convertYearProgressDaysIntoMonth(yearProgressDay, year){
-
-    var result; // {monthName:'', dayNum:int}
+    
+    // {monthName:'', dayNum:int}
+    var result = {
+        monthName:'',
+        dayNum:0
+    }; 
 
     // get the mapping for the current year to turn day count into a monthName and remainder
     let dayMap = getDayMonthMap(year);
@@ -120,11 +125,14 @@ function convertYearProgressDaysIntoMonth(yearProgressDay, year){
     }
     */
     // determine which entry has the corresponding day number
-    for(let [monthName, rangeList] in dayMap){
+    for(var [monthName, rangeList] of Object.entries(dayMap)){
         // if the yearProgressDay is in the range for this month, save that month, and subtract the month start from the yearProgressDayNum
-        if(rangeList[0] <= yearProgressDay && rangeList[1] >= yearProgressDay){
+        let monthStartNum = rangeList[0];
+        let monthEndNum = rangeList[1];
+        if(monthStartNum <= yearProgressDay && monthEndNum >= yearProgressDay){
             result.monthName = monthName;
-            result.dayNum = yearProgressDay-rangeList[0];
+            // remove the month start number from the progress number to get the day number inside the month
+            result.dayNum = yearProgressDay-monthStartNum;
         }
     }
 
@@ -136,57 +144,100 @@ class Transaction extends Model {
     getName(){
         return this.getDataValue('name');
     }
+
     getAmount(){
         let rawAmount = this.getDataValue('amount');
-        let amount = (transaction.getType() === 'income') ? rawAmount : -rawAmount;
-        return amount;
+        if(rawAmount){
+            let amount = (transaction.getType() === 'income') ? rawAmount : -rawAmount;
+            return amount;
+        } else {
+            return null;
+        }
     }
+
     getDueDateObj(){
-        return dayjs(this.getDataValue('due_date'));
+        let dueDate = this.getDataValue('due_date');
+        if(dueDate){
+            return dayjs(dueDate);
+        }else{
+            return null
+        }
     }
+
     getDueDateString(){
         let dayObj = this.getDueDateObj();
-        let dayText = dayObj.format('DD/MM/YYYY');
-        return dayText
+        if(dayObj){
+            let dayText = dayObj.format('DD/MM/YYYY');
+            return dayText
+        } else {
+            return null;
+        }
     }
+
     /**
      * Get the day number relative to 0BC from the due date string
      * @returns integer
      */
     getDueDateNum(){
         let date = this.getDueDateObj();
-        let dateNum = getDayNumberSince0BC(date);
-        return dateNum;
+        if(date){
+            let dateNum = getDayNumberSince0BC(date);
+            return dateNum;
+        }else{
+            return null
+        }
     }
+
     getFrequency(){
         return this.getDataValue('frequency');
     }
+
     getType(){
         return this.getDataValue('type');
     }
+
     getEndRecurrenceObj(){
-        return dayjs(this.getDataValue('end_recurrence'));
+        let end_recurrence = this.getDataValue('end_recurrence');
+        if(end_recurrence){
+            return dayjs(end_recurrence);
+        } else {
+            clog('No end recurrence found', 'yellow');
+            return null;
+        }
     }
+
     /**
      * Get the day number relative to 0BC from the end recurrence date string
      * @returns integer
      */
-     getEndRecurrenceDateNum(){
+    getEndRecurrenceDateNum(){
         let date = this.getEndRecurrenceObj();
-        let dateNum = getDayNumberSince0BC(date);
-        return dateNum;
+        if(date){
+            let dateNum = getDayNumberSince0BC(date);
+            return dateNum;
+        }else{
+            clog('No end recurrence date num found, this is an indefinite recurrence')
+            return null
+        }
     }
+
     getCategory(){
         return this.getDataValue('category_name');
     }
+
     getFrequencyMap(){
         const frequencyMap = {
             weekly: 6,
             fortnightly: 13,
             annually: 355
         }
-        let days = frequencyMap[this.getFrequency()];
-        return days
+        let frequency = this.getFrequency();
+        if(frequency != 'once'){
+            let days = frequencyMap[this.getFrequency()];
+            return days
+        } else {
+            return null
+        }
     }
 
     /**
@@ -206,33 +257,38 @@ class Transaction extends Model {
     getAllRecurrenceDateObjs(){
 
         // create list and add dueDateObj
-        var recurrenceDateObjs = [];
+        var resultObjs = [];
 
         // get dueDateObj
         let dueDateObj = this.getDueDateObj();
 
-        // add dueDateObj to resultant
-        recurrenceDateObjs.push(dueDateObj);
-
+        
         // if there is no recurrence for this transaction, it only has one recurring event
         if (this.getFrequency() === 'once'){
             // return list with just dueDateObj in it
-            return recurrenceDateObjs;
+            // add dueDateObj to resultant
+            resultObjs.push(dueDateObj);
+            clog('Transaction is once off', 'yellow');
+            return resultObjs;
         }
         // if transaction repeats monthly
         else if (this.getFrequency() === 'monthly'){
+            // add dueDateObj to resultant
+            resultObjs.push(dueDateObj);
             // monthly is an exception
-            let monthDates = this.getMonthlyRecurrenceDateObjs();
+            let monthDateObjs = this.getMonthlyRecurrenceDateObjs();
             // append the month dates to the original due date object
-            recurrenceDateObjs.push(monthDates)
-        // if the transaction repeats weekly, fortnightly, or annually
+            resultObjs =resultObjs.concat(monthDateObjs)
+            // if the transaction repeats weekly, fortnightly, or annually
         }else{
-            let otherRecurrences = this.getNonMonthlyRecurrenceDateObjs();
+            // add dueDateObj to resultant
+            resultObjs.push(dueDateObj);
+            let otherRecurrenceObs = this.getNonMonthlyRecurrenceDateObjs();
             // append the other dates to the original due date object
-            recurrenceDateObjs.push(otherRecurrences);
+            resultObjs = resultObjs.concat(otherRecurrenceObs);
         }
             
-        return recurrenceDateObjs;
+        return resultObjs;
     }
 
     getMonthlyRecurrenceDateObjs(){
@@ -271,6 +327,7 @@ class Transaction extends Model {
 
         return recurrences;
     }
+
     getNonMonthlyRecurrenceDateObjs(){
         let recurrenceDateNums = [];
         let recurrenceDateObjs = [];
@@ -285,6 +342,9 @@ class Transaction extends Model {
         // get the ending date day relative to 0BC
         let relEndDayNum = this.getEndRecurrenceDateNum();
 
+        // if there is no relEndDayNum, user has not defined an end period so we will just extend it for a year
+        relEndDayNum = relStartDayNum + 365;
+
         // make array of relDateNums using the two ranges and the frequency, excluding start as start is already calculated higher and end is round
         /* 
         start: 1000345
@@ -294,14 +354,14 @@ class Transaction extends Model {
         [1000358, 1000371]
         */
 
-        // skip start number as we don't want to add that to the list of recurrences, then increment by frequencyInDays
-        for(let i = relStartDayNum + 1; i<=relEndDayNum; i += frequencyInDays){
-            recurrenceDateNums.push(i)
+        // first number is startNum + frequency step we don't want to add that to the list of recurrences, then increment by frequencyInDays - one too many I think
+        for(let i = relStartDayNum + frequencyInDays; i<relEndDayNum; i += frequencyInDays){
+            recurrenceDateNums.push(i);
         }
 
-        // now we have a list of relative day numbers, and we need to convert them back to date strings
+        // now we have a list of relative day numbers, and we need to convert them back to date objects
         recurrenceDateObjs = recurrenceDateNums.map((relDateNum) => {
-            return convertRelDateToDateString(relDateNum)
+            return convertRelDateToDateObj(relDateNum)
         });
 
         //convert relDateNums back to dateObjs

@@ -2,6 +2,7 @@ const dayjs = require('dayjs');
 const {dict} = require('../utils/classes');
 const clog = require('../utils/colorLogging');
 const date_format = 'DD/MM/YYYY';
+
 /**
  * Function that creates a balance timeline for a given set of transactions, category filtering is done a level above in the route that calls this
  * @param {int} starting_balance the users opening balance
@@ -51,9 +52,7 @@ function createDailyTransactionTotalList(transactions){
         let name = transaction.getName();
         let recurrenceDateObjs = transaction.getAllRecurrenceDateObjs();
 
-        for(let recurrenceDate in recurrenceDateObjs){
-            // past date filter - TEST THIS COMPARISON!!!!!!
-            // https://day.js.org/docs/en/display/difference
+        for(let recurrenceDate of recurrenceDateObjs){
             if(recurrenceDate.diff(todayObj) > 0){
                 // date is yet to come so we care about it
                 // we are going to implement a dictionary from python here
@@ -63,6 +62,7 @@ function createDailyTransactionTotalList(transactions){
                 clog(`Transaction ${name} recurrence date: ${recurrenceDate.format(date_format)} has already passed`,'blue')
             }
         }
+        clog(`Finished frequency analysis for: ${name}`, 'yellow');
     }
     dayTransactions.reduceValuesLists();
 
