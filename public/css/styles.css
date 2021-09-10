@@ -11,6 +11,13 @@
 body {
     background: #FAF9F9 url('../images/background.jpeg') no-repeat center;
     background-size: cover;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
 }
 
 a.page-title {
