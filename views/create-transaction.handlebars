@@ -17,7 +17,8 @@ CREATE A TRANSACTION FORM - USER OBJ AVAILABLE {{user.email}} {{user.balance}} -
                 </div>
                 <div class="form-group p-4">
                     <label for="transaction-name" class="col-form-label">Name</label>
-                    <input class="form-input form-control" type="text" id="transaction-name">
+                    <input class="form-input form-control" type="text" data-id="{{transaction.id}}"
+                        id="transaction-name">
                 </div>
 
                 <div class="form-group p-4">
@@ -29,15 +30,11 @@ CREATE A TRANSACTION FORM - USER OBJ AVAILABLE {{user.email}} {{user.balance}} -
                     <p>Type:</p>
                     <input class="form-check-input" type="radio" value="income" name="transaction-type" id="income"
                         checked>
-                    <label class="form-check-label" for="income">
-                        Income
-                    </label>
+                    <label class="form-check-label" for="income">Income</label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" value="expense" name="transaction-type" id="expense">
-                    <label class="form-check-label" for="expense">
-                        Expense
-                    </label>
+                    <label class="form-check-label" for="expense">Expense</label>
                 </div>
 
 
@@ -55,32 +52,24 @@ CREATE A TRANSACTION FORM - USER OBJ AVAILABLE {{user.email}} {{user.balance}} -
                     <p>How often?</p>
                     <input class="form-check-input" type="radio" value="once" name="transaction-frequency" id="once"
                         checked>
-                    <label class="form-check-label" for="once">
-                        Once
-                    </label>
+                    <label class="form-check-label" for="once">Once</label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" value="weekly" name="transaction-frequency"
                         id="weekly">
-                    <label class="form-check-label" for="weekly">
-                        Weekly
-                    </label>
+                    <label class="form-check-label" for="weekly">Weekly</label>
                 </div>
 
                 <div class="form-check">
                     <input class="form-check-input" type="radio" value="fortnightly" name="transaction-frequency"
                         id="fortnightly">
-                    <label class="form-check-label" for="fortnightly">
-                        Fortnightly
-                    </label>
+                    <label class="form-check-label" for="fortnightly">Fortnightly</label>
                 </div>
 
                 <div class="form-check">
                     <input class="form-check-input" type="radio" value="monthly" name="transaction-frequency"
                         id="monthly">
-                    <label class="form-check-label" for="monthly">
-                        Monthly
-                    </label>
+                    <label class="form-check-label" for="monthly">Monthly</label>
                 </div>
 
                 <div class="form-group p-4">
