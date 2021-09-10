@@ -33,7 +33,7 @@ router.get('/', onlyIfLoggedIn, async (req, res) => {
 });
 
 // Get all transactions for a user for a category
-router.get('/:category_name', onlyIfLoggedIn, async (req, res) => {
+router.get('/category/:category_name', onlyIfLoggedIn, async (req, res) => {
     try{
         let userObj = await User.findByPk(req.session.user_id);
         let user = userObj.get();
@@ -62,7 +62,7 @@ router.get('/:category_name', onlyIfLoggedIn, async (req, res) => {
 });
 
 //request for update form for user balance
-router.get('/profile/balance', onlyIfLoggedIn, async (req, res) => {
+router.get('/balance', onlyIfLoggedIn, async (req, res) => {
     try{
       let userObj = await User.findByPk(req.session.user_id);
       let user = userObj.get();
@@ -74,7 +74,7 @@ router.get('/profile/balance', onlyIfLoggedIn, async (req, res) => {
 });
   
 // request to update user balance as a put request
-router.put('/profile/balance', onlyIfLoggedIn, async (req, res) => {
+router.put('/balance', onlyIfLoggedIn, async (req, res) => {
   try{
     let userObj = await User.findByPk(req.session.user_id, {
       all: true,
