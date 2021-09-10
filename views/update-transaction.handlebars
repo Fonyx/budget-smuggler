@@ -7,21 +7,22 @@ UPDATE TRANSACTION FORM + A TRANSACTION OBJECT
 <form id="update-transaction-form" class="form">
     <div class="form-group">
         <label for="update-transaction-name">NAME</label>
-        <input type="text" class="form-control" value="{{transaction.name}}" id="update-transaction-name" data-id="{{user.id}}" aria-describedby="updateTransactionName" placeholder="user name">
+        <input type="text" class="form-control" value="{{transaction.name}}" id="update-transaction-name" data-id="{{transaction.id}}" placeholder="user name">
         <label for="update-transaction-amount">AMOUNT</label>
-        <input type="text" class="form-control" value="{{transaction.amount}}" id="update-transaction-amount" data-id="{{user.id}}" aria-describedby="updateTransactionamount" placeholder="amount">
+        <input type="text" class="form-control" value="{{transaction.amount}}" id="update-transaction-amount" placeholder="amount">
         <label for="update-transaction-due-date">DUE DATE</label>
-        <input type="text" class="form-control" value="{{transaction.due_date}}" id="update-transaction-due-date" data-id="{{user.id}}" aria-describedby="updateTransactionDueDate" placeholder="due date">
+        <input type="text" class="form-control" value="{{transaction.due_date}}" id="update-transaction-due-date" placeholder="due date">
         <label for="update-transaction-frequency">FREQUENCY</label>
-        <input type="text" class="form-control" value="{{transaction.frequency}}" id="update-transaction-frequency" data-id="{{user.id}}" aria-describedby="updateTransactionFrequency" placeholder="frequency">
+        <input type="text" class="form-control" value="{{transaction.frequency}}" id="update-transaction-frequency" placeholder="frequency">
         <label for="update-transaction-type">TYPE</label>
-        <input type="text" class="form-control" value="{{transaction.type}}"id="update-transaction-type" data-id="{{user.id}}" aria-describedby="updateTransactionType" placeholder="type">
+        <input type="text" class="form-control" value="{{transaction.type}}"id="update-transaction-type" placeholder="type">
         <label for="update-transaction-category-name">CATEGORY NAME</label>
-        <input type="text" class="form-control" value="{{transaction.category_name}}"id="update-transaction-category-name" data-id="{{user.id}}" aria-describedby="updateTransactionCategoryName" placeholder="category">
+        <input type="text" class="form-control" value="{{transaction.category_name}}"id="update-transaction-category-name" placeholder="category">
     </div>
     <br>
     <div>
         <button id="submit-btn" type="submit" class="btn btn-primary">Submit</button>
+        <button id="cancel-btn" type="cancel" onclick="window.history.back()" class="btn btn-secondary">Cancel</button>
     </div>
 </form>
 
