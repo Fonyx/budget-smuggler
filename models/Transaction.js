@@ -7,9 +7,10 @@ dayjs.extend(weekOfYear);
 
 
 function getDayMonthMap(year){
+    let monthDays;
     // case for a leap year
     if(year % 4 === 0){
-        const monthDays = {
+        monthDays = {
             'january':[1, 31],
             'february':[32, 60],
             'march':[61, 91],
@@ -25,7 +26,7 @@ function getDayMonthMap(year){
         }
     // case for non leap years
     }else{
-        const monthDays = {
+        monthDays = {
             'january':[1, 31],
             'february':[32, 59],
             'march':[60, 90],
@@ -40,6 +41,7 @@ function getDayMonthMap(year){
             'december':[335, 365],
         }
     }
+    return monthDays;
 }
 
 
@@ -84,11 +86,11 @@ function getDayNumberSince0BC(date){
      * @param {int} relDateNum 
      * @return {dayjs()} dayjs object instance
      */
- convertRelDateToDateString(relDateNum){
-     var result;
+ function convertRelDateToDateString(relDateNum){
+    var result;
     // get date elements back from relDateNum that is relative to 0BC
     // days in a year
-    let daysInYear = 365
+    let daysInYear = 365;
     // get the number of years and floor the result to remove the days in the current year
     let year = Math.floor(relDateNum/daysInYear)
     // since we floored above result, determine how many days progressed in current year by finding remainder
@@ -105,7 +107,7 @@ function getDayNumberSince0BC(date){
  * Converts a year progress day number into a month and a remainder
  * @param {} yearProgressDay 
  */
-convertYearProgressDaysIntoMonth(yearProgressDay, year){
+function convertYearProgressDaysIntoMonth(yearProgressDay, year){
 
     var result; // {monthName:'', dayNum:int}
 
@@ -117,9 +119,8 @@ convertYearProgressDaysIntoMonth(yearProgressDay, year){
         ...
     }
     */
-
     // determine which entry has the corresponding day number
-    for(let monthName, rangeList in dayMap){
+    for(let [monthName, rangeList] in dayMap){
         // if the yearProgressDay is in the range for this month, save that month, and subtract the month start from the yearProgressDayNum
         if(rangeList[0] <= yearProgressDay && rangeList[1] >= yearProgressDay){
             result.monthName = monthName;
@@ -299,7 +300,9 @@ class Transaction extends Model {
         }
 
         // now we have a list of relative day numbers, and we need to convert them back to date strings
-        let recurrenceDateObjs = recurrenceDateNums.map((relDateNum) => return convertRelDateToDateString(relDateNum));
+        recurrenceDateObjs = recurrenceDateNums.map((relDateNum) => {
+            return convertRelDateToDateString(relDateNum)
+        });
 
         //convert relDateNums back to dateObjs
         return recurrenceDateObjs
@@ -307,8 +310,6 @@ class Transaction extends Model {
 
     
 }   
-
-
 
 Transaction.init(
     {
