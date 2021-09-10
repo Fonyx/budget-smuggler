@@ -1,23 +1,17 @@
-{{!-- This template renders a form to confirm the user wants to log out. It will have two buttons, a cancel button that will redirect back one page, and a logout button that will submit a post request to "/user/logout" and handle server response. The server will redirect the user to the login page, this will not be done in the client side js. --}}
+{{!-- This template renders a form to confirm the user wants to log out. It will have two buttons, a cancel button that
+will redirect back one page, and a logout button that will submit a post request to "/user/logout" and handle server
+response. The server will redirect the user to the login page, this will not be done in the client side js. --}}
+<main class="container">
+  <section class="card login-card row g-3 align-items-center m-4">
+    <div class="card-body d-flex flex-column p-4 w-75">
+      <h2 class="card-title text-center">Are you sure you want to logout?</h2>
 
-<header>
-  <nav>
-    <div class="nav-wrapper">
-      <p>Are you sure you want to log out?</p>
+      <div class="login-buttons form-group p-4 m-4 d-flex justify-content-evenly">
+        <a id="logout" class="btn btn-light mx-3 w-50">Logout</a>
+        <a href="#" onclick="window.history.back()" class="btn btn-light mx-3 w-50">Stay</a>
+      </div>
     </div>
-  </nav>
-</header>
-
-<main class="valign-wrapper">
-  <div class="container center-align">
-    <div class="col-md-6">
-        <h2>Logout</h2>
-
-        <a id="logout" class="btn btn-primary red">LOGOUT</a>
-
-        <a href="#" onclick="window.history.back()" class="btn btn-primary">Na, stay</a>
-    </div>
-  </div>
+  </section>
 
   <script src="/js/logout.js"></script>
 </main>

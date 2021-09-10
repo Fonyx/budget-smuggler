@@ -1,29 +1,18 @@
 <nav class="logout-nav navbar navbar-expand-md">
     <div class="container-fluid">
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#myTogglerNav"
+            aria-controls="#myTogglerNav" aria-label="Toggle Navigation"><i class="bi bi-list"></i></button>
         <div>
             <img src="/images/greenbudgie.png" alt="Outline of budgie with 100 dollar note superimposed over it"
                 style="width:100px;height:100px;">
             <a class="navbar-brand page-title" href="/profile">Budgie</a>
         </div>
-        <div class="navbar-nav">
-            <a class="nav-item nav-link text-uppercase" href="/profile">Profile</a>
-            <a class="nav-item nav-link text-uppercase" href="/graph/timeline">Timeline</a>
-            <a class="nav-item nav-link text-uppercase" href="/user/logout" id="logout">Logout</a>
-        </div>
+        <section class="collapse navbar-collapse" id="myToggleNav">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link text-uppercase" data-toggle="tab" href="/profile">Profile</a>
+                <a class="nav-item nav-link text-uppercase" href="/graph/timeline">Timeline</a>
+                <a class="nav-item nav-link text-uppercase" href="/user/logout" id="logout">Logout</a>
+            </div>
+        </section>
     </div>
 </nav>
-
-
-{{!-- <div class="container">
-    <nav class="logout-nav d-flex flex-row mb-3 justify-content-end">
-        <a class="btn btn-light p-2 m-2" href="/profile">Profile</a>
-        <a class="btn btn-light p-2 m-2" href="/graph/timeline">Timeline</a>
-        <a class="btn btn-light p-2 m-2" href="/user/logout" id="logout">LOGOUT</a>
-    </nav>
-</div> --}}
-
-{{!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list"
-    viewBox="0 0 16 16">
-    <path fill-rule="evenodd"
-        d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
-</svg> --}}
