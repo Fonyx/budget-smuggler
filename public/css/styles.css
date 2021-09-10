@@ -199,3 +199,8 @@ a.nav-link.nav-item:hover {
     color: #c60000;
 }
 
+
+/* Timeline graph */
+.chart-container{
+    background-color: white;
+}

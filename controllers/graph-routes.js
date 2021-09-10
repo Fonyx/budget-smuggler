@@ -22,9 +22,6 @@ router.get('/data/timeline', onlyIfLoggedIn, async(req, res)=> {
     try{
         // let forecast = userObj.getForecast();
         // this is a test arrangement that only does transaction values, not their cumulative account balance. Write that in a user model method
-        let colours = [];
-        let data = [];
-        let labels = [];
         let transactionObjs = await Transaction.findAll({
             where:{
                 user_id: req.session.user_id
