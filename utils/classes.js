@@ -1,4 +1,6 @@
+const dayjs = require('dayjs');
 const clog = require('../utils/colorLogging');
+const date_format = 'DD/MM/YYYY';
 /**
  * A dictionary object that acts like a python dictionary, with teh asterix that the value is a list
  * has getter, setter and print methods
@@ -14,9 +16,13 @@ const clog = require('../utils/colorLogging');
             this.keys = keys;
             this.values = values;
         } else {
-            this.keys = [];
-            this.values = [];
+            this.reset();
         }
+    }
+
+    reset(){
+        this.keys = [];
+        this.values = [];
     }
 
     print(){
@@ -27,13 +33,64 @@ const clog = require('../utils/colorLogging');
         }
     }
 
+    /**
+     * sort internal keys and values
+     * only sorts key date string in ascending order
+     * 
+     * {
+     *      keys: ['1/2/2021', '1/12/2020', '1/8/2019'],
+     *      values: [300, 500, 900]
+     * }
+     * ->
+     * {
+     *      keys: ['1/8/2019', '1/12/2020', '1/2/2021'],
+     *      values: [900, 500, 300]
+     * }
+     * @returns {} Nothing
+     *  */ 
+    sort(){
+        // since we are receiving two lists that are implicitly paired by order we need to combine them, then sort them, then seperate them again, IKR what bad design but hey, if it works, it works
+        let combined = this.keys.map((key)=>{
+            let value = this.get(key);
+            return {'key': key, 'value':value}
+        });
+
+        // now we need to sort the combined list of objects with a custom sort method
+        let sortedCombined = combined.sort(function compareFn(firstEl, secondEl) {
+            let first = firstEl.key;
+            let second = secondEl.key;
+            let firstDate = dayjs(first, date_format);
+            let secondDate = dayjs(second, date_format);
+            if (firstDate.diff(secondDate) > 0) {
+                return -1;
+            } else if (firstDate.diff(secondDate) < 0) {
+            return 1;
+            } else {
+                // firstDate must be equal to secondDate
+                return 0;
+            }
+        });
+
+        // now we reset the key and value lists in this
+        this.reset();
+
+        // now we split them back out and attach them to the reset key and value lists
+        for(let i=0; i<sortedCombined.length; i++){
+            let current = sortedCombined[i];
+            this.keys.push(current.key);
+            this.values.push(current.value);
+        }
+
+    }
+
     // exports the contents of the dictionary to a list of objects with lists
     // i.e [{key: [value]}, {key: [value]}, {key: [value]}]
     export(){
         let data = []
         for(let i = 0; i < this.keys.length; i++){
             let curr_key = this.keys[i];
-            let curr_val = Math.round(this.get(curr_key)[0]);
+            // we need 0th element because values is a list with one element
+            let curr_val = Math.round(this.get(curr_key));
             data.push({date: curr_key, amount: curr_val});
         }
         return data;
@@ -72,9 +129,9 @@ const clog = require('../utils/colorLogging');
             // indexOf returns -1 if not found
             if(keyIndex === -1){
                 this.keys.push(key);
-                this.values.push([value])
+                this.values.push(value)
             } else {
-                this.values[keyIndex] = [value];
+                this.values[keyIndex] = value;
             }
         } catch(error){
             clog(error, 'red');
@@ -149,7 +206,7 @@ const clog = require('../utils/colorLogging');
 
         for(let i = 0; i < this.keys.length; i++){
             let currentKey = this.keys[i];
-            let currentValue = this.values[i][0];
+            let currentValue = this.values[i];
 
             // dodge 0 index as that is the current date with starting balance
             if(i > 0){
