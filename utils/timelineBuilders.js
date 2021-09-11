@@ -65,7 +65,7 @@ function createDailyTransactionTotalList(transactions){
                 dayTransactions.upsert(recurrenceDate.format(date_format), amount);
             } else {
                 // date has already passed - log it for sanity but do nothing else
-                clog(`Transaction ${name} recurrence date: ${recurrenceDate.format(date_format)} has already passed`,'blue')
+                // clog(`Transaction ${name} recurrence date: ${recurrenceDate.format(date_format)} has already passed`,'blue')
             }
         }
         clog(`Finished frequency analysis for: ${name}`, 'yellow');
