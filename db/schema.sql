@@ -1,3 +1,3 @@
-DROP DATABASE IF EXISTS budgie_experiment;
-CREATE DATABASE budgie_experiment;
-USE budgie_experiment;
+DROP DATABASE IF EXISTS budgie_db;
+CREATE DATABASE budgie_db;
+USE budgie_db;
