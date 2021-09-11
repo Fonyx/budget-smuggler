@@ -6,8 +6,7 @@
     "frequency": "fortnightly",
     "type":"income",
     "end_recurrence":"1/12/2022",
-    "account_id":25,
-    "user_id": 5
+    "account_id":5
   },
   {
     "name":"rent",
@@ -16,8 +15,7 @@
     "frequency": "monthly",
     "type":"expense",
     "end_recurrence":"1/1/2022",
-    "account_id":25,
-    "user_id": 5
+    "account_id":5
   },
   {
     "name":"camera",
@@ -26,8 +24,7 @@
     "frequency": "fortnightly",
     "type":"income",
     "end_recurrence":"1/12/2022",
-    "account_id":25,
-    "user_id": 5
+    "account_id":25
   },
   {
     "name":"flights",
@@ -35,8 +32,7 @@
     "due_date": "3/8/2022",
     "frequency": "once",
     "type":"income",
-    "account_id":25,
-    "user_id": 5
+    "account_id":15
   },
   {
     "name":"ebay sale",
@@ -45,8 +41,7 @@
     "frequency": "fortnightly",
     "type":"income",
     "end_recurrence":"1/12/2022",
-    "account_id":25,
-    "user_id": 5
+    "account_id":15
   },
   {
     "name":"rent",
@@ -55,8 +50,7 @@
     "frequency": "monthly",
     "type":"expense",
     "end_recurrence":"1/1/2022",
-    "account_id":25,
-    "user_id": 5
+    "account_id":15
   },
   {
     "name":"lenses",
@@ -65,8 +59,7 @@
     "frequency": "once",
     "type":"income",
     "end_recurrence":"1/12/2022",
-    "account_id":25,
-    "user_id": 5
+    "account_id":5
   },
   {
     "name":"accommodation",
@@ -74,8 +67,7 @@
     "due_date": "3/8/2022",
     "frequency": "once",
     "type":"income",
-    "account_id":25,
-    "user_id": 5
+    "account_id":25
   },
   {
     "name":"accomodation double",
@@ -83,8 +75,7 @@
     "due_date": "3/8/2022",
     "frequency": "fortnightly",
     "type":"income",
-    "account_id":25,
-    "user_id": 5
+    "account_id":15
   },
   {
     "name":"accommodation triple",
@@ -92,7 +83,6 @@
     "due_date": "3/8/2022",
     "frequency": "once",
     "type":"income",
-    "account_id":25,
-    "user_id": 5
+    "account_id":25
   }
 ]

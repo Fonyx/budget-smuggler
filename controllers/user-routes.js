@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Transaction, User } = require('../models');
+const { User } = require('../models');
 const { onlyIfLoggedIn } = require('../middleware/auth');
 const clog = require('../utils/colorLogging');
 
