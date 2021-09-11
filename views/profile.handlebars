@@ -48,7 +48,10 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
                 <span class="col-md">Type</span>
                 <span class="col-md">Days Left</span>
             </h3>
-            <a href="/transaction/create/{{id}}" class="btn"><i class="material-icons">edit</i></a>
+            <div class="row center">
+                <a href="/transaction/create/{{id}}" class="btn-small waves-effect waves-light"><i
+                        class="material-icons left">add</i> Add a transaction</a>
+            </div>
         </div>
         {{#if transactions}}
         {{#each transactions as |transaction|}}
