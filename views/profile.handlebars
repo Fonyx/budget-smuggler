@@ -9,7 +9,7 @@ order they are:
 they should be <a href="/transaction/create"></a> tags as they are redirects which automatically use get requests --}}
 <header>
     <nav role="navigation">
-      <div class="nav-wrapper teal">
+      <div class="nav-wrapper teal darken-2">
         <img src="/images/greenbudgie.png" alt="Outline of budgie with 100 dollar note superimposed over it"
                 style="width:60px;height:60px;">
         <a id="logo-container" href="/profile/balance" class="brand-logo">PROFILE BALANCE: ${{user.balance}}<i class="material-icons">monetization_on</i></a>
@@ -38,24 +38,31 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
 
 <main>
     <br>
-    <div class="container">
-        <div class="row center-align">
-            <h3>
-                <span class="col-md">Name</span>
-                <span class="col-md">Frequency</span>
-                <span class="col-md">Amount</span>
-                <span class="col-md">Type</span>
-                <span class="col-md">Days Left</span>
-            </h3>
-        </div>
+    <div class="container valign-wrapper">
         {{#if transactions}}
-            {{#each transactions as |transaction|}}
-                {{>transaction-card}}
-            {{/each}}
+            <table class="stripped highlight centered responsive-table">
+                <thead>
+                    <th>NAME</th>
+                    <th>FREQUENCY</th>
+                    <th>TYPE</th>
+                    <th>AMOUNT</th>
+                    <th>DAYS LEFT</th>
+                    <th>UPDATE</th>
+                    <th>DELETE</th>
+                </thead>
+                <tbody>
+                    {{#each transactions as |transaction|}}
+                        {{>transaction-table-row}}
+                    {{/each}}
+                </tbody>
+            </table>
         {{else}}
-            <h2 class="no-transactions"> You have no transactions yet.</h2>
+            <h2 class="">YOU HAVE NO TRANSACTIONS YET</h2>
         {{/if}}
     </div>
+    <br>
+    <br>
+    <br>
 </main>
 
 

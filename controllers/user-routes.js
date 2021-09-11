@@ -82,24 +82,16 @@ router.post('/signup', async (req, res) => {
 });
 
 // request for logout form to be rendered
-router.get('/logout', (req, res) => {
-  if (req.session.logged_in) {
-    res.render('logout-confirm');
-  } else {
-    res.status(400).json({message:"User not logged in"});
-  }
+router.get('/logout', onlyIfLoggedIn, (req, res) => {
+  res.render('logout-confirm');
 });
 
 // Logout post request - does the actual logging out
-router.post('/logout', (req, res) => {
-  if (req.session.logged_in) {
-    req.session.destroy(() => {
-      clog('Successfully logged out', 'green');
-      res.status(204).end();
-    });
-  } else {
-    res.status(404).json({message:"Failed to sign out since user object could not be found"});
-  }
+router.post('/logout', onlyIfLoggedIn, (req, res) => {
+  req.session.destroy(() => {
+    clog('Successfully logged out', 'magenta');
+    res.status(204).end();
+  });
 });
 
 module.exports = router;

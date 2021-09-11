@@ -20,8 +20,6 @@ router.get('/timeline', async(req, res) => {
  */
 router.get('/data/timeline', onlyIfLoggedIn, async(req, res)=> {
     try{
-        // let forecast = userObj.getForecast();
-        // this is a test arrangement that only does transaction values, not their cumulative account balance. Write that in a user model method
         let transactionObjs = await Transaction.findAll({
             where:{
                 user_id: req.session.user_id
@@ -34,26 +32,7 @@ router.get('/data/timeline', onlyIfLoggedIn, async(req, res)=> {
         let userObj = await User.findByPk(req.session.user_id);
         let user = userObj.get({plain: true});
 
-        // let transactions = transactionObjs.map((transactionObj) => {
-        //     return transactionObj.get({plain: true});
-        // });
-
         var timeline = await createBalanceTimeline(user.balance, transactionObjs, 'all');
-
-        // transactionObjs.forEach((transactionObj) => {
-        //     if(transactionObj.getDataValue('type') === 'expense'){
-        //         colours.push('#ee110a');
-        //     } else {
-        //         colours.push('#0aee0a');
-        //     }
-        //     labels.push(transactionObj.getDateString());
-        //     data.push(
-        //         {   
-        //             date: transactionObj.getDateString(),
-        //             amount: transactionObj.getAmount()
-        //         }
-        //     )
-        // });
 
         const response = {
             status: 'success',
@@ -76,15 +55,31 @@ router.get('/data/timeline', onlyIfLoggedIn, async(req, res)=> {
  */
 router.get('/data/timeline/:category_name', onlyIfLoggedIn, async(req, res)=> {
     try{
-        let colours = [];
-        let data = [];
-        let labels = [];
-        
+        let transactionObjs = await Transaction.findAll({
+            where:{
+                user_id: req.session.user_id
+            },
+            order:[['due_date', 'ASC']],
+            nested: true,
+            all: true
+        });
+
+        let userObj = await User.findByPk(req.session.user_id);
+        let user = userObj.get({plain: true});
+
+        var timeline = await createBalanceTimeline(user.balance, transactionObjs, req.params.category_name);
+
+        const response = {
+            status: 'success',
+            body: {
+                timeline
+            },
+          };
 
         res.json(response);
     }catch(err){
         clog(err, 'red');
-        res.status(500).send('Error with server trying to build timeline package by category')
+        res.status(500).send('Error with server trying to built timeline package')
     }
 });
 
