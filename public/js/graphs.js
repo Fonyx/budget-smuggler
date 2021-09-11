@@ -14,12 +14,13 @@ async function graphTimeline(account_name) {
     return
   }
 
-  timelineChart.destroy();
+  // get the account name from the timeline-account id field
+  let accountName = document.querySelector('#timeline-account').innerHTML;
+  console.log(accountName);
 
   // build a new canvas to display to
   var timelineEl = document.getElementById('chartTimeline');
   var ctx = timelineEl.getContext('2d');
-  var timelineChart = new Chart(ctx, {});
 
   var width = window.innerWidth;
   let graphCanvasWidth = Math.floor(width/4);
@@ -32,7 +33,7 @@ async function graphTimeline(account_name) {
 
 
   // get the data
-  let timelineData = await fetch(`/graph/data/timeline/${account_name}`, {
+  let data = await fetch(`/graph/data/timeline/${accountName}`, {
     method: 'GET',
     headers: { 'Content-Type': 'application/json'}
   })
@@ -43,17 +44,15 @@ async function graphTimeline(account_name) {
   .catch((err) => console.log(err));
   
   // log the data
-  console.log(timelineData);
+  console.log(data);
 
-  timelineChart.destroy();
-
-  if(timelineData){
+  if(data){
     timelineChart = new Chart(ctx, {
       type:'line',
       data:{
         datasets:[{
           label: 'All Accounts',
-          data: timelineData.timeline,
+          data: data.timeline,
           backgroundColor:gradient,
           parsing: {
             xAxisKey: 'date',

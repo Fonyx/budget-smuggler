@@ -7,8 +7,9 @@ const { getAllAccountIdsForUserId, sumAllUserAccountBalances } = require('../uti
 const { getAccountNameFromParams } = require('../utils/routeHelpers');
 
 // get the test route for the timeline graph
-router.get('/timeline', async(req, res) => {
+router.get('/timeline/:account_name', async(req, res) => {
     try{
+        let accountName = req.params.account_name;
         let userAccountObjs =await  Account.findAll({
             where:{
                 user_id: req.session.user_id
@@ -26,7 +27,7 @@ router.get('/timeline', async(req, res) => {
             accounts.push(userAccount.name)
         })
 
-        res.render('graphs', {accounts});
+        res.render('graphs', {accounts, accountName});
     }catch(err){
         clog(err, 'red');
         res.status(500).json({message:"Failed to return timeline"});
