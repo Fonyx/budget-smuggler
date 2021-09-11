@@ -24,6 +24,17 @@ only accessible for a logged in user. --}}
             <li>
                 <a href="/user/logout">LOGOUT</a>
             </li>
+            <li>
+                <a href="#">------</a>
+            </li>
+            <li>
+                <a href="#" class="current-selection" onclick="graphTimeline('all');">All Accounts</a>
+            </li>
+            {{#each accounts as |account|}}
+                <li>
+                    <a href="#" onclick="graphTimeline('{{account}}');">{{account}}</a>
+                </li>
+            {{/each}}
         </ul>
         <a href="#" data-target="nav-mobile" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
       </div>

@@ -1,22 +1,37 @@
+class timelineChart{
+  constructor(){}
 
-var timelineEl = document.getElementById('chartTimeline');
-var ctx = timelineEl.getContext('2d');
-
-var width = window.innerWidth;
-let graphCanvasWidth = Math.floor(width/4);
-
-var gradient = ctx.createLinearGradient(0, 0, 0,graphCanvasWidth);
-
-// Add three color stops
-gradient.addColorStop(1, 'red');
-gradient.addColorStop(0.8, 'green');
+  destroy(){
+    console.log('Fake destroy');
+  }
+}
 
 
 async function graphTimeline(account_name) {
+  
   if(!account_name){
     console.log('Must pass either an account name or all to graph timelines');
     return
   }
+
+  timelineChart.destroy();
+
+  // build a new canvas to display to
+  var timelineEl = document.getElementById('chartTimeline');
+  var ctx = timelineEl.getContext('2d');
+  var timelineChart = new Chart(ctx, {});
+
+  var width = window.innerWidth;
+  let graphCanvasWidth = Math.floor(width/4);
+
+  var gradient = ctx.createLinearGradient(0, 0, 0,graphCanvasWidth);
+
+  // Add three color stops
+  gradient.addColorStop(1, 'red');
+  gradient.addColorStop(0.8, 'green');
+
+
+  // get the data
   let timelineData = await fetch(`/graph/data/timeline/${account_name}`, {
     method: 'GET',
     headers: { 'Content-Type': 'application/json'}
@@ -27,9 +42,13 @@ async function graphTimeline(account_name) {
   })
   .catch((err) => console.log(err));
   
+  // log the data
   console.log(timelineData);
+
+  timelineChart.destroy();
+
   if(timelineData){
-    let timelineChart = new Chart(ctx, {
+    timelineChart = new Chart(ctx, {
       type:'line',
       data:{
         datasets:[{
@@ -83,13 +102,10 @@ async function graphTimeline(account_name) {
         }
       }
     });
-  
+
   }else{
     console.log('Error getting timeline data');
   }
 }
 
-graphTimeline('cashflow');
-
-
-
+graphTimeline('all');
