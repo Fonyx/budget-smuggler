@@ -42,16 +42,14 @@ async function graphTimeline(account_name) {
     return data.body;
   })
   .catch((err) => console.log(err));
-  
-  // log the data
-  // console.log(data);
+
 
   if(data){
     timelineChart = new Chart(ctx, {
       type:'line',
       data:{
         datasets:[{
-          label: 'All Accounts',
+          // label: 'All Accounts',
           data: data.timeline,
           backgroundColor:gradient,
           parsing: {
@@ -84,6 +82,10 @@ async function graphTimeline(account_name) {
         plugins:{
           tooltip: {
             enabled: true
+          },
+          legend:{
+            display:false,
+            text: data.accountName
           }
         },
         animations: {
