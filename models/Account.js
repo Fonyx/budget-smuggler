@@ -58,24 +58,19 @@ Account.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        currency: {
-            type: DataTypes.STRING,
-            allowNull: true,
-            validate: {
-                len: [2,5],
-            },
-        },
+        // currency: {
+        //     type: DataTypes.STRING,
+        //     allowNull: true,
+        //     validate: {
+        //         len: [2,5],
+        //     },
+        // },
         balance:{
             type: DataTypes.FLOAT,
             defaultValue: 0.00,
             validate:{
                 isFloat: true,
             }
-        },
-        emoji: {
-            // maybe use a hook to determine the emoji char
-            type: DataTypes.STRING,
-            allowNull: true,
         },
         materialize_color:{
             type: DataTypes.ENUM,
@@ -124,8 +119,8 @@ Account.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'category',
+    modelName: 'account',
     }
 );
 
-module.exports = Category;
+module.exports = Account;

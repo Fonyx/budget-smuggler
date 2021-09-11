@@ -1,10 +1,10 @@
 const sequelize = require('../config/connection');
 
  //import models
- const { User, Category, Transaction } = require('../models');
+ const { User, Account, Transaction } = require('../models');
 
 // import seed data from .json files
-const categoryData = require('./categoryData.json');
+const accountData = require('./accountData.json');
 const userData = require('./userData.json');
 const transactionData = require('./transactionData.json');
 
@@ -18,7 +18,7 @@ const seedDatabase = async () => {
     returning: true,
   });
 
-  await Category.bulkCreate(categoryData, {
+  await Account.bulkCreate(accountData, {
     individualHooks: true,
     returning: true,
   });

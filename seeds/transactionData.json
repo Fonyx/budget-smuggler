@@ -6,7 +6,7 @@
     "frequency": "fortnightly",
     "type":"income",
     "end_recurrence":"1/12/2022",
-    "category_name":"Business",
+    "account_id":3,
     "user_id": 1
   },
   {
@@ -16,7 +16,7 @@
     "frequency": "monthly",
     "type":"expense",
     "end_recurrence":"1/1/2022",
-    "category_name":"Cashflow",
+    "account_id":3,
     "user_id": 1
   },
   {
@@ -26,7 +26,7 @@
     "frequency": "fortnightly",
     "type":"income",
     "end_recurrence":"1/12/2022",
-    "category_name":"Cashflow",
+    "account_id":3,
     "user_id": 1
   },
   {
@@ -35,7 +35,7 @@
     "due_date": "3/8/2022",
     "frequency": "once",
     "type":"income",
-    "category_name":"Savings",
+    "account_id":3,
     "user_id": 1
   },
   {
@@ -45,7 +45,7 @@
     "frequency": "fortnightly",
     "type":"income",
     "end_recurrence":"1/12/2022",
-    "category_name":"Savings",
+    "account_id":3,
     "user_id": 1
   },
   {
@@ -55,7 +55,7 @@
     "frequency": "monthly",
     "type":"expense",
     "end_recurrence":"1/1/2022",
-    "category_name":"Cashflow",
+    "account_id":3,
     "user_id": 1
   },
   {
@@ -65,7 +65,7 @@
     "frequency": "once",
     "type":"income",
     "end_recurrence":"1/12/2022",
-    "category_name":"Business",
+    "account_id":3,
     "user_id": 1
   },
   {
@@ -74,7 +74,7 @@
     "due_date": "3/8/2022",
     "frequency": "once",
     "type":"income",
-    "category_name":"Business",
+    "account_id":3,
     "user_id": 1
   },
   {
@@ -83,7 +83,7 @@
     "due_date": "3/8/2022",
     "frequency": "fortnightly",
     "type":"income",
-    "category_name":"Business",
+    "account_id":3,
     "user_id": 1
   },
   {
@@ -92,7 +92,7 @@
     "due_date": "3/8/2022",
     "frequency": "once",
     "type":"income",
-    "category_name":"Business",
+    "account_id":3,
     "user_id": 1
   }
 ]
