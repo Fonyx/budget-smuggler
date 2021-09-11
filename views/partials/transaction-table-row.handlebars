@@ -1,0 +1,38 @@
+{{!-- This partial will render a transaction object to a bootstrap card object. The data available for this template is
+{{transaction}} but check the parent template uses this alias.
+For example, the profile template may have a call in it like this:
+{{#each transactionObjs as |transaction|}}
+{{> transaction-card}}
+{{#each}}
+Then the transaction fields can be referenced as {{type}}, {{amount}} etc
+There is no client side js for this partial --}}
+
+{{!-- {{#each transactions as |transaction|}}
+<h1>{{transaction.name}}</h1>
+<h2>{{transaction.date}}</h2>
+<h3>{{transaction.amount}}</h3>
+{{/each}} --}}
+
+<tr class="z-depth-3 {{renderTypeToMaterializeColor type}}">
+    <td>
+        <span class="card-content black-text">{{uppercase name}}</span>
+    </td>
+    <td>
+        <span class="card-content black-text">{{uppercase frequency}}</span>
+    </td>
+    <td>
+        <span class="card-content black-text">{{uppercase type}}</span>
+    </td>
+    <td>
+        <span class="card-content black-text">{{amount}}</span>
+    </td>
+    <td>
+        <span class="card-content black-text">{{daysLeft due_date}}</span>
+    </td>
+    <td>
+        <a href="/transaction/update/{{id}}" class="btn"><i class="material-icons">edit</i></a>
+    </td>
+    <td>
+        <a href="/transaction/delete/{{id}}" class="btn"><i class="material-icons">delete</i></a>
+    </td>
+</tr>
