@@ -1,6 +1,6 @@
 const dayjs = require('dayjs');
 const clog = require('../utils/colorLogging');
-const date_format = 'DD/MM/YYYY';
+const date_format = 'D/MM/YYYY';
 var customParseFormat = require('dayjs/plugin/customParseFormat');
 dayjs.extend(customParseFormat);
 /**
