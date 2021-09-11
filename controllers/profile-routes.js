@@ -1,8 +1,7 @@
 const router = require('express').Router();
-const { User, Category, Transaction, Account } = require('../models');
+const { User, Transaction, Account } = require('../models');
 const {onlyIfLoggedIn} = require('../middleware/auth');
 const { getAllAccountIdsForUserId } = require('../utils/instanceHelpers');
-const clog = require('../utils/colorLogging');
 
 // Get all transactions for a user
 router.get('/', onlyIfLoggedIn, async (req, res) => {

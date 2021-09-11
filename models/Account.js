@@ -43,7 +43,8 @@ function generateRandomIntFromRange(min, max){
     return Math.floor(Math.random()*(max-min+1)+min);
 }
 
-class Account extends Model {}
+class Account extends Model {
+}
 
 Account.init(
     {
