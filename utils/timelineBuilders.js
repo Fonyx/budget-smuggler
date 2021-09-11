@@ -21,8 +21,14 @@ async function createBalanceTimeline(starting_balance, transactions){
 
     var dayTransactionTotals = createDailyTransactionTotalList(transactions);
 
+    // sum all transactions in day
+    dayTransactionTotals.reduceValuesLists();
+
+    // sort dictionary keys
+    dayTransactionTotals.sort();
+
     // reduce the transaction totals to an accumulated balance
-    dayTransactionTotals.accumulate();
+    dayTransactionTotals.accumulate(starting_balance);
 
     // export the timeline to a simple object for the graph
     data = dayTransactionTotals.export();
@@ -64,7 +70,6 @@ function createDailyTransactionTotalList(transactions){
         }
         clog(`Finished frequency analysis for: ${name}`, 'yellow');
     }
-    dayTransactions.reduceValuesLists();
 
     return dayTransactions
 

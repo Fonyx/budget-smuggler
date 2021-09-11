@@ -4,7 +4,10 @@ const dayjs = require('dayjs');
 // https://day.js.org/docs/en/display/format
 var weekOfYear = require('dayjs/plugin/weekOfYear')
 dayjs.extend(weekOfYear);
+var customParseFormat = require('dayjs/plugin/customParseFormat');
+dayjs.extend(customParseFormat);
 const clog = require('../utils/colorLogging');
+const date_format = 'DD/MM/YYYY';
 
 
 function getDayMonthMap(year){
@@ -44,8 +47,6 @@ function getDayMonthMap(year){
     }
     return monthDays;
 }
-
-
 
 /**
  *  function that returns the day of year number for a date object from 0BC, defaults to today if no date parsed
@@ -99,7 +100,7 @@ function getDayNumberSince0BC(date){
     // get month and remainder (day of month) and construct new dayjs object
     let progress = convertYearProgressDaysIntoMonth(yearProgressInDays, year);
 
-    result = new dayjs(progress.day+'/'+progress.monthName+'/'+year);
+    result = new dayjs(progress.dayNum+'/'+progress.monthName+'/'+year);
 
     return result; 
 }
@@ -198,11 +199,18 @@ class Transaction extends Model {
 
     getEndRecurrenceObj(){
         let end_recurrence = this.getDataValue('end_recurrence');
+        // case for if user has given an end_recurrence date
         if(end_recurrence){
             return dayjs(end_recurrence);
+        // case for user not defining and end date, we just assume a year from due date
         } else {
-            clog('No end recurrence found', 'yellow');
-            return null;
+            clog('No end recurrence found, getting date of one year away from start date', 'yellow');
+            let dueDateNum = this.getDueDateNum();
+            // just extend this end recurrence for a year, it gets recalculated every time the user refreshes the page
+            let limitDateNum = dueDateNum + 365;
+            // convert dateNum to dayjs obj
+            let end_recurrence_limit = convertRelDateToDateObj(limitDateNum);
+            return end_recurrence_limit;
         }
     }
 
@@ -300,9 +308,9 @@ class Transaction extends Model {
         let endDateObj = this.getEndRecurrenceObj();
 
         // create new due date obj for first of that month - including year
-        let firstOfStartMonthDateObj = dayjs(startDateObj.format('M/YYYY')); // '3/2021'
+        let firstOfStartMonthDateObj = dayjs(startDateObj).set('date', 1); // '1/3/2021'
         // create new end_recurrence date obj for first of that month - including year
-        let firstOfEndMonthDateObj = dayjs(endDateObj.format('M/YYYY')); // '7/2021'
+        let firstOfEndMonthDateObj = dayjs(endDateObj).set('date', 1); // '1/7/2021'
 
         // determine month count of difference, this will be done with date1.diff(date2, 'month') with no float (this means truncated to an integer) this works because we only ever pass in the first day of the month so always gets a whole month. 
         // #TODO: Check that the month diff can return more than a year as 13 and doesn't just return 1-12, docs are ambiguous
@@ -310,18 +318,24 @@ class Transaction extends Model {
 
         // take that month difference from the first of each month and build date objects on the same day number of dueDate Obj for that number of months
         // zero indexing with <= for month difference, as month difference can be 0 and if so, there isn't enough time for a full month between dates given by user so we don't run this loop at all
-        let startDayNum = startDateObj.format('D');
-        let startMonthNum = startDateObj.format('M');
-        let startYearNum = startDateObj.format('YYYY');
+        let startDayNum = parseInt((startDateObj).format('D'));
+        let startMonthNum = parseInt((startDateObj.format('M')));
+        let startYearNum = parseInt((startDateObj.format('YYYY')));
+
+        let monthCounter = startMonthNum;
         // we go from the current month, forward to the current month + truncate month difference
         for(let i = startMonthNum; i <= startMonthNum + monthDiffCount; i++){
             // create new dateObj using the startDate day, and programmatically generate the month
             // if we hit 12 months, increment the year
-            if(i > 12){
+            if(monthCounter >= 12){
                 startYearNum += 1;
+                monthCounter = 1;
+            } else {
+                monthCounter += 1;
             }
-            let newDateString = startDayNum + '/' + i + '/' + startYearNum; 
-            recurrences.push(dayjs(newDateString));
+            let newDateString = startDayNum + '/' + monthCounter + '/' + startYearNum; 
+            let newDateObj = dayjs(newDateString);
+            recurrences.push(newDateObj);
         }
         /*Note that the user may have over specified the end date, this will be overruled by the coercion of month difference to an integer. User gives date range for 6.5 months but frequency determines only 6 fit, 6 will be made */
 
