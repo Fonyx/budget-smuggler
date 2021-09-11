@@ -9,29 +9,30 @@ order they are:
 they should be <a href="/transaction/create"></a> tags as they are redirects which automatically use get requests --}}
 <header>
     <nav role="navigation">
-      <div class="nav-wrapper teal">
-        <img src="/images/greenbudgie.png" alt="Outline of budgie with 100 dollar note superimposed over it"
+        <div class="nav-wrapper teal">
+            <img src="/images/greenbudgie.png" alt="Outline of budgie with 100 dollar note superimposed over it"
                 style="width:60px;height:60px;">
-        <a id="logo-container" href="/profile/balance" class="brand-logo">PROFILE BALANCE: ${{user.balance}}<i class="material-icons">monetization_on</i></a>
-        <ul class="right hide-on-med-and-down">
-            <li>
-                <a href="/graph/timeline">TIMELINE</a>
-            </li>
-            <li>
-                <a href="/user/logout">LOGOUT</a>
-            </li>
-        </ul>
-  
-        <ul id="nav-mobile" class="sidenav sec_text_color">
-            <li>
-                <a href="/graph/timeline">TIMELINE</a>
-            </li>
-            <li>
-                <a href="/user/logout">LOGOUT</a>
-            </li>
-        </ul>
-        <a href="#" data-target="nav-mobile" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
-      </div>
+            <a id="logo-container" href="/profile/balance" class="brand-logo">PROFILE BALANCE: ${{user.balance}}<i
+                    class="material-icons">monetization_on</i></a>
+            <ul class="right hide-on-med-and-down">
+                <li>
+                    <a href="/graph/timeline">TIMELINE</a>
+                </li>
+                <li>
+                    <a href="/user/logout">LOGOUT</a>
+                </li>
+            </ul>
+
+            <ul id="nav-mobile" class="sidenav sec_text_color">
+                <li>
+                    <a href="/graph/timeline">TIMELINE</a>
+                </li>
+                <li>
+                    <a href="/user/logout">LOGOUT</a>
+                </li>
+            </ul>
+            <a href="#" data-target="nav-mobile" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
+        </div>
     </nav>
 </header>
 
@@ -47,13 +48,14 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
                 <span class="col-md">Type</span>
                 <span class="col-md">Days Left</span>
             </h3>
+            <a href="/transaction/create/{{id}}" class="btn"><i class="material-icons">edit</i></a>
         </div>
         {{#if transactions}}
-            {{#each transactions as |transaction|}}
-                {{>transaction-card}}
-            {{/each}}
+        {{#each transactions as |transaction|}}
+        {{>transaction-card}}
+        {{/each}}
         {{else}}
-            <h2 class="no-transactions"> You have no transactions yet.</h2>
+        <h2 class="no-transactions"> You have no transactions yet.</h2>
         {{/if}}
     </div>
 </main>
