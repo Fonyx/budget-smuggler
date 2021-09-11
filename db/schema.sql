@@ -1,3 +1,3 @@
-DROP DATABASE IF EXISTS budget_smuggler_db;
-CREATE DATABASE budget_smuggler_db;
-USE budget_smuggler_db;
+DROP DATABASE IF EXISTS budgie_db;
+CREATE DATABASE budgie_db;
+USE budgie_db;

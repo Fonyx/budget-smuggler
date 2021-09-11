@@ -13,6 +13,7 @@ router.get('/', onlyIfLoggedIn, async (req, res) => {
             where: {
               user_id: user.id
             },
+            order:[['due_date', 'ASC']],
             include: {all:true, nested: true}
         });
   
