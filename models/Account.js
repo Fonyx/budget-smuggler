@@ -44,6 +44,9 @@ function generateRandomIntFromRange(min, max){
 }
 
 class Account extends Model {
+    getBalance(){
+        return this.getDataValue('balance');
+    }
 }
 
 Account.init(

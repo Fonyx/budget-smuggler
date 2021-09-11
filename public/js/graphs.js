@@ -12,9 +12,12 @@ gradient.addColorStop(1, 'red');
 gradient.addColorStop(0.8, 'green');
 
 
-
-async function graphTimeline() {
-  let timelineData = await fetch('/graph/data/timeline', {
+async function graphTimeline(account_name) {
+  if(!account_name){
+    console.log('Must pass either an account name or all to graph timelines');
+    return
+  }
+  let timelineData = await fetch(`/graph/data/timeline/${account_name}`, {
     method: 'GET',
     headers: { 'Content-Type': 'application/json'}
   })
@@ -86,7 +89,7 @@ async function graphTimeline() {
   }
 }
 
-graphTimeline();
+graphTimeline('cash');
 
 
 
