@@ -16,7 +16,7 @@ async function graphTimeline(account_name) {
 
   // get the account name from the timeline-account id field
   let accountName = document.querySelector('#timeline-account').innerHTML;
-  console.log(accountName);
+  // console.log(accountName);
 
   // build a new canvas to display to
   var timelineEl = document.getElementById('chartTimeline');
