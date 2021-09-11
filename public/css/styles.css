@@ -49,6 +49,18 @@ a.page-title:hover {
     text-shadow: 2px 2px 8px var(--mediumgreen);
 }
 
+.margin {
+    margin: 20px;
+}
+
+label.form-check-label {
+    padding: 20px;
+}
+
+label span.title {
+    font-size: 12em;
+}
+
 /* ---------- NAVIGATION STYLES --------- */
 a.nav-link.nav-item {
     color: black;
@@ -65,6 +77,13 @@ a.nav-link.nav-item:hover {
     text-shadow: 2px 2px 24px var(--mediumgreen);
 }
 
+.padding-top {
+    padding-top: 25px;
+}
+
+.valign-wrapper {
+    padding-top: 40px !important;
+}
 
 /* ---------- LANDING PAGE HANDLEBARS STYLES ---------- */
 .headline {
