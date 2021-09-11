@@ -26,11 +26,18 @@ module.exports = {
         let day_delta = time_delta / (1000 * 60 * 60 * 24);
         return Math.round(day_delta);
     },
-    renderTypeColor: (type) => {
+    renderTypeToMaterializeTextColor: (type) => {
         if(type === 'income'){
             return 'green-text';
         } else {
             return 'red-text';
+        }
+    },
+    renderTypeToMaterializeColor: (type) => {
+        if(type === 'income'){
+            return 'green lighten-3';
+        } else {
+            return 'red lighten-3';
         }
     }
 

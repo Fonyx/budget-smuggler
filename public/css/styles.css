@@ -8,6 +8,15 @@
     --deletered: #c60000;
 }
 
+/*
+blue-grey darken-4
+teal darken-2
+teal lighten-3
+white
+deep-orange lighten-3
+red darken-3
+*/
+
 body {
     background: #FAF9F9 url('../images/background.jpeg') no-repeat center;
     background-size: cover;

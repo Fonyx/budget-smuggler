@@ -9,15 +9,9 @@ const date_format = 'DD/MM/YYYY';
  * @param {[Objs]} transactions chronologically ordered list of Sequelize objects (note, not serialized in order to use instance methods)
  * @returns {[{date: amount},]} 
  */
-async function createBalanceTimeline(starting_balance, transactions){
+async function createBalanceTimeline(starting_balance, transactions, categoryFilter){
     
-    // calculate day0 balance and assign
-    var dateAmounts = [];
     let data = [];
-    // push the day 0 value
-    dateAmounts.push(
-        {0: starting_balance}
-    )
 
     var dayTransactionTotals = createDailyTransactionTotalList(transactions);
 
@@ -30,8 +24,8 @@ async function createBalanceTimeline(starting_balance, transactions){
     // reduce the transaction totals to an accumulated balance
     dayTransactionTotals.accumulate(starting_balance);
 
-    // export the timeline to a simple object for the graph
-    data = dayTransactionTotals.export();
+    // export the timeline to a simple object for the graph - tags all elements with their category filter
+    data = dayTransactionTotals.export(categoryFilter);
 
     return data;
 
@@ -65,7 +59,7 @@ function createDailyTransactionTotalList(transactions){
                 dayTransactions.upsert(recurrenceDate.format(date_format), amount);
             } else {
                 // date has already passed - log it for sanity but do nothing else
-                clog(`Transaction ${name} recurrence date: ${recurrenceDate.format(date_format)} has already passed`,'blue')
+                // clog(`Transaction ${name} recurrence date: ${recurrenceDate.format(date_format)} has already passed`,'blue')
             }
         }
         clog(`Finished frequency analysis for: ${name}`, 'yellow');

@@ -276,7 +276,7 @@ class Transaction extends Model {
             // return list with just dueDateObj in it
             // add dueDateObj to resultant
             resultObjs.push(dueDateObj);
-            clog('Transaction is once off', 'yellow');
+            clog(`Transaction ${this.getName()} is once off`, 'yellow');
             return resultObjs;
         }
         // if transaction repeats monthly

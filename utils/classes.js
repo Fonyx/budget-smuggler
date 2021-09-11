@@ -31,7 +31,7 @@ dayjs.extend(customParseFormat);
         for(let i =0; i < this.keys.length; i++){
             let curr_key = this.keys[i];
             let curr_val = this.get(curr_key);
-            clog(`${curr_key}: ${curr_val}`, 'magenta');
+            // clog(`${curr_key}: ${curr_val}`, 'magenta');
         }
     }
 
@@ -92,13 +92,13 @@ dayjs.extend(customParseFormat);
 
     // exports the contents of the dictionary to a list of objects with lists
     // i.e [{key: [value]}, {key: [value]}, {key: [value]}]
-    export(){
+    export(categoryFilter){
         let data = []
         for(let i = 0; i < this.keys.length; i++){
             let curr_key = this.keys[i];
             // we need 0th element because values is a list with one element
             let curr_val = Math.round(this.get(curr_key));
-            data.push({date: curr_key, amount: curr_val});
+            data.push({date: curr_key, amount: curr_val, category: categoryFilter});
         }
         return data;
     }
@@ -158,7 +158,7 @@ dayjs.extend(customParseFormat);
             if(keyIndex !== -1){
                 // push the new value onto the list
                 let previousValuesList = this.values[keyIndex];
-                clog(`Updating values from ${previousValuesList} with ${value}`, 'magenta');
+                // clog(`Updating values from ${previousValuesList} with ${value}`, 'magenta');
                 previousValuesList.push(value);
             // if the value is to be inserted
             }else{
