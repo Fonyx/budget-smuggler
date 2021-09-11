@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Account } = require('../models');
+const { User, Account } = require('../models');
 const {onlyIfLoggedIn} = require('../middleware/auth');
 const clog = require('../utils/colorLogging');
 
@@ -47,55 +47,52 @@ router.post('/', onlyIfLoggedIn, async (req, res) => {
     }
 });
 
-// Get one account
-router.get('/:account_name',onlyIfLoggedIn,  async (req, res) => {
+//request for update form for user balance
+router.get('/:account_id', onlyIfLoggedIn, async (req, res) => {
     try{
-        const dbAccount = await Account.findByPk(req.params.account_name, {
-            include: {all:true, nested: true}
-        });
-        if(dbAccount){
-            res.status(200).json(dbAccount);
-        } else {
-            res.status(404).json({message: `no Account with id: ${req.params.account_name} found`});
-        }
-    }
-    catch(err){
-        console.log(err);
-        res.status(500).json(err);
+      let userObj = await User.findByPk(req.session.user_id);
+      let user = userObj.get();
+      let accountObj = await Account.findByPk(req.params.account_id);
+      let account = accountObj.get();
+      res.render('update-balance', {user, account});
+    }catch(err){
+      clog(err, 'red');
+      res.status(500).json({message:"Failed to serve update-balance form"});
     }
 });
-
-// Update a account
-router.put('/:account_name', onlyIfLoggedIn, async (req, res) => {
-    try {
-        const dbAccountData = await Account.findByPk(req.params.account_name);
-        if(dbAccountData){
-            dbAccountData.update({
-                name: req.body.name,
-                colour: req.body.colour,
-                emoji: req.body.emoji
-            });
-            res.status(200).json(dbAccountData);
-        } else {
-            res.status(404).json({message: `No account ${req.params.account_name} exists`});
-        }
+  
+// request to update user balance as a put request
+router.put('/:account_id', onlyIfLoggedIn, async (req, res) => {
+  try{
+    let accountObj = await Account.findByPk(req.params.account_id);
     
-    } catch (err) {
-      console.log(err);
-      res.status(500).json(err);
-    }
+    if(accountObj){
+        clog(`Updating account ${req.body.name} balance from, ${accountObj.balance} to ${req.body.balance}`, 'magenta')
+
+        await accountObj.update(req.body);
+
+        clog(`Successfully updated account ${req.body.name} balance to ${req.body.balance}`, 'blue');
+        res.status(200).json({message:`Successfully updated account ${req.body.name}'s' balance to ${req.body.balance}`});
+      } else {
+        clog(`User submitted ${typeof(req.body.balance)} instead of number`, 'red');
+        res.status(400).json({message:"User did not submit a number for balance"})
+      }
+  }catch(err){
+    clog(err, 'red');
+    res.status(500).json({message:"Server failed to update user balance"});
+  }
 });
 
 // Delete a account
-router.delete('/:account_name', onlyIfLoggedIn, async (req, res) => {
+router.delete('/:account_id', onlyIfLoggedIn, async (req, res) => {
     try{
-        let target = await Account.findByPk(req.params.account_name);
+        let target = await Account.findByPk(req.params.account_id);
         let targetName = target.name;
         if(target){
             target.destroy();
             res.status(200).json({message:`Deleted account ${targetName}`});
         } else{
-            res.status(404).json({message: `Could not find account with id: ${req.params.account_name} to delete`});
+            res.status(404).json({message: `Could not find account with id: ${req.params.account_id} to delete`});
         }
     }catch(err){
         console.log(err);
