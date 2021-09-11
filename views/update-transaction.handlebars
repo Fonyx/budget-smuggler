@@ -4,54 +4,59 @@ and then sending a PUT request to "/transaction/update/{{transactionObj.id}}". I
 200 - all good, 400 user did something bad, 500 server broke --}}
 
 {{!-- UPDATE TRANSACTION FORM + A TRANSACTION OBJECT --}}
-<main class="container">
-    <section class="card transaction-card row g-3 align-items-center m-4">
-        <div class="card-body d-flex flex-column p-4 w-75">
-            <form id="update-transaction-form" class="form form transaction-form">
-                <div>
-                    <h1 class="card-title text-center">Update Transaction</h1>
-                </div>
 
-                <div class="form-group p-3">
-                    <label for="update-transaction-name" class="col-form-label form-font">Name</label>
-                    <input type="text" class="form-control" value="{{transaction.name}}" id="update-transaction-name"
+<header>
+    <nav>
+        <div class="nav-wrapper teal">
+            <a href="#" class="brand-logo center">UPDATE TRANSACTION {{uppercase transaction.name}}</a>
+        </div>
+    </nav>
+</header>
+
+<main class="valign-wrapper">
+    <div class="container">
+        <div class="col-md-6">
+            <form id="update-transaction-form" class="form update-transaction-form center-align">
+                <div class="form-group center-align">
+                    <label for="update-transaction-name">Name</label>
+                    <input type="text" class="form-input center-align" value="{{transaction.name}}" id="update-transaction-name"
                         data-id="{{transaction.id}}" placeholder="user name">
                 </div>
-                <div class="form-group p-3">
-                    <label for="update-transaction-amount" class="col-form-label form-font">Amount</label>
-                    <input type="text" class="form-control" value="{{transaction.amount}}"
+                <div class="form-group">
+                    <label for="update-transaction-amount">Amount</label>
+                    <input type="text" class="form-input center-align" value="{{transaction.amount}}"
                         id="update-transaction-amount" placeholder="amount">
                 </div>
-                <div class="form-group p-3">
-                    <label for="update-transaction-due-date" class="col-form-label form-font">Due Date</label>
-                    <input type="text" class="form-control" value="{{transaction.due_date}}"
+                <div class="form-group">
+                    <label for="update-transaction-due-date">Due Date</label>
+                    <input type="text" class="form-input center-align" value="{{transaction.due_date}}"
                         id="update-transaction-due-date" placeholder="due date">
                 </div>
-                <div class="form-group p-3">
-                    <label for="update-transaction-frequency" class="col-form-label form-font">Frequency</label>
-                    <input type="text" class="form-control" value="{{transaction.frequency}}"
+                <div class="form-group">
+                    <label for="update-transaction-frequency">Frequency</label>
+                    <input type="text" class="form-input center-align" value="{{transaction.frequency}}"
                         id="update-transaction-frequency" placeholder="frequency">
                 </div>
-                <div class="form-group p-3">
-                    <label for="update-transaction-type" class="col-form-label form-font">Type</label>
-                    <input type="text" class="form-control" value="{{transaction.type}}" id="update-transaction-type"
+                <div class="form-group">
+                    <label for="update-transaction-type">Type</label>
+                    <input type="text" class="form-input center-align" value="{{transaction.type}}" id="update-transaction-type"
                         placeholder="type">
                 </div>
-                <div class="form-group p-3">
-                    <label for="update-transaction-category-name" class="col-form-label form-font">Category Name</label>
-                    <input type="text" class="form-control" value="{{transaction.category_name}}"
+                <div class="form-group">
+                    <label for="update-transaction-category-name">Category Name</label>
+                    <input type="text" class="form-input center-align" value="{{transaction.category_name}}"
                         id="update-transaction-category-name" placeholder="category">
                 </div>
+                <div class="form-group row center-align">
+                    <button id="submit-btn" class="btn" type="submit">UPDATE</button>
+                    <a href="/profile" class="btn grey">CANCEL</a>
+                    <a href="/transaction/delete/{{transaction.id}}" class="btn btn-primary red">DELETE</a>
+                </div>
+
+            </form>
         </div>
-        <div class="transaction-buttons form-group p-4 m-4 d-flex justify-content-evenly">
-            <button id="submit-btn" type="submit"
-                class="btn btn-light mx-3 create-transaction-button w-25">Submit</button>
-            <button id="cancel-btn" type="cancel" onclick="window.history.back()"
-                class="btn btn-light mx-3 w-25">Cancel</button>
-        </div>
-        </form>
-        </div>
-    </section>
+    </div>
+
 </main>
 
 <script src="/js/update-transaction.js"></script>

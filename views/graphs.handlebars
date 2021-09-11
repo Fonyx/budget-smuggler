@@ -2,9 +2,35 @@
 the category visuals which appear in a vertical scroll list. It has access to {{timelineObj}}, {{categoryObj}},
 {{userObj}} for dressing and rendering data. It also needs redirect buttons back to profile and logout as this page is
 only accessible for a logged in user. --}}
-{{>navbar}}
+<header>
+    <nav role="navigation">
+      <div class="nav-wrapper teal">
+        <img src="/images/greenbudgie.png" alt="Outline of budgie with 100 dollar note superimposed over it"
+                style="width:60px;height:60px;">
+        <a id="logo-container" href="/profile/balance" class="brand-logo">TIMELINE</a>
+        <ul class="right hide-on-med-and-down">
+            <li>
+                <a href="/profile">PROFILE</a>
+            </li>
+            <li>
+                <a href="/user/logout">LOGOUT</a>
+            </li>
+        </ul>
+  
+        <ul id="nav-mobile" class="sidenav sec_text_color">
+            <li>
+                <a href="/profile">PROFILE</a>
+            </li>
+            <li>
+                <a href="/user/logout">LOGOUT</a>
+            </li>
+        </ul>
+        <a href="#" data-target="nav-mobile" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
+      </div>
+    </nav>
+</header>
 
-<div class="container chart-container" style="position: relative; height:50vh; width:80vw">
+<div class="container chart-container" style="position: relative; height:80vh; width:80vw">
     <canvas id="chartTimeline"></canvas>
 </div>
 

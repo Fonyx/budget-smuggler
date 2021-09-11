@@ -31,7 +31,7 @@ dayjs.extend(customParseFormat);
         for(let i =0; i < this.keys.length; i++){
             let curr_key = this.keys[i];
             let curr_val = this.get(curr_key);
-            clog(`${curr_key}: ${curr_val}`, 'magenta');
+            // clog(`${curr_key}: ${curr_val}`, 'magenta');
         }
     }
 
@@ -158,7 +158,7 @@ dayjs.extend(customParseFormat);
             if(keyIndex !== -1){
                 // push the new value onto the list
                 let previousValuesList = this.values[keyIndex];
-                clog(`Updating values from ${previousValuesList} with ${value}`, 'magenta');
+                // clog(`Updating values from ${previousValuesList} with ${value}`, 'magenta');
                 previousValuesList.push(value);
             // if the value is to be inserted
             }else{

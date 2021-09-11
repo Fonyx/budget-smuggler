@@ -25,6 +25,13 @@ module.exports = {
         let time_delta = due_date_time - today_time;
         let day_delta = time_delta / (1000 * 60 * 60 * 24);
         return Math.round(day_delta);
+    },
+    renderTypeColor: (type) => {
+        if(type === 'income'){
+            return 'green-text';
+        } else {
+            return 'red-text';
+        }
     }
 
 };

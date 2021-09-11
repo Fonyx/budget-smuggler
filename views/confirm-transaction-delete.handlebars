@@ -1,24 +1,25 @@
 {{!-- This template is used to display a confirm delete form for a transaction. The data objects available are
 {{transaction}} and the {{user}} to stylize the template with dynamic data --}}
 
-<main class="container">
-  <section class="card login-card row g-3 align-items-center m-4">
-    <div class="card-body d-flex flex-column p-4 w-75">
-      <div>
-        <h1 class="card-title text-center">Deleting {{transaction.name}}...</h1>
-      </div>
-      <div class="container center-align">
-        <div class="form-group p-4">
-          <h2 class="text-center">Are you sure?</h2>
-        </div>
-        <div class="login-buttons form-group p-4 m-4 d-flex justify-content-evenly">
-          <button id="delete" class="btn btn-light mx-3 w-50" data-transaction_id="{{transaction.id}}">Delete</button>
 
-          <a href="#" onclick="window.history.back()" class="btn btn-light mx-3 w-50">Back Away Slowly</a>
-          {{!-- <a href="/comment/{{id}}" class="btn btn-primary">Back Away Slowly</a> --}}
-        </div>
-      </div>
+<header>
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo center">Are you Sure?</a>
     </div>
-  </section>
+  </nav>
+</header>
+<main class="valign-wrapper">
+  <div class="container center-align">
+    <div class="col-md-6">
+        <h2>DELETE TRANSACTION</h2>
+        <h4>{{uppercase transaction.name}} : {{uppercase transaction.frequency}}</h4>
+        <a id="delete" class="btn btn-primary red" data-transaction_id="{{transaction.id}}">Delete</a>
+        <a href="#" onclick="window.history.back()" class="btn btn-primary">Back Away Slowly</a>
+    </div>
+  </div>
+
 </main>
+
+
 <script src="/js/delete-transaction.js"></script>

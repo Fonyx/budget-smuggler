@@ -1,7 +1,31 @@
 {{!-- This template renders a form to confirm the user wants to log out. It will have two buttons, a cancel button that
 will redirect back one page, and a logout button that will submit a post request to "/user/logout" and handle server
 response. The server will redirect the user to the login page, this will not be done in the client side js. --}}
-<main class="container">
+
+<header>
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo left">LEAVING SO SOON?</a>
+    </div>
+  </nav>
+</header>
+
+<main class="valign-wrapper">
+  <div class="container center-align">
+    <div class="col-md-6">
+        <h2>Logout</h2>
+
+        <a id="logout" class="btn btn-primary red">LOGOUT</a>
+
+        <a href="#" onclick="window.history.back()" class="btn btn-primary">STAY</a>
+    </div>
+  </div>
+
+  <script src="/js/logout.js"></script>
+</main>
+
+
+{{!-- <main class="container">
   <section class="card login-card row g-3 align-items-center m-4">
     <div class="card-body d-flex flex-column p-4 w-75">
       <h2 class="card-title text-center">Are you sure you want to logout?</h2>
@@ -14,4 +38,4 @@ response. The server will redirect the user to the login page, this will not be 
   </section>
 
   <script src="/js/logout.js"></script>
-</main>
+</main> --}}
