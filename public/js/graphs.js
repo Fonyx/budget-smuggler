@@ -44,7 +44,7 @@ async function graphTimeline(account_name) {
   .catch((err) => console.log(err));
   
   // log the data
-  console.log(data);
+  // console.log(data);
 
   if(data){
     timelineChart = new Chart(ctx, {
