@@ -19,8 +19,8 @@ and then sending a PUT request to "/transaction/update/{{transactionObj.id}}". I
             <form id="update-transaction-form" class="form update-transaction-form center-align">
                 <div class="form-group center-align">
                     <label for="update-transaction-name">Name</label>
-                    <input type="text" class="form-input center-align" value="{{transaction.name}}" id="update-transaction-name"
-                        data-id="{{transaction.id}}" placeholder="user name">
+                    <input type="text" class="form-input center-align" value="{{transaction.name}}"
+                        id="update-transaction-name" data-id="{{transaction.id}}" placeholder="user name">
                 </div>
                 <div class="form-group">
                     <label for="update-transaction-amount">Amount</label>
@@ -29,7 +29,7 @@ and then sending a PUT request to "/transaction/update/{{transactionObj.id}}". I
                 </div>
                 <div class="form-group">
                     <label for="update-transaction-due-date">Due Date</label>
-                    <input type="text" class="form-input center-align" value="{{transaction.due_date}}"
+                    <input type="date" class="form-input center-align" value="{{transaction.due_date}}"
                         id="update-transaction-due-date" placeholder="due date">
                 </div>
                 <div class="form-group">
@@ -39,8 +39,8 @@ and then sending a PUT request to "/transaction/update/{{transactionObj.id}}". I
                 </div>
                 <div class="form-group">
                     <label for="update-transaction-type">Type</label>
-                    <input type="text" class="form-input center-align" value="{{transaction.type}}" id="update-transaction-type"
-                        placeholder="type">
+                    <input type="text" class="form-input center-align" value="{{transaction.type}}"
+                        id="update-transaction-type" placeholder="type">
                 </div>
                 <div class="form-group">
                     <label for="update-transaction-category-name">Category Name</label>
