@@ -2,10 +2,10 @@
 var timelineEl = document.getElementById('chartTimeline');
 var ctx = timelineEl.getContext('2d');
 
-var height = window.innerHeight;
-let graphCanvasHeight = Math.floor(height/2);
+var width = window.innerWidth;
+let graphCanvasWidth = Math.floor(width/4);
 
-var gradient = ctx.createLinearGradient(0,20, 0,graphCanvasHeight);
+var gradient = ctx.createLinearGradient(0, 0, 0,graphCanvasWidth);
 
 // Add three color stops
 gradient.addColorStop(1, 'red');
