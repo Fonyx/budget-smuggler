@@ -9,25 +9,23 @@ const { getAccountNameFromParams } = require('../utils/routeHelpers');
 // get the test route for the timeline graph
 router.get('/timeline/:account_name', async(req, res) => {
     try{
-        let accountName = req.params.account_name;
-        let userAccountObjs =await  Account.findAll({
+        let currentAccountName = req.params.account_name;
+        let userAccountObjs = await Account.findAll({
             where:{
                 user_id: req.session.user_id
             },
-            attributes: ['name']
+            // attributes: ['name']
         });
-        let userAccounts = userAccountObjs.map((userAccountObj) =>{
-            return userAccountObj.get({
-                attributes: 'name'
-            })
+        let accounts = userAccountObjs.map((userAccountObj) =>{
+            return userAccountObj.get({plain: true});
         });
 
-        let accounts = [];
-        userAccounts.forEach((userAccount) =>{
-            accounts.push(userAccount.name)
-        })
+        // let accounts = [];
+        // userAccounts.forEach((userAccount) =>{
+        //     accounts.push(userAccount.name)
+        // })
 
-        res.render('graphs', {accounts, accountName});
+        res.render('graphs', {accounts, currentAccountName});
     }catch(err){
         clog(err, 'red');
         res.status(500).json({message:"Failed to return timeline"});
