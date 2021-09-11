@@ -75,17 +75,17 @@ Account.init(
         materialize_color:{
             type: DataTypes.ENUM,
             values: colors,
-            allowNull: false,
+            allowNull: true,
         },
         materialize_modifier:{
             type: DataTypes.ENUM,
             values: modifiers,
-            allowNull: false,
+            allowNull: true,
         },
         materialize_text_color:{
             type: DataTypes.ENUM,
             values: ['white', 'black'],
-            allowNull: false,
+            allowNull: true,
         },
         user_id: {
             type: DataTypes.INTEGER,
