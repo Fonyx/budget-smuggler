@@ -39,6 +39,13 @@ module.exports = {
         } else {
             return 'red lighten-3';
         }
+    },
+    displayAmountWithTypeSign: (amount, type) => {
+        if(type === 'income'){
+            return '+'+amount;
+        } else {
+            return '-'+amount;
+        }
     }
 
 };

@@ -18,13 +18,13 @@ There is no client side js for this partial --}}
         <span class="card-content black-text">{{uppercase name}}</span>
     </td>
     <td>
+        <span class="card-content black-text">{{format_date due_date}}</span>
+    </td>
+    <td>
         <span class="card-content black-text">{{uppercase frequency}}</span>
     </td>
     <td>
-        <span class="card-content black-text">{{uppercase type}}</span>
-    </td>
-    <td>
-        <span class="card-content black-text">{{amount}}</span>
+        <span class="card-content black-text">{{displayAmountWithTypeSign amount type}}</span>
     </td>
     <td>
         <span class="card-content black-text">{{daysLeft due_date}}</span>
