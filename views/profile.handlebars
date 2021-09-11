@@ -39,27 +39,13 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
 
 <main>
     <br>
-    <<<<<<< HEAD <div class="container">
+    <div class="container">
         <div class="row center-align">
-            <h3>
-                <span class="col-md">Name</span>
-                <span class="col-md">Frequency</span>
-                <span class="col-md">Amount</span>
-                <span class="col-md">Type</span>
-                <span class="col-md">Days Left</span>
-            </h3>
-            <div class="row center">
-                <a href="/transaction/{{transaction.id}}" class="btn-small waves-effect waves-light"><i
+            <div class="row center padding-top">
+                <a href="/transaction/{{transaction.id}}" class="btn-large waves-effect waves-light"><i
                         class="material-icons left">add</i> Add a transaction</a>
             </div>
         </div>
-        {{#if transactions}}
-        {{#each transactions as |transaction|}}
-        {{>transaction-card}}
-        {{/each}}
-        {{else}}
-        <h2 class="no-transactions"> You have no transactions yet.</h2>
-        =======
         <div class="container valign-wrapper">
             {{#if transactions}}
             <table class="stripped highlight centered responsive-table">
@@ -80,13 +66,9 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
             </table>
             {{else}}
             <h2 class="">YOU HAVE NO TRANSACTIONS YET</h2>
-            >>>>>>> main
             {{/if}}
         </div>
         <br>
         <br>
         <br>
 </main>
-
-
-<script src="/js/logout.js"></script>
