@@ -89,7 +89,7 @@ async function graphTimeline(account_name) {
   }
 }
 
-graphTimeline('cash');
+graphTimeline('cashflow');
 
 
 

@@ -9,55 +9,29 @@ const { getAccountNameFromParams } = require('../utils/routeHelpers');
 // get the test route for the timeline graph
 router.get('/timeline', async(req, res) => {
     try{
-        res.render('graphs');
+        let userAccountObjs =await  Account.findAll({
+            where:{
+                user_id: req.session.user_id
+            },
+            attributes: ['name']
+        });
+        let userAccounts = userAccountObjs.map((userAccountObj) =>{
+            return userAccountObj.get({
+                attributes: 'name'
+            })
+        });
+
+        let accounts = [];
+        userAccounts.forEach((userAccount) =>{
+            accounts.push(userAccount.name)
+        })
+
+        res.render('graphs', {accounts});
     }catch(err){
+        clog(err, 'red');
         res.status(500).json({message:"Failed to return timeline"});
     }
 });
-
-/**
- * get the data packet for the timeline route 
- * list of {date: balance} objects
- * list of colors for each date, green if positive, red if negative
- */
-// router.get('/data/timeline/all', onlyIfLoggedIn, async(req, res)=> {
-//     try{
-//         let userObj = await User.findByPk(req.session.user_id);
-//         let userAccountIds = await getAllAccountIdsForUserId(req.session.user_id);
-//         if(!userAccountIds){
-//             res.status(404).json({message:"No accounts for this user"});
-//             return
-//         }
-//         let user = userObj.get({plain: true});
-//         let accountName = 'all';
-
-//         const rawDbTransactions = await Transaction.findAll({
-//             where: {
-//               account_id: userAccountIds
-//             },
-//             order:[['due_date', 'ASC']],
-//             include: {all:true, nested: true}
-//         });
-//         // get the total of all the user accounts since this is the 'all' timeline
-//         let totalBalance = await sumAllUserAccountBalances(user.id);
-
-//         // build a timeline with the cumulative balance of all accounts since all transactions will be in this timeline
-//         var timeline = await createBalanceTimeline(totalBalance, rawDbTransactions, 'all');
-
-//         const response = {
-//             status: 'success',
-//             body: {
-//                 accountName,
-//                 timeline
-//             },
-//           };
-
-//         res.json(response);
-//     }catch(err){
-//         clog(err, 'red');
-//         res.status(500).send('Error with server trying to built timeline package')
-//     }
-// });
 
 /**
  * get the data packet for the timeline route filtering by category
