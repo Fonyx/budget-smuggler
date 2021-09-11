@@ -3,10 +3,17 @@ const { Account } = require('../models');
 const {onlyIfLoggedIn} = require('../middleware/auth');
 const clog = require('../utils/colorLogging');
 
-// Get all accounts
+// Get all accounts for a user
 router.get('/', onlyIfLoggedIn, async (req, res) => {
     try{
-        const rawDbAccounts = await Account.findAll();
+        const rawDbAccounts = await Account.findAll({
+            where:{
+                user_id: req.session.user_id
+            },
+            order:[['name', 'ASC']],
+            nested: true,
+            all: true
+        });
 
         dbAccounts = rawDbAccounts.map((accountObj) => {
             return accountObj.get({plain: true});
