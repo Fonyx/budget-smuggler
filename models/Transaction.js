@@ -423,20 +423,11 @@ Transaction.init(
             type: DataTypes.DATE,
             allowNull: true,
         },
-        category_name: {
-            type: DataTypes.ENUM,
-            values: ['Cashflow', 'Business', 'Savings', 'Mortgage', 'Crypto'],
-            allowNull: false,
-            references: {
-                model: 'category',
-                key: 'name',
-            },
-        },
-        user_id: {
+        account_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: 'user',
+                model: 'account',
                 key: 'id',
             },
         }

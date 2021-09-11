@@ -30,20 +30,6 @@ User.init(
             validate: {
                 len: [8],
             },
-        },
-        currency: {
-            type: DataTypes.STRING,
-            allowNull: true,
-            validate: {
-                len: [2,5],
-            },
-        },
-        balance:{
-            type: DataTypes.FLOAT,
-            defaultValue: 0.00,
-            validate:{
-                isFloat: true,
-            }
         }
     },
     {
