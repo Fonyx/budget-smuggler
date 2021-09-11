@@ -99,7 +99,7 @@ function getDayNumberSince0BC(date){
     // get month and remainder (day of month) and construct new dayjs object
     let progress = convertYearProgressDaysIntoMonth(yearProgressInDays, year);
 
-    result = new dayjs(progress.day+'/'+progress.monthName+'/'+year);
+    result = new dayjs(progress.dayNum+'/'+progress.monthName+'/'+year);
 
     return result; 
 }
@@ -198,11 +198,18 @@ class Transaction extends Model {
 
     getEndRecurrenceObj(){
         let end_recurrence = this.getDataValue('end_recurrence');
+        // case for if user has given an end_recurrence date
         if(end_recurrence){
             return dayjs(end_recurrence);
+        // case for user not defining and end date, we just assume a year from due date
         } else {
-            clog('No end recurrence found', 'yellow');
-            return null;
+            clog('No end recurrence found, getting date of one year away from start date', 'yellow');
+            let dueDateNum = this.getDueDateNum();
+            // just extend this end recurrence for a year, it gets recalculated every time the user refreshes the page
+            let limitDateNum = dueDateNum + 365;
+            // convert dateNum to dayjs obj
+            let end_recurrence_limit = convertRelDateToDateObj(limitDateNum);
+            return end_recurrence_limit;
         }
     }
 

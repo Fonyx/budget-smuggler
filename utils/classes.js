@@ -96,12 +96,10 @@ const clog = require('../utils/colorLogging');
                 let previousValuesList = this.values[keyIndex];
                 clog(`Updating values from ${previousValuesList} with ${value}`, 'magenta');
                 previousValuesList.push(value);
-                clog(`Successfully updated to ${previousValuesList}`, 'magenta');
             // if the value is to be inserted
             }else{
                 this.keys.push(key);
                 this.values.push([value]);
-                clog(`Successfully inserted new value`, 'magenta');
             }
         } catch(error){
             console.error(error);
@@ -134,7 +132,7 @@ const clog = require('../utils/colorLogging');
         }
     }
     /**
-     * Function that adds all values previously seen, for example
+     * Function that accumulates daily transactions and offsets by users balance at day 0
      * {
      *      keys: [1, 2, 3],
      *      values: [[6], [6], [6]]
@@ -146,18 +144,16 @@ const clog = require('../utils/colorLogging');
      * }
      * 
      */
-    accumulate(){
-        let accumulatedValue = 0;
+    accumulate(starting_balance){
+        let accumulatedValue = starting_balance;
 
         for(let i = 0; i < this.keys.length; i++){
             let currentKey = this.keys[i];
             let currentValue = this.values[i][0];
 
-            // dodge 0 index
+            // dodge 0 index as that is the current date with starting balance
             if(i > 0){
                 accumulatedValue += currentValue
-            } else {
-                accumulatedValue = currentValue 
             }
             this.set(currentKey, accumulatedValue);
         }
