@@ -1,6 +1,8 @@
 const dayjs = require('dayjs');
 const clog = require('../utils/colorLogging');
 const date_format = 'DD/MM/YYYY';
+var customParseFormat = require('dayjs/plugin/customParseFormat');
+dayjs.extend(customParseFormat);
 /**
  * A dictionary object that acts like a python dictionary, with teh asterix that the value is a list
  * has getter, setter and print methods
@@ -49,22 +51,27 @@ const date_format = 'DD/MM/YYYY';
      * @returns {} Nothing
      *  */ 
     sort(){
-        // since we are receiving two lists that are implicitly paired by order we need to combine them, then sort them, then seperate them again, IKR what bad design but hey, if it works, it works
-        let combined = this.keys.map((key)=>{
-            let value = this.get(key);
+        // since we are receiving two lists that are implicitly paired by order we need to combine them, then sort them, then separate them again, IKR what bad design but hey, if it works, it works
+        var combined = this.keys.map((key)=>{
+            var value = this.get(key);
             return {'key': key, 'value':value}
         });
 
         // now we need to sort the combined list of objects with a custom sort method
-        let sortedCombined = combined.sort(function compareFn(firstEl, secondEl) {
-            let first = firstEl.key;
-            let second = secondEl.key;
-            let firstDate = dayjs(first, date_format);
-            let secondDate = dayjs(second, date_format);
-            if (firstDate.diff(secondDate) > 0) {
+        var sortedCombined = combined.sort((firstEl, secondEl) => {
+
+            var first = firstEl.key;
+            var second = secondEl.key;
+
+            var firstDate = dayjs(first, date_format);
+            var secondDate = dayjs(second, date_format);
+
+            let dayDifference = firstDate.diff(secondDate, 'd');
+            // if day difference is positive, first date is after second date
+            if (dayDifference > 0) {
+                return 1;
+            } else if (dayDifference < 0) {
                 return -1;
-            } else if (firstDate.diff(secondDate) < 0) {
-            return 1;
             } else {
                 // firstDate must be equal to secondDate
                 return 0;

@@ -4,6 +4,8 @@ const dayjs = require('dayjs');
 // https://day.js.org/docs/en/display/format
 var weekOfYear = require('dayjs/plugin/weekOfYear')
 dayjs.extend(weekOfYear);
+var customParseFormat = require('dayjs/plugin/customParseFormat');
+dayjs.extend(customParseFormat);
 const clog = require('../utils/colorLogging');
 
 
