@@ -12,7 +12,7 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
       <div class="nav-wrapper teal darken-2">
         <img src="/images/seethroughbudgie.png" alt="Outline of budgie with 100 dollar note superimposed over it"
                 style="width:60px;height:60px;">
-        <a id="logo-container" href="/account/update/{{account.id}}" class="brand-logo">{{uppercase account.name}} BALANCE : ${{account.balance}}</a>
+        <a id="logo-container" href="/account/update/{{account.id}}" class="brand-logo">{{uppercase account.name}} <span class="hide-on-med-and-down">BALANCE</span>${{account.balance}}</a>
         <ul class="right hide-on-med-and-down">
             <li>
                 <a href="/profile">PROFILE</a>
