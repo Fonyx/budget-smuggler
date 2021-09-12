@@ -35,6 +35,15 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
                 <li>
                     <div class="divider"></div>
                 </li>
+                <li>
+                    <a href="/account/create" class="btn-large waves-effect waves-light"><i class="material-icons left">add</i>New account</a>
+                </li>
+                <li>
+                    <a href="/transaction/{{transaction.id}}" class="btn-large waves-effect waves-light"><i class="material-icons left">add</i>New transaction</a>
+                </li>
+                <li>
+                    <div class="divider"></div>
+                </li>
                 {{#each accounts as |account|}}
                     <li>
                         <a href="/profile/account/{{account.id}}" class="btn {{materialize_color}} {{materialize_text_color}}-text">{{account.name}}</a>
@@ -52,6 +61,17 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
     <br>
     <div class="container">
         {{#if accounts}}
+            <div class="row center-align hide-on-med-and-down">
+                {{#each accounts as |account|}}
+                        {{>account-card}}
+                {{/each}}
+                <div class="row center padding-top">
+                    <a href="/account/create" class="btn-large waves-effect waves-light"><i
+                            class="material-icons left">add</i>New account</a>
+                    <a href="/transaction/{{transaction.id}}" class="btn-large waves-effect waves-light"><i
+                            class="material-icons left">add</i>New transaction</a>
+                </div>
+            </div>
             {{#if transactions}}
                 <table class="stripped highlight centered responsive-table">
                     <thead>
@@ -73,17 +93,6 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
             {{else}}
                 <h4 class="center-align">YOU HAVE NO TRANSACTIONS YET</h4>
             {{/if}}
-            <div class="row center-align hide-on-med-and-down">
-                {{#each accounts as |account|}}
-                        {{>account-card}}
-                {{/each}}
-                <div class="row center padding-top">
-                    <a href="/account/create" class="btn-large waves-effect waves-light"><i
-                            class="material-icons left">add</i>New account</a>
-                    <a href="/transaction/{{transaction.id}}" class="btn-large waves-effect waves-light"><i
-                            class="material-icons left">add</i>New transaction</a>
-                </div>
-            </div>
         {{else}}
             <h4 class="center-align">YOU HAVE NO ACCOUNTS YET</h4>
             <div class="container">
