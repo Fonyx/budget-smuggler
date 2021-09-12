@@ -30,8 +30,21 @@ router.get('/', onlyIfLoggedIn, async (req, res) => {
     }
 });
 
+// get account create form
+router.get('/create', onlyIfLoggedIn, async (req, res) => {
+    try{
+        let userObj = await User.findByPk(req.session.user_id);
+        let user = userObj.get();
+        res.render('create-account', {user})
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
 // CREATE new account
-router.post('/', onlyIfLoggedIn, async (req, res) => {
+router.post('/create', onlyIfLoggedIn, async (req, res) => {
     try {
         const dbAccountData = await Account.create(req.body);
         res.status(200).json(dbAccountData);
@@ -48,13 +61,16 @@ router.post('/', onlyIfLoggedIn, async (req, res) => {
 });
 
 //request for update form for user balance
-router.get('/:account_id', onlyIfLoggedIn, async (req, res) => {
+router.get('/update/:account_id', onlyIfLoggedIn, async (req, res) => {
     try{
-      let userObj = await User.findByPk(req.session.user_id);
-      let user = userObj.get();
-      let accountObj = await Account.findByPk(req.params.account_id);
-      let account = accountObj.get();
-      res.render('update-balance', {user, account});
+        let accountObj = await Account.findByPk(req.params.account_id, {
+            all: true, 
+            nested: true
+        });
+        let account = accountObj.get({plain:true});
+        let userObj = await User.findByPk(req.session.user_id);
+        let user = userObj.get();
+        res.render('update-account', {user, account})
     }catch(err){
       clog(err, 'red');
       res.status(500).json({message:"Failed to serve update-balance form"});
@@ -62,7 +78,7 @@ router.get('/:account_id', onlyIfLoggedIn, async (req, res) => {
 });
   
 // request to update user balance as a put request
-router.put('/:account_id', onlyIfLoggedIn, async (req, res) => {
+router.put('/update/:account_id', onlyIfLoggedIn, async (req, res) => {
   try{
     let accountObj = await Account.findByPk(req.params.account_id);
     
@@ -100,17 +116,8 @@ router.delete('/:account_id', onlyIfLoggedIn, async (req, res) => {
     }
 })
 
-// get account create form
-router.get('/create', onlyIfLoggedIn, async (req, res) => {
-    try{
-        let userObj = await User.findByPk(req.session.user_id);
-        let user = userObj.get();
-        res.render('', {user})
-    }
-    catch(err){
-        console.log(err);
-        res.status(500).json(err);
-    }
-});
+
+
+
 
 module.exports = router;
