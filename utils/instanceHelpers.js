@@ -12,6 +12,7 @@ async function getAllAccountIdsForUserId(id){
         let account = accountObj.get();
         return account.id;
     });
+    // this returns a list or a single int
     return accountIds;
 }
 

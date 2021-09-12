@@ -57,11 +57,14 @@ router.delete('/delete/:transaction_id', onlyIfLoggedIn, async (req, res) => {
 // Get new transaction form
 router.get('/', onlyIfLoggedIn, async (req, res) => {
     try {
-        let userObj = await User.findByPk(req.session.user_id);
-        let accountIds = await getAllAccountIdsForUserId(req.session.user_id);
+        let userObj = await User.findByPk(req.session.user_id, {
+            nested:true,
+            all: true
+        });
+        // let accountIds = await getAllAccountIdsForUserId(req.session.user_id);
         let accountObjs = await Account.findAll({
             where: {
-                user_id: accountIds
+                user_id: req.session.user_id
             },
             nested: true,
             all: true,
