@@ -102,9 +102,10 @@ router.get('/update/:transaction_id', onlyIfLoggedIn, async (req, res) => {
         });
   
         let transaction = rawTransaction.get({plain: true});
-
+        let frequencies = ['once', 'weekly', 'fortnightly', 'monthly', 'annually'];
+        let currentFrequency = transaction.frequency;
         if(transaction){
-            res.render('update-transaction', {transaction})
+            res.render('update-transaction', {transaction, frequencies, currentFrequency})
         } else {
             res.status(404).json({message: "no transaction found"});
         }

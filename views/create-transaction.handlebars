@@ -46,14 +46,14 @@ CREATE A TRANSACTION FORM - USER OBJ AVAILABLE {{user.email}} {{user.balance}} -
             </div>
 
             <!-- Switch -->
-            <div class="switch">
+            {{!-- <div class="switch">
                 <label>
                     INCOME
                     <input type="checkbox">
                     <span class="lever"></span>
                     EXPENSE
                 </label>
-            </div>
+            </div> --}}
 
             <div class="row">
                 <p class="form-font padding-top">Type:</p>
@@ -75,37 +75,6 @@ CREATE A TRANSACTION FORM - USER OBJ AVAILABLE {{user.email}} {{user.balance}} -
                 {{>account-form-field}}
             {{/each}}
 
-            {{!-- <label class="form-check-label" for="cashflow">
-                <input class="form-check-input center-align with-gap" type="radio" value="Cashflow"
-                    name="transaction-category" id="cashflow" checked="true">
-                <span>Cashflow</span></label>
-
-
-            <label class="form-check-label" for="business">
-                <input class="form-check-input center-align with-gap" type="radio" value="Business"
-                    name="transaction-category" id="business">
-                <span>Business</span></label>
-
-
-
-            <label class="form-check-label" for="savings">
-                <input class="form-check-input center-align with-gap" type="radio" value="Savings"
-                    name="transaction-category" id="savings">
-                <span>Savings</span></label>
-
-
-            <label class="form-check-label" for="mortgage">
-                <input class="form-check-input center-align with-gap" type="radio" value="Mortgage"
-                    name="transaction-category" id="mortgage">
-                <span>Mortgage</span></label>
-
-
-            <label class="form-check-label" for="crypto">
-                <input class="form-check-input center-align with-gap" type="radio" value="Crypto"
-                    name="transaction-category" id="crypto">
-                <span>Crypto</span></label>
-
-            <div class="divider"></div> --}}
             <p class="form-font padding-top">HOW OFTEN?</p>
 
             <label class="form-check-label" for="once">

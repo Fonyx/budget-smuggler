@@ -58,8 +58,15 @@ and then sending a PUT request to "/transaction/update/{{transactionObj.id}}". I
                     id="update-transaction-frequency" placeholder="frequency">
             </div>
 
+            {{#each frequencies as |frequency|}}
+                <label class="form-check-label" for="{{frequency}}">
+                <input class="form-check-input with-gap" type="radio" value="{{frequency}}" name="transaction-frequency" id="{{frequency}}" checked="true">
+                <span>{{uppercase frequency}}</span>
+            </label>
+            {{/each}}
+
             {{!-- From create transaction --}}
-            <div class="row">
+            {{!-- <div class="row">
                 <label class="form-check-label" for="once">
                     <input class="form-check-input with-gap" type="radio" value="once" name="transaction-frequency"
                         id="once" checked="true">
@@ -85,7 +92,7 @@ and then sending a PUT request to "/transaction/update/{{transactionObj.id}}". I
                         id="annually">
                     <span>Annually</span></label>
                 <div class="divider"></div>
-            </div>
+            </div> --}}
             {{!-- End --}}
 
             <div class="col s6">
