@@ -31,26 +31,26 @@ router.get('/', onlyIfLoggedIn, async (req, res) => {
 });
 
 // Get single account
-router.get('/:account_id', onlyIfLoggedIn, async (req, res) => {
-    try{
-        const accountObj = await Account.findByPk(req.params.account_id, {
-            nested: true,
-            all: true
-        });
+// router.get('/:account_id', onlyIfLoggedIn, async (req, res) => {
+//     try{
+//         const accountObj = await Account.findByPk(req.params.account_id, {
+//             nested: true,
+//             all: true
+//         });
 
-        let account = accountObj.get({plain:true});
+//         let account = accountObj.get({plain:true});
 
-        if(account){
-            res.render('', {account});
-        } else {
-            res.status(404).json({message: "no Account found"});
-        }
-    }
-    catch(err){
-        console.log(err);
-        res.status(500).json(err);
-    }
-});
+//         if(account){
+//             res.render('', {account});
+//         } else {
+//             res.status(404).json({message: "no Account found"});
+//         }
+//     }
+//     catch(err){
+//         console.log(err);
+//         res.status(500).json(err);
+//     }
+// });
 
 // get account create form
 router.get('/create', onlyIfLoggedIn, async (req, res) => {

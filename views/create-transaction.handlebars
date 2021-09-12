@@ -35,73 +35,46 @@ CREATE A TRANSACTION FORM - USER OBJ AVAILABLE {{user.email}} {{user.balance}} -
                 <div class="col s6">
                     <label for="transaction-duedate" class="col-form-label form-font">Due Date</label>
                     <input class="form-input form-control center-align" type="date" id="transaction-duedate">
-                    {{!-- <input class="datepicker" type="text" id="transaction-duedate"> --}}
                 </div>
 
                 <div class="col s6">
                     <label for="transaction-enddate" class="col-form-label form-font">End Date</label>
                     <input class="form-input form-control center-align" type="date" id="transaction-enddate">
-                    {{!-- <input class="datepicker" type="text" id="transaction-enddate"> --}}
                 </div>
             </div>
-
-            <!-- Switch -->
-            {{!-- <div class="switch">
-                <label>
-                    INCOME
-                    <input type="checkbox">
-                    <span class="lever"></span>
-                    EXPENSE
-                </label>
-            </div> --}}
 
             <div class="row">
                 <p class="form-font padding-top">Type:</p>
                 <label class="form-check-label center-align" for="income">
                     <input class="form-check-input center-align with-gap" type="radio" value="income"
                         name="transaction-type" id="income" checked="true">
-                    <span>Income</span></label>
+                    <span>INCOME</span></label>
 
                 <label class="form-check-label" for="expense">
                     <input class="form-check-input center-align with-gap" type="radio" value="expense"
                         name="transaction-type" id="expense">
-                    <span>Expense</span></label>
+                    <span>EXPENSE</span></label>
             </div>
 
             <div class="divider"></div>
+
             <p class="form-font padding-top">ACCOUNTS:</p>
 
             {{#each accounts as |account|}}
                 {{>account-form-field}}
             {{/each}}
 
+            <div class="divider"></div>
+
             <p class="form-font padding-top">HOW OFTEN?</p>
 
-            <label class="form-check-label" for="once">
-                <input class="form-check-input with-gap" type="radio" value="once" name="transaction-frequency"
-                    id="once" checked="true">
-                <span>Once</span></label>
+            {{#each frequencies as |frequency|}}
+                <label class="form-check-label" for="{{frequency}}">
+                    <input class="form-check-input with-gap" type="radio" value="{{frequency}}" name="transaction-frequency" id="{{frequency}}" checked="true">
+                    <span>{{uppercase frequency}}</span>
+                </label>
+            {{/each}}
 
-            <label class="form-check-label" for="weekly">
-                <input class="form-check-input with-gap" type="radio" value="weekly" name="transaction-frequency"
-                    id="weekly">
-                <span class="title">Weekly</span></label>
-
-            <label class="form-check-label" for="fortnightly">
-                <input class="form-check-input with-gap" type="radio" value="fortnightly" name="transaction-frequency"
-                    id="fortnightly">
-                <span>Fortnightly</span></label>
-
-            <label class="form-check-label" for="monthly">
-                <input class="form-check-input with-gap" type="radio" value="monthly" name="transaction-frequency"
-                    id="monthly">
-                <span>Monthly</span></label>
-
-            <label class="form-check-label" for="annually">
-                <input class="form-check-input with-gap" type="radio" value="annually" name="transaction-frequency"
-                    id="annually">
-                <span>Annually</span></label>
-            <div class="divider"></div>
             <div class="row padding-top">
                 <button class="btn btn-small mx-3 w-50 create-transaction-button" type="submit">Create</button>
                 <button class="btn btn-small mx-3 w-50" type="cancel" onclick="window.history.back()">Cancel</button>
@@ -111,40 +84,3 @@ CREATE A TRANSACTION FORM - USER OBJ AVAILABLE {{user.email}} {{user.balance}} -
 </main>
 
 <script src="/js/createtransaction.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var elems = document.querySelectorAll('.dropdown-trigger');
-      var containerEl = document.querySelector('#type-drop-container');
-      var options = {
-        hover: true,
-        container: containerEl
-    };
-      var instances = M.Dropdown.init(elems, options);
-    });
-
-    // date pickers
-    document.addEventListener('DOMContentLoaded', function() {
-        var options = {
-            format: 'dd/mm/yyyy'
-        }
-        var elems = document.querySelectorAll('.datepicker');
-        var instances = M.Datepicker.init(elems, options);
-    });
-
-    // select dropdowns
-    document.addEventListener('DOMContentLoaded', function() {
-        var options = {
-        }
-        var elems = document.querySelectorAll('select');
-        var instances = M.FormSelect.init(elems, options);
-    });
-
-
-
-    {{!-- const dueDateEl = document.querySelector('#transaction-duedate');   
-    console.log(dueDateEl);
-    var dueDateInstance = M.Datepicker.getInstance(dueDateEl);
-    console.log(dueDateInstance);
-    console.log(dueDateInstance.date()); --}}
-
-</script>

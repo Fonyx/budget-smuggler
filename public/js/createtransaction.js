@@ -18,7 +18,7 @@ const createTransactionHandler = async (event) => {
 
     // validating that dueDate has been filled out
     if(!dueDateValue){
-        console.error(err);
+        console.error('You need to enter a due date');
         return
     }
 

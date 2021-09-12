@@ -72,7 +72,8 @@ router.get('/', onlyIfLoggedIn, async (req, res) => {
 
         if(userObj){
             let user = userObj.get();
-            res.render('create-transaction', {user, accounts});
+            let frequencies = ['once', 'weekly', 'fortnightly', 'monthly', 'annually'];
+            res.render('create-transaction', {user, accounts, frequencies});
         } else {
             res.status(400).json({message:"Session user object didn't return an obj, likely user is signed out"});
         }
@@ -97,15 +98,26 @@ router.post('/', onlyIfLoggedIn, async (req, res) => {
 // get the update transaction form
 router.get('/update/:transaction_id', onlyIfLoggedIn, async (req, res) => {
     try{
+        let accountIds = await getAllAccountIdsForUserId(req.session.user_id);
+        let accountObjs = await Account.findAll({
+            where: {
+                user_id: accountIds
+            },
+            nested: true,
+            all: true,
+        });
+        let accounts = accountObjs.map((accountObj) => {
+            return accountObj.get({plain: true});
+        });
+
         const rawTransaction = await Transaction.findByPk(req.params.transaction_id, {
             include: {all:true, nested: true}
         });
   
         let transaction = rawTransaction.get({plain: true});
         let frequencies = ['once', 'weekly', 'fortnightly', 'monthly', 'annually'];
-        let currentFrequency = transaction.frequency;
         if(transaction){
-            res.render('update-transaction', {transaction, frequencies, currentFrequency})
+            res.render('update-transaction', {transaction, accounts, frequencies})
         } else {
             res.status(404).json({message: "no transaction found"});
         }
