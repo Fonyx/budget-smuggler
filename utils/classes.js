@@ -209,7 +209,7 @@ dayjs.extend(customParseFormat);
      * 
      */
     accumulate(starting_balance){
-        let accumulatedValue = starting_balance;
+        let accumulatedValue = parseFloat(starting_balance);
 
         for(let i = 0; i < this.keys.length; i++){
             let currentKey = this.keys[i];
@@ -217,7 +217,8 @@ dayjs.extend(customParseFormat);
 
             // dodge 0 index as that is the current date with starting balance
             if(i > 0){
-                accumulatedValue += currentValue
+                let currentFloat = parseFloat(currentValue);
+                accumulatedValue += currentFloat;
             }
             this.set(currentKey, accumulatedValue);
         }

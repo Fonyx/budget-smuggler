@@ -46,6 +46,13 @@ module.exports = {
         } else {
             return '-'+amount;
         }
+    },
+    isFrequencyChecked: (transaction, frequency) => {
+        if(transaction.frequency === frequency){
+            return 'checked="true"'
+        } else {
+            return 'checked="false"'
+        }
     }
 
 };

@@ -1,18 +1,14 @@
-console.log("infile")
 const updateTransactionFormHandler = async (event) => {
-    console.log("infunction")
     event.preventDefault();
-    // collect values from the update-transaction form
-    const nameValue = document.querySelector('#update-transaction-name').value.trim();
-    const amountValue = document.querySelector('#update-transaction-amount').value.trim();
-    const dueDateValue = document.querySelector('#update-transaction-due-date').value.trim();
-    const frequencyValue = document.querySelector('#update-transaction-frequency').value.trim();
-    const typeValue = document.querySelector('#update-transaction-type').value.trim();
-    const categoryNameValue = document.querySelector('#update-transaction-category-name').value.trim();    
-
-    const transaction_id = document.querySelector('#update-transaction-name').dataset.id;
-
-    // validating user input for amountValue
+    const nameValue = document.querySelector('#transaction-name').value.trim();
+    const amountValue = document.querySelector('#transaction-amount').value.trim();
+    const typeValue = document.querySelector('input[name="transaction-type"]:checked').value;
+    const accountId = document.querySelector('input[name="transaction-account"]:checked').dataset.id;
+    const dueDateValue = document.querySelector('#transaction-due-date').value.trim();
+    const frequencyValue = document.querySelector('input[name="transaction-frequency"]:checked').value;
+    const endDateValue = document.querySelector('#transaction-end-date').value.trim();   
+    const transaction_id = document.querySelector('#transaction-name').dataset.id;
+    console.log(transaction_id);
     try {
         let _ = parseFloat(amountValue);
     } catch (err) {
@@ -22,18 +18,21 @@ const updateTransactionFormHandler = async (event) => {
 
     // validating that dueDate has been filled out
     if(!dueDateValue){
-        console.error(err);
+        console.error('You need to enter a due date');
         return
     }
 
     let data_packet = {
         'name': nameValue,
         'amount': amountValue,
-        'dueDate': dueDateValue,
+        'due_date': new Date(dueDateValue),
         'frequency': frequencyValue,
         'type': typeValue,
-        'category': categoryNameValue,
+        'end_recurrence': new Date(endDateValue),
+        'account_id': accountId,
     }
+
+    console.log(data_packet);
     
     // if(name & amount & dueDate & frequency & type & category_name & transaction_id){
         try{
@@ -57,9 +56,6 @@ const updateTransactionFormHandler = async (event) => {
         } catch(err){
             console.log(err)
         }
-    // } else {
-    //     console.log('User did not submit values for current transaction');
-    // }
 }
 
 // attach the submit handler to the signup button

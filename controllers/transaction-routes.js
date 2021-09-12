@@ -1,6 +1,7 @@
 const router = require('express').Router();
-const { User, Category, Transaction } = require('../models');
+const { User, Account, Transaction } = require('../models');
 const {onlyIfLoggedIn} = require('../middleware/auth');
+const {getAllAccountIdsForUserId} = require('../utils/instanceHelpers');
 
 // Get one transaction
 router.get('/:transaction_id', onlyIfLoggedIn, async (req, res) => {
@@ -57,9 +58,22 @@ router.delete('/delete/:transaction_id', onlyIfLoggedIn, async (req, res) => {
 router.get('/', onlyIfLoggedIn, async (req, res) => {
     try {
         let userObj = await User.findByPk(req.session.user_id);
+        let accountIds = await getAllAccountIdsForUserId(req.session.user_id);
+        let accountObjs = await Account.findAll({
+            where: {
+                user_id: accountIds
+            },
+            nested: true,
+            all: true,
+        });
+        let accounts = accountObjs.map((accountObj) => {
+            return accountObj.get({plain: true});
+        });
+
         if(userObj){
             let user = userObj.get();
-            res.render('create-transaction', {user});
+            let frequencies = ['once', 'weekly', 'fortnightly', 'monthly', 'annually'];
+            res.render('create-transaction', {user, accounts, frequencies});
         } else {
             res.status(400).json({message:"Session user object didn't return an obj, likely user is signed out"});
         }
@@ -71,12 +85,8 @@ router.get('/', onlyIfLoggedIn, async (req, res) => {
 
 // CREATE new transaction using form contents
 router.post('/', onlyIfLoggedIn, async (req, res) => {
-    let user_id = req.session.user_id;
     try {
-        const dbTransactionData = await Transaction.create({
-            ...req.body,
-            user_id,
-        });
+        const dbTransactionData = await Transaction.create(req.body);
         res.status(200).json(dbTransactionData);
 
     } catch (err) {
@@ -88,14 +98,26 @@ router.post('/', onlyIfLoggedIn, async (req, res) => {
 // get the update transaction form
 router.get('/update/:transaction_id', onlyIfLoggedIn, async (req, res) => {
     try{
+        let accountIds = await getAllAccountIdsForUserId(req.session.user_id);
+        let accountObjs = await Account.findAll({
+            where: {
+                user_id: accountIds
+            },
+            nested: true,
+            all: true,
+        });
+        let accounts = accountObjs.map((accountObj) => {
+            return accountObj.get({plain: true});
+        });
+
         const rawTransaction = await Transaction.findByPk(req.params.transaction_id, {
             include: {all:true, nested: true}
         });
   
         let transaction = rawTransaction.get({plain: true});
-
+        let frequencies = ['once', 'weekly', 'fortnightly', 'monthly', 'annually'];
         if(transaction){
-            res.render('update-transaction', {transaction})
+            res.render('update-transaction', {transaction, accounts, frequencies})
         } else {
             res.status(404).json({message: "no transaction found"});
         }

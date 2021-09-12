@@ -3,7 +3,7 @@ const createTransactionHandler = async (event) => {
     const nameValue = document.querySelector('#transaction-name').value.trim();
     const amountValue = document.querySelector('#transaction-amount').value.trim();
     const typeValue = document.querySelector('input[name="transaction-type"]:checked').value;
-    const categoryValue = document.querySelector('input[name="transaction-category"]:checked').value;
+    const accountId = document.querySelector('input[name="transaction-account"]:checked').dataset.id;
     const dueDateValue = document.querySelector('#transaction-duedate').value.trim();
     const frequencyValue = document.querySelector('input[name="transaction-frequency"]:checked').value;
     const endDateValue = document.querySelector('#transaction-enddate').value.trim();
@@ -18,7 +18,7 @@ const createTransactionHandler = async (event) => {
 
     // validating that dueDate has been filled out
     if(!dueDateValue){
-        console.error(err);
+        console.error('You need to enter a due date');
         return
     }
 
@@ -29,10 +29,10 @@ const createTransactionHandler = async (event) => {
         'frequency': frequencyValue,
         'type': typeValue,
         'end_recurrence': new Date(endDateValue),
-        'category_name': categoryValue,
+        'account_id': accountId,
     }
 
-    console.log(`Sending date to server: ${data_packet}`);
+    console.log('Sending date to server',data_packet);
 
     const response = await fetch(`/transaction`, {
         method: 'POST',

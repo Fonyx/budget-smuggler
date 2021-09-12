@@ -2,6 +2,8 @@ const dayjs = require('dayjs');
 const {dict} = require('../utils/classes');
 const clog = require('../utils/colorLogging');
 const date_format = 'DD/MM/YYYY';
+var customParseFormat = require('dayjs/plugin/customParseFormat')
+dayjs.extend(customParseFormat)
 
 /**
  * Function that creates a balance timeline for a given set of transactions, category filtering is done a level above in the route that calls this
@@ -26,6 +28,18 @@ async function createBalanceTimeline(starting_balance, transactions){
 
     // export the timeline to a simple object for the graph - tags all elements with their category filter
     data = dayTransactionTotals.export();
+
+    // if there is only one entry, duplicate it a year later for completeness in the graph
+    if(data.length === 1){
+        let date = dayjs(data[0].date);
+        // increment date
+        newDate = date.add(1, 'year');
+        let amount = data[0].amount;
+        data.push({
+            'date':newDate.format('MM/DD/YYYY'), 
+            'amount': amount
+        });
+    }
 
     return data;
 
