@@ -31,12 +31,12 @@ async function createBalanceTimeline(starting_balance, transactions){
 
     // if there is only one entry, duplicate it a year later for completeness in the graph
     if(data.length === 1){
-        let date = dayjs(data[0].date);
+        let date = dayjs(data[0].date, 'DD/MM/YYYY');
         // increment date
         newDate = date.add(1, 'year');
         let amount = data[0].amount;
         data.push({
-            'date':newDate.format('MM/DD/YYYY'), 
+            'date':newDate.format('DD/MM/YYYY'), 
             'amount': amount
         });
     }

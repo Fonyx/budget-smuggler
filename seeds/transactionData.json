@@ -2,37 +2,37 @@
   {
     "name":"netflix subscription",
     "amount":12.50,
-    "due_date": "12/10/2021",
+    "due_date": "11/10/2021",
     "frequency": "monthly",
     "type":"expense",
-    "end_recurrence":"12/1/2023",
+    "end_recurrence":"11/1/2023",
     "account_id":1
   },
   {
     "name":"spotify subscription",
     "amount":15.50,
-    "due_date": "12/14/2021",
+    "due_date": "11/14/2021",
     "frequency": "monthly",
     "type":"expense",
-    "end_recurrence":"12/1/2023",
+    "end_recurrence":"11/1/2023",
     "account_id":1
   },
   {
     "name":"rent",
     "amount":1250,
-    "due_date": "12/1/2021",
+    "due_date": "11/1/2021",
     "frequency": "monthly",
     "type":"expense",
-    "end_recurrence":"12/1/2023",
+    "end_recurrence":"11/1/2023",
     "account_id":1
   },
   {
     "name":"groceries",
     "amount":100,
-    "due_date": "12/1/2021",
+    "due_date": "11/1/2021",
     "frequency": "weekly",
     "type":"expense",
-    "end_recurrence":"12/1/2023",
+    "end_recurrence":"11/1/2023",
     "account_id":1
   },
   {
@@ -41,13 +41,13 @@
     "due_date": "12/7/2021",
     "frequency": "fortnightly",
     "type":"income",
-    "end_recurrence":"12/1/2023",
+    "end_recurrence":"11/1/2023",
     "account_id":1
   },
   {
     "name":"dentist",
     "amount":1200,
-    "due_date": "12/1/2021",
+    "due_date": "11/1/2021",
     "frequency": "once",
     "type":"expense",
     "account_id":2
@@ -55,7 +55,7 @@
   {
     "name":"car excess",
     "amount":1500,
-    "due_date": "12/23/2021",
+    "due_date": "11/23/2021",
     "frequency": "once",
     "type":"expense",
     "account_id":2
@@ -66,25 +66,25 @@
     "due_date": "12/7/2021",
     "frequency": "fortnightly",
     "type":"income",
-    "end_recurrence":"12/1/2023",
+    "end_recurrence":"11/1/2023",
     "account_id":2
   },
   {
     "name":"10% to grow",
     "amount":220,
-    "due_date": "12/7/2021",
+    "due_date": "11/7/2021",
     "frequency": "fortnightly",
     "type":"income",
-    "end_recurrence":"12/1/2023",
+    "end_recurrence":"11/1/2023",
     "account_id":3
   },
   {
     "name":"mortgage service",
     "amount":1800,
-    "due_date": "12/23/2021",
+    "due_date": "11/21/2021",
     "frequency": "monthly",
     "type":"income",
-    "end_recurrence":"12/1/2022",
+    "end_recurrence":"11/1/2022",
     "account_id":4
   },
   {
@@ -98,19 +98,19 @@
   {
     "name":"monthly repayment",
     "amount":200,
-    "due_date": "12/6/2021",
+    "due_date": "11/6/2021",
     "frequency": "monthly",
     "type":"income",
-    "end_recurrence":"12/1/2023",
+    "end_recurrence":"11/1/2023",
     "account_id":6
   },
   {
     "name":"monthly car repayment",
     "amount":450,
-    "due_date": "12/19/2021",
+    "due_date": "11/19/2021",
     "frequency": "monthly",
     "type":"income",
-    "end_recurrence":"12/1/2022",
+    "end_recurrence":"11/1/2022",
     "account_id":7
   },
   {
