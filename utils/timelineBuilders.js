@@ -9,7 +9,7 @@ const date_format = 'DD/MM/YYYY';
  * @param {[Objs]} transactions chronologically ordered list of Sequelize objects (note, not serialized in order to use instance methods)
  * @returns {[{date: amount},]} 
  */
-async function createBalanceTimeline(starting_balance, transactions, categoryFilter){
+async function createBalanceTimeline(starting_balance, transactions){
     
     let data = [];
 
@@ -25,7 +25,7 @@ async function createBalanceTimeline(starting_balance, transactions, categoryFil
     dayTransactionTotals.accumulate(starting_balance);
 
     // export the timeline to a simple object for the graph - tags all elements with their category filter
-    data = dayTransactionTotals.export(categoryFilter);
+    data = dayTransactionTotals.export();
 
     return data;
 

@@ -238,4 +238,5 @@ a.nav-link.nav-item:hover {
 /* Timeline graph */
 .chart-container{
     /* background-color: white; */
+    padding-top: 100px;
 }

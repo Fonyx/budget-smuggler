@@ -1,20 +1,39 @@
+class timelineChart{
+  constructor(){}
 
-var timelineEl = document.getElementById('chartTimeline');
-var ctx = timelineEl.getContext('2d');
-
-var width = window.innerWidth;
-let graphCanvasWidth = Math.floor(width/4);
-
-var gradient = ctx.createLinearGradient(0, 0, 0,graphCanvasWidth);
-
-// Add three color stops
-gradient.addColorStop(1, 'red');
-gradient.addColorStop(0.8, 'green');
+  destroy(){
+    console.log('Fake destroy');
+  }
+}
 
 
+async function graphTimeline(account_name) {
+  
+  if(!account_name){
+    console.log('Must pass either an account name or all to graph timelines');
+    return
+  }
 
-async function graphTimeline() {
-  let timelineData = await fetch('/graph/data/timeline', {
+  // get the account name from the timeline-account id field
+  let accountName = document.querySelector('#timeline-account').innerHTML;
+  // console.log(accountName);
+
+  // build a new canvas to display to
+  var timelineEl = document.getElementById('chartTimeline');
+  var ctx = timelineEl.getContext('2d');
+
+  var width = window.innerWidth;
+  let graphCanvasWidth = Math.floor(width/4);
+
+  var gradient = ctx.createLinearGradient(0, 0, 0,graphCanvasWidth);
+
+  // Add three color stops
+  gradient.addColorStop(1, 'red');
+  gradient.addColorStop(0.8, 'green');
+
+
+  // get the data
+  let data = await fetch(`/graph/data/timeline/${accountName}`, {
     method: 'GET',
     headers: { 'Content-Type': 'application/json'}
   })
@@ -23,15 +42,16 @@ async function graphTimeline() {
     return data.body;
   })
   .catch((err) => console.log(err));
-  
-  console.log(timelineData);
-  if(timelineData){
-    let timelineChart = new Chart(ctx, {
+
+  console.log(data);
+
+  if(data){
+    timelineChart = new Chart(ctx, {
       type:'line',
       data:{
         datasets:[{
-          label: 'All Accounts',
-          data: timelineData.timeline,
+          // label: 'All Accounts',
+          data: data.timeline,
           backgroundColor:gradient,
           parsing: {
             xAxisKey: 'date',
@@ -63,6 +83,10 @@ async function graphTimeline() {
         plugins:{
           tooltip: {
             enabled: true
+          },
+          legend:{
+            display:false,
+            text: data.accountName
           }
         },
         animations: {
@@ -80,13 +104,10 @@ async function graphTimeline() {
         }
       }
     });
-  
+
   }else{
     console.log('Error getting timeline data');
   }
 }
 
-graphTimeline();
-
-
-
+graphTimeline('all');

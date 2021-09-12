@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Cashflow",
+	  "balance":525.23,
+	  "user_id":5
+  },
+  {
+    "name": "Mortgage",
+	  "balance":-110225.23,
+	  "user_id":5
+  },
+  {
+    "name": "Saving",
+	  "balance":31125.23,
+	  "user_id":5
+  }
+]

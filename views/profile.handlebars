@@ -13,27 +13,28 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
       <div class="nav-wrapper teal darken-2">
         <img src="/images/seethroughbudgie.png" alt="Outline of budgie with 100 dollar note superimposed over it"
                 style="width:60px;height:60px;">
-            <a id="logo-container" href="/profile/balance" class="brand-logo">PROFILE BALANCE: ${{user.balance}}<i
-                    class="material-icons">monetization_on</i></a>
-            <ul class="right hide-on-med-and-down">
-                <li>
-                    <a href="/graph/timeline">TIMELINE</a>
-                </li>
-                <li>
-                    <a href="/user/logout">LOGOUT</a>
-                </li>
-            </ul>
 
-            <ul id="nav-mobile" class="sidenav sec_text_color">
-                <li>
-                    <a href="/graph/timeline">TIMELINE</a>
-                </li>
-                <li>
-                    <a href="/user/logout">LOGOUT</a>
-                </li>
-            </ul>
-            <a href="#" data-target="nav-mobile" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
-        </div>
+        <a id="logo-container" href="/profile/balance" class="brand-logo">PROFILE BALANCE: ${{user.balance}}<i class="material-icons">monetization_on</i></a>
+        <ul class="right hide-on-med-and-down">
+            <li>
+                <a href="/graph/timeline/all">TIMELINE</a>
+            </li>
+            <li>
+                <a href="/user/logout">LOGOUT</a>
+            </li>
+        </ul>
+  
+        <ul id="nav-mobile" class="sidenav sec_text_color">
+            <li>
+                <a href="/graph/timeline/all">TIMELINE</a>
+            </li>
+            <li>
+                <a href="/user/logout">LOGOUT</a>
+            </li>
+        </ul>
+        <a href="#" data-target="nav-mobile" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
+      </div>
+
     </nav>
 </header>
 
@@ -52,6 +53,7 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
             <table class="stripped highlight centered responsive-table">
                 <thead>
                     <th>NAME</th>
+                    <th>ACCOUNT</th>
                     <th>STARTED</th>
                     <th>FREQUENCY</th>
                     <th>AMOUNT</th>

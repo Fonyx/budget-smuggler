@@ -7,7 +7,7 @@ only accessible for a logged in user. --}}
       <div class="nav-wrapper teal">
         <img src="/images/seethroughbudgie.png" alt="Outline of budgie with 100 dollar note superimposed over it"
                 style="width:60px;height:60px;">
-        <a id="logo-container" href="#" class="brand-logo">TIMELINE</a>
+        <a id="logo-container" href="#" class="brand-logo">TIMELINE: <span id="timeline-account">{{uppercase currentAccountName}}</span></a>
         <ul class="right hide-on-med-and-down">
             <li>
                 <a href="/profile">PROFILE</a>
@@ -24,15 +24,38 @@ only accessible for a logged in user. --}}
             <li>
                 <a href="/user/logout">LOGOUT</a>
             </li>
+            <li>
+                <a href="#">------</a>
+            </li>
+            <li>
+                <a href="/graph/timeline/all">All Accounts</a>
+            </li>
+            {{#each accounts as |account|}}
+                <li>
+                    <a href="/graph/timeline/{{name}}">{{name}}</a>
+                </li>
+            {{/each}}
         </ul>
         <a href="#" data-target="nav-mobile" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
       </div>
     </nav>
 </header>
 
-<div class="container chart-container" style="position: relative; height:80vh; width:80vw">
-    <canvas id="chartTimeline"></canvas>
-</div>
+<main>
+    <div class="container">
+        <div class="center-align hide-on-med-and-down">
+            {{#each accounts as |account|}}
+                 <a href="/graph/timeline/{{name}}" class="btn {{materialize_color}} {{materialize_text_color}}-text center-align">{{name}}</a>
+            {{/each}}
+        </div>
+    </div>
+    <div class="container">
+        <div class="container chart-container" style="position: relative; height:80vh; width:80vw">
+            <canvas id="chartTimeline"></canvas>
+        </div>
+    </div>
+</main>
+
 
 
 <script src="/js/graphs.js"></script>
