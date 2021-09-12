@@ -46,44 +46,62 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
         {{>account-table-row}}
         {{/each}}
         {{else}}
-        <div class="row">
-            <button><a href="/account/create">Create an account</a></button>
-        </div>
-        {{/if}}
-        <div class="container">
-            <div class="row center-align">
-                <div class="row center padding-top">
-                    <a href="/transaction/{{transaction.id}}" class="btn-large waves-effect waves-light"><i
-                            class="material-icons left">add</i> Add a transaction</a>
-                </div>
-            </div>
-        </div>
         <div class="container">
             {{#if transactions}}
-            <table class="stripped highlight centered responsive-table">
-                <thead>
-                    <th>NAME</th>
-                    <th>ACCOUNT</th>
-                    <th>STARTED</th>
-                    <th>FREQUENCY</th>
-                    <th>AMOUNT</th>
-                    <th>DAYS LEFT</th>
-                    <th>UPDATE</th>
-                    <th>DELETE</th>
-                </thead>
-                <tbody>
-                    {{#each transactions as |transaction|}}
-                    {{>transaction-table-row}}
-                    {{/each}}
-                </tbody>
-            </table>
+            <div class="row center-align">
+                <div class="row padding-top">
+                    <a href="/account/create" class="btn-large waves-effect waves-light"><i
+                            class="material-icons left">add</i>
+                        Create an account</a>
+                </div>
+            </div>
             {{else}}
-            <h2 class="">YOU HAVE NO TRANSACTIONS YET</h2>
+            <div class="row center-align">
+                <div class="row center padding-top">
+                    <a href="/account/create" class="btn-large waves-effect waves-light"><i
+                            class="material-icons left">add</i>
+                        Create an account</a>
+                </div>
+            </div>
             {{/if}}
         </div>
-        <br>
-        <br>
-        <br>
+    </div>
+
+    {{/if}}
+    <div class="container">
+        <div class="row center-align">
+            <div class="row center padding-top">
+                <a href="/transaction/{{transaction.id}}" class="btn-large waves-effect waves-light"><i
+                        class="material-icons left">add</i> Add a transaction</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        {{#if transactions}}
+        <table class="stripped highlight centered responsive-table">
+            <thead>
+                <th>NAME</th>
+                <th>ACCOUNT</th>
+                <th>STARTED</th>
+                <th>FREQUENCY</th>
+                <th>AMOUNT</th>
+                <th>DAYS LEFT</th>
+                <th>UPDATE</th>
+                <th>DELETE</th>
+            </thead>
+            <tbody>
+                {{#each transactions as |transaction|}}
+                {{>transaction-table-row}}
+                {{/each}}
+            </tbody>
+        </table>
+        {{else}}
+        <h2 class="">YOU HAVE NO TRANSACTIONS YET</h2>
+        {{/if}}
+    </div>
+    <br>
+    <br>
+    <br>
 </main>
 
 
