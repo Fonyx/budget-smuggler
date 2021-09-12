@@ -72,11 +72,11 @@ router.post('/signup', async (req, res) => {
     req.session.save(() => {
       req.session.logged_in = true;
       req.session.user_id = dbUserData.id;
-      clog('Successfully signed up', 'green');
-      res.status(200).json(dbUserData);
+      clog('Successfully logged in', 'green');
+      res.status(200).json({ user: dbUserData, message: 'You are now logged in!' });
     });
   } catch (err) {
-    clog(err.message, 'red');
+    clog(err, 'red');
     res.status(500).json(err);
   }
 });
