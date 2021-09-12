@@ -9,9 +9,11 @@ order they are:
 they should be <a href="/transaction/create"></a> tags as they are redirects which automatically use get requests --}}
 <header>
     <nav role="navigation">
+
       <div class="nav-wrapper teal darken-2">
         <img src="/images/seethroughbudgie.png" alt="Outline of budgie with 100 dollar note superimposed over it"
                 style="width:60px;height:60px;">
+
         <a id="logo-container" href="/profile/balance" class="brand-logo">PROFILE BALANCE: ${{user.balance}}<i class="material-icons">monetization_on</i></a>
         <ul class="right hide-on-med-and-down">
             <li>
@@ -32,14 +34,22 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
         </ul>
         <a href="#" data-target="nav-mobile" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
       </div>
+
     </nav>
 </header>
 
 
 <main>
     <br>
-    <div class="container valign-wrapper">
-        {{#if transactions}}
+    <div class="container">
+        <div class="row center-align">
+            <div class="row center padding-top">
+                <a href="/transaction/{{transaction.id}}" class="btn-large waves-effect waves-light"><i
+                        class="material-icons left">add</i> Add a transaction</a>
+            </div>
+        </div>
+        <div class="container valign-wrapper">
+            {{#if transactions}}
             <table class="stripped highlight centered responsive-table">
                 <thead>
                     <th>NAME</th>
@@ -53,18 +63,15 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
                 </thead>
                 <tbody>
                     {{#each transactions as |transaction|}}
-                        {{>transaction-table-row}}
+                    {{>transaction-table-row}}
                     {{/each}}
                 </tbody>
             </table>
-        {{else}}
+            {{else}}
             <h2 class="">YOU HAVE NO TRANSACTIONS YET</h2>
-        {{/if}}
-    </div>
-    <br>
-    <br>
-    <br>
+            {{/if}}
+        </div>
+        <br>
+        <br>
+        <br>
 </main>
-
-
-{{!-- <script src="/js/logout.js"></script> --}}
