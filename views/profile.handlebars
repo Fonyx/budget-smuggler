@@ -39,35 +39,35 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
 
 
 <main>
+
     <br>
     <div class="container valign-wrapper">
         {{#if accounts}}
-        {{#each account as |accounts|}}
-        {{>account-table-row}}
-        {{/each}}
+            {{#each account as |accounts|}}
+                {{>account-table-row}}
+            {{/each}}
         {{else}}
-        <div class="container">
-            {{#if transactions}}
-            <div class="row center-align">
-                <div class="row padding-top">
-                    <a href="/account/create" class="btn-large waves-effect waves-light"><i
-                            class="material-icons left">add</i>
-                        Create an account</a>
+            <div class="container">
+                {{#if transactions}}
+                <div class="row center-align">
+                    <div class="row padding-top">
+                        <a href="/account/create" class="btn-large waves-effect waves-light"><i
+                                class="material-icons left">add</i>
+                            Create an account</a>
+                    </div>
                 </div>
-            </div>
-            {{else}}
-            <div class="row center-align">
-                <div class="row center padding-top">
-                    <a href="/account/create" class="btn-large waves-effect waves-light"><i
-                            class="material-icons left">add</i>
-                        Create an account</a>
+                {{else}}
+                <div class="row center-align">
+                    <div class="row center padding-top">
+                        <a href="/account/create" class="btn-large waves-effect waves-light"><i
+                                class="material-icons left">add</i>
+                            Create an account</a>
+                    </div>
                 </div>
+                {{/if}}
             </div>
-            {{/if}}
-        </div>
+        {{/if}}
     </div>
-
-    {{/if}}
     <div class="container">
         <div class="row center-align">
             <div class="row center padding-top">
