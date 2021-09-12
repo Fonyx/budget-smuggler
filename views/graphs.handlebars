@@ -47,7 +47,7 @@ only accessible for a logged in user. --}}
         <div class="row center-align hide-on-med-and-down">
             <a href="/graph/timeline/all" class="btn red lighten-3 white-text center-align">all</a>
             {{#each accounts as |account|}}
-                 {{>account-card}}
+                 <a href="/graph/timeline/{{account.name}}" class="btn {{account.materialize_color}} {{account.materialize_text_color}}-text center-align">{{account.name}}</a>
             {{/each}}
         </div>
     </div>
