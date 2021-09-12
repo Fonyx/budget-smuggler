@@ -1,88 +1,140 @@
 [
   {
-    "name":"ebay sale",
-    "amount":112.54,
-    "due_date": "11/8/2022",
-    "frequency": "fortnightly",
-    "type":"income",
-    "end_recurrence":"1/12/2022",
+    "name":"netflix subscription",
+    "amount":12.50,
+    "due_date": "11/10/2021",
+    "frequency": "monthly",
+    "type":"expense",
+    "end_recurrence":"11/1/2023",
+    "account_id":5
+  },
+  {
+    "name":"spotify subscription",
+    "amount":15.50,
+    "due_date": "11/14/2021",
+    "frequency": "monthly",
+    "type":"expense",
+    "end_recurrence":"11/1/2023",
     "account_id":5
   },
   {
     "name":"rent",
-    "amount":800,
-    "due_date": "10/8/2022",
+    "amount":1250,
+    "due_date": "11/1/2021",
     "frequency": "monthly",
     "type":"expense",
-    "end_recurrence":"1/1/2022",
+    "end_recurrence":"11/1/2023",
     "account_id":5
   },
   {
-    "name":"camera",
-    "amount":112.54,
-    "due_date": "4/8/2022",
+    "name":"groceries",
+    "amount":100,
+    "due_date": "11/1/2021",
+    "frequency": "weekly",
+    "type":"expense",
+    "end_recurrence":"11/1/2023",
+    "account_id":5
+  },
+  {
+    "name":"salary",
+    "amount":2200,
+    "due_date": "12/7/2021",
     "frequency": "fortnightly",
     "type":"income",
-    "end_recurrence":"1/12/2022",
+    "end_recurrence":"11/1/2023",
+    "account_id":5
+  },
+  {
+    "name":"dentist",
+    "amount":1200,
+    "due_date": "11/1/2021",
+    "frequency": "once",
+    "type":"expense",
+    "account_id":15
+  },
+  {
+    "name":"car excess",
+    "amount":1500,
+    "due_date": "11/23/2021",
+    "frequency": "once",
+    "type":"expense",
+    "account_id":15
+  },
+  {
+    "name":"10% to mojo",
+    "amount":220,
+    "due_date": "12/7/2021",
+    "frequency": "fortnightly",
+    "type":"income",
+    "end_recurrence":"11/1/2023",
+    "account_id":15
+  },
+  {
+    "name":"10% to grow",
+    "amount":220,
+    "due_date": "11/7/2021",
+    "frequency": "fortnightly",
+    "type":"income",
+    "end_recurrence":"11/1/2023",
     "account_id":25
+  },
+  {
+    "name":"mortgage service",
+    "amount":1800,
+    "due_date": "11/21/2021",
+    "frequency": "monthly",
+    "type":"income",
+    "end_recurrence":"11/1/2022",
+    "account_id":35
+  },
+  {
+    "name":"dividends",
+    "amount":18000,
+    "due_date": "1/27/2022",
+    "frequency": "once",
+    "type":"income",
+    "account_id":45
+  },
+  {
+    "name":"monthly repayment",
+    "amount":200,
+    "due_date": "11/11/2021",
+    "frequency": "monthly",
+    "type":"income",
+    "end_recurrence":"11/11/2023",
+    "account_id":55
+  },
+  {
+    "name":"monthly car repayment",
+    "amount":450,
+    "due_date": "11/19/2021",
+    "frequency": "monthly",
+    "type":"income",
+    "end_recurrence":"11/1/2022",
+    "account_id":65
   },
   {
     "name":"flights",
-    "amount":1143.27,
-    "due_date": "3/8/2022",
+    "amount":1300,
+    "due_date": "11/3/2021",
     "frequency": "once",
-    "type":"income",
-    "account_id":15
-  },
-  {
-    "name":"ebay sale",
-    "amount":234.54,
-    "due_date": "11/8/2022",
-    "frequency": "fortnightly",
-    "type":"income",
-    "end_recurrence":"1/12/2022",
-    "account_id":15
-  },
-  {
-    "name":"rent",
-    "amount":800,
-    "due_date": "10/8/2022",
-    "frequency": "monthly",
     "type":"expense",
-    "end_recurrence":"1/1/2022",
-    "account_id":15
+    "account_id":75
   },
   {
-    "name":"lenses",
-    "amount":112.54,
-    "due_date": "4/8/2022",
+    "name":"accomodation",
+    "amount":600,
+    "due_date": "11/8/2021",
     "frequency": "once",
-    "type":"income",
-    "end_recurrence":"1/12/2022",
-    "account_id":5
+    "type":"expense",
+    "account_id":75
   },
   {
-    "name":"accommodation",
-    "amount":1290.27,
-    "due_date": "3/8/2022",
+    "name":"travel insurance",
+    "amount":150,
+    "due_date": "11/8/2021",
     "frequency": "once",
-    "type":"income",
-    "account_id":25
-  },
-  {
-    "name":"accomodation double",
-    "amount":1190.27,
-    "due_date": "3/8/2022",
-    "frequency": "fortnightly",
-    "type":"income",
-    "account_id":15
-  },
-  {
-    "name":"accommodation triple",
-    "amount":1990.27,
-    "due_date": "3/8/2022",
-    "frequency": "once",
-    "type":"income",
-    "account_id":25
+    "type":"expense",
+    "account_id":75
   }
 ]

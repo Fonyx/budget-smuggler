@@ -1,17 +1,42 @@
 [
   {
-    "name": "Cashflow",
+    "name": "blow",
 	  "balance":525.23,
 	  "user_id":5
   },
   {
-    "name": "Mortgage",
-	  "balance":-110225.23,
+    "name": "mojo",
+	  "balance":4225.23,
 	  "user_id":5
   },
   {
-    "name": "Saving",
+    "name": "grow",
 	  "balance":31125.23,
+	  "user_id":5
+  },
+  {
+    "name": "mortgage",
+	  "balance":-461125.23,
+	  "user_id":5
+  },
+  {
+    "name": "portfolio",
+	  "balance":125.23,
+	  "user_id":5
+  },
+  {
+    "name": "student debt",
+	  "balance":-12125.23,
+	  "user_id":5
+  },
+  {
+    "name": "car loan",
+	  "balance":12125.23,
+	  "user_id":5
+  },
+  {
+    "name": "yearly holiday",
+	  "balance":3000.23,
 	  "user_id":5
   }
 ]
