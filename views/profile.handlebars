@@ -52,6 +52,27 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
     <br>
     <div class="container">
         {{#if accounts}}
+            {{#if transactions}}
+                <table class="stripped highlight centered responsive-table">
+                    <thead>
+                        <th>NAME</th>
+                        <th>ACCOUNT</th>
+                        <th>STARTED</th>
+                        <th>FREQUENCY</th>
+                        <th>AMOUNT</th>
+                        <th>DAYS LEFT</th>
+                        <th>UPDATE</th>
+                        <th>DELETE</th>
+                    </thead>
+                    <tbody>
+                        {{#each transactions as |transaction|}}
+                        {{>transaction-table-row}}
+                        {{/each}}
+                    </tbody>
+                </table>
+            {{else}}
+                <h4 class="center-align">YOU HAVE NO TRANSACTIONS YET</h4>
+            {{/if}}
             <div class="row center-align hide-on-med-and-down">
                 {{#each accounts as |account|}}
                         {{>account-card}}
@@ -59,11 +80,12 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
                 <div class="row center padding-top">
                     <a href="/account/create" class="btn-large waves-effect waves-light"><i
                             class="material-icons left">add</i>New account</a>
-                        <a href="/transaction/{{transaction.id}}" class="btn-large waves-effect waves-light"><i
-                                class="material-icons left">add</i>New transaction</a>
+                    <a href="/transaction/{{transaction.id}}" class="btn-large waves-effect waves-light"><i
+                            class="material-icons left">add</i>New transaction</a>
                 </div>
             </div>
         {{else}}
+            <h4 class="center-align">YOU HAVE NO ACCOUNTS YET</h4>
             <div class="container">
                 <div class="row center padding-top">
                     <a href="/account/create" class="btn-large waves-effect waves-light"><i
@@ -72,31 +94,31 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
             </div>
         {{/if}}
     </div>
-    <div class="container">
+    {{!-- <div class="container">
     </div>
     <div class="container">
         {{#if transactions}}
-        <table class="stripped highlight centered responsive-table">
-            <thead>
-                <th>NAME</th>
-                <th>ACCOUNT</th>
-                <th>STARTED</th>
-                <th>FREQUENCY</th>
-                <th>AMOUNT</th>
-                <th>DAYS LEFT</th>
-                <th>UPDATE</th>
-                <th>DELETE</th>
-            </thead>
-            <tbody>
-                {{#each transactions as |transaction|}}
-                {{>transaction-table-row}}
-                {{/each}}
-            </tbody>
-        </table>
+            <table class="stripped highlight centered responsive-table">
+                <thead>
+                    <th>NAME</th>
+                    <th>ACCOUNT</th>
+                    <th>STARTED</th>
+                    <th>FREQUENCY</th>
+                    <th>AMOUNT</th>
+                    <th>DAYS LEFT</th>
+                    <th>UPDATE</th>
+                    <th>DELETE</th>
+                </thead>
+                <tbody>
+                    {{#each transactions as |transaction|}}
+                    {{>transaction-table-row}}
+                    {{/each}}
+                </tbody>
+            </table>
         {{else}}
-        <h2 class="">YOU HAVE NO TRANSACTIONS YET</h2>
+            <h4 class="center-align">YOU HAVE NO TRANSACTIONS YET</h4>
         {{/if}}
-    </div>
+    </div> --}}
     <br>
     <br>
     <br>
