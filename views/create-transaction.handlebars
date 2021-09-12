@@ -15,22 +15,11 @@ CREATE A TRANSACTION FORM - USER OBJ AVAILABLE {{user.email}} {{user.balance}} -
     </nav>
 </header>
 
- <!-- Dropdown Trigger -->
-  <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Drop Me!</a>
-
-  <!-- Dropdown Structure -->
-  <ul id='dropdown1' class='dropdown-content'>
-    <li><a href="#!">one</a></li>
-    <li><a href="#!">two</a></li>
-    <li class="divider" tabindex="-1"></li>
-    <li><a href="#!">three</a></li>
-    <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
-    <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
-  </ul>
 
 <main class="valign-wrapper">
     <div class="row">
         <form class="form transaction-form center-align" id="create-transaction-form">
+
             <div class="row">
                 <div class="col s6">
                     <label for="transaction-name" class="col-form-label form-font">Name</label>
@@ -41,18 +30,30 @@ CREATE A TRANSACTION FORM - USER OBJ AVAILABLE {{user.email}} {{user.balance}} -
                     <input class="form-input form-control center-align" type="text" id="transaction-amount">
                 </div>
             </div>
+
             <div class="row">
                 <div class="col s6">
                     <label for="transaction-duedate" class="col-form-label form-font">Due Date</label>
                     <input class="form-input form-control center-align" type="date" id="transaction-duedate">
+                    {{!-- <input class="datepicker" type="text" id="transaction-duedate"> --}}
                 </div>
 
                 <div class="col s6">
                     <label for="transaction-enddate" class="col-form-label form-font">End Date</label>
                     <input class="form-input form-control center-align" type="date" id="transaction-enddate">
+                    {{!-- <input class="datepicker" type="text" id="transaction-enddate"> --}}
                 </div>
             </div>
 
+            <!-- Switch -->
+            <div class="switch">
+                <label>
+                    INCOME
+                    <input type="checkbox">
+                    <span class="lever"></span>
+                    EXPENSE
+                </label>
+            </div>
 
             <div class="row">
                 <p class="form-font padding-top">Type:</p>
@@ -68,9 +69,13 @@ CREATE A TRANSACTION FORM - USER OBJ AVAILABLE {{user.email}} {{user.balance}} -
             </div>
 
             <div class="divider"></div>
-            <p class="form-font padding-top">Category:</p>
+            <p class="form-font padding-top">ACCOUNTS:</p>
 
-            <label class="form-check-label" for="cashflow">
+            {{#each accounts as |account|}}
+                {{>account-form-field}}
+            {{/each}}
+
+            {{!-- <label class="form-check-label" for="cashflow">
                 <input class="form-check-input center-align with-gap" type="radio" value="Cashflow"
                     name="transaction-category" id="cashflow" checked="true">
                 <span>Cashflow</span></label>
@@ -100,8 +105,8 @@ CREATE A TRANSACTION FORM - USER OBJ AVAILABLE {{user.email}} {{user.balance}} -
                     name="transaction-category" id="crypto">
                 <span>Crypto</span></label>
 
-            <div class="divider"></div>
-            <p class="form-font padding-top">How often?</p>
+            <div class="divider"></div> --}}
+            <p class="form-font padding-top">HOW OFTEN?</p>
 
             <label class="form-check-label" for="once">
                 <input class="form-check-input with-gap" type="radio" value="once" name="transaction-frequency"
@@ -137,3 +142,40 @@ CREATE A TRANSACTION FORM - USER OBJ AVAILABLE {{user.email}} {{user.balance}} -
 </main>
 
 <script src="/js/createtransaction.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.dropdown-trigger');
+      var containerEl = document.querySelector('#type-drop-container');
+      var options = {
+        hover: true,
+        container: containerEl
+    };
+      var instances = M.Dropdown.init(elems, options);
+    });
+
+    // date pickers
+    document.addEventListener('DOMContentLoaded', function() {
+        var options = {
+            format: 'dd/mm/yyyy'
+        }
+        var elems = document.querySelectorAll('.datepicker');
+        var instances = M.Datepicker.init(elems, options);
+    });
+
+    // select dropdowns
+    document.addEventListener('DOMContentLoaded', function() {
+        var options = {
+        }
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems, options);
+    });
+
+
+
+    {{!-- const dueDateEl = document.querySelector('#transaction-duedate');   
+    console.log(dueDateEl);
+    var dueDateInstance = M.Datepicker.getInstance(dueDateEl);
+    console.log(dueDateInstance);
+    console.log(dueDateInstance.date()); --}}
+
+</script>
