@@ -9,11 +9,12 @@ order they are:
 they should be <a href="/transaction/create"></a> tags as they are redirects which automatically use get requests --}}
 <header>
     <nav role="navigation">
+
         <div class="nav-wrapper teal darken-2">
             <img src="/images/seethroughbudgie.png" alt="Outline of budgie with 100 dollar note superimposed over it"
                 style="width:60px;height:60px;">
-            <a id="logo-container" href="/profile/balance" class="brand-logo">PROFILE BALANCE: ${{user.balance}}<i
-                    class="material-icons">monetization_on</i></a>
+            <a id="logo-container" href="/profile" class="brand-logo"><span class="hide-on-med-and-down">PROFILE CURRENT
+                    NET</span> BALANCE: ${{netBalance}}</a>
             <ul class="right hide-on-med-and-down">
                 <li>
                     <a href="/graph/timeline/all">TIMELINE</a>
@@ -49,31 +50,42 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
             <button><a href="/account/create">Create an account</a></button>
         </div>
         {{/if}}
-        {{#if transactions}}
-        <table class="stripped highlight centered responsive-table">
-            <thead>
-                <th>NAME</th>
-                <th>ACCOUNT</th>
-                <th>STARTED</th>
-                <th>FREQUENCY</th>
-                <th>AMOUNT</th>
-                <th>DAYS LEFT</th>
-                <th>UPDATE</th>
-                <th>DELETE</th>
-            </thead>
-            <tbody>
-                {{#each transactions as |transaction|}}
-                {{>transaction-table-row}}
-                {{/each}}
-            </tbody>
-        </table>
-        {{else}}
-        <h2 class="">YOU HAVE NO TRANSACTIONS YET</h2>
-        {{/if}}
-    </div>
-    <br>
-    <br>
-    <br>
+        <div class="container">
+            <div class="row center-align">
+                <div class="row center padding-top">
+                    <a href="/transaction/{{transaction.id}}" class="btn-large waves-effect waves-light"><i
+                            class="material-icons left">add</i> Add a transaction</a>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            {{#if transactions}}
+            <table class="stripped highlight centered responsive-table">
+                <thead>
+                    <th>NAME</th>
+                    <th>ACCOUNT</th>
+                    <th>STARTED</th>
+                    <th>FREQUENCY</th>
+                    <th>AMOUNT</th>
+                    <th>DAYS LEFT</th>
+                    <th>UPDATE</th>
+                    <th>DELETE</th>
+                </thead>
+                <tbody>
+                    {{#each transactions as |transaction|}}
+                    {{>transaction-table-row}}
+                    {{/each}}
+                </tbody>
+            </table>
+            {{else}}
+            <h2 class="">YOU HAVE NO TRANSACTIONS YET</h2>
+            {{/if}}
+        </div>
+        <br>
+        <br>
+        <br>
 </main>
 
-<script src="/js/logout.js"></script>
+
+{{!--
+<script src="/js/logout.js"></script> --}}

@@ -16,47 +16,129 @@ and then sending a PUT request to "/transaction/update/{{transactionObj.id}}". I
 </header>
 
 <main class="valign-wrapper">
-    <div class="container">
-        <div class="col-md-6">
-            <form id="update-transaction-form" class="form update-transaction-form center-align">
-                <div class="form-group center-align">
-                    <label for="update-transaction-name">Name</label>
-                    <input type="text" class="form-input center-align" value="{{transaction.name}}" id="update-transaction-name"
-                        data-id="{{transaction.id}}" placeholder="user name">
-                </div>
-                <div class="form-group">
-                    <label for="update-transaction-amount">Amount</label>
-                    <input type="text" class="form-input center-align" value="{{transaction.amount}}"
-                        id="update-transaction-amount" placeholder="amount">
-                </div>
-                <div class="form-group">
-                    <label for="update-transaction-due-date">Due Date</label>
-                    <input type="text" class="form-input center-align" value="{{transaction.due_date}}"
-                        id="update-transaction-due-date" placeholder="due date">
-                </div>
-                <div class="form-group">
-                    <label for="update-transaction-frequency">Frequency</label>
-                    <input type="text" class="form-input center-align" value="{{transaction.frequency}}"
-                        id="update-transaction-frequency" placeholder="frequency">
-                </div>
-                <div class="form-group">
-                    <label for="update-transaction-type">Type</label>
-                    <input type="text" class="form-input center-align" value="{{transaction.type}}" id="update-transaction-type"
-                        placeholder="type">
-                </div>
-                <div class="form-group">
-                    <label for="update-transaction-category-name">Category Name</label>
-                    <input type="text" class="form-input center-align" value="{{transaction.category_name}}"
-                        id="update-transaction-category-name" placeholder="category">
-                </div>
-                <div class="form-group row center-align">
-                    <button id="submit-btn" class="btn" type="submit">UPDATE</button>
-                    <a href="/profile" class="btn grey">CANCEL</a>
-                    <a href="/transaction/delete/{{transaction.id}}" class="btn btn-primary red">DELETE</a>
-                </div>
+    <div class="row">
+        <form id="update-transaction-form" class="form update-transaction-form center-align">
+            <div class="col s6">
+                <label for="update-transaction-name">Name</label>
+                <input type="text" class="form-input center-align" value="{{transaction.name}}"
+                    id="update-transaction-name" data-id="{{transaction.id}}" placeholder="user name">
+            </div>
+            <div class="col s6">
+                <label for="update-transaction-amount">Amount</label>
+                <input type="text" class="form-input center-align" value="{{transaction.amount}}"
+                    id="update-transaction-amount" placeholder="amount">
+            </div>
+            <div class="col s12">
+                <label for="update-transaction-due-date">Due Date</label>
+                <input type="date" class="form-input center-align" value="{{transaction.due_date}}"
+                    id="update-transaction-due-date" placeholder="due date">
+            </div>
+            <div class="col s6">
+                <label for="update-transaction-type">Type</label>
+                <input type="text" class="form-input center-align" value="{{transaction.type}}"
+                    id="update-transaction-type" placeholder="type">
+            </div>
+            {{!-- From create transaction form --}}
+            <div class="row">
+                <p class="form-font padding-top">Type:</p>
+                <label class="form-check-label center-align" for="income">
+                    <input class="form-check-input center-align with-gap" type="radio" value="income"
+                        name="transaction-type" id="income" checked="true">
+                    <span>Income</span></label>
 
-            </form>
-        </div>
+                <label class="form-check-label" for="expense">
+                    <input class="form-check-input center-align with-gap" type="radio" value="expense"
+                        name="transaction-type" id="expense">
+                    <span>Expense</span></label>
+            </div>
+            {{!-- End --}}
+            <div class="col s6">
+                <label for="update-transaction-frequency">Frequency</label>
+                <input type="text" class="form-input center-align" value="{{transaction.frequency}}"
+                    id="update-transaction-frequency" placeholder="frequency">
+            </div>
+
+            {{#each frequencies as |frequency|}}
+                <label class="form-check-label" for="{{frequency}}">
+                <input class="form-check-input with-gap" type="radio" value="{{frequency}}" name="transaction-frequency" id="{{frequency}}" checked="true">
+                <span>{{uppercase frequency}}</span>
+            </label>
+            {{/each}}
+
+            {{!-- From create transaction --}}
+            {{!-- <div class="row">
+                <label class="form-check-label" for="once">
+                    <input class="form-check-input with-gap" type="radio" value="once" name="transaction-frequency"
+                        id="once" checked="true">
+                    <span>Once</span></label>
+
+                <label class="form-check-label" for="weekly">
+                    <input class="form-check-input with-gap" type="radio" value="weekly" name="transaction-frequency"
+                        id="weekly">
+                    <span class="title">Weekly</span></label>
+
+                <label class="form-check-label" for="fortnightly">
+                    <input class="form-check-input with-gap" type="radio" value="fortnightly"
+                        name="transaction-frequency" id="fortnightly">
+                    <span>Fortnightly</span></label>
+
+                <label class="form-check-label" for="monthly">
+                    <input class="form-check-input with-gap" type="radio" value="monthly" name="transaction-frequency"
+                        id="monthly">
+                    <span>Monthly</span></label>
+
+                <label class="form-check-label" for="annually">
+                    <input class="form-check-input with-gap" type="radio" value="annually" name="transaction-frequency"
+                        id="annually">
+                    <span>Annually</span></label>
+                <div class="divider"></div>
+            </div> --}}
+            {{!-- End --}}
+
+            <div class="col s6">
+                <label for="update-transaction-category-name">Category Name</label>
+                <input type="text" class="form-input center-align" value="{{transaction.category_name}}"
+                    id="update-transaction-category-name" placeholder="category">
+            </div>
+
+            {{!-- From create transaction form --}}
+            <div class="row">
+                <label class="form-check-label" for="cashflow">
+                    <input class="form-check-input center-align with-gap" type="radio" value="Cashflow"
+                        name="transaction-category" id="cashflow" checked="true">
+                    <span>Cashflow</span></label>
+
+                <label class="form-check-label" for="business">
+                    <input class="form-check-input center-align with-gap" type="radio" value="Business"
+                        name="transaction-category" id="business">
+                    <span>Business</span></label>
+
+                <label class="form-check-label" for="savings">
+                    <input class="form-check-input center-align with-gap" type="radio" value="Savings"
+                        name="transaction-category" id="savings">
+                    <span>Savings</span></label>
+
+
+                <label class="form-check-label" for="mortgage">
+                    <input class="form-check-input center-align with-gap" type="radio" value="Mortgage"
+                        name="transaction-category" id="mortgage">
+                    <span>Mortgage</span></label>
+
+
+                <label class="form-check-label" for="crypto">
+                    <input class="form-check-input center-align with-gap" type="radio" value="Crypto"
+                        name="transaction-category" id="crypto">
+                    <span>Crypto</span></label>
+            </div>
+            {{!-- End --}}
+
+            <div class="row padding-top">
+                <button id="submit-btn" class="btn" type="submit">UPDATE</button>
+                <a href="/profile" class="btn grey">CANCEL</a>
+                <a href="/transaction/delete/{{transaction.id}}" class="btn btn-primary red">DELETE</a>
+            </div>
+
+        </form>
     </div>
 
 </main>
