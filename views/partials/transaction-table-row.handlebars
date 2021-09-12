@@ -15,22 +15,22 @@ There is no client side js for this partial --}}
 
 <tr class="z-depth-3 {{renderTypeToMaterializeColor type}}">
     <td>
-        <span class="card-content black-text">{{uppercase name}}</span>
+        <span class="black-text">{{uppercase name}}</span>
     </td>
     <td>
-        <span class="card-content black-text">{{account_id}}</span>
+        <a href="/profile/account/{{account.id}}" class="btn black-text">{{account.name}}</a>
     </td>
     <td>
-        <span class="card-content black-text">{{format_date due_date}}</span>
+        <span class="black-text">{{format_date due_date}}</span>
     </td>
     <td>
-        <span class="card-content black-text">{{uppercase frequency}}</span>
+        <span class="black-text">{{uppercase frequency}}</span>
     </td>
     <td>
-        <span class="card-content black-text">{{displayAmountWithTypeSign amount type}}</span>
+        <span class="black-text">{{displayAmountWithTypeSign amount type}}</span>
     </td>
     <td>
-        <span class="card-content black-text">{{daysLeft due_date}}</span>
+        <span class="black-text">{{daysLeft due_date}}</span>
     </td>
     <td>
         <a href="/transaction/update/{{id}}" class="btn"><i class="material-icons">edit</i></a>

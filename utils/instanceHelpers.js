@@ -1,5 +1,5 @@
 const {User, Account} = require('../models');
-
+const sequelize = require('../config/connection');
 
 async function getAllAccountIdsForUserId(id){
     let accountObjs = await Account.findAll({
@@ -21,22 +21,23 @@ async function getAllAccountIdsForUserId(id){
  * @returns {int} sum of all account balances for a user
  */
 async function sumAllUserAccountBalances(user_id){
-    let accountObjs = await Account.findAll({
-        where:{
-            id: user_id
-        },
-        attributes: ['balance']
+
+    var total = 0;
+
+    let testTotalObj = await Account.findAll({
+        // where:{
+        //     id: user_id
+        // },
+        attributes: ['user_id',[sequelize.fn('sum', sequelize.col('balance')), 'total']],
+        raw:true,
     });
-    let balances = accountObjs.map((accountObj) => {
-        return accountObj.get({
-            attributes: 'balance'
-        })
-    });
-    // this is like a summing list comprehension but the result is still an object that has a balance field....meh
-    let total = balances.reduce((a, b) => {
-        return {x: a.balance + b.balance};
-    });
-    return total.balance;
+
+    if(testTotalObj.length > 0){
+        total = testTotalObj[0].total.toFixed(2);
+    }
+
+    return total;
+
 }
 
 module.exports = {
