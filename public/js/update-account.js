@@ -21,7 +21,7 @@ const updateBalanceFormHandler = async (event) => {
     if(balance && account_id && name){
         try{
             // consume the login endpoint with a post request
-            const response = await fetch(`/account/${account_id}`, {
+            const response = await fetch(`/account/update/${account_id}`, {
                 method: 'PUT',
                 body: JSON.stringify({balance, name}),
                 headers: {'Content-Type':'application/json'}
@@ -47,5 +47,5 @@ const updateBalanceFormHandler = async (event) => {
 
 // attach the submit handler to the signup button
 document
-.querySelector('.update-balance-form')
+.querySelector('.update-account-form')
 .addEventListener('submit', updateBalanceFormHandler);

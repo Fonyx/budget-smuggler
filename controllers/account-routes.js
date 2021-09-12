@@ -81,7 +81,7 @@ router.get('/update/:account_id', onlyIfLoggedIn, async (req, res) => {
     }
 });
   
-// request to update user balance as a put request
+// request to update account as a put request
 router.put('/update/:account_id', onlyIfLoggedIn, async (req, res) => {
   try{
     let accountObj = await Account.findByPk(req.params.account_id);
