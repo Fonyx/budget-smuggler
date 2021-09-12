@@ -14,7 +14,7 @@ const createAccountFormHandler = async (event) => {
         if (response.ok) {
             document.location.replace('/account');
         } else {
-
+            console.log(response);
             alert(response.statusText);
         }
 
