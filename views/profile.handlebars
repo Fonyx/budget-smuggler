@@ -32,6 +32,14 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
                 <li>
                     <a href="/user/logout">LOGOUT</a>
                 </li>
+                <li>
+                    <div class="divider"></div>
+                </li>
+                {{#each accounts as |account|}}
+                    <li>
+                        <a href="/profile/account/{{account.id}}" class="btn {{materialize_color}} {{materialize_text_color}}-text">{{account.name}}</a>
+                    </li>
+                {{/each}}
             </ul>
             <a href="#" data-target="nav-mobile" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
         </div>
@@ -44,7 +52,7 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
     <br>
     <div class="container">
         {{#if accounts}}
-            <div class="row center-align">
+            <div class="row center-align hide-on-med-and-down">
                 {{#each accounts as |account|}}
                         {{>account-card}}
                 {{/each}}
