@@ -100,4 +100,17 @@ router.delete('/:account_id', onlyIfLoggedIn, async (req, res) => {
     }
 })
 
+// get account create form
+router.get('/create', onlyIfLoggedIn, async (req, res) => {
+    try{
+        let userObj = await User.findByPk(req.session.user_id);
+        let user = userObj.get();
+        res.render('', {user})
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
 module.exports = router;
