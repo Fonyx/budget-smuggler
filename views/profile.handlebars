@@ -41,40 +41,29 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
 <main>
 
     <br>
-    <div class="container valign-wrapper">
+    <div class="container">
         {{#if accounts}}
-            {{#each account as |accounts|}}
-                {{>account-table-row}}
-            {{/each}}
+            <div class="row center-align">
+                {{#each accounts as |account|}}
+                        {{>account-card}}
+                {{/each}}
+                <div class="row center padding-top">
+                    <a href="/account/create" class="btn-large waves-effect waves-light"><i
+                            class="material-icons left">add</i>New account</a>
+                        <a href="/transaction/{{transaction.id}}" class="btn-large waves-effect waves-light"><i
+                                class="material-icons left">add</i>New transaction</a>
+                </div>
+            </div>
         {{else}}
             <div class="container">
-                {{#if transactions}}
-                <div class="row center-align">
-                    <div class="row padding-top">
-                        <a href="/account/create" class="btn-large waves-effect waves-light"><i
-                                class="material-icons left">add</i>
-                            Create an account</a>
-                    </div>
+                <div class="row center padding-top">
+                    <a href="/account/create" class="btn-large waves-effect waves-light"><i
+                            class="material-icons left">add</i>New account</a>
                 </div>
-                {{else}}
-                <div class="row center-align">
-                    <div class="row center padding-top">
-                        <a href="/account/create" class="btn-large waves-effect waves-light"><i
-                                class="material-icons left">add</i>
-                            Create an account</a>
-                    </div>
-                </div>
-                {{/if}}
             </div>
         {{/if}}
     </div>
     <div class="container">
-        <div class="row center-align">
-            <div class="row center padding-top">
-                <a href="/transaction/{{transaction.id}}" class="btn-large waves-effect waves-light"><i
-                        class="material-icons left">add</i> Add a transaction</a>
-            </div>
-        </div>
     </div>
     <div class="container">
         {{#if transactions}}

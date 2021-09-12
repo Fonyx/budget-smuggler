@@ -11,6 +11,18 @@ router.get('/', onlyIfLoggedIn, async (req, res) => {
         let user = userObj.get();
         let netBalance = await sumAllUserAccountBalances(user.id);
 
+        const accountObjs = await Account.findAll({
+            where:{
+                id: userAccountIds
+            },
+            all: true,
+            nested: true
+        })
+
+        const accounts = accountObjs.map((accountObj) => {
+            return accountObj.get({plain:true});
+        })
+
         const rawDbTransactions = await Transaction.findAll({
             where: {
               account_id: userAccountIds
@@ -23,7 +35,7 @@ router.get('/', onlyIfLoggedIn, async (req, res) => {
             return transactionObj.get({plain: true});
         })
         if(transactions){
-            res.render('profile', {transactions, user, netBalance});
+            res.render('profile', {transactions, user, netBalance, accounts});
         } else {
             res.status(404).json({message: "no Transactions found"});
         }
