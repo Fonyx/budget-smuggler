@@ -1,11 +1,3 @@
-class timelineChart{
-  constructor(){}
-
-  destroy(){
-    console.log('Fake destroy');
-  }
-}
-
 
 async function graphTimeline(account_name) {
   
@@ -50,7 +42,7 @@ async function graphTimeline(account_name) {
       type:'line',
       data:{
         datasets:[{
-          // label: 'All Accounts',
+          label: data.amount,
           data: data.timeline,
           backgroundColor:gradient,
           parsing: {

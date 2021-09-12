@@ -32,7 +32,7 @@ only accessible for a logged in user. --}}
             </li>
             {{#each accounts as |account|}}
                 <li>
-                    <a href="/graph/timeline/{{name}}">{{name}}</a>
+                    <a href="/graph/timeline/{{account.name}}">{{account.name}}</a>
                 </li>
             {{/each}}
         </ul>
