@@ -98,10 +98,10 @@
   {
     "name":"monthly repayment",
     "amount":200,
-    "due_date": "11/6/2021",
+    "due_date": "11/11/2021",
     "frequency": "monthly",
     "type":"income",
-    "end_recurrence":"11/1/2023",
+    "end_recurrence":"11/11/2023",
     "account_id":6
   },
   {

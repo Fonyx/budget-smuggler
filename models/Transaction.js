@@ -307,10 +307,12 @@ class Transaction extends Model {
         // get end_recurrence date obj
         let endDateObj = this.getEndRecurrenceObj();
 
-        // create new due date obj for first of that month - including year
-        let firstOfStartMonthDateObj = dayjs(startDateObj).set('date', 1); // '1/3/2021'
-        // create new end_recurrence date obj for first of that month - including year
-        let firstOfEndMonthDateObj = dayjs(endDateObj).set('date', 1); // '1/7/2021'
+        // copy dates and set to first day of the month
+        let firstOfStartMonthDateObj = startDateObj;
+        firstOfStartMonthDateObj.set('date', 1);
+
+        let firstOfEndMonthDateObj = endDateObj;
+        firstOfEndMonthDateObj.set('date', 1);
 
         // determine month count of difference, this will be done with date1.diff(date2, 'month') with no float (this means truncated to an integer) this works because we only ever pass in the first day of the month so always gets a whole month. 
         // #TODO: Check that the month diff can return more than a year as 13 and doesn't just return 1-12, docs are ambiguous
@@ -334,7 +336,7 @@ class Transaction extends Model {
                 monthCounter += 1;
             }
             let newDateString = startDayNum + '/' + monthCounter + '/' + startYearNum; 
-            let newDateObj = dayjs(newDateString);
+            let newDateObj = dayjs(newDateString, 'DD/M/YYYY');
             recurrences.push(newDateObj);
         }
         /*Note that the user may have over specified the end date, this will be overruled by the coercion of month difference to an integer. User gives date range for 6.5 months but frequency determines only 6 fit, 6 will be made */
