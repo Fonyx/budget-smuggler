@@ -84,8 +84,6 @@ router.get('/', onlyIfLoggedIn, async (req, res) => {
 
 // CREATE new transaction using form contents
 router.post('/', onlyIfLoggedIn, async (req, res) => {
-    let user_id = req.session.user_id;
-    
     try {
         const dbTransactionData = await Transaction.create(req.body);
         res.status(200).json(dbTransactionData);

@@ -1,6 +1,4 @@
-console.log("infile")
 const updateTransactionFormHandler = async (event) => {
-    console.log("infunction")
     event.preventDefault();
     // collect values from the update-transaction form
     const nameValue = document.querySelector('#update-transaction-name').value.trim();
