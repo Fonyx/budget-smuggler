@@ -26,9 +26,9 @@ async function sumAllUserAccountBalances(user_id){
     var total = 0;
 
     let testTotalObj = await Account.findAll({
-        // where:{
-        //     id: user_id
-        // },
+        where:{
+            user_id: user_id
+        },
         attributes: ['user_id',[sequelize.fn('sum', sequelize.col('balance')), 'total']],
         raw:true,
     });
