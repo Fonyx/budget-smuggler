@@ -25,14 +25,11 @@ only accessible for a logged in user. --}}
                 <a href="/user/logout">LOGOUT</a>
             </li>
             <li>
-                <a href="#">------</a>
-            </li>
-            <li>
-                <a href="/graph/timeline/all">All Accounts</a>
+                <a class="btn white grey-text text-darken-3"  href="/graph/timeline/all">All ACCOUNTS</a>
             </li>
             {{#each accounts as |account|}}
                 <li>
-                    <a href="/graph/timeline/{{account.name}}">{{account.name}}</a>
+                    <a href="/graph/timeline/{{account.name}}" class="btn {{materialize_color}} {{materialize_text_color}}-text">{{account.name}}</a>
                 </li>
             {{/each}}
         </ul>
@@ -42,11 +39,12 @@ only accessible for a logged in user. --}}
 </header>
 
 <main>
+    <br>
     <div class="container">
-        <div class="center-align hide-on-med-and-down">
+        <div class="row center-align hide-on-med-and-down">
             <a href="/graph/timeline/all" class="btn red lighten-3 white-text center-align">all</a>
             {{#each accounts as |account|}}
-                 <a href="/graph/timeline/{{name}}" class="btn {{materialize_color}} {{materialize_text_color}}-text center-align">{{name}}</a>
+                 {{>account-card}}
             {{/each}}
         </div>
     </div>
