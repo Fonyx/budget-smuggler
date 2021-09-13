@@ -45,11 +45,11 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
 <main>
     <br>
     <div class="wide-container">
-        <h4 class="center-align">TRANSACTIONS FOR {{uppercase account.name}}</h4>
-        <h5 class="center-align">CURRENT BALANCE ${{account.balance}}</h5>
+        <h5 class="center-align">{{uppercase account.name}} BALANCE ${{account.balance}}</h5>
         <div class="span center-align">
             <a class="btn deep-orange lighten-3 black-text" href="/account/update/{{account.id}}">UPDATE BALANCE</a>
         </div>
+        <h5 class="center-align">TRANSACTIONS FOR {{uppercase account.name}}</h5>
         {{#if transactions}}
             <table class="stripped highlight centered responsive-table">
                 <thead>
