@@ -12,10 +12,12 @@ const signupFormHandler = async (event) => {
             body: JSON.stringify({ email, password }),
             headers: { 'Content-Type': 'application/json' }
         });
-
         if (response.ok) {
             console.log('User successfully logged in');
             document.location.replace('/profile');
+        } else if(response.status === 409){
+            console.log('That email already exists');
+            alert('That email already exists');
         } else {
             console.log('User failed to signup');
             alert(response.statusText);

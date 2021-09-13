@@ -76,8 +76,15 @@ router.post('/signup', async (req, res) => {
       res.status(200).json({ user: dbUserData, message: 'You are now logged in!' });
     });
   } catch (err) {
-    clog(err, 'red');
-    res.status(500).json(err);
+    if(err.name === "SequelizeUniqueConstraintError"){
+      clog('User tried to use an email that exists, constraint error', 'red');
+      clog(err, 'red');
+      // 409 reserved code for conflict
+      res.status(409).json(err);
+    } else {
+      clog(err, 'red');
+      res.status(500).json(err);
+    }
   }
 });
 
