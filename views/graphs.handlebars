@@ -28,6 +28,9 @@ only accessible for a logged in user. --}}
                 <div class="divider"></div>
             </li>
             <li>
+                <a href="#" class="center">YOUR ACCOUNTS</a>
+            </li>
+            <li>
                 <a class="btn white grey-text text-darken-3"  href="/graph/timeline/all">All ACCOUNTS</a>
             </li>
             {{#each accounts as |account|}}
@@ -45,6 +48,7 @@ only accessible for a logged in user. --}}
     <br>
     <div class="wide-container">
         <div class="row center-align hide-on-med-and-down">
+            <h5 class="center-align">YOUR ACCOUNTS</h5>
             <a href="/graph/timeline/all" class="btn red lighten-3 white-text center-align">all</a>
             {{#each accounts as |account|}}
                  <a href="/graph/timeline/{{account.name}}" class="btn {{account.materialize_color}} {{account.materialize_text_color}}-text center-align">{{account.name}}</a>
