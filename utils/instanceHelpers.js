@@ -34,7 +34,9 @@ async function sumAllUserAccountBalances(user_id){
     });
 
     if(testTotalObj.length > 0){
-        total = testTotalObj[0].total.toFixed(2);
+        if(testTotalObj[0].total){
+            total = testTotalObj[0].total.toFixed(2);
+        }
     }
 
     return total;
