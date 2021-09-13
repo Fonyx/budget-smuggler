@@ -101,10 +101,9 @@ router.post('/', onlyIfLoggedIn, async (req, res) => {
 // get the update transaction form
 router.get('/update/:transaction_id', onlyIfLoggedIn, async (req, res) => {
     try{
-        let accountIds = await getAllAccountIdsForUserId(req.session.user_id);
         let accountObjs = await Account.findAll({
             where: {
-                user_id: accountIds
+                user_id: req.session.user_id
             },
             nested: true,
             all: true,
