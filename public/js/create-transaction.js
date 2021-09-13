@@ -4,9 +4,9 @@ const createTransactionHandler = async (event) => {
     const amountValue = document.querySelector('#transaction-amount').value.trim();
     const typeValue = document.querySelector('input[name="transaction-type"]:checked').value;
     const accountId = document.querySelector('input[name="transaction-account"]:checked').dataset.id;
-    const dueDateValue = document.querySelector('#transaction-duedate').value.trim();
+    const dueDateValue = document.querySelector('#transaction-due-date').value.trim();
     const frequencyValue = document.querySelector('input[name="transaction-frequency"]:checked').value;
-    const endDateValue = document.querySelector('#transaction-enddate').value.trim();
+    const endDateValue = document.querySelector('#transaction-end-date').value.trim();
 
     // validating user input for amountValue
     try {

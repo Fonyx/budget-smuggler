@@ -30,13 +30,13 @@ CREATE A TRANSACTION FORM - USER OBJ AVAILABLE {{user.email}} {{user.balance}} -
             </div>
             <div class="row">
                 <div class="col s6">
-                    <label for="transaction-duedate" class="col-form-label form-font">Due Date</label>
-                    <input class="form-input form-control center-align" type="date" id="transaction-duedate">
+                    <label for="transaction-due-date" class="col-form-label form-font">Due Date</label>
+                    <input class="form-input form-control center-align" type="date" id="transaction-due-date">
                 </div>
 
                 <div class="col s6">
-                    <label for="transaction-enddate" class="col-form-label form-font">End Date</label>
-                    <input class="form-input form-control center-align" type="date" id="transaction-enddate">
+                    <label for="transaction-end-date" class="col-form-label form-font">End Date</label>
+                    <input class="form-input form-control center-align" type="date" id="transaction-end-date">
                 </div>
             </div>
 
@@ -79,14 +79,6 @@ CREATE A TRANSACTION FORM - USER OBJ AVAILABLE {{user.email}} {{user.balance}} -
     </div>
 </main>
 
-<script>
-    // set the minimum date the user can select to be today and onwards
-    var now = new Date(),
-    // minimum date the user can choose, in this case now and in the future
-    minDate = now.toISOString().substring(0,10);
+<script src="/js/limit-user-date.js"></script>
 
-    let dueDateEl = document.querySelector('#transaction-duedate');
-    dueDateEl.setAttribute('min', minDate);
-</script>
-
-<script src="/js/createtransaction.js"></script>
+<script src="/js/create-transaction.js"></script>
