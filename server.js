@@ -22,7 +22,7 @@ const sess = {
   // maxAge: 5 * 60 * 1000, // 5 minutes
   cookie: {
     // 5 minute session timeout
-    maxAge: 1000 * 10
+    maxAge: 1000 * 60 * 5
   },
   store: new SequelizeStore({
     db: sequelize
