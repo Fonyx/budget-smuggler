@@ -76,6 +76,11 @@ Account.init(
                 isFloat: true,
             }
         },
+        interest_rate:{
+            type: DataTypes.FLOAT,
+            defaultValue: 0,
+            allowNull: false,
+        },
         materialize_color:{
             type: DataTypes.ENUM,
             values: colors,
