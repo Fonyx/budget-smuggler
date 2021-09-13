@@ -17,13 +17,13 @@ const sess = {
   secret: 'Super secret secret',
   saveUninitialized: true,
   resave: true,
-  maxAge: 15 * 1000,
+  rolling: true,
+  // maxAge: 10 * 1000,
   // maxAge: 5 * 60 * 1000, // 5 minutes
-  // cookie: {
-  //   // 5 minute session timeout
-  //   expires: 1000 * 20
-  // },
-  saveUninitialized: true,
+  cookie: {
+    // 5 minute session timeout
+    maxAge: 1000 * 10
+  },
   store: new SequelizeStore({
     db: sequelize
   })

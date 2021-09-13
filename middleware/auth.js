@@ -13,10 +13,7 @@ const onlyIfLoggedIn = (req, res, next) => {
         res.render('landing');
     // otherwise call next to move through other middleware functions
     } else {
-        // refresh the duration of the session cookie so it updates timeout to 5 minutes from now
-        // req.session.cookie.expires = new Date(Date.now() + 20000);
-        req.session.touch();
-        next()
+        next();
     }
 }
 
