@@ -20,7 +20,7 @@ const sess = {
   rolling: true,
   cookie: {
     // 5 minute session timeout
-    expires: 1000 * 30 * 1
+    expires: 1000 * 60 * 5
   },
   saveUninitialized: true,
   store: new SequelizeStore({
