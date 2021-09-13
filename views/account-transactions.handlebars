@@ -12,11 +12,8 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
       <div class="nav-wrapper teal darken-2">
         <img src="/images/seethroughbudgie.png" alt="Outline of budgie with 100 dollar note superimposed over it"
                 style="width:60px;height:60px;">
-        <a id="logo-container" href="/account/update/{{account.id}}" class="brand-logo">{{uppercase account.name}} <span class="hide-on-med-and-down">BALANCE</span></a>
+        <a id="logo-container" href="#" class="brand-logo">{{uppercase account.name}}</a>
         <ul class="right hide-on-med-and-down">
-            <li>
-                <a href="/account/update/{{account.id}}">UPDATE BALANCE ${{account.balance}}</a>
-            </li>
             <li>
                 <a href="/profile">PROFILE</a>
             </li>
@@ -29,9 +26,6 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
         </ul>
   
         <ul id="nav-mobile" class="sidenav sec_text_color">
-            <li>
-                <a href="/account/update/{{account.id}}">UPDATE BALANCE ${{account.balance}}</a>
-            </li>
             <li>
                 <a href="/profile">PROFILE</a>
             </li>
@@ -50,8 +44,13 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
 
 <main>
     <br>
-    {{#if transactions}}
-        <div class="wide-container">
+    <div class="wide-container">
+        <h4 class="center-align">TRANSACTIONS FOR {{uppercase account.name}}</h4>
+        <h5 class="center-align">CURRENT BALANCE ${{account.balance}}</h5>
+        <div class="span center-align">
+            <a class="btn deep-orange lighten-3 black-text" href="/account/update/{{account.id}}">UPDATE BALANCE</a>
+        </div>
+        {{#if transactions}}
             <table class="stripped highlight centered responsive-table">
                 <thead>
                     <th>NAME</th>
@@ -76,8 +75,8 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
                 <a href="/transaction/{{transaction.id}}" class="btn-large waves-effect waves-light"><i
                             class="material-icons left">add</i>New transaction</a>
             </div>
-        </div>
-    {{/if}}
+        {{/if}}
+    </div>
     <br>
     <br>
     <br>
