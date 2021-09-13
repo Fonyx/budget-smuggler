@@ -18,7 +18,7 @@ There is no client side js for this partial --}}
         <span class="black-text">{{uppercase name}}</span>
     </td>
     <td>
-        <a href="/profile/account/{{account.id}}" class="btn {{account.materialize_color}} {{account.materialize_text_color}}-text center-align">{{account.name}}</a>
+        <a href="/profile/account/{{account.id}}" class="btn {{account.materialize_color}} {{account.materialize_text_color}}-text center-align">{{truncate account.name '8'}}</a>
     </td>
     <td>
         <span class="black-text">{{format_date due_date}}</span>

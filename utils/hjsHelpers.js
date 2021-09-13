@@ -9,8 +9,13 @@ module.exports = {
     parameterize: (text) => {
         return text.replace(/\s+/g, '-').toLowerCase();
     },
-    truncate: (text) => {
-        return text.slice(0, 100) + '...'
+    truncate: (text, limit) => {
+        let truncatedText = text;
+        // overrule truncatedText if the string is too long
+        if(text.length >= limit){
+            truncatedText = text.slice(0, limit) + '...'
+        } 
+        return truncatedText
     },
     uppercase: (text) => {
         return text.toUpperCase();

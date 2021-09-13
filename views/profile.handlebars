@@ -45,7 +45,7 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
                 </li>
                 {{#each accounts as |account|}}
                     <li>
-                        <a href="/profile/account/{{account.id}}" class="btn {{materialize_color}} {{materialize_text_color}}-text">{{account.name}}</a>
+                        {{>profile-account-card}}
                     </li>
                 {{/each}}
             </ul>
@@ -62,7 +62,7 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
         {{#if accounts}}
             <div class="row center-align hide-on-med-and-down">
                 {{#each accounts as |account|}}
-                        {{>account-card}}
+                        {{>profile-account-card}}
                 {{/each}}
                 <div class="row center padding-top">
                     <a href="/account/create" class="btn-large waves-effect waves-light"><i
@@ -85,7 +85,7 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
                     </thead>
                     <tbody>
                         {{#each transactions as |transaction|}}
-                        {{>transaction-table-row}}
+                            {{>transaction-table-row}}
                         {{/each}}
                     </tbody>
                 </table>
@@ -102,31 +102,6 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
             </div>
         {{/if}}
     </div>
-    {{!-- <div class="container">
-    </div>
-    <div class="container">
-        {{#if transactions}}
-            <table class="stripped highlight centered responsive-table">
-                <thead>
-                    <th>NAME</th>
-                    <th>ACCOUNT</th>
-                    <th>STARTED</th>
-                    <th>FREQUENCY</th>
-                    <th>AMOUNT</th>
-                    <th>DAYS LEFT</th>
-                    <th>UPDATE</th>
-                    <th>DELETE</th>
-                </thead>
-                <tbody>
-                    {{#each transactions as |transaction|}}
-                    {{>transaction-table-row}}
-                    {{/each}}
-                </tbody>
-            </table>
-        {{else}}
-            <h4 class="center-align">YOU HAVE NO TRANSACTIONS YET</h4>
-        {{/if}}
-    </div> --}}
     <br>
     <br>
     <br>
