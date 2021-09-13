@@ -57,6 +57,13 @@ async function graphTimeline(account_name) {
         }],
       },
       options:{
+        scales: {
+          yAxes: [{
+              ticks: {
+                  fontSize: 40
+              }
+          }]
+        },
         legend:{
           display: false,
           position: 'right',

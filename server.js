@@ -15,11 +15,13 @@ const PORT = process.env.PORT || 3001;
 
 const sess = {
   secret: 'Super secret secret',
+  saveUninitialized: true,
+  resave: true,
+  rolling: true,
   cookie: {
     // 5 minute session timeout
     expires: 1000 * 60 * 5
   },
-  resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
     db: sequelize
