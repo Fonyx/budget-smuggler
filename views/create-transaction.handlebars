@@ -79,4 +79,14 @@ CREATE A TRANSACTION FORM - USER OBJ AVAILABLE {{user.email}} {{user.balance}} -
     </div>
 </main>
 
+<script>
+    // set the minimum date the user can select to be today and onwards
+    var now = new Date(),
+    // minimum date the user can choose, in this case now and in the future
+    minDate = now.toISOString().substring(0,10);
+
+    let dueDateEl = document.querySelector('#transaction-duedate');
+    dueDateEl.setAttribute('min', minDate);
+</script>
+
 <script src="/js/createtransaction.js"></script>
