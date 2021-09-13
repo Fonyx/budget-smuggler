@@ -7,7 +7,7 @@ const { getAllAccountIdsForUserId, sumAllUserAccountBalances } = require('../uti
 const { getAccountNameFromParams } = require('../utils/routeHelpers');
 
 // get the test route for the timeline graph
-router.get('/timeline/:account_name', async(req, res) => {
+router.get('/timeline/:account_name', onlyIfLoggedIn, async(req, res) => {
     try{
         let currentAccountName = req.params.account_name;
         let userAccountObjs = await Account.findAll({
