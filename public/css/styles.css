@@ -240,3 +240,16 @@ a.nav-link.nav-item:hover {
     /* background-color: white; */
     padding-top: 100px;
 }
+
+/* special containers */
+.wide-container{
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 80%;
+}
+
+.widest-container{
+    margin: 0 auto;
+    max-width: 1800px;
+    width: 90%;
+}
