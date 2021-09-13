@@ -11,10 +11,10 @@ const cRequests = (req, res, next) => {
     const handWriting = String.fromCodePoint(0x270D);
     const pointing = String.fromCodePoint(0x1F446);
     const bomb = String.fromCodePoint(0x1F631);	
-    
-    let user_logged_in = req.session.logged_in? true: false;
-    let sessionRemainingTime = req.session.nowInMinutes;
-    clog(`user: ${req.session.user_id} logged in: ${user_logged_in} with timeout remaining: ${sessionRemainingTime}`, 'red');
+
+    let user_logged_in = req.session.logged_in? 'Logged In': 'Not Logged In';
+
+    clog(`user: ${req.session.user_id} is: ${user_logged_in}`,`cyan`);
 
     // log the method type and destination
     switch (req.method) {
