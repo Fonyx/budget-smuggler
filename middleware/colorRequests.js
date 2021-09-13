@@ -10,30 +10,33 @@ const cRequests = (req, res, next) => {
     const openHands = String.fromCodePoint(0x1F932);
     const handWriting = String.fromCodePoint(0x270D);
     const pointing = String.fromCodePoint(0x1F446);
-    const bomb = String.fromCodePoint(0x1F631);		
+    const bomb = String.fromCodePoint(0x1F631);	
+    let user_logged_in = req.session.logged_in? true: false;
     switch (req.method) {
       case 'GET': {
-        clog(`${openHands}  ${req.method} request to ${req.path}`, 'green');
+        clog(`${openHands}  ${req.method} request to ${req.path} from user logged in: ${user_logged_in}`, 'green');
         // clog.logGreen(`${openHands}  ${req.method} request to ${req.path}`);
         break;
       }
       case 'POST': {
-        clog(`${handWriting}  ${req.method} request to ${req.path}`, 'blue');
+        clog(`${handWriting}  ${req.method} request to ${req.path} from user logged in: ${user_logged_in}`, 'blue');
         // clog.logBlue(`${handWriting}  ${req.method} request to ${req.path}`);
         break;
       }
       case 'PUT': {
-        clog(`${pointing}  ${req.method} request to ${req.path}`, 'magenta');
+        clog(`${pointing}  ${req.method} request to ${req.path} from user logged in: ${user_logged_in}`, 'magenta');
         // clog.logMagenta(`${pointing}  ${req.method} request to ${req.path}`)
         break;
       }
       case 'DELETE': {
-        clog(`${bomb}  ${req.method} request to ${req.path}`, 'red');
+        clog(`${pointing}  ${req.method} request to ${req.path} from user logged in: ${user_logged_in}`, 'magenta');
+        clog(`${bomb}  ${req.method} request to ${req.path} `, 'red');
         // clog.logRed(`${bomb}  ${req.method} request to ${req.path}`)
         break;
       }
       default:
-        clog(`${req.method} request to ${req.path}`, 'white')
+        clog(`${pointing}  ${req.method} request to ${req.path} from user logged in: ${user_logged_in}`, 'magenta');
+        clog(`${req.method} request to ${req.path} `, 'black')
     }
   
     next();

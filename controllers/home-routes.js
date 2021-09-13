@@ -6,9 +6,7 @@ const {onlyIfLoggedIn} = require('../middleware/auth');
 router.get('/', async (req, res) => {
   try {
     // Pass serialized data into Handlebars.js template
-    res.render('landing', {
-      logged_in: req.session.logged_in 
-    });
+    res.render('landing');
   } catch (err) {
     res.status(500).json(err.message);
   }
