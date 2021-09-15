@@ -57,7 +57,7 @@ main {
     max-height: 700px;
 }
 
-#budgie-icon{
+.budgie-icon{
     width:60px;height:60px;
     filter: brightness(0) invert(1);
 }
