@@ -49,20 +49,24 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
 
 <main>
     <br>
-    <div class="wide-container">
-        <h5 class="center-align">{{uppercase account.name}} BALANCE ${{account.balance}}</h5>
-        <div class="span center-align">
-            <a class="btn deep-orange lighten-3 black-text" href="/account/update/{{account.id}}">UPDATE BALANCE</a>
-        </div>
+    <h5 class="center-align">{{uppercase account.name}} BALANCE ${{account.balance}}</h5>
+    <div class="span center-align">
+        <a class="btn deep-orange lighten-3 black-text" href="/account/update/{{account.id}}">UPDATE BALANCE</a>
+    </div>
         <div class="widest-container">
-            <div class="container chart-container accountTimeline" style="position: relative; height:80vh; width:80vw">
+            <div class="container chart-container accountTimeline">
                 <canvas id="chartTimeline"></canvas>
             </div>
         </div>
+        <br>
+    <div class="wide-container">
         <h5 class="center-align">TRANSACTIONS FOR {{uppercase account.name}}</h5>
+        <div class="row center">
+            <a href="/transaction/{{transaction.id}}" class="btn-large waves-effect waves-light"><i class="material-icons left">add</i>New transaction</a>
+        </div>
         {{#if transactions}}
             <table class="stripped highlight centered responsive-table">
-                <thead>
+                <thead class="teal lighten-2">
                     <th>NAME</th>
                     <th>STARTED</th>
                     <th>FREQUENCY</th>
@@ -80,10 +84,6 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
         {{else}}
             <div class="row">
                 <h4 class="center-align">YOU HAVE NO TRANSACTIONS YET</h4>
-            </div>
-            <div class="row center">
-                <a href="/transaction/{{transaction.id}}" class="btn-large waves-effect waves-light"><i
-                            class="material-icons left">add</i>New transaction</a>
             </div>
         {{/if}}
     </div>
