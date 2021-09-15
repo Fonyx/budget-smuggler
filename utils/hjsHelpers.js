@@ -58,6 +58,15 @@ module.exports = {
         } else {
             return 'checked="false"'
         }
+    },
+    displayBalanceWithDollarSign: (amount) => {
+        if(amount >= 0){
+            return '$'+amount;
+        } else {
+            let numeric = parseFloat(amount);
+            let absNumeric = Math.abs(numeric);
+            return '-$'+absNumeric;
+        }
     }
 
 };

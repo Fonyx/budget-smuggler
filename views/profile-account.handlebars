@@ -13,13 +13,10 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
         <img id="budgie-icon" src="/images/seethroughbudgie.png" alt="Outline of budgie with 100 dollar note superimposed over it">
         {{#if account}}
             <a id="logo-container" href="#" class="brand-logo center"><span id="timeline-account">{{uppercase account.name}}</span></a>
-            <a id="logo-container" href="#" class="brand-logo left"><span id="account-balance">BALANCE ${{account.balance}}</span></a>
+            <a id="logo-container" href="#" class="brand-logo left"><span id="account-balance">BALANCE {{displayBalanceWithDollarSign account.balance}}</span></a>
         {{else}}
             <a id="logo-container" href="#" class="brand-logo center"><span id="timeline-account">ALL</span></a>
-            <a id="logo-container" href="#" class="brand-logo left"><span id="account-balance">BALANCE ${{netBalance}}</span></a>
-        {{/if}}
-        {{#if netBalance}}
-        {{else}}
+            <a id="logo-container" href="#" class="brand-logo left"><span id="account-balance">BALANCE {{displayBalanceWithDollarSign netBalance}}</span></a>
         {{/if}}
         <ul class="right hide-on-med-and-down">
             <li>
