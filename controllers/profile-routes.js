@@ -37,7 +37,7 @@ router.get('/', onlyIfLoggedIn, async (req, res) => {
             return transactionObj.get({plain: true});
         })
         if(transactions){
-            res.render('profile', {transactions, user, netBalance, accounts});
+            res.render('profile-account', {transactions, user, netBalance, accounts});
         } else {
             res.status(404).json({message: "no Transactions found"});
         }
@@ -86,7 +86,7 @@ router.get('/account/:account_id', onlyIfLoggedIn, async (req, res) => {
             return transactionObj.get({plain: true});
         })
         if(transactions){
-            res.render('account-transactions', {transactions, account, user, accounts});
+            res.render('profile-account', {transactions, account, user, accounts});
         } else {
             res.status(404).json({message: "no Transactions found"});
         }
