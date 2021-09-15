@@ -74,14 +74,16 @@ CREATE A TRANSACTION FORM - USER OBJ AVAILABLE {{user.email}} {{user.balance}} -
             {{/each}}
             <div class="row padding-top">
                 <button class="btn btn-small mx-3 w-50 create-transaction-button" type="submit">Create</button>
-                <button class="btn btn-small mx-3 w-50" type="cancel" onclick="window.history.back()">Cancel</button>
+                <button class="btn btn-small mx-3 w-50" onclick="window.history.back()">Cancel</button>
             </div>
         </form>
     </div>
 </main>
 
+<script src="/js/set-date-to-today.js"></script>
+
+
 <script src="/js/limit-user-date.js"></script>
 
-<script src="/js/set-date-to-today"></script>
 
 <script src="/js/create-transaction.js"></script>
