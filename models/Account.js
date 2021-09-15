@@ -58,17 +58,28 @@ Account.init(
             unique: true,
             allowNull:false
         },
+        user_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            unique: 'uniqueUserIdName',
+            references: {
+                model: 'user',
+                key: 'id',
+            },
+        },
         name: {
             type: DataTypes.STRING,
+            unique: 'uniqueUserIdName',
             allowNull: false,
         },
-        // currency: {
-        //     type: DataTypes.STRING,
-        //     allowNull: true,
-        //     validate: {
-        //         len: [2,5],
-        //     },
-        // },
+        currency: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            allowNull: true,
+            validate: {
+                len: [2,5],
+            },
+        },
         balance:{
             type: DataTypes.FLOAT,
             defaultValue: 0.00,
@@ -95,14 +106,6 @@ Account.init(
             type: DataTypes.ENUM,
             values: ['white', 'black'],
             allowNull: true,
-        },
-        user_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'user',
-                key: 'id',
-            },
         }
     },{
     hooks:{

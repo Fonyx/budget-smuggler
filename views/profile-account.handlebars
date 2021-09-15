@@ -81,14 +81,14 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
         {{/each}}
         <a href="/account/create" class="btn red lighten-3 white-text center-align"><i class="material-icons left">add</i>New account</a>
     </div>
-    <div class="widest-container">
-        <div class="container chart-container accountTimeline">
-            <canvas id="chartTimeline"></canvas>
+    {{#if transactions}}
+        <div class="widest-container">
+            <div class="container chart-container accountTimeline">
+                <canvas id="chartTimeline"></canvas>
+            </div>
         </div>
-    </div>
-    <br>
-    <div class="wide-container">
-        {{#if transactions}}
+        <br>
+        <div class="wide-container">
             <table class="stripped highlight centered responsive-table">
                 <thead class="teal lighten-3">
                     <th>NAME</th>
@@ -105,12 +105,12 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
                     {{/each}}
                 </tbody>
             </table>
-        {{else}}
-            <div class="row">
-                <h4 class="center-align">YOU HAVE NO TRANSACTIONS YET</h4>
-            </div>
-        {{/if}}
-    </div>
+        </div>
+    {{else}}
+        <div class="row">
+            <h4 class="center-align">YOU HAVE NO TRANSACTIONS YET</h4>
+        </div>
+    {{/if}}
     <br>
 </main>
 

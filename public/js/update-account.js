@@ -3,27 +3,44 @@ const updateBalanceFormHandler = async (event) => {
     // collect values from the update-balance form
     const name = document.querySelector('#account-name').value.trim();
     const balance = document.querySelector('#account-balance').value.trim();
+    const interest_rate = document.querySelector('#account-interest-rate').value.trim();
     const account_id = document.querySelector('#account-detail').dataset.id;
-    // validating user input for balance
+    const feedback = document.querySelector('#feedback');
+
+
     try {
         let _ = parseFloat(balance);
     } catch (err) {
+        feedback.textContent = "You need to add a decimal number as a balance";
         console.error(err);
         return
     }
 
+    try {
+        let __ = parseFloat(interest_rate);
+    } catch (err) {
+        feedback.textContent = "You need to add a decimal number as a balance";
+        console.error(err);
+        return
+    }
+    
     if(!name){
-        console.log('You need an account name');
+        feedback.textContent = "You need an account name";
+        return
+    }
+
+    if(!interest_rate || interest_rate < 0){
+        feedback.textContent = "You need to have a positive interest rate";
         return
     }
 
     
-    if(balance && account_id && name){
+    if(balance && account_id && name && interest_rate){
         try{
             // consume the login endpoint with a post request
             const response = await fetch(`/account/update/${account_id}`, {
                 method: 'PUT',
-                body: JSON.stringify({balance, name}),
+                body: JSON.stringify({balance, name, interest_rate}),
                 headers: {'Content-Type':'application/json'}
             });
             if(response.ok){

@@ -1,0 +1,60 @@
+<header>
+    <nav>
+        <div class="nav-wrapper teal">
+            <img class="budgie-icon" src="/images/seethroughbudgie.png" alt="Outline of budgie with 100 dollar note superimposed over it">
+            {{#if account}}
+                <a href="#" class="brand-logo center">UPDATE ACCOUNT</a>
+            {{else}}
+                <a href="#" class="brand-logo center">CREATE ACCOUNT</a>
+            {{/if}}
+        </div>
+    </nav>
+</header>
+<main class="valign-wrapper">
+    <div class="container center-align">
+        <div class="col-md-6">
+            {{#if account}}
+                <form class="form update-account-form center-align">
+                    <div class="form-group">
+                        <label for="account-name" id="account-detail" data-id={{account.id}}>ACCOUNT NAME</label>
+                        <input class="form-input center-align" type="text" id="account-name" value="{{account.name}}" placeholder="eg. Mortgage">
+                    </div>
+                    <div class="form-group">
+                        <label for="account-balance">BALANCE</label>
+                        <input class="form-input center-align" type="text" id="account-balance"
+                            value="{{account.balance}}" placeholder="Positive Decimal">
+                    </div>
+                    <div class="form-group">
+                        <label for="account-interest-rate">INTEREST RATE</label>
+                        <input class="form-input center-align" type="text" id="account-interest-rate"
+                            value="{{account.interestRate}}" placeholder="Positive Decimal">
+                    </div>
+                    <button id="create-btn" type="submit" class="btn">Update</button>
+                    <button id="cancel-btn" type="cancel" class="btn" onclick="window.history.back()" class="btn btn-light mx-3 w-50">Cancel</button>
+                </form>
+                <script src="/js/update-account.js"></script>
+            {{else}}
+                <form class="form update-account-form center-align">
+                    <div class="form-group">
+                        <label for="account-name">ACCOUNT NAME</label>
+                        <input class="form-input center-align" type="text" id="account-name" placeholder="eg. Mortgage">
+                    </div>
+                    <div class="form-group">
+                        <label for="account-balance">ACCOUNT BALANCE</label>
+                        <input class="form-input center-align" type="text" id="account-balance" value="0.00" placeholder="Positive Decimal">
+                    </div>
+                    <div class="form-group">
+                        <label for="account-interest-rate">INTEREST RATE</label>
+                        <input class="form-input center-align" type="text" id="account-interest-rate" value="0.00" placeholder="Positive Decimal">
+                    </div>
+                    <button id="create-btn" type="submit" class="btn">Create</button>
+                    <button id="cancel-btn" type="cancel" class="btn" onclick="window.history.back()"
+                    class="btn btn-light mx-3 w-50">Cancel</button>
+                </form>
+                <script src="/js/create-account.js"></script>
+            {{/if}}
+            <h5 id="feedback" class="red-text lighten-text-1"></h5>
+        </div>
+    </div>
+
+</main>
