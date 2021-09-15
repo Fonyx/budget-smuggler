@@ -12,13 +12,10 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
       <div class="nav-wrapper teal darken-2">
         <img src="/images/seethroughbudgie.png" alt="Outline of budgie with 100 dollar note superimposed over it"
                 style="width:60px;height:60px;">
-        <a id="logo-container" href="#" class="brand-logo">{{uppercase account.name}}</a>
+        <a id="logo-container" href="#" class="brand-logo"><span id="timeline-account">{{uppercase account.name}}</span></a>
         <ul class="right hide-on-med-and-down">
             <li>
                 <a href="/profile">PROFILE</a>
-            </li>
-            <li>
-                <a href="/graph/timeline/{{account.name}}">TIMELINE</a>
             </li>
             <li>
                 <a href="/user/logout">LOGOUT</a>
@@ -30,11 +27,19 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
                 <a href="/profile">PROFILE</a>
             </li>
             <li>
-                <a href="/graph/timeline/{{account.name}}">TIMELINE</a>
-            </li>
-            <li>
                 <a href="/user/logout">LOGOUT</a>
             </li>
+            <li>
+                <div class="divider"></div>
+            </li>
+            <li>
+                <a href="#" class="center">YOUR ACCOUNTS</a>
+            </li>
+            {{#each accounts as |account|}}
+                <li>
+                    {{>profile-account-card}}
+                </li>
+            {{/each}}
         </ul>
         <a href="#" data-target="nav-mobile" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
       </div>
@@ -48,6 +53,11 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
         <h5 class="center-align">{{uppercase account.name}} BALANCE ${{account.balance}}</h5>
         <div class="span center-align">
             <a class="btn deep-orange lighten-3 black-text" href="/account/update/{{account.id}}">UPDATE BALANCE</a>
+        </div>
+        <div class="widest-container">
+            <div class="container chart-container accountTimeline" style="position: relative; height:80vh; width:80vw">
+                <canvas id="chartTimeline"></canvas>
+            </div>
         </div>
         <h5 class="center-align">TRANSACTIONS FOR {{uppercase account.name}}</h5>
         {{#if transactions}}
@@ -83,4 +93,4 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
 </main>
 
 
-{{!-- <script src="/js/logout.js"></script> --}}
+<script src="/js/graphs.js"></script>

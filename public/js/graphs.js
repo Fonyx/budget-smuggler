@@ -1,10 +1,5 @@
 
-async function graphTimeline(account_name) {
-  
-  if(!account_name){
-    console.log('Must pass either an account name or all to graph timelines');
-    return
-  }
+async function graphTimeline() {
 
   // get the account name from the timeline-account id field
   let accountName = document.querySelector('#timeline-account').innerHTML;
@@ -108,4 +103,4 @@ async function graphTimeline(account_name) {
   }
 }
 
-graphTimeline('all');
+graphTimeline();
