@@ -30,13 +30,13 @@
                             value="{{account.interest_rate}}" placeholder="Positive Decimal">
                     </div>
                     <br>
-                    
-                        <p class="">COMPOUNDS</p>
-                        {{#each compounding as |compounds|}}
-                                <input class="form-check-input with-gap" type="radio" value="{{compounds}}" name="account-compounding" id="{{compounds}}" checked="true">
-                                <span>{{uppercase compounds}}</span>
-                            </label>
-                        {{/each}}
+                    <p class="">COMPOUNDS</p>
+                    {{#each compounding as |compounds|}}
+                        <label class="form-check-label" for="{{compounds}}">
+                            <input class="form-check-input with-gap" type="radio" value="{{compounds}}" name="account-compounding" id="{{compounds}}" checked="true">
+                            <span>{{uppercase compounds}}</span>
+                        </label>
+                    {{/each}}
                     <br>
                     <div class="row padding-top">
                         <button id="create-btn" type="submit" class="btn">Update</button>
@@ -59,15 +59,13 @@
                         <input class="form-input center-align" type="text" id="account-interest-rate" value="0.00" placeholder="Positive Decimal">
                     </div>
                     <br>
-                    <div class="form-group">
-                        <p class="">COMPOUNDS</p>
-                        {{#each compounding as |compounds|}}
-                            <label class="form-check-label" for="{{compounds}}">
-                                <input class="form-check-input with-gap" type="radio" value="{{compounds}}" name="account-compounding" id="{{compounds}}" checked="true">
-                                <span>{{uppercase compounds}}</span>
-                            </label>
-                        {{/each}}
-                    </div>
+                    <p class="">COMPOUNDS</p>
+                    {{#each compounding as |compounds|}}
+                        <label class="form-check-label" for="{{compounds}}">
+                            <input class="form-check-input with-gap" type="radio" value="{{compounds}}" name="account-compounding" id="{{compounds}}" checked="true">
+                            <span>{{uppercase compounds}}</span>
+                        </label>
+                    {{/each}}
                     <br>
                     <div class="row padding-top">
                         <button id="create-btn" type="submit" class="btn">Create</button>
