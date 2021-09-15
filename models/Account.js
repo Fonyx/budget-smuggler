@@ -50,89 +50,95 @@ class Account extends Model {
 }
 
 Account.init(
-    {
-        id:{
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
-            primaryKey: true,
-            unique: true,
-            allowNull:false
+{
+    id:{
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+        unique: true,
+        allowNull:false
+    },
+    user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        unique: 'uniqueUserIdName',
+        references: {
+            model: 'user',
+            key: 'id',
         },
-        user_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            unique: 'uniqueUserIdName',
-            references: {
-                model: 'user',
-                key: 'id',
-            },
+    },
+    name: {
+        type: DataTypes.STRING,
+        unique: 'uniqueUserIdName',
+        allowNull: false,
+    },
+    currency: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        allowNull: true,
+        validate: {
+            len: [2,5],
         },
-        name: {
-            type: DataTypes.STRING,
-            unique: 'uniqueUserIdName',
-            allowNull: false,
-        },
-        currency: {
-            type: DataTypes.STRING,
-            allowNull: true,
-            allowNull: true,
-            validate: {
-                len: [2,5],
-            },
-        },
-        balance:{
-            type: DataTypes.FLOAT,
-            defaultValue: 0.00,
-            validate:{
-                isFloat: true,
-            }
-        },
-        interest_rate:{
-            type: DataTypes.FLOAT,
-            defaultValue: 0,
-            allowNull: false,
-        },
-        materialize_color:{
-            type: DataTypes.ENUM,
-            values: colors,
-            allowNull: true,
-        },
-        materialize_modifier:{
-            type: DataTypes.ENUM,
-            values: modifiers,
-            allowNull: true,
-        },
-        materialize_text_color:{
-            type: DataTypes.ENUM,
-            values: ['white', 'black'],
-            allowNull: true,
-        }
-    },{
-    hooks:{
-        beforeCreate: (account) => {
-            let randomColorIndex = generateRandomIntFromRange(0, colors.length-1);
-            let randomModifierIndex = generateRandomIntFromRange(0, modifiers.length-1);
-            let materializeText = 'black'
-
-            let randomColor = colors[randomColorIndex];
-            let randomModifier = modifiers[randomModifierIndex];
-
-            account.materialize_color = randomColor;
-            account.materialize_modifier = randomModifier;
-
-            // if the modifier is darken, set the text to white, otherwise leave it black for lighten and accent
-            if(randomModifier[0] === 'd'){
-                materializeText = 'white';
-            }
-            account.materialize_text_color = materializeText;
+    },
+    balance:{
+        type: DataTypes.FLOAT,
+        defaultValue: 0.00,
+        validate:{
+            isFloat: true,
         }
     },
-    sequelize,
-    timestamps: false,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'account',
+    interest_rate:{
+        type: DataTypes.FLOAT,
+        defaultValue: 0,
+        allowNull: false,
+    },
+    compounding:{
+        type: DataTypes.ENUM,
+        values: ['daily', 'weekly', 'fortnightly', 'monthly', 'annually'],
+        allowNull: false,
+        defaultValue: 'daily'
+    },
+    materialize_color:{
+        type: DataTypes.ENUM,
+        values: colors,
+        allowNull: true,
+    },
+    materialize_modifier:{
+        type: DataTypes.ENUM,
+        values: modifiers,
+        allowNull: true,
+    },
+    materialize_text_color:{
+        type: DataTypes.ENUM,
+        values: ['white', 'black'],
+        allowNull: true,
     }
+},{
+hooks:{
+    beforeCreate: (account) => {
+        let randomColorIndex = generateRandomIntFromRange(0, colors.length-1);
+        let randomModifierIndex = generateRandomIntFromRange(0, modifiers.length-1);
+        let materializeText = 'black'
+
+        let randomColor = colors[randomColorIndex];
+        let randomModifier = modifiers[randomModifierIndex];
+
+        account.materialize_color = randomColor;
+        account.materialize_modifier = randomModifier;
+
+        // if the modifier is darken, set the text to white, otherwise leave it black for lighten and accent
+        if(randomModifier[0] === 'd'){
+            materializeText = 'white';
+        }
+        account.materialize_text_color = materializeText;
+    }
+},
+sequelize,
+timestamps: false,
+freezeTableName: true,
+underscored: true,
+modelName: 'account',
+}
 );
 
 module.exports = Account;

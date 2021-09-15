@@ -37,7 +37,7 @@
   },
   {
     "name": "car loan",
-	  "balance":12125.23,
+	  "balance":-12125.23,
     "interest_rate": 9.56,
 	  "user_id":1
   },

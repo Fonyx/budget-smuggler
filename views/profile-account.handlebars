@@ -57,11 +57,11 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
         {{#if account}}
             <div class="nav-wrapper {{displayColoredBackgroundMaterialize account.balance}}">
                 <a href="#" class="brand-logo left"><span id="timeline-account">{{uppercase account.name}}</span></a>
-                <a href="#" class="brand-logo right">BALANCE {{displayBalanceWithDollarSign account.balance}}</a>
+                <a href="#" class="brand-logo right"><span class="hide-on-med-and-down">BALANCE </span>{{displayBalanceWithDollarSign account.balance}} @ {{account.interest_rate}}% *{{account.compounding}}</a>
         {{else}}
             <div class="nav-wrapper {{displayColoredBackgroundMaterialize netBalance}}">
                 <a href="#" class="brand-logo left"><span id="timeline-account">ALL</span> ACCOUNTS</a>
-                <a href="#" class="brand-logo right">BALANCE {{displayBalanceWithDollarSign netBalance}}</a>
+                <a href="#" class="brand-logo right"><span class="hide-on-med-and-down">BALANCE </span>{{displayBalanceWithDollarSign netBalance}}</a>
         {{/if}}
         </div>
         </div>
@@ -89,6 +89,7 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
         </div>
         <br>
         <div class="wide-container">
+            <h5 class="center-align">YOUR TRANSACTIONS</h5>
             <table class="stripped highlight centered responsive-table">
                 <thead class="teal lighten-3">
                     <th>NAME</th>
