@@ -33,10 +33,6 @@ main {
     padding-top: 25px;
 }
 
-/* .valign-wrapper {
-    padding-top: 40px !important;
-} */
-
 /* Timeline graph */
 .chart-container{
     /* background-color: white; */
@@ -55,8 +51,12 @@ main {
 
 .widest-container{
     margin: 0 auto;
-    max-width: 1800px;
+    max-width: 1600px;
     /* width: 90vw; */
-    height: 80vh;
+    height: 75vh;
     max-height: 700px;
+}
+
+#budgie-icon{
+    width:60px;height:60px;
 }

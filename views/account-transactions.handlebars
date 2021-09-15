@@ -10,10 +10,13 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
 <header>
     <nav role="navigation">
       <div class="nav-wrapper teal darken-2">
-        <img src="/images/seethroughbudgie.png" alt="Outline of budgie with 100 dollar note superimposed over it"
-                style="width:60px;height:60px;">
-        <a id="logo-container" href="#" class="brand-logo"><span id="timeline-account">{{uppercase account.name}}</span></a>
+        <img id="budgie-icon" src="/images/seethroughbudgie.png" alt="Outline of budgie with 100 dollar note superimposed over it">
+        <a id="logo-container" href="#" class="brand-logo center"><span id="timeline-account">{{uppercase account.name}}</span></a>
+        <a id="logo-container" href="#" class="brand-logo left"><span id="timeline-account">BALANCE ${{account.balance}}</span></a>
         <ul class="right hide-on-med-and-down">
+            <li>
+                <a href="/account/update/{{account.id}}">UPDATE BALANCE</a>
+            </li>
             <li>
                 <a href="/profile">PROFILE</a>
             </li>
@@ -49,16 +52,19 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
 
 <main>
     <br>
-    <h5 class="center-align">{{uppercase account.name}} BALANCE ${{account.balance}}</h5>
-    <div class="span center-align">
-        <a class="btn deep-orange lighten-3 black-text" href="/account/update/{{account.id}}">UPDATE BALANCE</a>
+    <div class="wide-container center-align hide-on-med-and-down">
+        <h5 class="center-align">YOUR OTHER ACCOUNTS</h5>
+        <a href="/profile" class="btn red lighten-3 white-text center-align">all</a>
+        {{#each accounts as |account|}}
+                {{>profile-account-card}}
+        {{/each}}
     </div>
-        <div class="widest-container">
-            <div class="container chart-container accountTimeline">
-                <canvas id="chartTimeline"></canvas>
-            </div>
+    <div class="widest-container">
+        <div class="container chart-container accountTimeline">
+            <canvas id="chartTimeline"></canvas>
         </div>
-        <br>
+    </div>
+    <br>
     <div class="wide-container">
         <h5 class="center-align">TRANSACTIONS FOR {{uppercase account.name}}</h5>
         <div class="row center">
@@ -66,7 +72,7 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
         </div>
         {{#if transactions}}
             <table class="stripped highlight centered responsive-table">
-                <thead class="teal lighten-2">
+                <thead class="teal lighten-3">
                     <th>NAME</th>
                     <th>STARTED</th>
                     <th>FREQUENCY</th>
@@ -87,8 +93,6 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
             </div>
         {{/if}}
     </div>
-    <br>
-    <br>
     <br>
 </main>
 
