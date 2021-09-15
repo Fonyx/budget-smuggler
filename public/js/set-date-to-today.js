@@ -1,0 +1,1 @@
+document.getElementById('transaction-due-date').value = new Date().toDateInputValue();

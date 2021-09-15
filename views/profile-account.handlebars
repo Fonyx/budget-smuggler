@@ -23,22 +23,25 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
         {{/if}}
         <ul class="right hide-on-med-and-down">
             <li>
-                <a href="/account/update/{{account.id}}">UPDATE BALANCE</a>
+                <a href="/transaction/{{transaction.id}}"><i class="material-icons left show-on-large">add</i>TRANSACTION</a>
             </li>
             <li>
-                <a href="/profile">PROFILE</a>
+                <a href="/account/update/{{account.id}}"><i class="material-icons left show-on-large">swap_vert</i>BALANCE</a>
             </li>
             <li>
-                <a href="/user/logout">LOGOUT</a>
+                <a href="/user/logout"><i class="material-icons left show-on-large">exit_to_app</i>LOGOUT</a>
             </li>
         </ul>
   
         <ul id="nav-mobile" class="sidenav sec_text_color">
             <li>
-                <a href="/profile">PROFILE</a>
+                <a href="/transaction/{{transaction.id}}"><i class="material-icons left show-on-large">add</i>NEW TRANSACTION</a>
             </li>
             <li>
-                <a href="/user/logout">LOGOUT</a>
+                <a href="/account/update/{{account.id}}"><i class="material-icons left show-on-large">swap_vert</i>UPDATE BALANCE</a>
+            </li>
+            <li>
+                <a href="/user/logout"><i class="material-icons left show-on-large">exit_to_app</i>LOGOUT</a>
             </li>
             <li>
                 <div class="divider"></div>
@@ -80,9 +83,6 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
     </div>
     <br>
     <div class="wide-container">
-        <div class="row center">
-            <a href="/transaction/{{transaction.id}}" class="btn-large waves-effect waves-light"><i class="material-icons left">add</i>New transaction</a>
-        </div>
         {{#if transactions}}
             <table class="stripped highlight centered responsive-table">
                 <thead class="teal lighten-3">

@@ -6,32 +6,6 @@ const {createBalanceTimeline} = require('../utils/timelineBuilders');
 const { getAllAccountIdsForUserId, sumAllUserAccountBalances } = require('../utils/instanceHelpers');
 const { getAccountNameFromParams } = require('../utils/routeHelpers');
 
-// get the test route for the timeline graph
-// router.get('/timeline/:account_name', onlyIfLoggedIn, async(req, res) => {
-//     try{
-//         let currentAccountName = req.params.account_name;
-//         let userAccountObjs = await Account.findAll({
-//             where:{
-//                 user_id: req.session.user_id
-//             },
-//             // attributes: ['name']
-//         });
-//         let accounts = userAccountObjs.map((userAccountObj) =>{
-//             return userAccountObj.get({plain: true});
-//         });
-
-//         // let accounts = [];
-//         // userAccounts.forEach((userAccount) =>{
-//         //     accounts.push(userAccount.name)
-//         // })
-
-//         res.render('graphs', {accounts, currentAccountName});
-//     }catch(err){
-//         clog(err, 'red');
-//         res.status(500).json({message:"Failed to return timeline"});
-//     }
-// });
-
 /**
  * get the data packet for the timeline route filtering by category
  * list of {date: balance} objects
