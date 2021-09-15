@@ -11,20 +11,15 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
     <nav role="navigation">
       <div class="nav-wrapper teal darken-2">
         <img id="budgie-icon" src="/images/seethroughbudgie.png" alt="Outline of budgie with 100 dollar note superimposed over it">
-        {{#if account}}
-            <a id="logo-container" href="#" class="brand-logo center"><span id="timeline-account">{{uppercase account.name}}</span></a>
-            <a id="logo-container" href="#" class="brand-logo left"><span id="account-balance">BALANCE {{displayBalanceWithDollarSign account.balance}}</span></a>
-        {{else}}
-            <a id="logo-container" href="#" class="brand-logo center"><span id="timeline-account">ALL</span></a>
-            <a id="logo-container" href="#" class="brand-logo left"><span id="account-balance">BALANCE {{displayBalanceWithDollarSign netBalance}}</span></a>
-        {{/if}}
         <ul class="right hide-on-med-and-down">
             <li>
                 <a href="/transaction/{{transaction.id}}"><i class="material-icons left show-on-large">add</i>TRANSACTION</a>
             </li>
-            <li>
-                <a href="/account/update/{{account.id}}"><i class="material-icons left show-on-large">swap_vert</i>BALANCE</a>
-            </li>
+            {{#if account}}
+                <li>
+                    <a href="/account/update/{{account.id}}"><i class="material-icons left show-on-large">swap_vert</i>BALANCE</a>
+                </li>
+            {{/if}}
             <li>
                 <a href="/user/logout"><i class="material-icons left show-on-large">exit_to_app</i>LOGOUT</a>
             </li>
@@ -57,6 +52,19 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
         </ul>
         <a href="#" data-target="nav-mobile" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
       </div>
+    </nav>
+    <nav role="navigation">
+        {{#if account}}
+            <div class="nav-wrapper {{displayColoredBackgroundMaterialize account.balance}}">
+                <a href="#" class="brand-logo left"><span id="timeline-account">{{uppercase account.name}}</span></a>
+                <a href="#" class="brand-logo right">BALANCE {{displayBalanceWithDollarSign account.balance}}</a>
+        {{else}}
+            <div class="nav-wrapper {{displayColoredBackgroundMaterialize netBalance}}">
+                <a href="#" class="brand-logo left"><span id="timeline-account">ALL</span> ACCOUNTS</a>
+                <a href="#" class="brand-logo right">BALANCE {{displayBalanceWithDollarSign netBalance}}</a>
+        {{/if}}
+        </div>
+        </div>
     </nav>
 </header>
 

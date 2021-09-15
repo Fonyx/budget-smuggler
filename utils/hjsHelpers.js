@@ -67,6 +67,13 @@ module.exports = {
             let absNumeric = Math.abs(numeric);
             return '-$'+absNumeric;
         }
+    },
+    displayColoredBackgroundMaterialize: (amount) => {
+        if(amount > 0) {
+            return 'green lighten-2'
+        } else {
+            return 'red lighten-2'
+        }
     }
 
 };
