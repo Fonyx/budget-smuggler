@@ -74,6 +74,13 @@ module.exports = {
         } else {
             return 'red lighten-2'
         }
+    },
+    renderSignFromAmount: (amount) => {
+        if(amount < 0){
+            return '-'
+        } else {
+            return '+'
+        }
     }
 
 };
