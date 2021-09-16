@@ -64,7 +64,7 @@ async function createBalanceTimelineForAccount(account, transactions){
     // dayTransactions.compound(account.interest_rate, account.compounding);
 
     // sort dictionary keys
-    dayTransactions.sort();
+    // dayTransactions.sort();
 
     // reduce the transaction totals to an accumulated balance
     dayTransactions.accumulate();
