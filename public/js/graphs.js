@@ -3,7 +3,17 @@ async function graphTimeline() {
 
   // get the account name from the timeline-account id field
   let accountName = document.querySelector('#timeline-account').innerHTML;
-  // console.log(accountName);
+  accountNameLower = accountName.toLowerCase();
+  // slugify for url parametrization
+  accountNameLowerSlug = accountNameLower.replace(/ /g, '-');
+  console.log(accountNameLowerSlug);
+  // determine which url to send the request to
+  if(accountNameLower === 'all'){
+    dataUrl = '/graph/data/timeline/all';
+  } else {
+    dataUrl = `/graph/data/timeline/account/${accountNameLowerSlug}`;
+  }
+  console.log(dataUrl);
 
   // build a new canvas to display to
   var timelineEl = document.getElementById('chartTimeline');
@@ -18,9 +28,8 @@ async function graphTimeline() {
   gradient.addColorStop(1, 'red');
   gradient.addColorStop(0.8, 'green');
 
-
   // get the data
-  let data = await fetch(`/graph/data/timeline/${accountName}`, {
+  let data = await fetch(dataUrl, {
     method: 'GET',
     headers: { 'Content-Type': 'application/json'}
   })

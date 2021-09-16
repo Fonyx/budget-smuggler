@@ -41,6 +41,11 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
             <li>
                 <a href="#" class="center">YOUR ACCOUNTS</a>
             </li>
+            {{#if account}}
+                <li>
+                    <a href="/profile/all" class="btn red black-text center-align">ALL</a>
+                </li>
+            {{/if}}
             {{#each accounts as |account|}}
                 <li>
                     {{>profile-account-card}}
@@ -74,7 +79,7 @@ they should be <a href="/transaction/create"></a> tags as they are redirects whi
     <div class="wide-container center-align hide-on-med-and-down">
         <h5 class="center-align">YOUR OTHER ACCOUNTS</h5>
         {{#if account}}
-            <a href="/profile" class="btn red lighten-3 white-text center-align">all</a>
+            <a href="/profile/all" class="btn red lighten-3 white-text center-align">ALL</a>
         {{/if}}
         {{#each accounts as |account|}}
                 {{>profile-account-card}}

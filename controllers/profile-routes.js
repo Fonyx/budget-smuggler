@@ -6,7 +6,7 @@ const sequelize = require('../config/connection');
 const { Op } = require("sequelize");
 
 // Get all transactions for a user
-router.get('/', onlyIfLoggedIn, async (req, res) => {
+router.get('/all', onlyIfLoggedIn, async (req, res) => {
     try{
         let userObj = await User.findByPk(req.session.user_id);
         let userAccountIds = await getAllAccountIdsForUserId(req.session.user_id);

@@ -20,7 +20,7 @@ const signupFormHandler = async (event) => {
         });
         if (response.ok) {
             console.log('User successfully logged in');
-            document.location.replace('/profile');
+            document.location.replace('/profile/all');
         } else if(response.status === 409){
             console.log('That email already exists');
             feedback.textContent = 'That email already exists';

@@ -16,7 +16,7 @@ const loginFormHandler = async (event) => {
 
         if(response.ok){
             console.log('User successfully logged in');
-            document.location.replace('/profile');
+            document.location.replace('/profile/all');
         } else {
             console.log('User failed to login with known credentials');
             console.log(response);

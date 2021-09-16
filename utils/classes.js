@@ -7,7 +7,7 @@ dayjs.extend(customParseFormat);
  * A dictionary object that acts like a python dictionary, with teh asterix that the value is a list
  * has getter, setter and print methods
  */
- class dict{
+ class timelineDict{
     /**
      * 
      * @param {list} keys list of strings
@@ -169,7 +169,7 @@ dayjs.extend(customParseFormat);
             console.error(error);
         }
     }
-    /* special function used to reduce the values in each value entry
+    /** special function used to reduce the values in each value entry
     for example: 
         {
             keys: [1, 2, 3],
@@ -208,25 +208,19 @@ dayjs.extend(customParseFormat);
      * }
      * 
      */
-    accumulate(starting_balance){
-        let accumulatedValue = parseFloat(starting_balance);
-
+    accumulate(){
+        let accumulatedValue = 0;
+        
         for(let i = 0; i < this.keys.length; i++){
             let currentKey = this.keys[i];
             let currentValue = this.values[i];
-
-            // dodge 0 index as that is the current date with starting balance
-            if(i > 0){
-                let currentFloat = parseFloat(currentValue);
-                accumulatedValue += currentFloat;
-            }
+            let currentFloat = parseFloat(currentValue);
+            accumulatedValue += currentFloat;
             this.set(currentKey, accumulatedValue);
         }
-
-        this.print();
     }
 }
 
 module.exports ={
-    dict,
+    timelineDict,
 }
