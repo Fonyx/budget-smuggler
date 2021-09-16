@@ -3,6 +3,12 @@ const signupFormHandler = async (event) => {
     // collect values from the login form
     const email = document.querySelector('#email-signup').value.trim();
     const password = document.querySelector('#password-signup').value.trim();
+    const feedback = document.querySelector('#feedback');
+
+    if(password.length < 8){
+        feedback.textContent = "That password isn't long enough, at least 8 characters please";
+        return
+    }
 
     if (email && password) {
 
@@ -14,10 +20,10 @@ const signupFormHandler = async (event) => {
         });
         if (response.ok) {
             console.log('User successfully logged in');
-            document.location.replace('/profile');
+            document.location.replace('/profile/all');
         } else if(response.status === 409){
             console.log('That email already exists');
-            alert('That email already exists');
+            feedback.textContent = 'That email already exists';
         } else {
             console.log('User failed to signup');
             alert(response.statusText);

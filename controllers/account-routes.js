@@ -35,7 +35,8 @@ router.get('/create', onlyIfLoggedIn, async (req, res) => {
     try{
         let userObj = await User.findByPk(req.session.user_id);
         let user = userObj.get();
-        res.render('create-account', {user})
+        let compounding = ['daily', 'weekly', 'fortnightly', 'monthly', 'annually'];
+        res.render('create-update-account', {user, compounding})
     }
     catch(err){
         console.log(err);
@@ -56,7 +57,7 @@ router.post('/create', onlyIfLoggedIn, async (req, res) => {
     } catch (err) {
         if(err.name ==="SequelizeUniqueConstraintError"){
             clog(`Account ${req.body.name} already exists`, 'magenta');
-            res.status(400).json({message:`Account ${req.body.name} already exists`})
+            res.status(409).json({message:`Account ${req.body.name} already exists`})
         } else {
             clog(err, 'red');
             res.status(500).json(err);
@@ -64,7 +65,7 @@ router.post('/create', onlyIfLoggedIn, async (req, res) => {
     }
 });
 
-//request for update form for user balance
+//request for update form for account
 router.get('/update/:account_id', onlyIfLoggedIn, async (req, res) => {
     try{
         let accountObj = await Account.findByPk(req.params.account_id, {
@@ -74,7 +75,8 @@ router.get('/update/:account_id', onlyIfLoggedIn, async (req, res) => {
         let account = accountObj.get({plain:true});
         let userObj = await User.findByPk(req.session.user_id);
         let user = userObj.get();
-        res.render('update-account', {user, account})
+        let compounding = ['daily', 'weekly', 'fortnightly', 'monthly', 'annually'];
+        res.render('create-update-account', {user, account, compounding})
     }catch(err){
       clog(err, 'red');
       res.status(500).json({message:"Failed to serve update-balance form"});

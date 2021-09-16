@@ -235,6 +235,7 @@ class Transaction extends Model {
 
     getFrequencyMap(){
         const frequencyMap = {
+            daily: 1,
             weekly: 6,
             fortnightly: 13,
             annually: 355

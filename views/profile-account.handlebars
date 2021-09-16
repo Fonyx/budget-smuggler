@@ -1,0 +1,124 @@
+{{!-- This template will render all transactions for a logged in user. Data available is {{userTransactions}} and
+{{userObj}} for dressing the dynamic fields. There will be buttons that redirect to many other routes, in no particular
+order they are:
+- create transaction : /transaction/create - link to new page
+- update transaction : /transaction/update/:transaction_id link to new page
+- delete transaction : /transaction/delete/:transaction_id not sure
+- update balance : /profile/balance link to new page
+- graph view : /graphs link to new page
+they should be <a href="/transaction/create"></a> tags as they are redirects which automatically use get requests --}}
+<header>
+    <nav role="navigation">
+      <div class="nav-wrapper teal darken-2">
+        <img class="budgie-icon" src="/images/seethroughbudgie.png" alt="Outline of budgie with 100 dollar note superimposed over it">
+        <ul class="right hide-on-med-and-down">
+            <li>
+                <a href="/transaction/{{transaction.id}}"><i class="material-icons left show-on-large">add</i>TRANSACTION</a>
+            </li>
+            {{#if account}}
+                <li>
+                    <a href="/account/update/{{account.id}}"><i class="material-icons left show-on-large">swap_vert</i>BALANCE</a>
+                </li>
+            {{/if}}
+            <li>
+                <a href="/user/logout"><i class="material-icons left show-on-large">exit_to_app</i>LOGOUT</a>
+            </li>
+        </ul>
+  
+        <ul id="nav-mobile" class="sidenav sec_text_color">
+            <li>
+                <a href="/transaction/{{transaction.id}}"><i class="material-icons left show-on-large">add</i>NEW TRANSACTION</a>
+            </li>
+            <li>
+                <a href="/account/update/{{account.id}}"><i class="material-icons left show-on-large">swap_vert</i>UPDATE BALANCE</a>
+            </li>
+            <li>
+                <a href="/user/logout"><i class="material-icons left show-on-large">exit_to_app</i>LOGOUT</a>
+            </li>
+            <li>
+                <div class="divider"></div>
+            </li>
+            <li>
+                <a href="#" class="center">YOUR ACCOUNTS</a>
+            </li>
+            {{#if account}}
+                <li>
+                    <a href="/profile/all" class="btn red black-text center-align">ALL</a>
+                </li>
+            {{/if}}
+            {{#each accounts as |account|}}
+                <li>
+                    {{>profile-account-card}}
+                </li>
+            {{/each}}
+            <li>
+                <a href="/account/create" class="btn red lighten-3 white-text center-align"><i class="material-icons left">add</i>New account</a>
+            </li>
+        </ul>
+        <a href="#" data-target="nav-mobile" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
+      </div>
+    </nav>
+    <nav role="navigation">
+        {{#if account}}
+            <div class="nav-wrapper {{displayColoredBackgroundMaterialize account.balance}}">
+                <a href="#" class="brand-logo left"><span id="timeline-account">{{uppercase account.name}}</span></a>
+                <a href="#" class="brand-logo right"><span class="hide-on-med-and-down">BALANCE </span>{{displayBalanceWithDollarSign account.balance}} {{renderSignFromAmount account.balance}} {{account.interest_rate}}% {{uppercase account.compounding}}</a>
+        {{else}}
+            <div class="nav-wrapper {{displayColoredBackgroundMaterialize netBalance}}">
+                <a href="#" class="brand-logo left"><span id="timeline-account">ALL</span> ACCOUNTS</a>
+                <a href="#" class="brand-logo right"><span class="hide-on-med-and-down">BALANCE </span>{{displayBalanceWithDollarSign netBalance}}</a>
+        {{/if}}
+        </div>
+        </div>
+    </nav>
+</header>
+
+
+<main>
+    <br>
+    <div class="wide-container center-align hide-on-med-and-down">
+        <h5 class="center-align">YOUR OTHER ACCOUNTS</h5>
+        {{#if account}}
+            <a href="/profile/all" class="btn red lighten-3 white-text center-align">ALL</a>
+        {{/if}}
+        {{#each accounts as |account|}}
+                {{>profile-account-card}}
+        {{/each}}
+        <a href="/account/create" class="btn red lighten-3 white-text center-align"><i class="material-icons left">add</i>New account</a>
+    </div>
+    {{#if transactions}}
+        <div class="widest-container">
+            <div class="container chart-container accountTimeline">
+                <canvas id="chartTimeline"></canvas>
+            </div>
+        </div>
+        <br>
+        <div class="wide-container">
+            <h5 class="center-align">YOUR TRANSACTIONS</h5>
+            <table class="stripped highlight centered responsive-table">
+                <thead class="teal lighten-3">
+                    <th>NAME</th>
+                    <th>STARTED</th>
+                    <th>FREQUENCY</th>
+                    <th>AMOUNT</th>
+                    <th>DAYS LEFT</th>
+                    <th>UPDATE</th>
+                    <th>DELETE</th>
+                </thead>
+                <tbody>
+                    {{#each transactions as |transaction|}}
+                        {{>account-transaction-table-row}}
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    {{else}}
+        <div class="row">
+            <h4 class="center-align">YOU HAVE NO TRANSACTIONS YET</h4>
+        </div>
+    {{/if}}
+    <br>
+</main>
+
+
+<script src="/js/graphs.js"></script>

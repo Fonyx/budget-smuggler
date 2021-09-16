@@ -2,41 +2,49 @@
   {
     "name": "blow",
 	  "balance":525.23,
+    "interest_rate": 2.56,
 	  "user_id":1
   },
   {
     "name": "mojo",
 	  "balance":4225.23,
+    "interest_rate": 2.56,
 	  "user_id":1
   },
   {
     "name": "grow",
 	  "balance":31125.23,
+    "interest_rate": 3.16,
 	  "user_id":1
   },
   {
     "name": "mortgage",
 	  "balance":-461125.23,
+    "interest_rate": 2.86,
 	  "user_id":1
   },
   {
     "name": "portfolio",
 	  "balance":125.23,
+    "interest_rate": 6.56,
 	  "user_id":1
   },
   {
     "name": "student debt",
 	  "balance":-12125.23,
+    "interest_rate": 0.86,
 	  "user_id":1
   },
   {
     "name": "car loan",
 	  "balance":-12125.23,
+    "interest_rate": 9.56,
 	  "user_id":1
   },
   {
     "name": "yearly holiday",
 	  "balance":3000.23,
+    "interest_rate": 2.56,
 	  "user_id":1
   }
 ]

@@ -10,6 +10,7 @@ CREATE A TRANSACTION FORM - USER OBJ AVAILABLE {{user.email}} {{user.balance}} -
 <header>
     <nav>
         <div class="nav-wrapper teal">
+            <img class="budgie-icon" src="/images/seethroughbudgie.png" alt="Outline of budgie with 100 dollar note superimposed over it">
             <a href="#" class="brand-logo center">NEW TRANSACTION</a>
         </div>
     </nav>
@@ -43,13 +44,11 @@ CREATE A TRANSACTION FORM - USER OBJ AVAILABLE {{user.email}} {{user.balance}} -
             <div class="row">
                 <p class="form-font padding-top">Type:</p>
                 <label class="form-check-label center-align" for="income">
-                    <input class="form-check-input center-align with-gap" type="radio" value="income"
-                        name="transaction-type" id="income" checked="true">
+                    <input class="form-check-input center-align with-gap" type="radio" value="income" name="transaction-type" id="income" checked="true">
                     <span>INCOME</span></label>
 
                 <label class="form-check-label" for="expense">
-                    <input class="form-check-input center-align with-gap" type="radio" value="expense"
-                        name="transaction-type" id="expense">
+                    <input class="form-check-input center-align with-gap" type="radio" value="expense" name="transaction-type" id="expense">
                     <span>EXPENSE</span></label>
             </div>
 
@@ -73,12 +72,16 @@ CREATE A TRANSACTION FORM - USER OBJ AVAILABLE {{user.email}} {{user.balance}} -
             {{/each}}
             <div class="row padding-top">
                 <button class="btn btn-small mx-3 w-50 create-transaction-button" type="submit">Create</button>
-                <button class="btn btn-small mx-3 w-50" type="cancel" onclick="window.history.back()">Cancel</button>
+                <button class="btn btn-small mx-3 w-50" onclick="window.history.back()">Cancel</button>
             </div>
         </form>
     </div>
 </main>
 
+<script src="/js/set-date-to-today.js"></script>
+
+
 <script src="/js/limit-user-date.js"></script>
+
 
 <script src="/js/create-transaction.js"></script>

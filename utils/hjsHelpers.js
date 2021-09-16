@@ -58,6 +58,33 @@ module.exports = {
         } else {
             return 'checked="false"'
         }
+    },
+    displayBalanceWithDollarSign: (amount) => {
+        if(amount >= 0){
+            return '$'+amount;
+        } else {
+            let numeric = parseFloat(amount);
+            let absNumeric = Math.abs(numeric);
+            return '-$'+absNumeric;
+        }
+    },
+    displayColoredBackgroundMaterialize: (amount) => {
+        if(amount > 0) {
+            return 'green lighten-2'
+        } else {
+            return 'red lighten-2'
+        }
+    },
+    renderSignFromAmount: (amount) => {
+        if(amount < 0){
+            return '-'
+        } else {
+            return '+'
+        }
+    },
+    slugify: (text)=>{
+        let lowerText = text.toLowerCase();
+        return lowerText.replace(/ /g, '-');
     }
 
 };

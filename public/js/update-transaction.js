@@ -44,7 +44,7 @@ const updateTransactionFormHandler = async (event) => {
             });
             if(response.ok){
                 console.log('User transaction successfully updated');
-                document.location.replace('/profile');
+                document.location.replace('/profile/all');
             } else if (response.statusCode === 400) {
                     alert('Client error');
             } else if (response.statusCode === 500) {
