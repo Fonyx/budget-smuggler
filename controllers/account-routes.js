@@ -35,7 +35,7 @@ router.get('/create', onlyIfLoggedIn, async (req, res) => {
     try{
         let userObj = await User.findByPk(req.session.user_id);
         let user = userObj.get();
-        let compounding = ['once', 'weekly', 'fortnightly', 'monthly', 'annually'];
+        let compounding = ['daily', 'weekly', 'fortnightly', 'monthly', 'annually'];
         res.render('create-update-account', {user, compounding})
     }
     catch(err){
@@ -65,7 +65,7 @@ router.post('/create', onlyIfLoggedIn, async (req, res) => {
     }
 });
 
-//request for update form for user balance
+//request for update form for account
 router.get('/update/:account_id', onlyIfLoggedIn, async (req, res) => {
     try{
         let accountObj = await Account.findByPk(req.params.account_id, {
@@ -75,7 +75,7 @@ router.get('/update/:account_id', onlyIfLoggedIn, async (req, res) => {
         let account = accountObj.get({plain:true});
         let userObj = await User.findByPk(req.session.user_id);
         let user = userObj.get();
-        let compounding = ['once', 'weekly', 'fortnightly', 'monthly', 'annually'];
+        let compounding = ['daily', 'weekly', 'fortnightly', 'monthly', 'annually'];
         res.render('create-update-account', {user, account, compounding})
     }catch(err){
       clog(err, 'red');
