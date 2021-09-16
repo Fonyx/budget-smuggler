@@ -7,7 +7,7 @@ const clog = require('../utils/colorLogging');
 router.get('/login', (req, res) => {
   try {
     if (req.session.logged_in) {
-      res.redirect('/profile');
+      res.redirect('/profile/all');
     } else {
       res.render('login');
     }
@@ -54,7 +54,7 @@ router.post('/login', async (req, res) => {
 router.get('/signup', (req, res) => {
   try {
     if (req.session.logged_in) {
-      res.redirect('/user/profile');
+      res.redirect('/profile/all');
       return;
     } else {
       res.render('signup');

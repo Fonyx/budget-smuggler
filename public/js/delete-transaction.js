@@ -14,7 +14,7 @@ const deleteCommentFormHandler = async (event) => {
 
     if(response.ok){
         console.log('Post deleted successfully');
-        document.location.replace(`/profile`);
+        document.location.replace(`/profile/all`);
     } else {
         console.log('Post failed to delete');
         alert(response.statusText);

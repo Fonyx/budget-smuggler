@@ -61,7 +61,7 @@ async function createBalanceTimelineForAccount(account, transactions){
     dayTransactions.sort();
 
     // apply compounding to timeline, this happens after sorting as previous values affect
-    dayTransactions.compound(account.interest_rate, account.compounding);
+    // dayTransactions.compound(account.interest_rate, account.compounding);
 
     // sort dictionary keys
     dayTransactions.sort();

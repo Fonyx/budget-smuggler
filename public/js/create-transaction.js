@@ -41,7 +41,7 @@ const createTransactionHandler = async (event) => {
     });
 
     if (response.ok) {
-        document.location.replace('/profile');
+        document.location.replace('/profile/all');
     } else {
         console.log(response);
         alert('Failed to create transaction');

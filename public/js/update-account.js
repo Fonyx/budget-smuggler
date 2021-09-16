@@ -1,12 +1,11 @@
 const updateBalanceFormHandler = async (event) => {
     event.preventDefault();
     // collect values from the update-balance form
-    const name = document.querySelector('#account-name').value.trim();
+    const nameValue = document.querySelector('#account-name').value.trim();
     const balance = document.querySelector('#account-balance').value.trim();
     const interest_rate = document.querySelector('#account-interest-rate').value.trim();
     const account_id = document.querySelector('#account-detail').dataset.id;
     const feedback = document.querySelector('#feedback');
-
 
     try {
         let _ = parseFloat(balance);
@@ -24,10 +23,12 @@ const updateBalanceFormHandler = async (event) => {
         return
     }
     
-    if(!name){
+    if(!nameValue){
         feedback.textContent = "You need an account name";
         return
     }
+
+    let name = nameValue.toLowerCase().replace(/ /g, '-');
 
     if(!interest_rate || interest_rate < 0){
         feedback.textContent = "You need to have a positive interest rate";
@@ -45,7 +46,7 @@ const updateBalanceFormHandler = async (event) => {
             });
             if(response.ok){
                 console.log('User balance successfully updated');
-                document.location.replace(`/profile/account/${account_id}`);
+                document.location.replace(`/profile/account/${name}`);
             } else if (response.statusCode === 400) {
                     alert('Client error');
             } else if (response.statusCode === 500) {

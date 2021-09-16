@@ -40,7 +40,7 @@ const createAccountFormHandler = async (event) => {
     });
 
     if (response.ok) {
-        document.location.replace('/profile');
+        document.location.replace('/profile/all');
     }else if(response.status === 409){
         feedback.textContent = "You already have an account with that name";
         return
