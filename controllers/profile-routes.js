@@ -49,18 +49,23 @@ router.get('/all', onlyIfLoggedIn, async (req, res) => {
 });
 
 // Get all transactions for a user for a account
-router.get('/account/:account_id', onlyIfLoggedIn, async (req, res) => {
+router.get('/account/:account_name_slug', onlyIfLoggedIn, async (req, res) => {
     try{
         let userObj = await User.findByPk(req.session.user_id);
         let user = userObj.get();
-        let accountObj = await Account.findByPk(req.params.account_id);
-        let account = await accountObj.get();
+        let accountName = req.params.account_name_slug.replace(/-/g, ' ');
+        let accountObj = await Account.findOne({
+            where:{
+                name: accountName
+            }
+        });
+        let account = accountObj.get({plain: true});
 
         // find all the accounts for the session user_id, but not the account currently shown
         const accountObjs = await Account.findAll({
             where:{
                 [Op.and]: [
-                    {user_id: req.session.user_id},
+                    {user_id: user.id},
                     {id: {
                         [Op.not]: account.id
                         }
@@ -77,7 +82,7 @@ router.get('/account/:account_id', onlyIfLoggedIn, async (req, res) => {
 
         const rawDbTransactions = await Transaction.findAll({
             where: {
-              account_id: req.params.account_id
+              account_id: account.id
             },
             include: {all:true, nested: true}
         });

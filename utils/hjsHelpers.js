@@ -81,6 +81,10 @@ module.exports = {
         } else {
             return '+'
         }
+    },
+    slugify: (text)=>{
+        let lowerText = text.toLowerCase();
+        return lowerText.replace(/ /g, '-');
     }
 
 };
